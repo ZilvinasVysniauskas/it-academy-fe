@@ -1,9 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HerokuTestComponent } from './heroku-test.component';
 
-
-
-
 describe('HerokuTestComponent', () => {
   let component: HerokuTestComponent;
   let fixture: ComponentFixture<HerokuTestComponent>;
