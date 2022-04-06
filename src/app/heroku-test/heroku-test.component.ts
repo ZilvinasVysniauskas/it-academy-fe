@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, CUSTOM_ELEMENTS_SCHEMA, OnInit} from '@angular/core';
 import {HerokuService} from "../service/heroku.service";
 import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-heroku-test',
   templateUrl: './heroku-test.component.html',
-  styleUrls: ['./heroku-test.component.scss']
+  styleUrls: ['./heroku-test.component.scss'],
 })
 export class HerokuTestComponent implements OnInit {
 

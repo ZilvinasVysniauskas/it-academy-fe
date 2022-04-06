@@ -17,7 +17,6 @@ import { HerokuTestComponent } from './heroku-test/heroku-test.component';
     AppRoutingModule,
     HttpClientModule
   ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],
   bootstrap: [AppComponent]
 })
