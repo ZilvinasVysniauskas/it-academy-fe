@@ -1,4 +1,4 @@
-import {Component, CUSTOM_ELEMENTS_SCHEMA, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {HerokuService} from "../service/heroku.service";
 import {Observable} from "rxjs";
 
