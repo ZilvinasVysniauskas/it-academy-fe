@@ -9,7 +9,7 @@ describe('HerokuService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, HttpClientModule, HttpClient]
+      imports: [HttpClientTestingModule, HttpClientModule]
     });
     service = TestBed.inject(HerokuService);
   });

@@ -9,7 +9,7 @@ describe('HerokuTestComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, HttpClientModule, HttpClient],
+      imports: [HttpClientTestingModule, HttpClientModule],
       declarations: [ HerokuTestComponent ]
     })
     .compileComponents();

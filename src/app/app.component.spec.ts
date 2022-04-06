@@ -3,7 +3,6 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 import {HerokuTestComponent} from "./heroku-test/heroku-test.component";
 import {HttpClientTestingModule} from "@angular/common/http/testing";
-import {HttpClient, HttpClientModule} from "@angular/common/http";
 
 
 
@@ -13,7 +12,7 @@ describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule, HttpClientTestingModule, HttpClientModule, HttpClient
+        RouterTestingModule, HttpClientTestingModule
       ],
       declarations: [
         AppComponent,
