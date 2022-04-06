@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HerokuTestComponent } from './heroku-test.component';
+import {HttpClientTestingModule} from "@angular/common/http/testing";
 
 
 
@@ -9,7 +10,7 @@ describe('HerokuTestComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ HerokuTestComponent ]
+      declarations: [ HerokuTestComponent, HttpClientTestingModule ]
     })
     .compileComponents();
   });
