@@ -2,14 +2,14 @@ name: Build and Test
 on:
   push:
     branches:
-      - main
+      - heroku-test
 jobs:
   install-and-test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@main
+      - uses: actions/checkout@heroku-test
       - name: Use Node.js 16.13.1
-        uses: actions/setup-node@main
+        uses: actions/setup-node@heroku-test
         with:
           node-version: 16.13.1
       - name: Build, lint and test
