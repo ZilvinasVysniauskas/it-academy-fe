@@ -7,9 +7,9 @@ jobs:
   install-and-test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@main
       - name: Use Node.js 11
-        uses: actions/setup-node@master
+        uses: actions/setup-node@main
         with:
           node-version: 11
       - name: Build, lint and test
