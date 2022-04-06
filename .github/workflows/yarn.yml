@@ -15,5 +15,6 @@ jobs:
       - name: Build, lint and test
         run: |
           yarn
+          yarn list
           yarn test --watch=false --browsers=ChromeHeadless
           yarn build --prod
