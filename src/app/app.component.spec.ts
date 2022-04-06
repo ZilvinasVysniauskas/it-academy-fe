@@ -16,7 +16,7 @@ describe('AppComponent', () => {
       ],
       declarations: [
         AppComponent,
-        // HerokuTestComponent
+        HerokuTestComponent
       ],
     }).compileComponents();
   });
