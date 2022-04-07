@@ -6,18 +6,26 @@ import { AppComponent } from './app.component';
 import {HttpClientModule} from "@angular/common/http";
 import { HerokuTestComponent } from './heroku-test/heroku-test.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatInputModule} from '@angular/material/input';
+import { LoginComponent } from './components/login/login.component';
+import {MatButtonModule} from "@angular/material/button";
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HerokuTestComponent
+    HerokuTestComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatInputModule,
+    MatButtonModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

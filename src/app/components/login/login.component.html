@@ -1,0 +1,17 @@
+<form class="login-form">
+  <h1>Login:</h1>
+  <mat-form-field class="login-full-width" appearance="fill">
+    <mat-label>User name</mat-label>
+    <input [formControl]="loginFormControl" matInput placeholder="Ex. Jonas Jonaitis" value="">
+    <mat-error *ngIf="loginFormControl.hasError('required')">
+      Please enter your user name
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="login-full-width" appearance="fill">
+    <mat-label>Password</mat-label>
+    <input type="password" matInput>
+  </mat-form-field>
+  <button class="login-buttons" mat-raised-button color="primary">Login</button>
+  <button class="login-buttons" mat-raised-button>Cancel</button>
+</form>
