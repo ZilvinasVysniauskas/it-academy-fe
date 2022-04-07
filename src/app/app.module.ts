@@ -14,6 +14,12 @@ import { CalendarComponent } from './components/calendar/calendar.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatCardModule } from '@angular/material/card';
+import { HeaderComponent } from './components/header/header.component';
+import { HomeComponent } from './components/home/home.component';
+import { ReservationsComponent } from './components/reservations/reservations.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { ContentComponent } from './components/content/content.component';
+
 
 @NgModule({
   declarations: [
@@ -21,6 +27,10 @@ import { MatCardModule } from '@angular/material/card';
     HerokuTestComponent,
     LoginComponent,
     CalendarComponent,
+    HeaderComponent,
+    HomeComponent,
+    ReservationsComponent,
+    ContentComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,6 +43,7 @@ import { MatCardModule } from '@angular/material/card';
     MatDatepickerModule,
     MatNativeDateModule,
     MatCardModule,
+    FlexLayoutModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

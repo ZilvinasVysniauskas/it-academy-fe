@@ -1,0 +1,10 @@
+
+<div fxLayout="row" >
+  <app-calendar [date]="reservationDate"
+                (onDateChange)="handleReservationChange($event)"></app-calendar>
+
+  <div fxFlex fxLayout="column" fxLayoutAlign="center center">
+    <p>reservations for {{ reservationDate }}</p>
+
+  </div>
+</div>
