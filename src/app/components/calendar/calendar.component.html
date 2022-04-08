@@ -4,4 +4,4 @@
     (selectedChange)="onDateChange.emit($event)"
   ></mat-calendar>
 </mat-card>
-<p>{{ date }}</p>
+  <p class="today">{{ today | date: "fullDate" }}</p>

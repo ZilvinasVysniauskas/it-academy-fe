@@ -15,5 +15,7 @@ export class CalendarComponent implements OnInit {
     this.dateAdapter.setLocale('en-GB');
   }
 
+  today : number = Date.now();
+ 
   ngOnInit(): void {}
 }
