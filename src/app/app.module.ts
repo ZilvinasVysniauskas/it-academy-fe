@@ -9,7 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
 import { LoginComponent } from './components/login/login.component';
 import { MatButtonModule } from '@angular/material/button';
-import { ReactiveFormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
@@ -45,20 +45,21 @@ export const MY_DATE_FORMATS = {
     ReservationsComponent,
     ContentComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    MatInputModule,
-    MatButtonModule,
-    ReactiveFormsModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatCardModule,
-    FlexLayoutModule,
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        MatInputModule,
+        MatButtonModule,
+        ReactiveFormsModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatCardModule,
+        FlexLayoutModule,
+        FormsModule,
 
-  ],
+    ],
   providers: [
     {
       provide: DateAdapter,
