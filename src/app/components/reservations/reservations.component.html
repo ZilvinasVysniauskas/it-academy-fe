@@ -7,17 +7,38 @@
     <p>reservations for {{ reservationDate }}</p>
   </div>
 </div>
-<div fxLayout="row">
-  <div *ngFor="let room of desksReservationsByDate">
-    <h2>{{room.roomName}}</h2>
-    <div *ngFor="let desk of room.desks">
-      <p>{{desk.deskNumber}}</p>
-      <div *ngIf="desk.available; else reservationInfo">
-        <button (click)="placeReservation(desk.id)">BOOK</button>
+
+{{errorMsg}}
+
+
+<div *ngIf="currentReservation?.date == undefined; then reservationsDisplay else message">
+    {{currentReservation?.date}}
+</div>
+
+<ng-template #message>
+  <p>you already have reservation on {{currentReservation?.date}}, cancel this reservation?</p>
+  <button (click)="cancelReservation(currentReservation?.reservationId)">cancel</button>
+  <button>keep reservation</button>
+</ng-template>
+
+
+<ng-template #reservationsDisplay>
+  <div fxLayout="row">
+    <div *ngFor="let room of desksReservationsByDate">
+      <h2>{{room.roomName}}</h2>
+      <div *ngFor="let desk of room.desks">
+        <p>{{desk.deskNumber}}</p>
+        <div *ngIf="desk.available; else reservationInfo">
+          <button (click)="placeReservation(desk.id)">BOOK</button>
+        </div>
+        <ng-template #reservationInfo>
+          <p>booked by {{desk.info.userFirstName}}</p>
+        </ng-template>
       </div>
-      <ng-template #reservationInfo>
-        <p>booked by {{desk.info.userFirstName}}</p>
-      </ng-template>
     </div>
   </div>
-</div>
+</ng-template>
+
+
+
+
