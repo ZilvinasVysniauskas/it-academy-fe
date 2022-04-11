@@ -8,11 +8,11 @@ import { ContentComponent } from './components/content/content.component';
 
 const routes: Routes = [
   // {path: '', component: HerokuTestComponent},
-  { path: '', component: LoginComponent },
-  { path: '', component: ContentComponent, children: [
-      {path: '', component: HomeComponent},
-      {path: 'reservations', component: ReservationsComponent},
-    ] }
+  // { path: '', component: LoginComponent },
+  // { path: '', component: ContentComponent, children: [
+  //     {path: '', component: HomeComponent},
+  //     {path: 'reservations', component: ReservationsComponent},
+  //   ] }
 
 ];
 
