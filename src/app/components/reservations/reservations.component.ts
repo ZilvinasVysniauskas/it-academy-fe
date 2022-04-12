@@ -14,7 +14,7 @@ import * as moment from "moment";
 export class ReservationsComponent implements OnInit {
   reservationDate: Date | null = new Date;
 
-  displayUser: boolean = false;
+  displayReservationInfo: boolean = true;
 
   displayReservationMessage!: boolean;
 
@@ -25,6 +25,8 @@ export class ReservationsComponent implements OnInit {
   currentReservation?: Reservation;
 
   selected?: number;
+
+  hoverId?: number;
 
   constructor(private reservationService: DeskReservationService) {
   }
