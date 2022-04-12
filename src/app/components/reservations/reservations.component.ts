@@ -55,7 +55,7 @@ export class ReservationsComponent implements OnInit {
     const reservationRequest: ReservationRequest = {
       userId: 12345678,
       deskId: this.selected!,
-      date: moment(this.reservationDate).add(1, 'days').toDate().toISOString().split('T')[0]
+      date: this.dateToString(this.reservationDate!)
     }
     this.reservationService.reserveTable(reservationRequest).subscribe(a =>
       this.checkUserCurrentDateReservations()
