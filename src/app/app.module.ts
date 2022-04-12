@@ -21,6 +21,11 @@ import { ContentComponent } from './components/content/content.component';
 import { MAT_MOMENT_DATE_ADAPTER_OPTIONS, MomentDateAdapter } from '@angular/material-moment-adapter';
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {BookingMessagesComponent} from "./components/booking-messages/booking-messages.component";
+import {AdminComponent} from "./components/admin/admin.component";
+import { SearchUserComponent } from './components/forms/search-user/search-user.component';
+
+
+
 
 
 export const MY_DATE_FORMATS = {
@@ -45,7 +50,9 @@ export const MY_DATE_FORMATS = {
     HomeComponent,
     ReservationsComponent,
     ContentComponent,
-    BookingMessagesComponent
+    BookingMessagesComponent,
+    AdminComponent,
+    SearchUserComponent
   ],
     imports: [
         BrowserModule,
@@ -60,8 +67,7 @@ export const MY_DATE_FORMATS = {
         MatCardModule,
         FlexLayoutModule,
         FormsModule,
-        MatCheckboxModule,
-
+        MatCheckboxModule
     ],
   providers: [
     {

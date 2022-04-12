@@ -16,16 +16,16 @@ export class DeskReservationService {
   }
 
   getReservationsByDate(reservationDate: string ): Observable<Room[]> {
-    return this.httpClient.get<Room[]>("http://localhost:8080/api/v1/reservations/" + reservationDate!);
+    return this.httpClient.get<Room[]>("/api/v1/reservations/" + reservationDate!);
   }
 
 
   reserveTable(reservationRequest: ReservationRequest): Observable<ReservationRequest> {
-    return this.httpClient.post<ReservationRequest>("http://localhost:8080/api/v1/reservations", reservationRequest)
+    return this.httpClient.post<ReservationRequest>("/api/v1/reservations", reservationRequest)
   }
 
   getUserCurrentDayReservation(reservationDate: string): Observable<Reservation> {
-    return this.httpClient.get<Reservation>("http://localhost:8080/api/v1/reservations/" + reservationDate + "/12345678")
+    return this.httpClient.get<Reservation>("/api/v1/reservations/" + reservationDate + "/12345678")
   }
 
   // private dateToString(reservationDate: string): string {
@@ -34,6 +34,6 @@ export class DeskReservationService {
   // }
 
   cancelReservationById(id: number | undefined): Observable<any> {
-    return this.httpClient.delete("http://localhost:8080/api/v1/reservations/" + id);
+    return this.httpClient.delete("/api/v1/reservations/" + id);
   }
 }

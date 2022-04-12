@@ -1,0 +1,14 @@
+<form [formGroup]="searchUserForm" (ngSubmit)="searchUser()">
+  <label for="userId">User ID:</label>
+  <input id="userId" type="text" formControlName="userId">
+
+  <label for="firstname">First Name: </label>
+  <input id="firstname" type="text" formControlName="firstName">
+
+  <label for="lastname">Name: </label>
+  <input id="lastname" type="text" formControlName="lastName">
+
+  {{expUserId?.value}}
+  {{expLastName?.value}}
+  {{expFirstName?.valueChanges}}
+</form>
