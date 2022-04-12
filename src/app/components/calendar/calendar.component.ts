@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DateAdapter } from '@angular/material/core';
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-calendar',
@@ -15,8 +16,10 @@ export class CalendarComponent implements OnInit {
         this.dateAdapter.setLocale('en-GB');
     }
 
+    minDate!: moment.Moment;
     today : number = Date.now();
 
     ngOnInit(): void {
+      this.minDate = moment();
     }
 }

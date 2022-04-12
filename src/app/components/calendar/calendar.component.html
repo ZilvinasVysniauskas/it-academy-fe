@@ -1,5 +1,5 @@
 <mat-card>
-  <mat-calendar
+  <mat-calendar [minDate]="minDate"
           [(selected)]="date"
           (selectedChange)="onDateChange.emit($event)"
   ></mat-calendar>

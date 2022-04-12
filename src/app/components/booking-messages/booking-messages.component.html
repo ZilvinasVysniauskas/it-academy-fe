@@ -1,0 +1,21 @@
+<div *ngIf="reservationPlaced; then success else error "></div>
+
+<ng-template #error >
+  <div class="container">
+    <p>you already have reservation on {{currentReservation?.date}}, cancel this reservation on desk number
+      {{currentReservation?.deskNumber}} on {{currentReservation?.deskNumber}} ?</p>
+    <button (click)="inputIdToCancelButton(currentReservation!.reservationId)">cancel</button>
+    <button (click)="keepReservationButtonClickEvent()">keep reservation</button>
+  </div>
+</ng-template>
+
+<ng-template #success >
+  <div class="container">
+    <p>Reservation successful</p>
+    <p>date: {{currentReservation.date}}</p>
+    <p>Room: {{currentReservation.roomName}}</p>
+    <p>Desk number: {{currentReservation.deskNumber}}</p>
+    <button (click)="okClicked.emit()">OKAY</button>
+  </div>
+
+</ng-template>

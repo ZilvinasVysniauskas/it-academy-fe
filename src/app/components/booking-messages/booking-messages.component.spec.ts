@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ErrorReservationComponent } from './error-reservation.component';
+import { BookingMessagesComponent } from './booking-messages.component';
 
 describe('ErrorReservationComponent', () => {
-  let component: ErrorReservationComponent;
-  let fixture: ComponentFixture<ErrorReservationComponent>;
+  let component: BookingMessagesComponent;
+  let fixture: ComponentFixture<BookingMessagesComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ErrorReservationComponent ]
+      declarations: [ BookingMessagesComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ErrorReservationComponent);
+    fixture = TestBed.createComponent(BookingMessagesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

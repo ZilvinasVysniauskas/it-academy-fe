@@ -6,7 +6,7 @@
   <div fxLayout="column" fxLayoutAlign="center center">
 
     <div fxFlex  fxLayoutAlign="center center">
-      <button (click)="minusOneDay()"><</button><p>reservations for {{ reservationDate }}</p><button>></button>
+      <button (click)="minusOneDay()"><</button><p>reservations for {{ reservationDate }}</p><button (click)="plusOneDay()">></button>
     </div>
 
     <div fxLayout="row">
@@ -14,9 +14,11 @@
       </div>
 
       <ng-template #message>
-        <app-error-reservation (cancelButtonClick)="cancelReservation($event)"
+        <app-booking-messages (cancelButtonClick)="cancelReservation($event)"
+                               [reservationPlaced]="placedReservation!"
                                (keepReservationButtonClick)="displayReservationMessage=false"
-                               [currentReservation]="currentReservation"></app-error-reservation>
+                               (okClicked)="displayReservationMessage=false; placedReservation=false"
+                               [currentReservation]="currentReservation!"></app-booking-messages>
       </ng-template>
 
       <ng-template #reservationsDisplay2>

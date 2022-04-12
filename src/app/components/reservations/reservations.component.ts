@@ -12,7 +12,9 @@ import * as moment from "moment";
   styleUrls: ['./reservations.component.scss']
 })
 export class ReservationsComponent implements OnInit {
-  reservationDate: moment.Moment | null =  moment();
+  reservationDate: moment.Moment =  moment();
+
+  placedReservation: boolean = false;
 
   displayReservationInfo: boolean = true;
 
@@ -37,16 +39,14 @@ export class ReservationsComponent implements OnInit {
   }
 
   fetchDesksByDate() {
-    this.reservationService.getReservationsByDate(this.dateToString(this.reservationDate!))
+    this.reservationService.getReservationsByDate(this.dateToString(this.reservationDate))
       .subscribe(res => this.desksReservationsByDate = res);
   }
 
   checkUserCurrentDateReservations() {
-    console.log(this.reservationDate)
-    this.reservationService.getUserCurrentDayReservation(this.dateToString(this.reservationDate!)).subscribe(reservation => {
+    this.reservationService.getUserCurrentDayReservation(this.dateToString(this.reservationDate)).subscribe(reservation => {
       this.currentReservation = reservation;
       this.displayReservationMessage = this.isCurrentReservationActive = reservation?.date !== undefined;
-      console.log(this.displayReservationMessage)
       this.fetchDesksByDate();
       this.selected = undefined;
     });
@@ -56,14 +56,16 @@ export class ReservationsComponent implements OnInit {
     const reservationRequest: ReservationRequest = {
       userId: 12345678,
       deskId: this.selected!,
-      date: this.dateToString(this.reservationDate!)
+      date: this.dateToString(this.reservationDate)
     }
-    this.reservationService.reserveTable(reservationRequest).subscribe(a =>
-      this.checkUserCurrentDateReservations()
-    );
+    this.reservationService.reserveTable(reservationRequest).subscribe( a =>{
+      this.placedReservation = true;
+      this.checkUserCurrentDateReservations();
+    });
   }
 
   handleReservationChange(date: moment.Moment) {
+    console.log(this.placedReservation)
     this.reservationDate = date;
     this.checkUserCurrentDateReservations();
   }
@@ -78,13 +80,19 @@ export class ReservationsComponent implements OnInit {
     }
   }
 
-  cancelReservation(id: number | undefined) {
+  cancelReservation(id: number) {
     return this.reservationService.cancelReservationById(id).subscribe(a => this.checkUserCurrentDateReservations());
   }
 
   minusOneDay(){
-    this.reservationDate!.add(-1, 'day');
-    console.log(this.reservationDate?.format())
+    if (this.reservationDate >= moment()){
+      this.reservationDate = moment(this.reservationDate.add(-1, 'day').format())
+      this.checkUserCurrentDateReservations();
+    }
+  }
+
+  plusOneDay() {
+    this.reservationDate = moment(this.reservationDate.add(1, 'day').format())
     this.checkUserCurrentDateReservations();
   }
 
