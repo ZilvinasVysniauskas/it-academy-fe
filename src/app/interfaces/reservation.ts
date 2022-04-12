@@ -3,4 +3,5 @@ export interface Reservation {
   roomName: string,
   deskNumber: number,
   date: Date
+  deskId: number
 }

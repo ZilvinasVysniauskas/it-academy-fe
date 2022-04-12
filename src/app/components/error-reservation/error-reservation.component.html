@@ -1,1 +1,8 @@
-<p>error-reservation works!</p>
+<div class="container">
+  <p>you already have reservation on {{currentReservation?.date}}, cancel this reservation?</p>
+  <button (click)="inputIdToCancelButton(currentReservation!.reservationId)">cancel</button>
+  <button (click)="keepReservationButtonClickEvent()">keep reservation</button>
+
+
+
+</div>

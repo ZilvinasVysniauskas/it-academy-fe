@@ -2,10 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {Room} from "../../interfaces/room";
 import {DeskReservationService} from "../../service/reservations/desk-reservation.service";
 import {ReservationRequest} from "../../interfaces/reservationRequest";
-import {error} from "@angular/compiler/src/util";
 import {Reservation} from "../../interfaces/reservation";
 import * as moment from "moment";
-import {Observable} from "rxjs";
+
 
 @Component({
   selector: 'app-reservations',
@@ -15,11 +14,17 @@ import {Observable} from "rxjs";
 export class ReservationsComponent implements OnInit {
   reservationDate: Date | null = new Date;
 
+  displayUser: boolean = false;
+
+  displayReservationMessage!: boolean;
+
+  isCurrentReservationActive!: boolean;
+
   desksReservationsByDate!: Room[];
 
-  errorMsg!: string;
-
   currentReservation?: Reservation;
+
+  selected?: number;
 
   constructor(private reservationService: DeskReservationService) {
   }
@@ -31,23 +36,26 @@ export class ReservationsComponent implements OnInit {
 
   fetchDesksByDate() {
     this.reservationService.getReservationsByDate(this.reservationDate)
-        .subscribe(res => this.desksReservationsByDate = res);
+      .subscribe(res => this.desksReservationsByDate = res);
   }
 
   checkUserCurrentDateReservations() {
     this.reservationService.getUserCurrentDayReservation(this.reservationDate).subscribe(reservation => {
       this.currentReservation = reservation;
+      this.displayReservationMessage = this.isCurrentReservationActive = reservation?.date !== undefined;
+      console.log(this.displayReservationMessage)
       this.fetchDesksByDate();
+      this.selected = undefined;
     });
   }
 
-  placeReservation(deskId: number) {
+  placeReservation() {
     const reservationRequest: ReservationRequest = {
       userId: 12345678,
-      deskId: deskId,
+      deskId: this.selected!,
       date: moment(this.reservationDate).add(1, 'days').toDate().toISOString().split('T')[0]
     }
-    this.reservationService.reserveTable(reservationRequest).subscribe( a =>
+    this.reservationService.reserveTable(reservationRequest).subscribe(a =>
       this.checkUserCurrentDateReservations()
     );
   }
@@ -58,7 +66,19 @@ export class ReservationsComponent implements OnInit {
 
   }
 
+  validateClick(id: number) {
+    if (this.isCurrentReservationActive) {
+      this.displayReservationMessage = true;
+    } else if (this.selected == id) {
+      this.selected = undefined;
+    } else {
+      this.selected = id;
+    }
+  }
+
   cancelReservation(id: number | undefined) {
     return this.reservationService.cancelReservationById(id).subscribe(a => this.checkUserCurrentDateReservations());
   }
+
+
 }
