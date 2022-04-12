@@ -6,7 +6,7 @@
   <div fxLayout="column" fxLayoutAlign="center center">
 
     <div fxFlex  fxLayoutAlign="center center">
-      <p>reservations for {{ reservationDate }}</p>
+      <button (click)="minusOneDay()"><</button><p>reservations for {{ reservationDate }}</p><button>></button>
     </div>
 
     <div fxLayout="row">

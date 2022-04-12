@@ -31,6 +31,7 @@ export class ReservationsComponent implements OnInit {
   constructor(private reservationService: DeskReservationService) {
   }
 
+
   ngOnInit(): void {
     this.checkUserCurrentDateReservations();
   }
@@ -81,10 +82,17 @@ export class ReservationsComponent implements OnInit {
     return this.reservationService.cancelReservationById(id).subscribe(a => this.checkUserCurrentDateReservations());
   }
 
+  minusOneDay(){
+    this.reservationDate!.add(-1, 'day');
+    console.log(this.reservationDate?.format())
+    this.checkUserCurrentDateReservations();
+  }
+
   private dateToString(date: moment.Moment): string {
-    console.log(date.format('YYYY-MM-DD'))
     return date.format('YYYY-MM-DD');
   }
+
+
 
 
 }
