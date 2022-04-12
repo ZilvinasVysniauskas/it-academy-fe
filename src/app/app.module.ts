@@ -22,6 +22,7 @@ import { ContentComponent } from './components/content/content.component';
 import { MAT_MOMENT_DATE_ADAPTER_OPTIONS, MomentDateAdapter } from '@angular/material-moment-adapter';
 import { ErrorReservationComponent } from './components/error-reservation/error-reservation.component';
 import {MatCheckboxModule} from "@angular/material/checkbox";
+import { ReservationSuccessfulComponent } from './components/reservation-successful/reservation-successful.component';
 
 export const MY_DATE_FORMATS = {
   parse: {
@@ -47,6 +48,7 @@ export const MY_DATE_FORMATS = {
     ReservationsComponent,
     ContentComponent,
     ErrorReservationComponent,
+    ReservationSuccessfulComponent,
   ],
     imports: [
         BrowserModule,

@@ -7,9 +7,9 @@ import { DateAdapter } from '@angular/material/core';
     styleUrls: ['./calendar.component.scss'],
 })
 export class CalendarComponent implements OnInit {
-    @Input() date: Date | null = null;
-    @Output() onDateChange: EventEmitter<Date | null> =
-        new EventEmitter<Date | null>();
+    @Input() date: moment.Moment | null = null;
+    @Output() onDateChange: EventEmitter<moment.Moment | null> =
+        new EventEmitter<moment.Moment | null>();
 
     constructor(private dateAdapter: DateAdapter<Date>) {
         this.dateAdapter.setLocale('en-GB');
@@ -17,5 +17,6 @@ export class CalendarComponent implements OnInit {
 
     today : number = Date.now();
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+    }
 }

@@ -1,8 +1,6 @@
 <div class="container">
-  <p>you already have reservation on {{currentReservation?.date}}, cancel this reservation?</p>
+  <p>you already have reservation on {{currentReservation?.date}}, cancel this reservation on desk number
+    {{currentReservation?.deskNumber}} on {{currentReservation?.deskNumber}} ?</p>
   <button (click)="inputIdToCancelButton(currentReservation!.reservationId)">cancel</button>
   <button (click)="keepReservationButtonClickEvent()">keep reservation</button>
-
-
-
 </div>

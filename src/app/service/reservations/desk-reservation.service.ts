@@ -15,8 +15,8 @@ export class DeskReservationService {
   constructor(private httpClient: HttpClient) {
   }
 
-  getReservationsByDate(reservationDate: Date | null): Observable<Room[]> {
-    return this.httpClient.get<Room[]>("http://localhost:8080/api/v1/reservations/" + this.dateToString(reservationDate!))
+  getReservationsByDate(reservationDate: string ): Observable<Room[]> {
+    return this.httpClient.get<Room[]>("http://localhost:8080/api/v1/reservations/" + reservationDate!);
   }
 
 
@@ -24,16 +24,14 @@ export class DeskReservationService {
     return this.httpClient.post<ReservationRequest>("http://localhost:8080/api/v1/reservations", reservationRequest)
   }
 
-  getUserCurrentDayReservation(reservationDate: Date | null): Observable<Reservation> {
-
-
-    return this.httpClient.get<Reservation>("http://localhost:8080/api/v1/reservations/" + this.dateToString(reservationDate!) + "/12345678")
+  getUserCurrentDayReservation(reservationDate: string): Observable<Reservation> {
+    return this.httpClient.get<Reservation>("http://localhost:8080/api/v1/reservations/" + reservationDate + "/12345678")
   }
 
-  private dateToString(reservationDate: Date): string {
-    //TODO fix date problem
-    return moment(reservationDate).add(1, 'days').toDate().toISOString().split('T')[0];
-  }
+  // private dateToString(reservationDate: string): string {
+  //   //TODO fix date problem
+  //   return moment(reservationDate).add(1, 'days').toDate().toISOString().split('T')[0];
+  // }
 
   cancelReservationById(id: number | undefined): Observable<any> {
     return this.httpClient.delete("http://localhost:8080/api/v1/reservations/" + id);

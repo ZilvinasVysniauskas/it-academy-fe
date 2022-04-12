@@ -12,7 +12,7 @@ import * as moment from "moment";
   styleUrls: ['./reservations.component.scss']
 })
 export class ReservationsComponent implements OnInit {
-  reservationDate: Date | null = new Date;
+  reservationDate: moment.Moment | null =  moment();
 
   displayReservationInfo: boolean = true;
 
@@ -32,17 +32,17 @@ export class ReservationsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.checkUserCurrentDateReservations();
-    this.fetchDesksByDate();
+    this.checkUserCurrentDateReservations();
   }
 
   fetchDesksByDate() {
-    this.reservationService.getReservationsByDate(this.reservationDate)
+    this.reservationService.getReservationsByDate(this.dateToString(this.reservationDate!))
       .subscribe(res => this.desksReservationsByDate = res);
   }
 
   checkUserCurrentDateReservations() {
-    this.reservationService.getUserCurrentDayReservation(this.reservationDate).subscribe(reservation => {
+    console.log(this.reservationDate)
+    this.reservationService.getUserCurrentDayReservation(this.dateToString(this.reservationDate!)).subscribe(reservation => {
       this.currentReservation = reservation;
       this.displayReservationMessage = this.isCurrentReservationActive = reservation?.date !== undefined;
       console.log(this.displayReservationMessage)
@@ -62,10 +62,9 @@ export class ReservationsComponent implements OnInit {
     );
   }
 
-  handleReservationChange(date: Date | null) {
+  handleReservationChange(date: moment.Moment) {
     this.reservationDate = date;
     this.checkUserCurrentDateReservations();
-
   }
 
   validateClick(id: number) {
@@ -80,6 +79,11 @@ export class ReservationsComponent implements OnInit {
 
   cancelReservation(id: number | undefined) {
     return this.reservationService.cancelReservationById(id).subscribe(a => this.checkUserCurrentDateReservations());
+  }
+
+  private dateToString(date: moment.Moment): string {
+    console.log(date.format('YYYY-MM-DD'))
+    return date.format('YYYY-MM-DD');
   }
 
 
