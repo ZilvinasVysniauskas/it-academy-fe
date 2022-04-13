@@ -15,20 +15,41 @@ export class AdminComponent implements OnInit {
 
   maxLength = 20;
 
-  public readonly searchControl: FormControl;
-  public readonly searchControl2: FormControl;
-  public readonly users$: Observable<User[]>;
+  searchUserForm: FormGroup;
+
+  users$: Observable<User[]>;
+
+  user?: User | null;
+
+  get expFirstName() {
+    return this.searchUserForm.get('firstName')
+  }
+  get expLastName() {
+    return this.searchUserForm.get('lastName')
+  }
+  get expUserId() {
+    return this.searchUserForm.get('userId')
+  }
+
 
   constructor(private adminService: AdminPageService) {
-    this.searchControl = new FormControl('', [Validators.required]);
-    this.searchControl2 = new FormControl('', [Validators.required]);
+    this.searchUserForm = new FormGroup({
+        userId: new FormControl(''),
+        firstName: new FormControl(''),
+        lastName: new FormControl('')
+      }
+    );
 
     this.users$ = combineLatest([
-      this.searchControl.valueChanges.pipe(startWith('')),
+      this.expUserId!.valueChanges.pipe(startWith('')),
+      this.expFirstName!.valueChanges.pipe(startWith('')),
+      this.expLastName!.valueChanges.pipe(startWith('')),
       this.adminService.fetchAllUsers(),
     ]).pipe(
-      map(([ search, allUsers ]: [ string, User[] ]): User[] => allUsers.filter(
-        (user: User): boolean => user.firstName.includes(search),
+      map(([ userId, firstName, lastName, allUsers ]: [ string, string, string, User[] ]): User[] => allUsers.filter(
+        (user: User): boolean => user.firstName.toLocaleLowerCase().startsWith(firstName)
+          && user.lastName.toLocaleLowerCase().startsWith(lastName)
+          && user.userId.toString().toLocaleLowerCase().startsWith(userId),
       )),
     );
 
@@ -36,8 +57,12 @@ export class AdminComponent implements OnInit {
   users!: User[];
 
   ngOnInit(): void {
+
   }
 
 
+  editUser(user: User) {
+    this.user = user;
+  }
 }
 
