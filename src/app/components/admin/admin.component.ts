@@ -16,10 +16,12 @@ export class AdminComponent implements OnInit {
   maxLength = 20;
 
   public readonly searchControl: FormControl;
+  public readonly searchControl2: FormControl;
   public readonly users$: Observable<User[]>;
 
   constructor(private adminService: AdminPageService) {
     this.searchControl = new FormControl('', [Validators.required]);
+    this.searchControl2 = new FormControl('', [Validators.required]);
 
     this.users$ = combineLatest([
       this.searchControl.valueChanges.pipe(startWith('')),
@@ -29,6 +31,7 @@ export class AdminComponent implements OnInit {
         (user: User): boolean => user.firstName.includes(search),
       )),
     );
+
   }
   users!: User[];
 
@@ -37,3 +40,4 @@ export class AdminComponent implements OnInit {
 
 
 }
+
