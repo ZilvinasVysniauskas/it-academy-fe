@@ -1,7 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {User} from "../../../interfaces/user";
-import {FormControl, FormGroup} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserRequest} from "../../../interfaces/user-request";
+import {generatePassword} from "../../../shared/generatePassword";
 
 @Component({
   selector: 'app-edit-user-form',
@@ -15,6 +16,9 @@ export class EditUserFormComponent implements OnInit {
   @Output() cancelUpdate: EventEmitter<any> = new EventEmitter<any>();
 
   editUserForm: FormGroup;
+
+  password!: string;
+  passwordChanged: boolean = false;
 
   get expFirstName() {
     return this.editUserForm.get('firstName')
@@ -39,14 +43,25 @@ export class EditUserFormComponent implements OnInit {
     return this.editUserForm.get('active')
   }
 
+  get expUserId () {
+    return this.editUserForm.get('userId')
+  }
 
   constructor() {
     this.editUserForm = new FormGroup({
-        firstName: new FormControl(''),
-        lastName: new FormControl(''),
-        middleName: new FormControl(''),
-        email: new FormControl(''),
-        password: new FormControl(''),
+        userId: new FormControl(''),
+        firstName: new FormControl('', {validators:
+            [Validators.required, Validators.maxLength(40)]
+        }),
+        lastName: new FormControl('', {validators:
+            [Validators.required, Validators.maxLength(40)]
+        }),
+        middleName: new FormControl('', {validators:
+            [Validators.required, Validators.maxLength(40)]
+        }),
+        email: new FormControl('', {validators:
+            [Validators.required, forbiden]
+        }),
         role: new FormControl(''),
         active: new FormControl('')
       }
@@ -54,6 +69,8 @@ export class EditUserFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.password = this.user.password;
+    this.expUserId?.setValue(this.user.userId);
     this.expFirstName?.setValue(this.user.firstName);
     this.expLastName?.setValue(this.user.lastName);
     this.expMiddleName?.setValue(this.user.middleName);
@@ -75,12 +92,16 @@ export class EditUserFormComponent implements OnInit {
       firstName: this.expFirstName?.value,
       middleName: this.expMiddleName?.value,
       lastName: this.expLastName?.value,
-      password: this.expPassword?.value,
-      passwordRepeat: this.expPassword?.value,
       isActive: isActive(),
+      password: this.password,
       email: this.expEmail?.value,
       role: this.expRole?.value
     }
     this.savedUser.emit(user)
+  }
+
+  resetPassword() {
+    this.password = generatePassword(10);
+    this.passwordChanged = true;
   }
 }

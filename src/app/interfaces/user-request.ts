@@ -4,7 +4,6 @@ export interface UserRequest {
   "middleName": string,
   "lastName": string,
   "password": string,
-  "passwordRepeat": string,
   "isActive": number,
   "email": string,
   "role": number

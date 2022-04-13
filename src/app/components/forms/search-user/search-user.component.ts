@@ -31,7 +31,7 @@ export class SearchUserComponent implements OnInit {
   );}
 
   ngOnInit(): void {
-    this.expLastName?.valueChanges
+
   }
 
   searchUser() {

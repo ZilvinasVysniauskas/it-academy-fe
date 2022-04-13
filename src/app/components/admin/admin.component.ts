@@ -6,6 +6,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {map, startWith} from "rxjs/operators";
 import {combineLatest, Observable, of} from "rxjs";
 import {UserRequest} from "../../interfaces/user-request";
+import {generatePassword} from "../../shared/generatePassword";
 
 @Component({
   selector: 'app-admin',

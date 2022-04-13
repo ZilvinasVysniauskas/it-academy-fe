@@ -1,4 +1,6 @@
 <form [formGroup]="editUserForm">
+  <label for="userid">User Id</label>
+  <input id="userid" readonly formControlName="userId">
   <label for="firstName">First Name</label>
   <input id="firstName" type="text" formControlName="firstName">
   <label for="lastName">Last Name</label>
@@ -7,17 +9,18 @@
   <input id="middleName" type="text" formControlName="middleName">
   <label for="email">Email</label>
   <input id="email" type="text" formControlName="email">
-  <label for="password"></label>
-  <input id="password" type="text" formControlName="password">
   <label for="role">Role</label>
   <select id="role" formControlName="role">
     <option value="STANDARD_USER" [selected]="expRole?.value == 'STANDARD_USER' ">STANDARD_USER</option>
     <option value="ADMINISTRATOR" [selected]="expRole?.value == 'ADMINISTRATOR' ">ADMINISTRATOR</option>
   </select>
+  <div *ngIf="passwordChanged">
+    <p>password: {{password}}</p>
+  </div>
 
-  <label for="active">Last Name</label>tu
+  <label for="active">active</label>
   <input id="active" type="checkbox" formControlName="active">
-
+  <button (click)="resetPassword()">generate new password</button>
   <button (click)="saveUpdatedUser()">save</button>
   <button (click)="cancelUpdate.emit()">cancel</button>
 </form>
