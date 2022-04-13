@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {Reservation} from "../../../interfaces/reservation";
-import {DeskReservationService} from "../../../service/reservations/desk-reservation.service";
+import {Reservation} from "../../../../interfaces/reservation";
+import {DeskReservationService} from "../../../../service/reservations/desk-reservation.service";
 
 @Component({
   selector: 'app-reservations-dialog',

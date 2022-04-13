@@ -12,19 +12,18 @@ export class AuthService {
   constructor(private httpClient: HttpClient, private router: Router) {
   }
 
-
   login(loginRequest: UserLoginRequest) {
     let loginUrl = 'api/v1/login';
+    console.log('here')
     this.httpClient.post<LoginResponse>(loginUrl, loginRequest, {observe: 'response'})
-      .subscribe(response => {
-        if (response.status == 200) {
-          this.setRole(response.body?.user.role!)
-          this.setToken(response.body?.jwtToken!)
-          this.router.navigate(['home'])
-        } else {
-          alert("Authentication failed.")
-        }
-      });
+      .subscribe(
+        response => {
+        this.setRole(response.body?.user.role!)
+        this.setToken(response.body?.jwtToken!)
+        this.router.navigate(['home'])
+      },
+      error => alert("login failed")
+      );
   }
 
   public setRole(role: string): void {

@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {Room} from "../../interfaces/room";
-import {DeskReservationService} from "../../service/reservations/desk-reservation.service";
-import {ReservationRequest} from "../../interfaces/reservationRequest";
-import {Reservation} from "../../interfaces/reservation";
+import {Room} from "../../../../interfaces/room";
+import {DeskReservationService} from "../../../../service/reservations/desk-reservation.service";
+import {ReservationRequest} from "../../../../interfaces/reservationRequest";
+import {Reservation} from "../../../../interfaces/reservation";
 import * as moment from "moment";
-import {dateToString} from "../../shared/utils";
+import {dateToString} from "../../../../shared/utils";
 import {MatDialog} from "@angular/material/dialog";
-import {ReservationsDialogComponent} from "../modals/reservations-dialog/reservations-dialog.component";
+import {ReservationsDialogComponent} from "../../modal/reservations-dialog/reservations-dialog.component";
 
 
 @Component({

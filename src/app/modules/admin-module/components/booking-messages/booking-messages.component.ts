@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Reservation} from "../../interfaces/reservation";
+import {Reservation} from "../../../../interfaces/reservation";
 
 @Component({
   selector: 'app-booking-messages',

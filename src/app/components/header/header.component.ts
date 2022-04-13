@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {UserDialogComponentComponent} from "../modals/user-dialog-component/user-dialog-component.component";
+import {UserDialogComponentComponent} from "../../modules/admin-module/modal/user-dialog-component/user-dialog-component.component";
 import {MatDialog} from "@angular/material/dialog";
 
 @Component({

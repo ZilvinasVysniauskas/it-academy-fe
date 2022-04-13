@@ -21,22 +21,22 @@ import {
 import { MatCardModule } from '@angular/material/card';
 import { HeaderComponent } from './components/header/header.component';
 import { HomeComponent } from './components/home/home.component';
-import { ReservationsComponent } from './components/reservations/reservations.component';
+import { ReservationsComponent } from './modules/user-module/components/reservations/reservations.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { ContentComponent } from './components/content/content.component';
 import { MAT_MOMENT_DATE_ADAPTER_OPTIONS, MomentDateAdapter } from '@angular/material-moment-adapter';
 import {MatCheckboxModule} from "@angular/material/checkbox";
-import {BookingMessagesComponent} from "./components/booking-messages/booking-messages.component";
-import {AdminComponent} from "./components/admin/admin.component";
-import { SearchUserComponent } from './components/forms/search-user/search-user.component';
-import { EditUserFormComponent } from './components/forms/edit-user-form/edit-user-form.component';
-import {AdminAddUserComponent} from "./components/adim-add-user/adim-add-user.component";
-import { UserDialogComponentComponent } from './components/modals/user-dialog-component/user-dialog-component.component';
+import {BookingMessagesComponent} from "./modules/admin-module/components/booking-messages/booking-messages.component";
+import {AdminComponent} from "./modules/admin-module/components/admin/admin.component";
+import { SearchUserComponent } from './modules/admin-module/components/forms/search-user/search-user.component';
+import { EditUserFormComponent } from './modules/admin-module/components/forms/edit-user-form/edit-user-form.component';
+import {AdminAddUserComponent} from "./modules/admin-module/components/adim-add-user/adim-add-user.component";
+import { UserDialogComponentComponent } from './modules/admin-module/modal/user-dialog-component/user-dialog-component.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatSelectModule} from "@angular/material/select";
-import { HistoryLogComponent } from './components/history-log/history-log.component';
+import { HistoryLogComponent } from './modules/user-module/components/history-log/history-log.component';
 import {Routes} from "@angular/router";
-import { ReservationsDialogComponent } from './components/modals/reservations-dialog/reservations-dialog.component';
+import { ReservationsDialogComponent } from './modules/user-module/modal/reservations-dialog/reservations-dialog.component';
+
 
 
 
@@ -63,7 +63,6 @@ export const MY_DATE_FORMATS = {
     HeaderComponent,
     HomeComponent,
     ReservationsComponent,
-    ContentComponent,
     BookingMessagesComponent,
     AdminComponent,
     SearchUserComponent,
@@ -103,6 +102,9 @@ export const MY_DATE_FORMATS = {
     },
   ],
   bootstrap: [AppComponent],
+  exports: [
+    HeaderComponent
+  ]
 })
 export class AppModule {
 

@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { UserRequest } from '../../../interfaces/user-request';
-import { AdminPageService } from '../../../service/admin/admin-page.service';
-import { User } from '../../../interfaces/user';
+import { UserRequest } from '../../../../interfaces/user-request';
+import { AdminPageService } from '../../../../service/admin/admin-page.service';
+import { User } from '../../../../interfaces/user';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({

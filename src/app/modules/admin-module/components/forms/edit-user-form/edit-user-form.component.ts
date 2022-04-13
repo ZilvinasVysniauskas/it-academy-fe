@@ -1,12 +1,12 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {User} from "../../../interfaces/user";
+import {User} from "../../../../../interfaces/user";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {UserRequest} from "../../../interfaces/user-request";
-import {generatePassword} from "../../../shared/generatePassword";
-import {validateEmail} from "../../../validators/emailValidator";
-import {AdminPageService} from "../../../service/admin/admin-page.service";
-import {validateEmailUnique} from "../../../validators/emailUniqueValidator";
-import {userIdValidator} from "../../../validators/userIdValidator";
+import {UserRequest} from "../../../../../interfaces/user-request";
+import {generatePassword} from "../../../../../shared/generatePassword";
+import {validateEmail} from "../../../../../validators/emailValidator";
+import {AdminPageService} from "../../../../../service/admin/admin-page.service";
+import {validateEmailUnique} from "../../../../../validators/emailUniqueValidator";
+import {userIdValidator} from "../../../../../validators/userIdValidator";
 
 @Component({
   selector: 'app-edit-user-form',
