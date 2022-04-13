@@ -4,6 +4,7 @@ import {DeskReservationService} from "../../service/reservations/desk-reservatio
 import {ReservationRequest} from "../../interfaces/reservationRequest";
 import {Reservation} from "../../interfaces/reservation";
 import * as moment from "moment";
+import {dateToString} from "../../shared/utils";
 
 
 @Component({
@@ -39,12 +40,12 @@ export class ReservationsComponent implements OnInit {
   }
 
   fetchDesksByDate() {
-    this.reservationService.getReservationsByDate(this.dateToString(this.reservationDate))
+    this.reservationService.getReservationsByDate(dateToString(this.reservationDate))
       .subscribe(res => this.desksReservationsByDate = res);
   }
 
   checkUserCurrentDateReservations() {
-    this.reservationService.getUserCurrentDayReservation(this.dateToString(this.reservationDate)).subscribe(reservation => {
+    this.reservationService.getUserCurrentDayReservation(dateToString(this.reservationDate)).subscribe(reservation => {
       this.currentReservation = reservation;
       this.displayReservationMessage = this.isCurrentReservationActive = reservation?.date !== undefined;
       this.fetchDesksByDate();
@@ -56,7 +57,7 @@ export class ReservationsComponent implements OnInit {
     const reservationRequest: ReservationRequest = {
       userId: 12345678,
       deskId: this.selected!,
-      date: this.dateToString(this.reservationDate)
+      date: dateToString(this.reservationDate)
     }
     this.reservationService.reserveTable(reservationRequest).subscribe( a =>{
       this.placedReservation = true;
@@ -96,9 +97,7 @@ export class ReservationsComponent implements OnInit {
     this.checkUserCurrentDateReservations();
   }
 
-  private dateToString(date: moment.Moment): string {
-    return date.format('YYYY-MM-DD');
-  }
+
 
 
 
