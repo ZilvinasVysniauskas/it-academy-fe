@@ -1,13 +1,8 @@
-<form [formGroup]="searchUserForm">
-  <label for="userId">User ID:</label>
-  <input id="userId" type="text" formControlName="userId">
 
-  <label for="firstname">First Name: </label>
-  <input  id="firstname" type="text" formControlName="firstName">
 
-  <label for="lastname">Name: </label>
-  <input id="lastname" type="text" formControlName="lastName">
-</form>
+
+  <input  id="firstname" type="text" [formControl]="searchControl">
+
 
 <div fxLayout="row">
   <p>User ID</p>
@@ -15,7 +10,7 @@
   <p>Last Name</p>
   <p>Active</p>
 </div>
-<div *ngFor="let user of users">
+<div *ngFor="let user of this.users$ | async">
   <div fxLayout="row">
     <p>{{user.userId}}</p>
     <p>{{user.firstName}}</p>
