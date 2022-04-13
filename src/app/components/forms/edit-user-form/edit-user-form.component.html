@@ -37,7 +37,8 @@
     <div *ngIf="expEmail?.errors?.['required']">
       <p>email is required</p>
     </div>
-    <div *ngIf="expEmail?.errors?.['validateEmail']">
+    <div *ngIf="expEmail?.errors?.['validateEmail']"
+    >
       <p>email must end with @corporate.com</p>
     </div>
   </div>
