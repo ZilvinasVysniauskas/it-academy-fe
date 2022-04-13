@@ -34,12 +34,9 @@ import { UserDialogComponentComponent } from './modules/admin-module/modal/user-
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatSelectModule} from "@angular/material/select";
 import { HistoryLogComponent } from './modules/user-module/components/history-log/history-log.component';
-import {Routes} from "@angular/router";
 import { ReservationsDialogComponent } from './modules/user-module/modal/reservations-dialog/reservations-dialog.component';
-
-
-
-
+import {AdminModuleComponent} from "./modules/admin-module/admin-module.component";
+import {UserModuleComponent} from "./modules/user-module/user-module.component";
 
 
 export const MY_DATE_FORMATS = {
@@ -106,26 +103,6 @@ export const MY_DATE_FORMATS = {
     HeaderComponent
   ]
 })
-export class AppModule {
+export class AppModule {}
 
-  userRoutes: Routes = [
-    { path: '', component: HomeComponent },
-    { path: 'reservations', component: ReservationsComponent },
-    { path: 'history', component:  HistoryLogComponent}
-  ];
 
-  adminRoutes: Routes = [
-    { path: '', component: LoginComponent },
-    { path: '1', component: ReservationsComponent },
-    { path: '2', component: AdminComponent },
-    { path: '3', component: AdminAddUserComponent },
-  ];
-}
-
-/*
-@NgModule({
-  imports: [MatDatepickerModule, MatMomentDateModule],
-  providers: [
-    {provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: {useUtc: true}}
-  ]
- */

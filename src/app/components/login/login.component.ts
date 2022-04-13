@@ -3,6 +3,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../service/authentification/auth.service";
 import {UserLoginRequest} from "../../interfaces/userLoginRequest";
 import {validateEmail} from "../../validators/emailValidator";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -21,7 +22,7 @@ export class LoginComponent implements OnInit {
     return this.loginFormGroup.get('password')
   }
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private router: Router) {
     this.loginFormGroup = new FormGroup({
         userId: new FormControl('', {validators:
             [Validators.required],
@@ -34,6 +35,8 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log('AAAAAAAAAAAAA')
+    this.router.navigate(['/admin'])
   }
 
   login() {

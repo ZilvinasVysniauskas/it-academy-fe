@@ -14,15 +14,20 @@ export class AuthService {
 
   login(loginRequest: UserLoginRequest) {
     let loginUrl = 'api/v1/login';
-    console.log('here')
     this.httpClient.post<LoginResponse>(loginUrl, loginRequest, {observe: 'response'})
       .subscribe(
         response => {
-        this.setRole(response.body?.user.role!)
-        this.setToken(response.body?.jwtToken!)
-        this.router.navigate(['home'])
-      },
-      error => alert("login failed")
+          const role = response.body?.user.role!;
+          this.setToken(response.body?.jwtToken!)
+          this.setRole(role);
+          if (role == 'admin') {
+            this.router.navigate(['/admin'])
+          }
+          else {
+            this.router.navigate(['/user']);
+          }
+        },
+        error => alert("login failed")
       );
   }
 
