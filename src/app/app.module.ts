@@ -4,12 +4,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
-import { HerokuTestComponent } from './heroku-test/heroku-test.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
 import { LoginComponent } from './components/login/login.component';
 import { MatButtonModule } from '@angular/material/button';
-import { ReactiveFormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
@@ -20,6 +19,9 @@ import { ReservationsComponent } from './components/reservations/reservations.co
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ContentComponent } from './components/content/content.component';
 import { MAT_MOMENT_DATE_ADAPTER_OPTIONS, MomentDateAdapter } from '@angular/material-moment-adapter';
+import {MatCheckboxModule} from "@angular/material/checkbox";
+import {BookingMessagesComponent} from "./components/booking-messages/booking-messages.component";
+
 
 export const MY_DATE_FORMATS = {
   parse: {
@@ -37,28 +39,30 @@ export const MY_DATE_FORMATS = {
 @NgModule({
   declarations: [
     AppComponent,
-    HerokuTestComponent,
     LoginComponent,
     CalendarComponent,
     HeaderComponent,
     HomeComponent,
     ReservationsComponent,
     ContentComponent,
+    BookingMessagesComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    MatInputModule,
-    MatButtonModule,
-    ReactiveFormsModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatCardModule,
-    FlexLayoutModule,
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        MatInputModule,
+        MatButtonModule,
+        ReactiveFormsModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatCardModule,
+        FlexLayoutModule,
+        FormsModule,
+        MatCheckboxModule,
 
-  ],
+    ],
   providers: [
     {
       provide: DateAdapter,

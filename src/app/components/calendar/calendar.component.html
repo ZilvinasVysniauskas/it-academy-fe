@@ -1,4 +1,7 @@
 <mat-card>
-  <mat-calendar [(selected)]="date" (selectedChange)="onDateChange.emit($event)"></mat-calendar>
+  <mat-calendar [minDate]="minDate"
+          [(selected)]="date"
+          (selectedChange)="onDateChange.emit($event)"
+  ></mat-calendar>
 </mat-card>
-<!--<p>Selected date: {{date}}</p>-->
+<p class="today">{{ today | date: "fullDate" }}</p>
