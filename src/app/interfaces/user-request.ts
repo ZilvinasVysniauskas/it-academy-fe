@@ -5,7 +5,7 @@ export interface UserRequest {
   "lastName": string,
   "password": string,
   "passwordRepeat": string,
-  "isActive": 1,
+  "isActive": number,
   "email": string,
-  "role": 0
+  "role": number
 }

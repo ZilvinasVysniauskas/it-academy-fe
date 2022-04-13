@@ -24,6 +24,7 @@ export class AdminPageService {
   }
 
   updateUser(user: UserRequest): Observable<UserRequest> {
+    console.log(user)
     return this.httpClient.put<UserRequest>(this.apiUser, user)
   }
 

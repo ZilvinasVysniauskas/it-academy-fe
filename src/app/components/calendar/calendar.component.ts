@@ -9,8 +9,8 @@ import * as moment from 'moment';
 })
 export class CalendarComponent implements OnInit {
     @Input() date: moment.Moment | null = null;
-    @Output() onDateChange: EventEmitter<moment.Moment | null> =
-        new EventEmitter<moment.Moment | null>();
+    @Output() onDateChange: EventEmitter<moment.Moment> =
+        new EventEmitter<moment.Moment>();
 
     constructor(private dateAdapter: DateAdapter<Date>) {
         this.dateAdapter.setLocale('en-GB');

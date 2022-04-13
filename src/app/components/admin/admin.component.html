@@ -7,9 +7,6 @@
   <input id="lastname" type="text" formControlName="lastName">
 </form>
 
-
-
-
 <div fxLayout="row">
   <p>User ID</p>
   <p>First Name</p>
@@ -33,7 +30,11 @@
 
 
 <div *ngIf="user?.userId !== null" class="container">
-
+  <app-edit-user-form
+    [user]="user!"
+    (savedUser)="saveUser($event)"
+    (cancelUpdate)="user = null"
+  ></app-edit-user-form>
 </div>
 
 

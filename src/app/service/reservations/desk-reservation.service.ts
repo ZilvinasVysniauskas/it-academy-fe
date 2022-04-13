@@ -33,7 +33,7 @@ export class DeskReservationService {
   //   return moment(reservationDate).add(1, 'days').toDate().toISOString().split('T')[0];
   // }
 
-  cancelReservationById(id: number | undefined): Observable<any> {
+  cancelReservationById(id: number): Observable<any> {
     return this.httpClient.delete("/api/v1/reservations/" + id);
   }
 }

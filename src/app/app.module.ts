@@ -23,6 +23,7 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
 import {BookingMessagesComponent} from "./components/booking-messages/booking-messages.component";
 import {AdminComponent} from "./components/admin/admin.component";
 import { SearchUserComponent } from './components/forms/search-user/search-user.component';
+import { EditUserFormComponent } from './components/forms/edit-user-form/edit-user-form.component';
 
 
 
@@ -52,7 +53,8 @@ export const MY_DATE_FORMATS = {
     ContentComponent,
     BookingMessagesComponent,
     AdminComponent,
-    SearchUserComponent
+    SearchUserComponent,
+    EditUserFormComponent
   ],
     imports: [
         BrowserModule,

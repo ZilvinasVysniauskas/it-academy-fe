@@ -1,0 +1,23 @@
+<form [formGroup]="editUserForm">
+  <label for="firstName">First Name</label>
+  <input id="firstName" type="text" formControlName="firstName">
+  <label for="lastName">Last Name</label>
+  <input id="lastName" type="text" formControlName="lastName">
+  <label for="middleName">Middle Name</label>
+  <input id="middleName" type="text" formControlName="middleName">
+  <label for="email">Email</label>
+  <input id="email" type="text" formControlName="email">
+  <label for="password"></label>
+  <input id="password" type="text" formControlName="password">
+  <label for="role">Role</label>
+  <select id="role" formControlName="role">
+    <option value="STANDARD_USER" [selected]="expRole?.value == 'STANDARD_USER' ">STANDARD_USER</option>
+    <option value="ADMINISTRATOR" [selected]="expRole?.value == 'ADMINISTRATOR' ">ADMINISTRATOR</option>
+  </select>
+
+  <label for="active">Last Name</label>tu
+  <input id="active" type="checkbox" formControlName="active">
+
+  <button (click)="saveUpdatedUser()">save</button>
+  <button (click)="cancelUpdate.emit()">cancel</button>
+</form>
