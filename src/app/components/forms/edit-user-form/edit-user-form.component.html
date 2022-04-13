@@ -3,12 +3,44 @@
   <input id="userid" readonly formControlName="userId">
   <label for="firstName">First Name</label>
   <input id="firstName" type="text" formControlName="firstName">
+  <div [hidden]="expFirstName?.valid || expFirstName?.pristine">
+    <div *ngIf="expFirstName?.errors?.['required']">
+      <p>first name is required</p>
+    </div>
+    <div *ngIf="expFirstName?.errors?.['maxlength']">
+      <p>cannot be longer then 40 characters</p>
+    </div>
+  </div>
   <label for="lastName">Last Name</label>
   <input id="lastName" type="text" formControlName="lastName">
+  <div [hidden]="expLastName?.valid || expLastName?.pristine">
+    <div *ngIf="expLastName?.errors?.['required']">
+      <p>last name is required</p>
+    </div>
+    <div *ngIf="expLastName?.errors?.['maxlength']">
+      <p>cannot be longer then 40 characters</p>
+    </div>
+  </div>
   <label for="middleName">Middle Name</label>
   <input id="middleName" type="text" formControlName="middleName">
+  <div [hidden]="expMiddleName?.valid || expMiddleName?.pristine">
+    <div *ngIf="expMiddleName?.errors?.['required']">
+      <p>middle name is required</p>
+    </div>
+    <div *ngIf="expMiddleName?.errors?.['maxlength']">
+      <p>cannot be longer then 40 characters</p>
+    </div>
+  </div>
   <label for="email">Email</label>
   <input id="email" type="text" formControlName="email">
+  <div [hidden]="expEmail?.valid || expEmail?.pristine">
+    <div *ngIf="expEmail?.errors?.['required']">
+      <p>email is required</p>
+    </div>
+    <div *ngIf="expEmail?.errors?.['validateEmail']">
+      <p>email must end with @corporate.com</p>
+    </div>
+  </div>
   <label for="role">Role</label>
   <select id="role" formControlName="role">
     <option value="STANDARD_USER" [selected]="expRole?.value == 'STANDARD_USER' ">STANDARD_USER</option>
@@ -21,6 +53,6 @@
   <label for="active">active</label>
   <input id="active" type="checkbox" formControlName="active">
   <button (click)="resetPassword()">generate new password</button>
-  <button (click)="saveUpdatedUser()">save</button>
+  <button (click)="saveUpdatedUser()" [disabled]="!editUserForm.valid">save</button>
   <button (click)="cancelUpdate.emit()">cancel</button>
 </form>

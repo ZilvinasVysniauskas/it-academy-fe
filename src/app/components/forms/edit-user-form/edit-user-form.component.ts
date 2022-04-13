@@ -3,6 +3,7 @@ import {User} from "../../../interfaces/user";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserRequest} from "../../../interfaces/user-request";
 import {generatePassword} from "../../../shared/generatePassword";
+import {validateEmail} from "../../../validators/emailValidator";
 
 @Component({
   selector: 'app-edit-user-form',
@@ -60,7 +61,7 @@ export class EditUserFormComponent implements OnInit {
             [Validators.required, Validators.maxLength(40)]
         }),
         email: new FormControl('', {validators:
-            [Validators.required, forbiden]
+            [Validators.required, validateEmail]
         }),
         role: new FormControl(''),
         active: new FormControl('')
@@ -101,7 +102,7 @@ export class EditUserFormComponent implements OnInit {
   }
 
   resetPassword() {
-    this.password = generatePassword(10);
+    this.password = generatePassword(8);
     this.passwordChanged = true;
   }
 }

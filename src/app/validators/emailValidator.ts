@@ -1,5 +1,10 @@
-import {FormControl, ValidatorFn} from "@angular/forms";
+import {FormControl} from "@angular/forms";
 
-export function emailValidator(nameRe: FormControl): ValidatorFn {
+export function validateEmail(email: FormControl) {
 
+  return /@corporate.com$/.test(email.value)? null : {
+    validateEmail: {
+      valid: false
+    }
+  };
 }
