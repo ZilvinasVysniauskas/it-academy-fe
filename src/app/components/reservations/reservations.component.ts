@@ -47,6 +47,7 @@ export class ReservationsComponent implements OnInit {
   checkUserCurrentDateReservations() {
     this.reservationService.getUserCurrentDayReservation(dateToString(this.reservationDate)).subscribe(reservation => {
       this.currentReservation = reservation;
+      console.log(this.currentReservation)
       this.displayReservationMessage = this.isCurrentReservationActive = reservation?.date !== undefined;
       this.fetchDesksByDate();
       this.selected = undefined;

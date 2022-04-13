@@ -1,12 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
 import {User} from "../../interfaces/user";
 import {AdminPageService} from "../../service/admin/admin-page.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {map, startWith} from "rxjs/operators";
 import {combineLatest, Observable, of} from "rxjs";
 import {UserRequest} from "../../interfaces/user-request";
-import {generatePassword} from "../../shared/generatePassword";
 
 @Component({
   selector: 'app-admin',
