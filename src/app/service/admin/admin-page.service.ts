@@ -35,4 +35,7 @@ export class AdminPageService {
     return this.httpClient.get<boolean>(this.apiUser + `/id/${value}`);
   }
 
+  checkIfEmailExists(value: boolean): Observable<boolean> {
+    return this.httpClient.get<boolean>(this.apiUser + `/email/${value}`)
+  }
 }

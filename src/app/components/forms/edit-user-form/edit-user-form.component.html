@@ -63,6 +63,9 @@
     <div *ngIf="expEmail?.errors?.['validateEmail']">
       <p>email must end with @corporate.com</p>
     </div>
+    <div *ngIf="expEmail?.errors?.['emailAlreadyExists']">
+      id already exists
+    </div>
   </div>
   <label for="role">Role</label>
   <select id="role" formControlName="role">

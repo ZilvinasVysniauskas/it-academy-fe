@@ -3,16 +3,14 @@ import {AbstractControl, AsyncValidator, AsyncValidatorFn, ValidationErrors} fro
 import {Observable} from "rxjs";
 import {map} from "rxjs/operators";
 
-export class UserEntryValidator {
-  static validateId(adminService: AdminPageService): AsyncValidatorFn {
+export function userIdValidator(adminService: AdminPageService): AsyncValidatorFn {
     return (control: AbstractControl): Observable<ValidationErrors | null> => {
       return adminService
         .checkIfUserIdExists(control.value)
         .pipe(
           map((result: boolean) =>
-            result ? { idAlreadyExists: true } : null
+            result ? {idAlreadyExists: true} : null
           )
         );
     };
-  }
 }

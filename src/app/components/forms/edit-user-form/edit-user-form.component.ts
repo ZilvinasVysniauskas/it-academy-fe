@@ -5,7 +5,8 @@ import {UserRequest} from "../../../interfaces/user-request";
 import {generatePassword} from "../../../shared/generatePassword";
 import {validateEmail} from "../../../validators/emailValidator";
 import {AdminPageService} from "../../../service/admin/admin-page.service";
-import {UserEntryValidator} from "../../../validators/userEntryValidator";
+import {validateEmailUnique} from "../../../validators/emailUniqueValidator";
+import {userIdValidator} from "../../../validators/userIdValidator";
 
 @Component({
   selector: 'app-edit-user-form',
@@ -55,9 +56,7 @@ export class EditUserFormComponent implements OnInit {
 
 
 
-  private userIdValidator = [
-    UserEntryValidator.validateId(this.adminService)
-  ];
+
   constructor(private adminService: AdminPageService) {
     this.editUserForm = new FormGroup({
         userId: new FormControl('', {validators:
@@ -97,7 +96,8 @@ export class EditUserFormComponent implements OnInit {
     }
     else {
       this.expActive?.setValue(true)
-      this.editUserForm.get('userId')?.setAsyncValidators(this.userIdValidator)
+      this.editUserForm.get('userId')?.setAsyncValidators(userIdValidator(this.adminService))
+      this.editUserForm.get('email')?.setAsyncValidators(validateEmailUnique(this.adminService))
     }
 
   }
