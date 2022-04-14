@@ -11,7 +11,13 @@ import { MatButtonModule } from '@angular/material/button';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
+import {
+  DateAdapter,
+  MAT_DATE_FORMATS,
+  MAT_DATE_LOCALE,
+  MatNativeDateModule,
+  MatOptionModule
+} from '@angular/material/core';
 import { MatCardModule } from '@angular/material/card';
 import { HeaderComponent } from './components/header/header.component';
 import { HomeComponent } from './components/home/home.component';
@@ -27,6 +33,7 @@ import { EditUserFormComponent } from './components/forms/edit-user-form/edit-us
 import {AdminAddUserComponent} from "./components/adim-add-user/adim-add-user.component";
 import { UserDialogComponentComponent } from './components/modals/user-dialog-component/user-dialog-component.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import {MatSelectModule} from "@angular/material/select";
 
 
 
@@ -61,22 +68,24 @@ export const MY_DATE_FORMATS = {
     AdminAddUserComponent,
     UserDialogComponentComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        HttpClientModule,
-        BrowserAnimationsModule,
-        MatInputModule,
-        MatButtonModule,
-        ReactiveFormsModule,
-        MatDatepickerModule,
-        MatNativeDateModule,
-        MatCardModule,
-        FlexLayoutModule,
-        FormsModule,
-        MatCheckboxModule,
-      MatDialogModule,
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatInputModule,
+    MatButtonModule,
+    ReactiveFormsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatCardModule,
+    FlexLayoutModule,
+    FormsModule,
+    MatCheckboxModule,
+    MatDialogModule,
+    MatOptionModule,
+    MatSelectModule,
+  ],
   providers: [
     {
       provide: DateAdapter,

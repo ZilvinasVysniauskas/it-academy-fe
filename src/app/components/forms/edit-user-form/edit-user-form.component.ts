@@ -26,6 +26,11 @@ export class EditUserFormComponent implements OnInit {
   password!: string;
   passwordChanged: boolean = false;
   userRequest?: UserRequest;
+  selected!: string;
+
+  states = [
+    'STANDARD_USER', 'ADMINISTRATOR'
+  ]
 
   get expFirstName() {
     return this.editUserForm.get('firstName')
@@ -54,9 +59,6 @@ export class EditUserFormComponent implements OnInit {
     return this.editUserForm.get('userId')
   }
 
-
-
-
   constructor(private adminService: AdminPageService) {
     this.editUserForm = new FormGroup({
         userId: new FormControl('', {validators:
@@ -70,7 +72,7 @@ export class EditUserFormComponent implements OnInit {
             [Validators.required, Validators.maxLength(40)]
         }),
         middleName: new FormControl('', {validators:
-            [Validators.required, Validators.maxLength(40)]
+            [Validators.maxLength(40)]
         }),
         email: new FormControl('', {validators:
             [Validators.required, validateEmail]
@@ -93,6 +95,8 @@ export class EditUserFormComponent implements OnInit {
       this.expPassword?.setValue(this.user.password);
       this.expRole?.setValue(this.user.role);
       this.expActive?.setValue(this.user.active);
+      this.editUserForm.get('email')?.setAsyncValidators(validateEmailUnique(this.adminService))
+      this.selected = this.expRole?.value;
     }
     else {
       this.expActive?.setValue(true)
@@ -101,6 +105,7 @@ export class EditUserFormComponent implements OnInit {
     }
 
   }
+
 
   AddOrUpdateUser() {
     const isActive = () => {
@@ -132,7 +137,9 @@ export class EditUserFormComponent implements OnInit {
       role: this.expRole?.value
     }
     this.userRequest = user;
-    this.savedUser.emit(user)
+    if (this.editUserForm.valid){
+      this.savedUser.emit(user)
+    }
   }
 
   resetPassword() {

@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {User} from "../../interfaces/user";
 import {AdminPageService} from "../../service/admin/admin-page.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {map, startWith} from "rxjs/operators";
+import {delay, map, startWith} from "rxjs/operators";
 import {combineLatest, Observable, of} from "rxjs";
 import {UserRequest} from "../../interfaces/user-request";
 import { UserDialogComponentComponent } from '../modals/user-dialog-component/user-dialog-component.component';
@@ -47,6 +47,7 @@ export class AdminComponent implements OnInit {
   }
 
   private setUsers(): void {
+    console.log('here')
     this.users$ = combineLatest([
       this.expUserId!.valueChanges.pipe(startWith('')),
       this.expFirstName!.valueChanges.pipe(startWith('')),
@@ -65,24 +66,17 @@ export class AdminComponent implements OnInit {
   }
 
   editUser(user: User) {
-    // this.user = user;
     this.matDialog.open(UserDialogComponentComponent, { data: { user } })
       .afterClosed()
       .subscribe((result?: boolean) => {
         console.log('mat dialog result on edit', result);
         if (result === true) {
           console.log('Edit success');
+          this.setUsers()
         }
       });
   }
 
-  saveUser($event: UserRequest) {
-    this.adminService.updateUser($event).subscribe(a => {
-        this.user = null;
-        this.setUsers();
-      }
-    )
 
-  }
 }
 

@@ -27,15 +27,3 @@
     <button (click)="editUser(user)">edit</button>
   </div>
 </div>
-
-
-<div *ngIf="user?.userId !== null" class="container">
-  <app-edit-user-form
-    [user]="user!"
-    [isEditForm]="true"
-    (savedUser)="saveUser($event)"
-    (cancel)="user = null"
-  ></app-edit-user-form>
-</div>
-
-

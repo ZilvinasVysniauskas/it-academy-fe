@@ -9,7 +9,7 @@ export function validateEmailUnique(adminService: AdminPageService): AsyncValida
       .checkIfEmailExists(control.value)
       .pipe(
         map((result: boolean) =>
-          result ? {emailAlreadyExists: true} : null
+          result && control.dirty ? {emailAlreadyExists: true} : null
         )
       );
   }

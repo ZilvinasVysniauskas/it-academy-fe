@@ -1,19 +1,12 @@
 <h1 mat-dialog-title>{{ isEdit ? 'Edit' : 'Create' }}</h1>
 
-<div mat-dialog-content>
-  <app-edit-user-form
+<div mat-dialog-content fxLayout="column">
+  <app-edit-user-form fxLayout="column"
     [user]="data.user"
     [isEditForm]="isEdit"
     [displaySuccessMessage]="displaySuccessMessage"
     (savedUser)="handleSavedUser($event)"
-    (addNewUser)="handleAddNewUser()"
     (cancel)="handleCancel()"
   ></app-edit-user-form>
-
 </div>
 
-<div mat-dialog-actions>
-  <button mat-button *ngIf="isEdit" (click)="update()">Update</button>
-  <button mat-button *ngIf="!isEdit" (click)="create()">Create</button>
-  <button mat-button [mat-dialog-close]="false">Cancel</button>
-</div>

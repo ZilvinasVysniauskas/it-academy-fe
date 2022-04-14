@@ -25,28 +25,22 @@ export class UserDialogComponentComponent implements OnInit {
 
   }
 
-  create() {
-
-  }
-
-  update() {
-
-  }
-
-  handleAddNewUser() {
-
-  }
-
   handleCancel() {
     this.dialogRef.close();
   }
 
   handleSavedUser(userRequest: UserRequest) {
-    this.adminService.addNewUser(userRequest).subscribe(() => {
-      this.displaySuccessMessage = true;
-      this.dialogRef.close(true);
-    })
-
+    if (this.isEdit) {
+      this.adminService.updateUser(userRequest).subscribe(() => {
+        this.displaySuccessMessage = true;
+        this.dialogRef.close(true);
+      })
+    }
+    else {
+      this.adminService.addNewUser(userRequest).subscribe(() => {
+        this.displaySuccessMessage = true;
+      })
+    }
   }
 
 }

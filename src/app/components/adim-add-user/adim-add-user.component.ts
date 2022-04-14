@@ -11,8 +11,6 @@ import { UserDialogComponentComponent } from '../modals/user-dialog-component/us
 })
 export class AdminAddUserComponent implements OnInit {
 
-  displaySuccessMessage = false;
-
   constructor(private adminService: AdminPageService,
               private matDialog: MatDialog,) { }
 
