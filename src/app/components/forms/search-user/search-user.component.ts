@@ -33,8 +33,4 @@ export class SearchUserComponent implements OnInit {
   ngOnInit(): void {
 
   }
-
-  searchUser() {
-
-  }
 }
