@@ -32,8 +32,9 @@
 <div *ngIf="user?.userId !== null" class="container">
   <app-edit-user-form
     [user]="user!"
+    [isEditForm]="true"
     (savedUser)="saveUser($event)"
-    (cancelUpdate)="user = null"
+    (cancel)="user = null"
   ></app-edit-user-form>
 </div>
 

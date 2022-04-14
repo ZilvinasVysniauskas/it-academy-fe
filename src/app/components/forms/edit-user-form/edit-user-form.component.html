@@ -1,6 +1,29 @@
+<div *ngIf="displaySuccessMessage; then message else form"></div>
+
+<ng-template #message>
+  <div class="container">
+    <p>user added successfully</p>
+    <p>user id: {{userRequest!.userId}}</p>
+    <p>password: {{userRequest!.password}}</p>
+    <button (click)="editUserForm.reset(); addNewUser.emit(); expActive?.setValue(true)">add new user</button>
+  </div>
+</ng-template>
+
+<ng-template #form>
 <form [formGroup]="editUserForm">
   <label for="userid">User Id</label>
-  <input id="userid" readonly formControlName="userId">
+  <input id="userid" [readOnly]="isEditForm" formControlName="userId">
+  <div [hidden]="expUserId?.valid || expUserId?.pristine">
+    <div *ngIf="expUserId?.errors?.['required']">
+      <p>id field is required</p>
+    </div>
+    <div *ngIf="expUserId?.errors?.['minlength'] || expUserId?.errors?.['maxlength']">
+      <p>id must be 8 characters</p>
+    </div>
+    <div *ngIf="expUserId?.errors?.['idAlreadyExists']">
+      id already exists
+    </div>
+  </div>
   <label for="firstName">First Name</label>
   <input id="firstName" type="text" formControlName="firstName">
   <div [hidden]="expFirstName?.valid || expFirstName?.pristine">
@@ -37,8 +60,7 @@
     <div *ngIf="expEmail?.errors?.['required']">
       <p>email is required</p>
     </div>
-    <div *ngIf="expEmail?.errors?.['validateEmail']"
-    >
+    <div *ngIf="expEmail?.errors?.['validateEmail']">
       <p>email must end with @corporate.com</p>
     </div>
   </div>
@@ -53,7 +75,11 @@
 
   <label for="active">active</label>
   <input id="active" type="checkbox" formControlName="active">
-  <button (click)="resetPassword()">generate new password</button>
-  <button (click)="saveUpdatedUser()" [disabled]="!editUserForm.valid">save</button>
-  <button (click)="cancelUpdate.emit()">cancel</button>
+  <div [hidden]="!isEditForm">
+    <button (click)="resetPassword()">generate new password</button>
+  </div>
+
+  <button (click)="AddOrUpdateUser()" [disabled]="!editUserForm.valid">save</button>
+  <button (click)="cancel.emit()">cancel</button>
 </form>
+</ng-template>

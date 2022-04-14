@@ -24,6 +24,7 @@ import {BookingMessagesComponent} from "./components/booking-messages/booking-me
 import {AdminComponent} from "./components/admin/admin.component";
 import { SearchUserComponent } from './components/forms/search-user/search-user.component';
 import { EditUserFormComponent } from './components/forms/edit-user-form/edit-user-form.component';
+import {AdminAddUserComponent} from "./components/adim-add-user/adim-add-user.component";
 
 
 
@@ -54,7 +55,8 @@ export const MY_DATE_FORMATS = {
     BookingMessagesComponent,
     AdminComponent,
     SearchUserComponent,
-    EditUserFormComponent
+    EditUserFormComponent,
+    AdminAddUserComponent
   ],
     imports: [
         BrowserModule,

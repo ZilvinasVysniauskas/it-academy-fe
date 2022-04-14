@@ -19,10 +19,6 @@ export class AdminPageService {
     return this.httpClient.get<User[]>(this.apiUser);
   }
 
-  fetchUserById(id: number): Observable<User> {
-    return this.httpClient.get<User>(this.apiUser + id);
-  }
-
   updateUser(user: UserRequest): Observable<UserRequest> {
     console.log(user)
     return this.httpClient.put<UserRequest>(this.apiUser, user)
@@ -35,8 +31,8 @@ export class AdminPageService {
   fetchAllReservations(): Observable<ReservationAdmin[]> {
     return this.httpClient.get<ReservationAdmin[]>(this.apiReservations);
   }
-
-  cancelReservationById(id: number): Observable<any> {
-    return this.httpClient.delete(this.apiReservations + id);
+  checkIfUserIdExists(value: string): Observable<boolean> {
+    return this.httpClient.get<boolean>(this.apiUser + `/id/${value}`);
   }
+
 }
