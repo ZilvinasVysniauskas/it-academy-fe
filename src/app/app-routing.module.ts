@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './components/login/login.component';
-import {AdminModuleComponent} from "./modules/admin-module/admin-module.component";
-import {UserModuleComponent} from "./modules/user-module/user-module.component";
+import { LoginComponent } from './shared-componets-module/login/login.component';
 
 const routes: Routes = [
   {path: '', component: LoginComponent},

@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+// @ts-ignore
 import { AdimAddUserComponent } from './adim-add-user.component';
 
 describe('AdimAddUserComponent', () => {

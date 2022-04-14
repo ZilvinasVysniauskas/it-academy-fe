@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {HomeComponent} from "../../components/home/home.component";
+import {HomeComponent} from "../../shared-componets-module/home/home.component";
 import {ReservationsComponent} from "./components/reservations/reservations.component";
 import {HistoryLogComponent} from "./components/history-log/history-log.component";
 

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {AdminPageService} from "../../../../service/admin/admin-page.service";
-import {UserRequest} from "../../../../interfaces/user-request";
 import { MatDialog } from '@angular/material/dialog';
 import { UserDialogComponentComponent } from '../../modal/user-dialog-component/user-dialog-component.component';
 
