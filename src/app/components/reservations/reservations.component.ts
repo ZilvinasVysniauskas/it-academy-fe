@@ -98,9 +98,4 @@ export class ReservationsComponent implements OnInit {
     this.checkUserCurrentDateReservations();
   }
 
-
-
-
-
-
 }
