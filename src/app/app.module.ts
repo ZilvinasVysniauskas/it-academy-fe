@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
 import { LoginComponent } from './components/login/login.component';
@@ -37,6 +37,7 @@ import {MatSelectModule} from "@angular/material/select";
 import { HistoryLogComponent } from './components/history-log/history-log.component';
 import {Routes} from "@angular/router";
 import { ReservationsDialogComponent } from './components/modals/reservations-dialog/reservations-dialog.component';
+import {TokenInterceptor} from "./service/interpretor";
 
 
 
@@ -101,6 +102,11 @@ export const MY_DATE_FORMATS = {
       provide: MAT_DATE_FORMATS,
       useValue: MY_DATE_FORMATS,
     },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent],
 })

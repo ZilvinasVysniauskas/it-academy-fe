@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {UserDialogComponentComponent} from "../modals/user-dialog-component/user-dialog-component.component";
 import {MatDialog} from "@angular/material/dialog";
+import {AuthService} from "../../service/authentification/auth.service";
 
 @Component({
   selector: 'app-header',
@@ -9,10 +10,14 @@ import {MatDialog} from "@angular/material/dialog";
 })
 export class HeaderComponent implements OnInit {
 
+  isLogged: boolean;
 
-  role = sessionStorage.getItem('role')
+  role: string;
 
-  constructor(private matDialog: MatDialog) { }
+  constructor(private matDialog: MatDialog, private authService: AuthService) {
+    this.isLogged = authService.isLoggedIn();
+    this.role = authService.getRole()!;
+  }
 
   addUser() {
     this.matDialog.open(UserDialogComponentComponent, { data: { } })
@@ -27,4 +32,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  logout() {
+    this.authService.logout();
+  }
 }

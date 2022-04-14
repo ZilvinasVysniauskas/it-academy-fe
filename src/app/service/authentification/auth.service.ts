@@ -18,17 +18,17 @@ export class AuthService {
     this.httpClient.post<LoginResponse>(loginUrl, loginRequest, {observe: 'response'})
       .subscribe(response => {
         if (response.status == 200) {
+          console.log(response.body?.user.role!)
           this.setRole(response.body?.user.role!)
           this.setToken(response.body?.jwtToken!)
           this.router.navigate(['home'])
-        } else {
-          alert("Authentication failed.")
         }
-      });
+      },
+        error => alert('login failed'));
   }
 
   public setRole(role: string): void {
-    localStorage.setItem('roles', role);
+    localStorage.setItem('role', role);
   }
 
   public getRole(): string | null {
@@ -46,6 +46,10 @@ export class AuthService {
   public logout() {
     this.router.navigate(['/login']);
     localStorage.clear();
+  }
+
+  public isLoggedIn(): boolean{
+  return this.getToken() !== null;
   }
 
 }
