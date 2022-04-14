@@ -25,6 +25,8 @@ import {AdminComponent} from "./components/admin/admin.component";
 import { SearchUserComponent } from './components/forms/search-user/search-user.component';
 import { EditUserFormComponent } from './components/forms/edit-user-form/edit-user-form.component';
 import {AdminAddUserComponent} from "./components/adim-add-user/adim-add-user.component";
+import { UserDialogComponentComponent } from './components/modals/user-dialog-component/user-dialog-component.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 
@@ -56,7 +58,8 @@ export const MY_DATE_FORMATS = {
     AdminComponent,
     SearchUserComponent,
     EditUserFormComponent,
-    AdminAddUserComponent
+    AdminAddUserComponent,
+    UserDialogComponentComponent
   ],
     imports: [
         BrowserModule,
@@ -71,7 +74,8 @@ export const MY_DATE_FORMATS = {
         MatCardModule,
         FlexLayoutModule,
         FormsModule,
-        MatCheckboxModule
+        MatCheckboxModule,
+      MatDialogModule,
     ],
   providers: [
     {

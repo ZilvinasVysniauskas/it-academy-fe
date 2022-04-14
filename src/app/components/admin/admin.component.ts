@@ -5,6 +5,8 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {map, startWith} from "rxjs/operators";
 import {combineLatest, Observable, of} from "rxjs";
 import {UserRequest} from "../../interfaces/user-request";
+import { UserDialogComponentComponent } from '../modals/user-dialog-component/user-dialog-component.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-admin',
@@ -34,7 +36,7 @@ export class AdminComponent implements OnInit {
   }
 
 
-  constructor(private adminService: AdminPageService) {
+  constructor(private adminService: AdminPageService, private matDialog: MatDialog,) {
     this.searchUserForm = new FormGroup({
         userId: new FormControl(''),
         firstName: new FormControl(''),
@@ -63,7 +65,15 @@ export class AdminComponent implements OnInit {
   }
 
   editUser(user: User) {
-    this.user = user;
+    // this.user = user;
+    this.matDialog.open(UserDialogComponentComponent, { data: { user } })
+      .afterClosed()
+      .subscribe((result?: boolean) => {
+        console.log('mat dialog result on edit', result);
+        if (result === true) {
+          console.log('Edit success');
+        }
+      });
   }
 
   saveUser($event: UserRequest) {
