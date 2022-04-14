@@ -110,21 +110,7 @@ export const MY_DATE_FORMATS = {
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {
-
-  userRoutes: Routes = [
-    { path: '', component: HomeComponent },
-    { path: 'reservations', component: ReservationsComponent },
-    { path: 'history', component:  HistoryLogComponent}
-  ];
-
-  adminRoutes: Routes = [
-    { path: '', component: LoginComponent },
-    { path: '1', component: ReservationsComponent },
-    { path: '2', component: AdminComponent },
-    { path: '3', component: AdminAddUserComponent },
-  ];
-}
+export class AppModule {}
 
 /*
 @NgModule({

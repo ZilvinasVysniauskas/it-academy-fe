@@ -23,8 +23,6 @@ export class ReservationsComponent implements OnInit {
 
   displayReservationMessage!: boolean;
 
-  isCurrentReservationActive!: boolean;
-
   desksReservationsByDate!: Room[];
 
   currentReservation?: Reservation;
@@ -102,7 +100,6 @@ export class ReservationsComponent implements OnInit {
 
   placeReservation() {
     const reservationRequest: ReservationRequest = {
-      userId: 12345678,
       deskId: this.selected!,
       date: dateToString(this.reservationDate)
     }
@@ -119,7 +116,7 @@ export class ReservationsComponent implements OnInit {
   }
 
   validateClick(id: number) {
-    if (this.isCurrentReservationActive) {
+    if (this.currentReservation) {
       this.displayErrorMessage(this.getMessage(), this.currentReservation!);
     } else if (this.selected == id) {
       this.selected = undefined;

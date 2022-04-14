@@ -5,7 +5,6 @@ import {Room} from "../../interfaces/room";
 import {ReservationRequest} from "../../interfaces/reservationRequest";
 import 'rxjs/add/operator/catch';
 import {Reservation} from "../../interfaces/reservation";
-import * as moment from 'moment';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +26,7 @@ export class DeskReservationService {
   }
 
   getUserCurrentDayReservation(reservationDate: string): Observable<HttpResponse<Reservation>> {
-    return this.httpClient.get<Reservation>(this.reservationsApi + reservationDate + "/12345678", {observe: 'response'})
+    return this.httpClient.get<Reservation>(this.reservationsApi + reservationDate, {observe: 'response'})
   }
 
   cancelReservationById(id: number): Observable<any> {
