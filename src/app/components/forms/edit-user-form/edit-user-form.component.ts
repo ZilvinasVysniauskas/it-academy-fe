@@ -4,8 +4,8 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserRequest} from "../../../interfaces/user-request";
 import {generatePassword} from "../../../shared/generatePassword";
 import {validateEmail} from "../../../validators/emailValidator";
-import {UserEntryValidator} from "../../../validators/userEntryValidator";
 import {AdminPageService} from "../../../service/admin/admin-page.service";
+import {UserEntryValidator} from "../../../validators/userEntryValidator";
 
 @Component({
   selector: 'app-edit-user-form',
@@ -53,11 +53,17 @@ export class EditUserFormComponent implements OnInit {
     return this.editUserForm.get('userId')
   }
 
-  constructor(adminService: AdminPageService) {
+
+
+  private userIdValidator = [
+    UserEntryValidator.validateId(this.adminService)
+  ];
+  constructor(private adminService: AdminPageService) {
     this.editUserForm = new FormGroup({
         userId: new FormControl('', {validators:
             [Validators.required, Validators.maxLength(8),
-              Validators.minLength(8)], asyncValidators: [UserEntryValidator.validateId(adminService)]}),
+              Validators.minLength(8)],
+          }),
         firstName: new FormControl('', {validators:
             [Validators.required, Validators.maxLength(40)]
         }),
@@ -76,6 +82,7 @@ export class EditUserFormComponent implements OnInit {
     );
   }
 
+
   ngOnInit(): void {
     if (this.user){
       this.password = this.user.password;
@@ -90,6 +97,7 @@ export class EditUserFormComponent implements OnInit {
     }
     else {
       this.expActive?.setValue(true)
+      this.editUserForm.get('userId')?.setAsyncValidators(this.userIdValidator)
     }
 
   }
