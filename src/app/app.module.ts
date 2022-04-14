@@ -18,6 +18,7 @@ import {
   MatOptionModule
 } from '@angular/material/core';
 import { MAT_MOMENT_DATE_ADAPTER_OPTIONS, MomentDateAdapter } from '@angular/material-moment-adapter';
+import {MatDialogModule} from "@angular/material/dialog";
 
 
 export const MY_DATE_FORMATS = {
@@ -40,7 +41,8 @@ export const MY_DATE_FORMATS = {
     AppRoutingModule,
     BrowserAnimationsModule,
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    MatDialogModule
   ],
   providers: [
     {

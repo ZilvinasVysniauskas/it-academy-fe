@@ -23,6 +23,9 @@ export class LoginComponent implements OnInit {
   }
 
   constructor(private authService: AuthService, private router: Router) {
+    this.router.events.subscribe(a  => {
+      console.log(a)
+    })
     this.loginFormGroup = new FormGroup({
         userId: new FormControl('', {validators:
             [Validators.required],
@@ -35,6 +38,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.router.navigate(['/user'])
   }
 
   login() {
