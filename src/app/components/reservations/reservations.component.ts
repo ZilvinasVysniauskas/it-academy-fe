@@ -44,22 +44,47 @@ export class ReservationsComponent implements OnInit {
 
   fetchDesksByDate() {
     this.reservationService.getReservationsByDate(dateToString(this.reservationDate))
-      .subscribe(res => this.desksReservationsByDate = res);
+      .subscribe(rooms => {
+        console.log(this.isThereAvailableDesks(rooms) +  " HERE")
+        this.desksReservationsByDate = rooms;
+        if (this.displayReservationMessage || !this.isThereAvailableDesks(rooms)){
+          this.displayErrorMessage(this.getMessage() , this.currentReservation!);
+        }
+      })
+  };
+
+  private getMessage(): string {
+    if (this.placedReservation){
+      return "successful"
+    }
+    if (this.displayReservationMessage){
+      return "reservationExists"
+    }
+    return "noDesks"
   }
+
+  isThereAvailableDesks(rooms: Room[]): boolean {
+    for (let room of rooms){
+      for (let desk of room.desks){
+        if (desk.available){
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
 
   checkUserCurrentDateReservations() {
     this.reservationService.getUserCurrentDayReservation(dateToString(this.reservationDate)).subscribe(reservation => {
       this.currentReservation = reservation;
       this.displayReservationMessage = this.isCurrentReservationActive = reservation?.date !== undefined;
-      if (this.displayReservationMessage){
-        this.displayErrorMessage(this.placedReservation, this.currentReservation);
-      }
       this.fetchDesksByDate();
       this.selected = undefined;
     });
   }
-  displayErrorMessage(placedReservation: boolean, currentReservation: Reservation) {
-    this.matDialog.open(ReservationsDialogComponent, {data: {placedReservation, currentReservation}})
+  displayErrorMessage(message: string, currentReservation: Reservation) {
+    this.matDialog.open(ReservationsDialogComponent, {data: {message, currentReservation}})
       .afterClosed()
       .subscribe((result) => {
         if (result?.event == 'canceled') {
@@ -91,7 +116,7 @@ export class ReservationsComponent implements OnInit {
 
   validateClick(id: number) {
     if (this.isCurrentReservationActive) {
-      this.displayErrorMessage(this.placedReservation, this.currentReservation!);
+      this.displayErrorMessage(this.getMessage(), this.currentReservation!);
     } else if (this.selected == id) {
       this.selected = undefined;
     } else {
@@ -110,5 +135,6 @@ export class ReservationsComponent implements OnInit {
     this.reservationDate = moment(this.reservationDate.add(1, 'day').format())
     this.checkUserCurrentDateReservations();
   }
+
 
 }

@@ -1,6 +1,6 @@
 <div mat-dialog-content fxLayout="column">
   <app-booking-messages (cancelButtonClick)="cancelReservation($event)"
-                        [reservationPlaced]="data.placedReservation"
+                        [message]="data.message"
                         (keepReservationButtonClick)="handleCancel()"
                         (okClicked)="handleCancel()"
                         [currentReservation]="data.currentReservation"></app-booking-messages>

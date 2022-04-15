@@ -12,7 +12,7 @@ export class ReservationsDialogComponent {
 
   test = "test"
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: { placedReservation: boolean, currentReservation: Reservation },
+  constructor(@Inject(MAT_DIALOG_DATA) public data: { message: string, currentReservation: Reservation },
               public dialogRef: MatDialogRef<ReservationsDialogComponent>,private reservationService: DeskReservationService) {
   }
 
