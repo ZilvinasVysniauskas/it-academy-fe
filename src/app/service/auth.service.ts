@@ -14,8 +14,9 @@ export class AuthService {
   constructor(private httpClient: HttpClient, private router: Router) { }
 
   login() {
-    let url = 'http://localhost:8080/login';
-    this.httpClient.post<Observable<boolean>>(url, {
+    let loginUrl = 'http://localhost:8080/api/v1/login';
+    this.httpClient.get('http://localhost:8080/api/v1/user');
+    this.httpClient.post<Observable<boolean>>(loginUrl, {
       userName: this.loginFormControl.value,
       password: this.passwordFormControl.value
     }).subscribe(isValid => {
@@ -30,6 +31,7 @@ export class AuthService {
       }
     });
   }
+
   logout() {
     this.router.navigate(['/login']);
     sessionStorage.clear();
