@@ -4,6 +4,7 @@ import {Router} from "@angular/router";
 import {ActivatedRoute} from "@angular/router";
 import {Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
+import {AuthService} from "../../service/auth.service";
 
 @Component({
     selector: 'app-login',
@@ -13,32 +14,18 @@ import {HttpClient} from "@angular/common/http";
 export class LoginComponent implements OnInit {
     loginFormControl = new FormControl('', [Validators.required]);
     passwordFormControl = new FormControl('', [Validators.required])
-    userId: string = '';
-    password: string = '';
 
-
-    constructor(private router: Router, private route: ActivatedRoute, private httpClient: HttpClient) {
+    constructor(private authService: AuthService) {
     }
 
     ngOnInit(): void {
     }
 
     login() {
-        let url = 'http://localhost:8080/login';
-        this.httpClient.post<Observable<boolean>>(url, {
-            userName: this.loginFormControl.value,
-            password: this.passwordFormControl.value
-        }).subscribe(isValid => {
-            if (isValid) {
-                sessionStorage.setItem(
-                    'token',
-                    btoa(this.loginFormControl.value + ':' + this.passwordFormControl.value)
-                );
-                this.router.navigate(['']);
-            } else {
-                alert("Authentication failed.")
-            }
-        });
+        this.authService.login();
+    }
+    logout() {
+        this.authService.logout();
     }
 
     resetForm() {
