@@ -8,8 +8,8 @@ import {AuthService} from "../../service/auth.service";
     styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-    loginFormControl = new FormControl('', [Validators.required]);
-    passwordFormControl = new FormControl('', [Validators.required])
+    loginFormControl = this.authService.loginFormControl;
+    passwordFormControl = this.authService.passwordFormControl;
 
     constructor(private authService: AuthService) {
     }
