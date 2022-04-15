@@ -58,15 +58,15 @@ export class ReservationsComponent implements OnInit {
       this.selected = undefined;
     });
   }
-  displayErrorMessage(message: boolean, reservation: Reservation) {
-    console.log(message)
-    console.log(reservation)
-    this.matDialog.open(ReservationsDialogComponent, {data: {message, reservation}})
+  displayErrorMessage(placedReservation: boolean, currentReservation: Reservation) {
+    this.matDialog.open(ReservationsDialogComponent, {data: {placedReservation, currentReservation}})
       .afterClosed()
-      .subscribe((result?: boolean) => {
-        console.log('mat dialog result', result);
-        if (result === true) {
-          console.log('Create success');
+      .subscribe((result) => {
+        if (result?.event == 'canceled') {
+          this.checkUserCurrentDateReservations()
+        }
+        if (this.placedReservation) {
+          this.placedReservation = false;
         }
       });
   }
@@ -91,16 +91,12 @@ export class ReservationsComponent implements OnInit {
 
   validateClick(id: number) {
     if (this.isCurrentReservationActive) {
-      this.displayReservationMessage = true;
+      this.displayErrorMessage(this.placedReservation, this.currentReservation!);
     } else if (this.selected == id) {
       this.selected = undefined;
     } else {
       this.selected = id;
     }
-  }
-
-  cancelReservation(id: number) {
-    return this.reservationService.cancelReservationById(id).subscribe(a => this.checkUserCurrentDateReservations());
   }
 
   minusOneDay(){

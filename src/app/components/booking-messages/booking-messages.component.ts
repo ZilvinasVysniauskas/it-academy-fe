@@ -24,6 +24,9 @@ export class BookingMessagesComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    console.log('form')
+    console.log(this.currentReservation)
+    console.log(this.reservationPlaced)
   }
 
 }
