@@ -1,9 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, Validators} from "@angular/forms";
-import {Router} from "@angular/router";
-import {ActivatedRoute} from "@angular/router";
-import {Observable} from "rxjs";
-import {HttpClient} from "@angular/common/http";
 import {AuthService} from "../../service/auth.service";
 
 @Component({
@@ -24,6 +20,7 @@ export class LoginComponent implements OnInit {
     login() {
         this.authService.login();
     }
+
     logout() {
         this.authService.logout();
     }
