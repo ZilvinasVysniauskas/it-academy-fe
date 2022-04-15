@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {ActivatedRoute} from "@angular/router";
+import {Observable} from "rxjs";
+import {HttpClient} from "@angular/common/http";
 
 @Component({
     selector: 'app-login',
@@ -15,16 +17,28 @@ export class LoginComponent implements OnInit {
     password: string = '';
 
 
-    constructor(private router: Router, private route: ActivatedRoute) {
+    constructor(private router: Router, private route: ActivatedRoute, private httpClient: HttpClient) {
     }
 
     ngOnInit(): void {
     }
 
     login() {
-        this.userId = this.loginFormControl.value;
-        this.password = this.passwordFormControl.value;
-        this.router.navigate(['/home']);
+        let url = 'http://localhost:8080/login';
+        this.httpClient.post<Observable<boolean>>(url, {
+            userName: this.loginFormControl.value,
+            password: this.passwordFormControl.value
+        }).subscribe(isValid => {
+            if (isValid) {
+                sessionStorage.setItem(
+                    'token',
+                    btoa(this.loginFormControl.value + ':' + this.passwordFormControl.value)
+                );
+                this.router.navigate(['']);
+            } else {
+                alert("Authentication failed.")
+            }
+        });
     }
 
     resetForm() {
