@@ -1,8 +1,24 @@
-<header>
-  <nav>
-    <ul>
-      <li><a [routerLink]="'/'">Home</a></li>
-      <li><a [routerLink]="'/reservations'">Reservations</a></li>
-    </ul>
-  </nav>
-</header>
+<div *ngIf="role == 'user'; then user else admin"></div>
+<ng-template #user>
+  <header>
+    <nav>
+      <ul>
+        <li><a [routerLink]="'/'">Home</a></li>
+        <li><a [routerLink]="'/reservations'">reservations</a></li>
+        <li><a [routerLink]="'/history'">history</a></li>
+      </ul>
+    </nav>
+  </header>
+</ng-template>
+
+<ng-template #admin>
+  <header>
+    <nav>
+      <ul>
+        <li><a [routerLink]="'/'">Home</a></li>
+        <li><a [routerLink]="'/edit'">edit</a></li>
+        <li><a (click)="addUser()">add user</a></li>
+      </ul>
+    </nav>
+  </header>
+</ng-template>

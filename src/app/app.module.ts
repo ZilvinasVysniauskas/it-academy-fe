@@ -34,6 +34,9 @@ import {AdminAddUserComponent} from "./components/adim-add-user/adim-add-user.co
 import { UserDialogComponentComponent } from './components/modals/user-dialog-component/user-dialog-component.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatSelectModule} from "@angular/material/select";
+import { HistoryLogComponent } from './components/history-log/history-log.component';
+import {Routes} from "@angular/router";
+import { ReservationsDialogComponent } from './components/modals/reservations-dialog/reservations-dialog.component';
 
 
 
@@ -66,7 +69,9 @@ export const MY_DATE_FORMATS = {
     SearchUserComponent,
     EditUserFormComponent,
     AdminAddUserComponent,
-    UserDialogComponentComponent
+    UserDialogComponentComponent,
+    HistoryLogComponent,
+    ReservationsDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -99,7 +104,21 @@ export const MY_DATE_FORMATS = {
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+
+  userRoutes: Routes = [
+    { path: '', component: HomeComponent },
+    { path: 'reservations', component: ReservationsComponent },
+    { path: 'history', component:  HistoryLogComponent}
+  ];
+
+  adminRoutes: Routes = [
+    { path: '', component: LoginComponent },
+    { path: '1', component: ReservationsComponent },
+    { path: '2', component: AdminComponent },
+    { path: '3', component: AdminAddUserComponent },
+  ];
+}
 
 /*
 @NgModule({

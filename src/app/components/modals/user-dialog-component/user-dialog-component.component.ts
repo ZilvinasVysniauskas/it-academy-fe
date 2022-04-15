@@ -13,11 +13,13 @@ export class UserDialogComponentComponent implements OnInit {
   displaySuccessMessage: boolean = false;
   isEdit: boolean;
 
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { user?: User },
     public dialogRef: MatDialogRef<UserDialogComponentComponent>,
     private adminService: AdminPageService,
   ) {
+
     this.isEdit = !!this.data.user;
   }
 

@@ -5,6 +5,9 @@ import {ReservationRequest} from "../../interfaces/reservationRequest";
 import {Reservation} from "../../interfaces/reservation";
 import * as moment from "moment";
 import {dateToString} from "../../shared/utils";
+import {UserDialogComponentComponent} from "../modals/user-dialog-component/user-dialog-component.component";
+import {MatDialog} from "@angular/material/dialog";
+import {ReservationsDialogComponent} from "../modals/reservations-dialog/reservations-dialog.component";
 
 
 @Component({
@@ -31,7 +34,7 @@ export class ReservationsComponent implements OnInit {
 
   hoverId?: number;
 
-  constructor(private reservationService: DeskReservationService) {
+  constructor(private reservationService: DeskReservationService, private matDialog: MatDialog) {
   }
 
 
@@ -47,11 +50,25 @@ export class ReservationsComponent implements OnInit {
   checkUserCurrentDateReservations() {
     this.reservationService.getUserCurrentDayReservation(dateToString(this.reservationDate)).subscribe(reservation => {
       this.currentReservation = reservation;
-      console.log(this.currentReservation)
       this.displayReservationMessage = this.isCurrentReservationActive = reservation?.date !== undefined;
+      if (this.displayReservationMessage){
+        this.displayErrorMessage(this.placedReservation, this.currentReservation);
+      }
       this.fetchDesksByDate();
       this.selected = undefined;
     });
+  }
+  displayErrorMessage(message: boolean, reservation: Reservation) {
+    console.log(message)
+    console.log(reservation)
+    this.matDialog.open(ReservationsDialogComponent, {data: {message, reservation}})
+      .afterClosed()
+      .subscribe((result?: boolean) => {
+        console.log('mat dialog result', result);
+        if (result === true) {
+          console.log('Create success');
+        }
+      });
   }
 
   placeReservation() {

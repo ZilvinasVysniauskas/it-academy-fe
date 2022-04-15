@@ -1,0 +1,7 @@
+<div mat-dialog-content fxLayout="column">
+  <app-booking-messages (cancelButtonClick)="cancelReservation($event)"
+                        [reservationPlaced]="false"
+                        (keepReservationButtonClick)="handleCancel()"
+                        [currentReservation]="data.currentReservation"></app-booking-messages>
+</div>
+

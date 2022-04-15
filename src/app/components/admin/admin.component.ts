@@ -4,7 +4,6 @@ import {AdminPageService} from "../../service/admin/admin-page.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {delay, map, startWith} from "rxjs/operators";
 import {combineLatest, Observable, of} from "rxjs";
-import {UserRequest} from "../../interfaces/user-request";
 import { UserDialogComponentComponent } from '../modals/user-dialog-component/user-dialog-component.component';
 import { MatDialog } from '@angular/material/dialog';
 

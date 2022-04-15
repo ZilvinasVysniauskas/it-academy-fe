@@ -58,27 +58,13 @@
   <mat-form-field>
     <mat-label>Email</mat-label>
     <input [readOnly]="isEditForm" matInput formControlName="email">
-    <mat-error *ngIf="expLastName?.errors?.['required']">
-      last name is required
+    <mat-error *ngIf="expEmail?.errors?.['required']">
+      email is required
     </mat-error>
-    <mat-error *ngIf="expLastName?.errors?.['validateEmail']">
+    <mat-error *ngIf="expEmail?.errors?.['validateEmail']">
       email must end with @corporate.com
     </mat-error>
-    <mat-error *ngIf="expLastName?.errors?.['emailAlreadyExists']">
-      email already exists
-    </mat-error>
-  </mat-form-field>
-
-  <mat-form-field>
-    <mat-label>Email</mat-label>
-    <input [readOnly]="isEditForm" matInput formControlName="email">
-    <mat-error *ngIf="expLastName?.errors?.['required']">
-      last name is required
-    </mat-error>
-    <mat-error *ngIf="expLastName?.errors?.['validateEmail']">
-      email must end with @corporate.com
-    </mat-error>
-    <mat-error *ngIf="expLastName?.errors?.['emailAlreadyExists']">
+    <mat-error *ngIf="expEmail?.errors?.['emailAlreadyExists']">
       email already exists
     </mat-error>
   </mat-form-field>
