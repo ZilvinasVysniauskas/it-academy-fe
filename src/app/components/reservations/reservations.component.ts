@@ -5,7 +5,6 @@ import {ReservationRequest} from "../../interfaces/reservationRequest";
 import {Reservation} from "../../interfaces/reservation";
 import * as moment from "moment";
 import {dateToString} from "../../shared/utils";
-import {UserDialogComponentComponent} from "../modals/user-dialog-component/user-dialog-component.component";
 import {MatDialog} from "@angular/material/dialog";
 import {ReservationsDialogComponent} from "../modals/reservations-dialog/reservations-dialog.component";
 
@@ -36,7 +35,6 @@ export class ReservationsComponent implements OnInit {
 
   constructor(private reservationService: DeskReservationService, private matDialog: MatDialog) {
   }
-
 
   ngOnInit(): void {
     this.checkUserCurrentDateReservations();
@@ -73,7 +71,6 @@ export class ReservationsComponent implements OnInit {
     }
     return false;
   }
-
 
   checkUserCurrentDateReservations() {
     this.reservationService.getUserCurrentDayReservation(dateToString(this.reservationDate)).pipe()

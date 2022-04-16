@@ -32,30 +32,30 @@ export class EditUserFormComponent implements OnInit {
     'STANDARD_USER', 'ADMINISTRATOR'
   ]
 
-  get expFirstName() {
+  get getFirstName() {
     return this.editUserForm.get('firstName')
   }
-  get expLastName() {
+  get getLastName() {
     return this.editUserForm.get('lastName')
   }
 
-  get expMiddleName() {
+  get getMiddleName() {
     return this.editUserForm.get('middleName')
   }
-  get expEmail() {
+  get getEmail() {
     return this.editUserForm.get('email')
   }
-  get expPassword() {
+  get getPassword() {
     return this.editUserForm.get('password')
   }
-  get expRole() {
+  get getRole() {
     return this.editUserForm.get('role')
   }
-  get expActive() {
+  get getActive() {
     return this.editUserForm.get('active')
   }
 
-  get expUserId () {
+  get getUserId () {
     return this.editUserForm.get('userId')
   }
 
@@ -83,23 +83,22 @@ export class EditUserFormComponent implements OnInit {
     );
   }
 
-
   ngOnInit(): void {
     if (this.user){
       this.password = this.user.password;
-      this.expUserId?.setValue(this.user.userId);
-      this.expFirstName?.setValue(this.user.firstName);
-      this.expLastName?.setValue(this.user.lastName);
-      this.expMiddleName?.setValue(this.user.middleName);
-      this.expEmail?.setValue(this.user.email);
-      this.expPassword?.setValue(this.user.password);
-      this.expRole?.setValue(this.user.role);
-      this.expActive?.setValue(this.user.active);
+      this.getUserId?.setValue(this.user.userId);
+      this.getFirstName?.setValue(this.user.firstName);
+      this.getLastName?.setValue(this.user.lastName);
+      this.getMiddleName?.setValue(this.user.middleName);
+      this.getEmail?.setValue(this.user.email);
+      this.getPassword?.setValue(this.user.password);
+      this.getRole?.setValue(this.user.role);
+      this.getActive?.setValue(this.user.active);
       this.editUserForm.get('email')?.setAsyncValidators(validateEmailUnique(this.adminService))
-      this.selected = this.expRole?.value;
+      this.selected = this.getRole?.value;
     }
     else {
-      this.expActive?.setValue(true)
+      this.getActive?.setValue(true)
       this.editUserForm.get('userId')?.setAsyncValidators(userIdValidator(this.adminService))
       this.editUserForm.get('email')?.setAsyncValidators(validateEmailUnique(this.adminService))
     }
@@ -109,7 +108,7 @@ export class EditUserFormComponent implements OnInit {
 
   AddOrUpdateUser() {
     const isActive = () => {
-      if (this.expActive?.value){
+      if (this.getActive?.value){
         return 1;
       }
       return 0;
@@ -118,7 +117,7 @@ export class EditUserFormComponent implements OnInit {
       if (this.isEditForm) {
         return this.user!.userId;
       }
-      return this.expUserId?.value;
+      return this.getUserId?.value;
     }
     const password = () => {
       if (this.isEditForm) {
@@ -128,13 +127,13 @@ export class EditUserFormComponent implements OnInit {
     }
     const user: UserRequest = {
       userId: id(),
-      firstName: this.expFirstName?.value,
-      middleName: this.expMiddleName?.value,
-      lastName: this.expLastName?.value,
+      firstName: this.getFirstName?.value,
+      middleName: this.getMiddleName?.value,
+      lastName: this.getLastName?.value,
       isActive: isActive(),
       password: password(),
-      email: this.expEmail?.value,
-      role: this.expRole?.value
+      email: this.getEmail?.value,
+      role: this.getRole?.value
     }
     this.userRequest = user;
     if (this.editUserForm.valid){

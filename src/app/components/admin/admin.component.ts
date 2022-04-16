@@ -46,7 +46,6 @@ export class AdminComponent implements OnInit {
   }
 
   private setUsers(): void {
-    console.log('here')
     this.users$ = combineLatest([
       this.expUserId!.valueChanges.pipe(startWith('')),
       this.expFirstName!.valueChanges.pipe(startWith('')),

@@ -8,7 +8,7 @@ import {HomeComponent} from "./components/home/home.component";
 import {HistoryLogComponent} from "./components/history-log/history-log.component";
 
 
-sessionStorage.setItem('role', 'user')
+sessionStorage.setItem('role', 'admin')
 sessionStorage.setItem('userId', '12345678')
 
 const userRoutes: Routes = [

@@ -10,18 +10,6 @@
     </div>
 
     <div fxLayout="row">
-<!--      <div *ngIf="displayReservationMessage; then message else reservationsDisplay2">-->
-<!--      </div>-->
-
-<!--      <ng-template #message>-->
-<!--        <app-booking-messages (cancelButtonClick)="cancelReservation($event)"-->
-<!--                               [reservationPlaced]="placedReservation!"-->
-<!--                               (keepReservationButtonClick)="displayReservationMessage=false"-->
-<!--                               (okClicked)="displayReservationMessage=false; placedReservation=false"-->
-<!--                               [currentReservation]="currentReservation!"></app-booking-messages>-->
-<!--      </ng-template>-->
-
-
         <div *ngFor="let room of desksReservationsByDate;">
           <h2>{{room.roomName}}</h2>
           <div *ngFor="let desk of room.desks">
@@ -35,8 +23,6 @@
           </div>
         </div>
         <button [disabled]="selected == undefined" (click)="placeReservation()">book</button>
-
-
     </div>
 
   </div>
