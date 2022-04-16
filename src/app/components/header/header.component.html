@@ -6,11 +6,13 @@
         <li><a [routerLink]="'/reservations'">reservations</a></li>
         <li><a [routerLink]="'/history'">history</a></li>
         <div *ngIf="isAdmin">
+          <li ><a [routerLink]="'/desk-manage'">desk management</a></li>
           <li ><a [routerLink]="'/edit'">edit</a></li>
-        </div>
-        <div *ngIf="isAdmin">
           <li><a (click)="addUser()">add user</a></li>
         </div>
+
+
+
       </ul>
       <button (click)="logout()">LOGOUT</button>
     </nav>

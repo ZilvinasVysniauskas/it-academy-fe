@@ -38,6 +38,7 @@ import { HistoryLogComponent } from './components/history-log/history-log.compon
 import {Routes} from "@angular/router";
 import { ReservationsDialogComponent } from './components/modals/reservations-dialog/reservations-dialog.component';
 import {TokenInterceptor} from "./service/interpretor";
+import { ManageDesksComponent } from './components/manage-desks/manage-desks.component';
 
 
 
@@ -73,6 +74,7 @@ export const MY_DATE_FORMATS = {
     UserDialogComponentComponent,
     HistoryLogComponent,
     ReservationsDialogComponent,
+    ManageDesksComponent,
   ],
   imports: [
     BrowserModule,
