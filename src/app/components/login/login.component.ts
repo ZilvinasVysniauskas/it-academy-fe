@@ -1,36 +1,52 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, Validators} from "@angular/forms";
-import {Router} from "@angular/router";
-import {ActivatedRoute} from "@angular/router";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {AuthService} from "../../service/authentification/auth.service";
+import {UserLoginRequest} from "../../interfaces/userLoginRequest";
+import {validateEmail} from "../../validators/emailValidator";
 
 @Component({
-    selector: 'app-login',
-    templateUrl: './login.component.html',
-    styleUrls: ['./login.component.scss']
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-    loginFormControl = new FormControl('', [Validators.required]);
-    passwordFormControl = new FormControl('', [Validators.required])
-    userId: string = '';
-    password: string = '';
 
+  loginFormGroup: FormGroup;
 
-    constructor(private router: Router, private route: ActivatedRoute) {
+  get getUserId() {
+    return this.loginFormGroup.get('userId')
+  }
+
+  get getPassword () {
+    return this.loginFormGroup.get('password')
+  }
+
+  constructor(private authService: AuthService) {
+    this.loginFormGroup = new FormGroup({
+        userId: new FormControl('', {validators:
+            [Validators.required],
+        }),
+        password: new FormControl('', {validators:
+            [Validators.required]
+        })
+      }
+    );
+  }
+
+  ngOnInit(): void {
+  }
+
+  login() {
+    const loginRequest: UserLoginRequest =  {
+      userId: this.getUserId!.value,
+      password: this.getPassword!.value
     }
+    this.authService.login(loginRequest);
+  }
 
-    ngOnInit(): void {
-    }
-
-    login() {
-        this.userId = this.loginFormControl.value;
-        this.password = this.passwordFormControl.value;
-        this.router.navigate(['/home']);
-    }
-
-    resetForm() {
-        this.loginFormControl.reset();
-        this.passwordFormControl.reset();
-    }
+  resetForm() {
+    this.loginFormGroup.reset();
+  }
 
 
 }

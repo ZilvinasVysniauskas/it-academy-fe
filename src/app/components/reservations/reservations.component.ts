@@ -83,7 +83,6 @@ export class ReservationsComponent implements OnInit {
           this.currentReservation = undefined;
           this.displayReservationMessage = false;
         }
-
       this.fetchDesksByDate();
       this.selected = undefined;
     });

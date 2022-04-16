@@ -26,4 +26,7 @@ export class BookingMessagesComponent implements OnInit {
   ngOnInit(): void {
   }
 
+
+
+
 }
