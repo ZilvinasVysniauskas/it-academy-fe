@@ -5,33 +5,40 @@ import {UserLoginRequest} from "../../interfaces/userLoginRequest";
 import {User} from "../../interfaces/user";
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private httpClient: HttpClient, private router: Router) {
-  }
+    constructor(private httpClient: HttpClient, private router: Router) {
+    }
 
-  login(loginRequest: UserLoginRequest) {
-    let loginUrl = 'http://localhost:8080/api/v1/login';
-    this.httpClient.post<User>(loginUrl, loginRequest, {observe: 'response'})
-      .subscribe(response => {
-      if (response.status == 200) {
-        sessionStorage.setItem(
-          'token',
-          btoa(loginRequest.userId + ':' + loginRequest.password)
-        );
-        this.router.navigate(['/home']);
-      } else {
-        alert("Authentication failed.")
-      }
-    });
-  }
+    isLoggedIn: boolean = false;
 
-  logout() {
-    this.router.navigate(['/login']);
-    sessionStorage.removeItem('token');
-  }
+    login(loginRequest: UserLoginRequest) {
+        let loginUrl = 'http://localhost:8080/api/v1/login';
+        this.httpClient.post<User>(loginUrl, loginRequest, {observe: 'response'})
+            .subscribe(response => {
+                if (response.status == 200) {
+                    sessionStorage.setItem(
+                        'token',
+                        btoa(loginRequest.userId + ':' + loginRequest.password)
+                    );
+                    this.isLoggedIn = true;
+                    if (response.body!.role === 'admin') {
+                        this.router.navigate(['/adminpage'])
+                    } else {
+                        this.router.navigate(['/home']);
+                    }
+                } else {
+                    alert("Authentication failed.")
+                }
+            });
+    }
+
+    logout() {
+        this.router.navigate(['/login']);
+        sessionStorage.removeItem('token');
+    }
 }
 
 
