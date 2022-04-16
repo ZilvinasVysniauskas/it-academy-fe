@@ -13,6 +13,7 @@ export class AuthService {
     }
 
     isLoggedIn: boolean = false;
+    isAdmin: boolean = false;
 
     login(loginRequest: UserLoginRequest) {
         let loginUrl = 'http://localhost:8080/api/v1/login';
@@ -25,10 +26,11 @@ export class AuthService {
                     );
                     this.isLoggedIn = true;
                     if (response.body!.role === 'admin') {
-                        this.router.navigate(['/adminpage'])
+                        this.isAdmin = true;
                     } else {
-                        this.router.navigate(['/home']);
+                        this.isAdmin = false;
                     }
+                    this.router.navigate(['home']);
                 } else {
                     alert("Authentication failed.")
                 }
