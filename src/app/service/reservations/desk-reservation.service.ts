@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpErrorResponse} from "@angular/common/http";
+import {HttpClient, HttpErrorResponse, HttpResponse} from "@angular/common/http";
 import {Observable} from 'rxjs/Rx';
 import {Room} from "../../interfaces/room";
 import {ReservationRequest} from "../../interfaces/reservationRequest";
@@ -15,25 +15,22 @@ export class DeskReservationService {
   constructor(private httpClient: HttpClient) {
   }
 
-  getReservationsByDate(reservationDate: string ): Observable<Room[]> {
-    return this.httpClient.get<Room[]>("/api/v1/reservations/" + reservationDate!);
-  }
+  desksApi = '/api/v1/desks/';
+  reservationsApi = '/api/v1/reservations/';
 
+  getDesksByDate(reservationDate: string ): Observable<Room[]> {
+    return this.httpClient.get<Room[]>(this.desksApi + reservationDate!);
+  }
 
   reserveTable(reservationRequest: ReservationRequest): Observable<ReservationRequest> {
-    return this.httpClient.post<ReservationRequest>("/api/v1/reservations", reservationRequest)
+    return this.httpClient.post<ReservationRequest>(this.reservationsApi, reservationRequest)
   }
 
-  getUserCurrentDayReservation(reservationDate: string): Observable<Reservation> {
-    return this.httpClient.get<Reservation>("/api/v1/reservations/" + reservationDate + "/12345678")
+  getUserCurrentDayReservation(reservationDate: string): Observable<HttpResponse<Reservation>> {
+    return this.httpClient.get<Reservation>(this.reservationsApi + reservationDate + "/12345678", {observe: 'response'})
   }
-
-  // private dateToString(reservationDate: string): string {
-  //   //TODO fix date problem
-  //   return moment(reservationDate).add(1, 'days').toDate().toISOString().split('T')[0];
-  // }
 
   cancelReservationById(id: number): Observable<any> {
-    return this.httpClient.delete("/api/v1/reservations/" + id);
+    return this.httpClient.delete(this.reservationsApi + id);
   }
 }

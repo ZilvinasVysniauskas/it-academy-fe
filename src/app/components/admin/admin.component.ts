@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {User} from "../../interfaces/user";
 import {AdminPageService} from "../../service/admin/admin-page.service";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {delay, map, startWith} from "rxjs/operators";
+import {FormControl, FormGroup} from "@angular/forms";
+import {map, startWith} from "rxjs/operators";
 import {combineLatest, Observable, of} from "rxjs";
 import { UserDialogComponentComponent } from '../modals/user-dialog-component/user-dialog-component.component';
 import { MatDialog } from '@angular/material/dialog';

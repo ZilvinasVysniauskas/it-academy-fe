@@ -43,7 +43,7 @@ export class ReservationsComponent implements OnInit {
   }
 
   fetchDesksByDate() {
-    this.reservationService.getReservationsByDate(dateToString(this.reservationDate))
+    this.reservationService.getDesksByDate(dateToString(this.reservationDate))
       .subscribe(rooms => {
         console.log(this.isThereAvailableDesks(rooms) +  " HERE")
         this.desksReservationsByDate = rooms;
@@ -76,9 +76,17 @@ export class ReservationsComponent implements OnInit {
 
 
   checkUserCurrentDateReservations() {
-    this.reservationService.getUserCurrentDayReservation(dateToString(this.reservationDate)).subscribe(reservation => {
-      this.currentReservation = reservation;
-      this.displayReservationMessage = this.isCurrentReservationActive = reservation?.date !== undefined;
+    this.reservationService.getUserCurrentDayReservation(dateToString(this.reservationDate)).pipe()
+      .subscribe(reservation => {
+        if (reservation.status == 200){
+          this.currentReservation = reservation.body!;
+          this.displayReservationMessage = true;
+        }
+        else {
+          this.currentReservation = undefined;
+          this.displayReservationMessage = false;
+        }
+
       this.fetchDesksByDate();
       this.selected = undefined;
     });
