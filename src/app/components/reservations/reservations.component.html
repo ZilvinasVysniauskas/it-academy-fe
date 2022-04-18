@@ -6,11 +6,11 @@
   <div fxLayout="column" fxLayoutAlign="center center">
 
     <div fxFlex  fxLayoutAlign="center center">
-      <button (click)="minusOneDay()"><</button><p>reservations for {{ reservationDate }}</p><button (click)="plusOneDay()">></button>
+      <button class="one-day-selector" (click)="minusOneDay()"><</button><p>Available workplaces for {{ reservationDate.format('LL') }}</p><button class="one-day-selector" (click)="plusOneDay()">></button>
     </div>
 
-    <div fxLayout="row">
-        <div *ngFor="let room of desksReservationsByDate;">
+    <div fxLayout="row"fxLayoutGap="10">
+        <div class="room" *ngFor="let room of desksReservationsByDate;">
           <h2>{{room.roomName}}</h2>
           <div *ngFor="let desk of room.desks">
             <mat-checkbox [disabled]="!desk.available" (mouseover)="displayReservationInfo=false; hoverId = desk.id" (mouseout)="displayReservationInfo=true;"
@@ -22,7 +22,7 @@
             </div>
           </div>
         </div>
-        <button [disabled]="selected == undefined" (click)="placeReservation()">book</button>
+        <button [disabled]="selected == undefined" (click)="placeReservation()">Book the desk</button>
     </div>
 
   </div>
