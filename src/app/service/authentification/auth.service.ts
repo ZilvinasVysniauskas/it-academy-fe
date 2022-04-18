@@ -2,45 +2,52 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {UserLoginRequest} from "../../interfaces/userLoginRequest";
-import {User} from "../../interfaces/user";
+import {LoginResponse} from "../../interfaces/loginResponse";
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class AuthService {
 
-    constructor(private httpClient: HttpClient, private router: Router) {
-    }
+  constructor(private httpClient: HttpClient, private router: Router) {
+  }
 
-    isLoggedIn: boolean = false;
-    isAdmin: boolean = false;
 
-    login(loginRequest: UserLoginRequest) {
-        let loginUrl = 'http://localhost:8080/api/v1/login';
-        this.httpClient.post<User>(loginUrl, loginRequest, {observe: 'response'})
-            .subscribe(response => {
-                if (response.status == 200) {
-                    sessionStorage.setItem(
-                        'token',
-                        btoa(loginRequest.userId + ':' + loginRequest.password)
-                    );
-                    this.isLoggedIn = true;
-                    if (response.body!.role === 'admin') {
-                        this.isAdmin = true;
-                    } else {
-                        this.isAdmin = false;
-                    }
-                    this.router.navigate(['home']);
-                } else {
-                    alert("Authentication failed.")
-                }
-            });
-    }
+  login(loginRequest: UserLoginRequest) {
+    let loginUrl = 'api/v1/login';
+    this.httpClient.post<LoginResponse>(loginUrl, loginRequest, {observe: 'response'})
+      .subscribe(response => {
+        if (response.status == 200) {
+          this.setRole(response.body?.user.role!)
+          this.setToken(response.body?.jwtToken!)
+          this.router.navigate(['home'])
+        } else {
+          alert("Authentication failed.")
+        }
+      });
+  }
 
-    logout() {
-        this.router.navigate(['/login']);
-        sessionStorage.removeItem('token');
-    }
+  public setRole(role: string): void {
+    localStorage.setItem('roles', role);
+  }
+
+  public getRole(): string | null {
+    return localStorage.getItem('role');
+  }
+
+  public setToken(jwtToken: string) {
+    localStorage.setItem('jwtToken', jwtToken);
+  }
+
+  public getToken(): string | null {
+    return localStorage.getItem('jwtToken');
+  }
+
+  public logout() {
+    this.router.navigate(['/login']);
+    localStorage.clear();
+  }
+
 }
 
 
