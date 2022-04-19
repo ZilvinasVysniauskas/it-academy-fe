@@ -3,15 +3,15 @@
   <app-calendar [date]="reservationDate"
                 (onDateChange)="handleReservationChange($event!)"></app-calendar>
 
-  <div fxLayout="column" fxLayoutAlign="center center">
+  <div class="middle-container" fxLayout="column" fxLayoutAlign="center center">
 
     <div fxFlex  fxLayoutAlign="center center">
       <button class="one-day-selector" (click)="minusOneDay()"><</button><p>Available workplaces for {{ reservationDate.format('LL') }}</p><button class="one-day-selector" (click)="plusOneDay()">></button>
     </div>
 
-    <div fxLayout="row"fxLayoutGap="10">
+    <div class="reservations" fxLayout="row">
         <div class="room" *ngFor="let room of desksReservationsByDate;">
-          <h2>{{room.roomName}}</h2>
+          <h4>{{room.roomName}}</h4>
           <div *ngFor="let desk of room.desks">
             <mat-checkbox [disabled]="!desk.available" (mouseover)="displayReservationInfo=false; hoverId = desk.id" (mouseout)="displayReservationInfo=true;"
                           [checked]="desk.id == currentReservation?.deskId || desk.id == selected"
@@ -22,11 +22,11 @@
             </div>
           </div>
         </div>
-        <button [disabled]="selected == undefined" (click)="placeReservation()">Book the desk</button>
+        <button class="book-button" [disabled]="selected == undefined" (click)="placeReservation()">Book the desk</button>
     </div>
 
   </div>
-<img src="assets/img/office-map.png" width="40%" >
+<img src="assets/img/office-map.png" >
 </div>
 
 

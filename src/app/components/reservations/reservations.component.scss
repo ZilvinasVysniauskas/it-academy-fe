@@ -4,10 +4,37 @@ div {
 
 .room {
 border: 2px solid grey;
-padding: 20px 20px 20px 20px;
+margin: 20px 20px 20px 20px;
 }
 
 .one-day-selector {
     align-self: flex-start;
     margin: 0 10px 0 10px;
+}
+
+.reservations {
+    max-width: 400px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+img {
+    width: 40%;
+    height: 40%;
+    margin-top: 60px;
+}
+
+.middle-container {
+    margin-top: 30px;
+} 
+
+.book-button {
+    max-width: 70px;
+    max-height: 70px;
+    margin: 20px 20px 20px 20px;
+
+}
+
+p {
+    
 }
