@@ -85,6 +85,7 @@ export class ReservationsComponent implements OnInit {
       this.selected = undefined;
     });
   }
+
   displayErrorMessage(message: string, currentReservation: Reservation) {
     this.matDialog.open(ReservationsDialogComponent, {data: {message, currentReservation}})
       .afterClosed()

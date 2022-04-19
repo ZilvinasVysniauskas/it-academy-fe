@@ -23,7 +23,7 @@ export class EditUserFormComponent implements OnInit {
   @Output() addNewUser: EventEmitter<any> = new EventEmitter<any>();
 
   editUserForm: FormGroup;
-  password!: string;
+  password: string | undefined;
   passwordChanged: boolean = false;
   userRequest?: UserRequest;
   selected!: string;
@@ -91,7 +91,6 @@ export class EditUserFormComponent implements OnInit {
       this.getLastName?.setValue(this.user.lastName);
       this.getMiddleName?.setValue(this.user.middleName);
       this.getEmail?.setValue(this.user.email);
-      this.getPassword?.setValue(this.user.password);
       this.getRole?.setValue(this.user.role);
       this.getActive?.setValue(this.user.active);
       this.editUserForm.get('email')?.setAsyncValidators(validateEmailUnique(this.adminService))

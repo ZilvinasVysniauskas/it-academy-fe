@@ -35,7 +35,7 @@ export class AdminComponent implements OnInit {
   }
 
 
-  constructor(private adminService: AdminPageService, private matDialog: MatDialog,) {
+  constructor(private adminService: AdminPageService, private matDialog: MatDialog) {
     this.searchUserForm = new FormGroup({
         userId: new FormControl(''),
         firstName: new FormControl(''),

@@ -3,7 +3,7 @@ export interface UserRequest {
   "firstName": string,
   "middleName": string,
   "lastName": string,
-  "password": string,
+  "password"?: string,
   "isActive": number,
   "email": string,
   "role": number
