@@ -9,7 +9,7 @@ import {Reservation} from "../../interfaces/reservation";
 export class BookingMessagesComponent implements OnInit {
 
   @Input() currentReservation!: Reservation;
-  @Input() reservationPlaced!: boolean;
+  @Input() message!: string;
   @Output() cancelButtonClick: EventEmitter<number> = new EventEmitter<number>()
   @Output() keepReservationButtonClick: EventEmitter<any> = new EventEmitter<any>()
   @Output() okClicked: EventEmitter<any> = new EventEmitter<any>();
@@ -25,5 +25,8 @@ export class BookingMessagesComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+
+
 
 }

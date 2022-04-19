@@ -1,50 +1,57 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, Validators} from "@angular/forms";
-import {Router} from "@angular/router";
-import {ActivatedRoute} from "@angular/router";
-import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
-import * as url from "url";
+
+import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {AuthService} from "../../service/authentification/auth.service";
+import {UserLoginRequest} from "../../interfaces/userLoginRequest";
+import {validateEmail} from "../../validators/emailValidator";
+
 
 @Component({
-    selector: 'app-login',
-    templateUrl: './login.component.html',
-    styleUrls: ['./login.component.scss']
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-    loginFormControl = new FormControl('', [Validators.required]);
-    passwordFormControl = new FormControl('', [Validators.required])
-    userId: string = '';
-    password: string = '';
 
+  loginFormGroup: FormGroup;
 
-    constructor(private router: Router, private route: ActivatedRoute, private httpClient: HttpClient) {
+  get getUserId() {
+    return this.loginFormGroup.get('userId')
+  }
+
+  get getPassword () {
+    return this.loginFormGroup.get('password')
+  }
+
+  constructor(private authService: AuthService) {
+    this.loginFormGroup = new FormGroup({
+        userId: new FormControl('', {validators:
+            [Validators.required],
+        }),
+        password: new FormControl('', {validators:
+            [Validators.required]
+        })
+      }
+    );
+  }
+
+  ngOnInit(): void {
+  }
+
+  login() {
+    const loginRequest: UserLoginRequest =  {
+      userId: this.getUserId!.value,
+      password: this.getPassword!.value
+
     }
+    this.authService.login(loginRequest);
+  }
 
-    ngOnInit(): void {
-    }
 
-    login() {
-        this.httpClient.post<Observable<boolean>>(url, {
-            userName: this.loginFormControl.value,
-            password: this.passwordFormControl.value
-        }).subscribe(isValid => {
-            if (isValid) {
-                sessionStorage.setItem(
-                    'token',
-                    btoa(this.loginFormControl.value + ':' + this.passwordFormControl.value)
-                );
-                this.router.navigate(['']);
-            } else {
-                alert("Authentication failed.")
-            }
-        });
-    }
+  resetForm() {
+    this.loginFormGroup.reset();
+  }
 
-    resetForm() {
-        this.loginFormControl.reset();
-        this.passwordFormControl.reset();
-    }
 
 
 }

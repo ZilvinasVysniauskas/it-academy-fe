@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>{{ isEdit ? 'Edit' : 'Create' }}</h1>
+
+<div mat-dialog-content fxLayout="column">
+  <app-edit-user-form fxLayout="column"
+    [user]="data.user"
+    [isEditForm]="isEdit"
+    [displaySuccessMessage]="displaySuccessMessage"
+    (savedUser)="handleSavedUser($event)"
+    (cancel)="handleCancel()"
+  ></app-edit-user-form>
+</div>
+

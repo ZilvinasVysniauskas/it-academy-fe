@@ -4,6 +4,9 @@ import {DeskReservationService} from "../../service/reservations/desk-reservatio
 import {ReservationRequest} from "../../interfaces/reservationRequest";
 import {Reservation} from "../../interfaces/reservation";
 import * as moment from "moment";
+import {dateToString} from "../../shared/utils";
+import {MatDialog} from "@angular/material/dialog";
+import {ReservationsDialogComponent} from "../modals/reservations-dialog/reservations-dialog.component";
 
 
 @Component({
@@ -20,8 +23,6 @@ export class ReservationsComponent implements OnInit {
 
   displayReservationMessage!: boolean;
 
-  isCurrentReservationActive!: boolean;
-
   desksReservationsByDate!: Room[];
 
   currentReservation?: Reservation;
@@ -30,33 +31,78 @@ export class ReservationsComponent implements OnInit {
 
   hoverId?: number;
 
-  constructor(private reservationService: DeskReservationService) {
+  constructor(private reservationService: DeskReservationService, private matDialog: MatDialog) {
   }
-
 
   ngOnInit(): void {
     this.checkUserCurrentDateReservations();
   }
 
   fetchDesksByDate() {
-    this.reservationService.getReservationsByDate(this.dateToString(this.reservationDate))
-      .subscribe(res => this.desksReservationsByDate = res);
+    this.reservationService.getDesksByDate(dateToString(this.reservationDate))
+      .subscribe(rooms => {
+        console.log(this.isThereAvailableDesks(rooms) +  " HERE")
+        this.desksReservationsByDate = rooms;
+        if (this.displayReservationMessage || !this.isThereAvailableDesks(rooms)){
+          this.displayErrorMessage(this.getMessage() , this.currentReservation!);
+        }
+      })
+  };
+
+  private getMessage(): string {
+    if (this.placedReservation){
+      return "successful"
+    }
+    if (this.displayReservationMessage){
+      return "reservationExists"
+    }
+    return "noDesks"
+  }
+
+  isThereAvailableDesks(rooms: Room[]): boolean {
+    for (let room of rooms){
+      for (let desk of room.desks){
+        if (desk.available){
+          return true;
+        }
+      }
+    }
+    return false;
   }
 
   checkUserCurrentDateReservations() {
-    this.reservationService.getUserCurrentDayReservation(this.dateToString(this.reservationDate)).subscribe(reservation => {
-      this.currentReservation = reservation;
-      this.displayReservationMessage = this.isCurrentReservationActive = reservation?.date !== undefined;
+    this.reservationService.getUserCurrentDayReservation(dateToString(this.reservationDate)).pipe()
+      .subscribe(reservation => {
+        if (reservation.status == 200){
+          this.currentReservation = reservation.body!;
+          this.displayReservationMessage = true;
+        }
+        else {
+          this.currentReservation = undefined;
+          this.displayReservationMessage = false;
+        }
       this.fetchDesksByDate();
       this.selected = undefined;
     });
   }
 
+  displayErrorMessage(message: string, currentReservation: Reservation) {
+    this.matDialog.open(ReservationsDialogComponent, {data: {message, currentReservation}})
+      .afterClosed()
+      .subscribe((result) => {
+        if (result?.event == 'canceled') {
+          this.checkUserCurrentDateReservations()
+        }
+        if (this.placedReservation) {
+          this.placedReservation = false;
+        }
+      });
+  }
+
   placeReservation() {
     const reservationRequest: ReservationRequest = {
-      userId: 12345678,
       deskId: this.selected!,
-      date: this.dateToString(this.reservationDate)
+      date: dateToString(this.reservationDate)
     }
     this.reservationService.reserveTable(reservationRequest).subscribe( a =>{
       this.placedReservation = true;
@@ -71,17 +117,13 @@ export class ReservationsComponent implements OnInit {
   }
 
   validateClick(id: number) {
-    if (this.isCurrentReservationActive) {
-      this.displayReservationMessage = true;
+    if (this.currentReservation) {
+      this.displayErrorMessage(this.getMessage(), this.currentReservation!);
     } else if (this.selected == id) {
       this.selected = undefined;
     } else {
       this.selected = id;
     }
-  }
-
-  cancelReservation(id: number) {
-    return this.reservationService.cancelReservationById(id).subscribe(a => this.checkUserCurrentDateReservations());
   }
 
   minusOneDay(){
@@ -95,12 +137,6 @@ export class ReservationsComponent implements OnInit {
     this.reservationDate = moment(this.reservationDate.add(1, 'day').format())
     this.checkUserCurrentDateReservations();
   }
-
-  private dateToString(date: moment.Moment): string {
-    return date.format('YYYY-MM-DD');
-  }
-
-
 
 
 }
