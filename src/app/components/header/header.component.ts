@@ -12,11 +12,11 @@ export class HeaderComponent implements OnInit {
 
   isLogged: boolean;
 
-  role: string;
+  isAdmin: boolean;
 
   constructor(private matDialog: MatDialog, private authService: AuthService) {
     this.isLogged = authService.isLoggedIn();
-    this.role = authService.getRole()!;
+    this.isAdmin = authService.getRole()! == 'ADMINISTRATOR';
   }
 
   addUser() {
@@ -30,7 +30,6 @@ export class HeaderComponent implements OnInit {
       });
   }
   ngOnInit(): void {
-    console.log(this.role)
   }
 
   logout() {
