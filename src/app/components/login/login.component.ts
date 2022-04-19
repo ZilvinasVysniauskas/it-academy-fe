@@ -1,8 +1,10 @@
 import {Component, OnInit} from '@angular/core';
+
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../service/authentification/auth.service";
 import {UserLoginRequest} from "../../interfaces/userLoginRequest";
 import {validateEmail} from "../../validators/emailValidator";
+
 
 @Component({
   selector: 'app-login',
@@ -40,13 +42,16 @@ export class LoginComponent implements OnInit {
     const loginRequest: UserLoginRequest =  {
       userId: this.getUserId!.value,
       password: this.getPassword!.value
+
     }
     this.authService.login(loginRequest);
   }
 
+
   resetForm() {
     this.loginFormGroup.reset();
   }
+
 
 
 }
