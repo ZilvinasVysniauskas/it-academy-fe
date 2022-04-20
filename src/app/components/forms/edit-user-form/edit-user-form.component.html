@@ -2,17 +2,17 @@
 
 <ng-template #message>
   <div class="container">
-    <p>user added successfully</p>
-    <p>user id: {{userRequest!.userId}}</p>
-    <p>password: {{userRequest!.password}}</p>
-    <button (click)="cancel.emit()">close</button>
+    <p>User added successfully</p>
+    <p>User ID: {{userRequest!.userId}}</p>
+    <p>Password: {{userRequest!.password}}</p>
+    <button (click)="cancel.emit()">Close</button>
   </div>
 </ng-template>
 
 <ng-template #form>
 <form [formGroup]="editUserForm">
   <mat-form-field>
-    <mat-label>User Id</mat-label>
+    <mat-label>User ID</mat-label>
     <input id="userid" [readOnly]="isEditForm" matInput formControlName="userId">
     <mat-error *ngIf="getUserId?.errors?.['required']">
       id field is required
@@ -37,6 +37,14 @@
   </mat-form-field>
 
   <mat-form-field>
+    <mat-label>Middle Name</mat-label>
+    <input [readOnly]="isEditForm" matInput formControlName="middleName">
+    <mat-error *ngIf="getLastName?.errors?.['maxlength']">
+      cannot be longer then 40 characters
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
     <mat-label>Last Name</mat-label>
     <input [readOnly]="isEditForm" matInput formControlName="lastName">
     <mat-error *ngIf="getLastName?.errors?.['required']">
@@ -46,15 +54,7 @@
       cannot be longer then 40 characters
     </mat-error>
   </mat-form-field>
-
-  <mat-form-field>
-    <mat-label>Middle Name</mat-label>
-    <input [readOnly]="isEditForm" matInput formControlName="middleName">
-    <mat-error *ngIf="getLastName?.errors?.['maxlength']">
-      cannot be longer then 40 characters
-    </mat-error>
-  </mat-form-field>
-
+  
   <mat-form-field>
     <mat-label>Email</mat-label>
     <input [readOnly]="isEditForm" matInput formControlName="email">
