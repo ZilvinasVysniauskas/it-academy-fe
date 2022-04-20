@@ -1,1 +1,9 @@
-<p>manage-desks works!</p>
+<div *ngFor="let room of listOfRooms">
+  <input [value]="room.roomName">
+  <div *ngFor="let desk of room.desks">
+    <p>{{desk.deskNumber}}</p>
+    <button (click)="deleteDesk(desk.id)">delete</button>
+  </div>
+  <button (click)="addTable(room.roomId)">Add table</button>
+</div>
+<button></button>

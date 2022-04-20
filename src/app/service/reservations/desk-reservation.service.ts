@@ -21,6 +21,11 @@ export class DeskReservationService {
     return this.httpClient.get<Room[]>(this.desksApi + reservationDate!);
   }
 
+  getDesks(): Observable<Room[]> {
+    return this.httpClient.get<Room[]>(this.desksApi);
+  }
+
+
   reserveTable(reservationRequest: ReservationRequest): Observable<ReservationRequest> {
     return this.httpClient.post<ReservationRequest>(this.reservationsApi, reservationRequest)
   }
@@ -31,5 +36,9 @@ export class DeskReservationService {
 
   cancelReservationById(id: number): Observable<any> {
     return this.httpClient.delete(this.reservationsApi + id);
+  }
+
+  deleteDesk(id: number): Observable<any> {
+    return this.httpClient.delete(this.desksApi + id);
   }
 }
