@@ -1,7 +1,7 @@
 export interface Reservation {
   reservationId: number
   roomName: string
-  deskNumber: number
+  deskName: string
   date: Date
   deskId: number
   reservationStatus?: string

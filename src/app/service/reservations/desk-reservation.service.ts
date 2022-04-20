@@ -5,6 +5,7 @@ import {Room} from "../../interfaces/room";
 import {ReservationRequest} from "../../interfaces/reservationRequest";
 import 'rxjs/add/operator/catch';
 import {Reservation} from "../../interfaces/reservation";
+import {DeskRequest} from "../../interfaces/deskRequest";
 
 @Injectable({
   providedIn: 'root'
@@ -32,4 +33,8 @@ export class DeskReservationService {
   cancelReservationById(id: number): Observable<any> {
     return this.httpClient.delete(this.reservationsApi + id);
   }
+
+
+
+
 }
