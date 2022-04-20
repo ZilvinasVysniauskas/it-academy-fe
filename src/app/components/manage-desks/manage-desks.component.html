@@ -1,9 +1,11 @@
 <div *ngFor="let room of listOfRooms">
   <input [value]="room.roomName">
-  <div *ngFor="let desk of room.desks">
+  <button mat-button (click)="deleteRoom(room.roomId)">delete room</button>
+  <div *ngFor="let desk of room.desks" fxLayout="row">
     <p>{{desk.deskNumber}}</p>
-    <button (click)="deleteDesk(desk.id)">delete</button>
+    <button mat-button (click)="deleteDesk(desk.id)">delete desk</button>
   </div>
-  <button (click)="addTable(room.roomId)">Add table</button>
+  <button mat-button (click)="addTable(room.roomId)">Add desk</button>
 </div>
-<button></button>
+<button mat-button (click)="addRoom()">Add room</button>
+

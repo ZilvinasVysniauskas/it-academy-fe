@@ -5,7 +5,7 @@ import { LoginComponent } from './components/login/login.component';
 import {AdminComponent} from "./components/admin/admin.component";
 import {HomeComponent} from "./components/home/home.component";
 import {HistoryLogComponent} from "./components/history-log/history-log.component";
-import {AuthentificationGuard} from "./service/authentification.guard";
+import {AuthentificationGuard} from "./service/guard/authentification.guard";
 import {ManageDesksComponent} from "./components/manage-desks/manage-desks.component";
 
 sessionStorage.setItem('role', 'user')

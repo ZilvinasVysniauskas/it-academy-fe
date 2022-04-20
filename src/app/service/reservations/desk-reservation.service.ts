@@ -5,6 +5,7 @@ import {Room} from "../../interfaces/room";
 import {ReservationRequest} from "../../interfaces/reservationRequest";
 import 'rxjs/add/operator/catch';
 import {Reservation} from "../../interfaces/reservation";
+import {DeskRequest} from "../../interfaces/deskRequest";
 
 @Injectable({
   providedIn: 'root'
@@ -21,11 +22,6 @@ export class DeskReservationService {
     return this.httpClient.get<Room[]>(this.desksApi + reservationDate!);
   }
 
-  getDesks(): Observable<Room[]> {
-    return this.httpClient.get<Room[]>(this.desksApi);
-  }
-
-
   reserveTable(reservationRequest: ReservationRequest): Observable<ReservationRequest> {
     return this.httpClient.post<ReservationRequest>(this.reservationsApi, reservationRequest)
   }
@@ -38,7 +34,7 @@ export class DeskReservationService {
     return this.httpClient.delete(this.reservationsApi + id);
   }
 
-  deleteDesk(id: number): Observable<any> {
-    return this.httpClient.delete(this.desksApi + id);
-  }
+
+
+
 }
