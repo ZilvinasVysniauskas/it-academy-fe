@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, SimpleChanges} from '@angular/core';
 import {UserDialogComponentComponent} from "../modals/user-dialog-component/user-dialog-component.component";
 import {MatDialog} from "@angular/material/dialog";
 import {AuthService} from "../../service/authentification/auth.service";

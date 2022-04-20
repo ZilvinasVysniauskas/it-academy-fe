@@ -1,22 +1,24 @@
 <div [hidden]="!isLogged">
-  <header>
-    <nav>
-      <ul>
-        <li><a [routerLink]="'/home'">Home</a></li>
-        <li><a [routerLink]="'/reservations'">reservations</a></li>
-        <li><a [routerLink]="'/history'">history</a></li>
-        <div *ngIf="isAdmin">
-          <li ><a [routerLink]="'/edit'">edit</a></li>
-        </div>
-        <div *ngIf="isAdmin">
-          <li><a (click)="addUser()">add user</a></li>
-        </div>
-      </ul>
-      <button (click)="logout()">LOGOUT</button>
-    </nav>
-  </header>
+    <header>
+        <nav>
+            <ul>
+                <button mat-raised-button [routerLink]="'/home'">Home</button>
+                <button mat-raised-button [routerLink]="'/reservations'">Reservations</button>
+                <button mat-raised-button [routerLink]="'/history'">History</button>
+                <div *ngIf="isAdmin">
+                    <div class="dropdown">
+                        <button mat-raised-button class="drop-btn">Administrate</button>
+                        <div class="dropdown-content">
+                            <button mat-button (click)="addUser()">Add new user</button>
+                            <button mat-button [routerLink]="'/edit'">Edit user info</button>
+                        </div>
+                    </div>
+                </div>
+                <button class="logout-button" mat-raised-button (click)="logout()">LOGOUT</button>
+            </ul>
+        </nav>
+    </header>
 </div>
-
 
 
 <!--<ng-template #admin>-->
