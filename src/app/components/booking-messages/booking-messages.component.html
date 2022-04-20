@@ -5,18 +5,21 @@
 
 <ng-template #reservationExists>
   <div class="container" mat-dialog-content >
-    <p>you already have reservation on {{currentReservation?.date}}, cancel this reservation on desk number
-      {{currentReservation?.deskName}} on {{currentReservation?.deskName}} ?</p>
-    <button mat-button (click)="inputIdToCancelButton(currentReservation!.reservationId)">cancel reservation</button>
-    <button mat-button (click)="keepReservationButtonClickEvent()">keep reservation</button>
+
+    <p>You already have a reservation on {{currentReservation?.date}}.</p>
+    <p>Would you like to cancel this reservation for desk no.
+      {{currentReservation?.deskName}} in Room {{currentReservation?.deskName}}?</p>
+    <button mat-button (click)="keepReservationButtonClickEvent()">Keep reservation</button>
+    <button mat-button (click)="inputIdToCancelButton(currentReservation!.reservationId)">Cancel reservation</button>
+
   </div>
 </ng-template>
 
 
 <ng-template #successful>
   <div mat-dialog-content class="container" >
-    <p>Reservation successful</p>
-    <p>date: {{currentReservation.date}}</p>
+    <p>Reservation is successful.</p>
+    <p>Date: {{currentReservation.date}}</p>
     <p>Room: {{currentReservation.roomName}}</p>
     <p>Desk number: {{currentReservation.deskName}}</p>
     <button mat-button (click)="okClicked.emit()">OKAY</button>
