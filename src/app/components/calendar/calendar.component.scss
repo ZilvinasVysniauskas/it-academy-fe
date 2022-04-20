@@ -1,7 +1,12 @@
 mat-card {
-    width: 200px;
+  width: 200px;
+  margin-top: 80px;
 }
 .today {
-    text-align: center;
-    margin-top: 10px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+::ng-deep .mat-calendar-body-selected {
+  background-color: orange;
 }
