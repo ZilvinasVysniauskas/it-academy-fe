@@ -1,8 +1,30 @@
-<div *ngFor="let room of listOfRooms">
-  <input [value]="room.roomName">
+<div *ngFor="let room of listOfRooms"
+      [ngSwitch]="( room === selectedRoom )">
+  <app-click-to-edit
+    *ngSwitchCase="true"
+    [value]="room.roomName"
+  (valueChangeEvents)="changeRoomName($event)"
+    (cancelEvents)="selectedRoom=null"
+  ></app-click-to-edit>
+
+  <div *ngSwitchCase="false" (click)="selectedRoom = room">
+    {{ room.roomName }}
+  </div>
+
   <button mat-button (click)="deleteRoom(room.roomId)">delete room</button>
-  <div *ngFor="let desk of room.desks" fxLayout="row">
-    <p>{{desk.deskNumber}}</p>
+  <div *ngFor="let desk of room.desks" fxLayout="row"
+       [ngSwitch]="( desk === selectedDesk )">
+    <app-click-to-edit
+      *ngSwitchCase="true"
+      [value]="desk.deskName"
+      (valueChangeEvents)="changeDeskName($event)"
+      (cancelEvents)="selectedDesk=null"
+    ></app-click-to-edit>
+
+    <div *ngSwitchCase="false" (click)="selectedDesk = desk">
+      {{ desk.deskName }}
+    </div>
+
     <button mat-button (click)="deleteDesk(desk.id)">delete desk</button>
   </div>
   <button mat-button (click)="addTable(room.roomId)">Add desk</button>

@@ -14,13 +14,13 @@ export class AddDesksFormComponent implements OnInit {
   @Output() addDesk: EventEmitter<DeskRequest> = new EventEmitter<DeskRequest>();
   @Output() cancel: EventEmitter<any> = new EventEmitter<any>();
 
-  deskNumber = new FormControl();
+  deskName = new FormControl();
 
   constructor() {}
 
   addNewDesk(): void {
     const desk: DeskRequest = {
-      deskNumber: this.deskNumber.value,
+      deskName: this.deskName.value,
       roomId: this.roomId
     }
     this.addDesk.emit(desk)

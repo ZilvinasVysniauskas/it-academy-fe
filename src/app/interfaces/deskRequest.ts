@@ -1,5 +1,5 @@
 export interface DeskRequest {
-  roomId: number,
-
-  deskNumber: number
+  id?: number,
+  roomId?: number,
+  deskName: string
 }

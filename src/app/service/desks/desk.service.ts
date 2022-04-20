@@ -25,4 +25,7 @@ export class DeskService {
     return this.httpClient.get<Room[]>(this.desksApi);
   }
 
+  editDest(desk: DeskRequest): Observable<any> {
+    return this.httpClient.put(this.desksApi, desk);
+  }
 }
