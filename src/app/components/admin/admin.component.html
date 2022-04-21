@@ -18,9 +18,9 @@
     <th>Active</th>
     <th>Edit user</th>
 <tr *ngFor="let user of this.users$ | async">
-    <td>{{user.userId}} .</td>
-    <td>{{user.firstName}} .</td>
-    <td>{{user.lastName}} .</td>
+    <td>{{user.userId}}</td>
+    <td>{{user.firstName}}</td>
+    <td>{{user.lastName}}</td>
     <td *ngIf="user.active">
       Active</td>
     <td *ngIf="!user.active">
