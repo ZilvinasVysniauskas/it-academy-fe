@@ -46,6 +46,8 @@ import { AddNewRoomComponent } from './components/forms/add-new-room/add-new-roo
 import { ClickToEditComponent } from './components/click-to-edit/click-to-edit.component';
 import { ChangePasswordDialogComponent } from './components/modals/change-password-dialog/change-password-dialog.component';
 import { ChangePasswordComponent } from './components/forms/change-password/change-password.component';
+import { ChangePlaceDialogComponent } from './components/modals/change-place-dialog/change-place-dialog.component';
+import { SelectFloorComponent } from './components/forms/select-floor/select-floor.component';
 
 
 
@@ -89,6 +91,8 @@ export const MY_DATE_FORMATS = {
     ClickToEditComponent,
     ChangePasswordDialogComponent,
     ChangePasswordComponent,
+    ChangePlaceDialogComponent,
+    SelectFloorComponent,
   ],
   imports: [
     BrowserModule,

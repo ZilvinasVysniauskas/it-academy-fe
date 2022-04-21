@@ -19,7 +19,6 @@ export class UserDialogComponentComponent implements OnInit {
     public dialogRef: MatDialogRef<UserDialogComponentComponent>,
     private adminService: AdminPageService,
   ) {
-
     this.isEdit = !!this.data.user;
   }
 

@@ -7,6 +7,9 @@ import * as moment from "moment";
 import {dateToString} from "../../shared/utils";
 import {MatDialog} from "@angular/material/dialog";
 import {ReservationsDialogComponent} from "../modals/reservations-dialog/reservations-dialog.component";
+import {ChangePlaceDialogComponent} from "../modals/change-place-dialog/change-place-dialog.component";
+import {Floor} from "../../interfaces/floor";
+import {FloorService} from "../../service/floor/floor.service";
 
 
 @Component({
@@ -31,7 +34,12 @@ export class ReservationsComponent implements OnInit {
 
   hoverId?: number;
 
-  constructor(private reservationService: DeskReservationService, private matDialog: MatDialog) {
+  floor!: Floor;
+
+  constructor(private reservationService: DeskReservationService,
+              private floorService: FloorService,
+              private matDialog: MatDialog) {
+    floorService.getFloorsById(localStorage.getItem("floor-id")).subscribe(floor => this.floor = floor)
   }
 
   ngOnInit(): void {
@@ -39,7 +47,7 @@ export class ReservationsComponent implements OnInit {
   }
 
   fetchDesksByDate() {
-    this.reservationService.getDesksByDate(dateToString(this.reservationDate))
+    this.reservationService.getDesksByDate(dateToString(this.reservationDate), this.floor.id)
       .subscribe(rooms => {
         console.log(this.isThereAvailableDesks(rooms) +  " HERE")
         this.desksReservationsByDate = rooms;
@@ -138,5 +146,12 @@ export class ReservationsComponent implements OnInit {
     this.checkUserCurrentDateReservations();
   }
 
-
+  changeFloor() {
+    this.matDialog.open(ChangePlaceDialogComponent, {})
+      .afterClosed()
+      .subscribe((floor) => {
+        this.floor = floor.floor;
+        this.checkUserCurrentDateReservations();
+      });
+  }
 }
