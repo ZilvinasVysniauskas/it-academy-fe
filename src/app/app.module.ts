@@ -44,6 +44,8 @@ import { AddingDeskDialogComponent } from './components/modals/adding-desk-dialo
 import { AddRoomDialogComponent } from './components/modals/add-room-dialog/add-room-dialog.component';
 import { AddNewRoomComponent } from './components/forms/add-new-room/add-new-room.component';
 import { ClickToEditComponent } from './components/click-to-edit/click-to-edit.component';
+import { ChangePasswordDialogComponent } from './components/modals/change-password-dialog/change-password-dialog.component';
+import { ChangePasswordComponent } from './components/forms/change-password/change-password.component';
 
 
 
@@ -85,6 +87,8 @@ export const MY_DATE_FORMATS = {
     AddRoomDialogComponent,
     AddNewRoomComponent,
     ClickToEditComponent,
+    ChangePasswordDialogComponent,
+    ChangePasswordComponent,
   ],
   imports: [
     BrowserModule,

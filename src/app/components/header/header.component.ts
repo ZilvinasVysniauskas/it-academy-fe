@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {UserDialogComponentComponent} from "../modals/user-dialog-component/user-dialog-component.component";
 import {MatDialog} from "@angular/material/dialog";
 import {AuthService} from "../../service/authentification/auth.service";
+import {ChangePasswordDialogComponent} from "../modals/change-password-dialog/change-password-dialog.component";
 
 @Component({
     selector: 'app-header',
@@ -29,6 +30,14 @@ export class HeaderComponent implements OnInit {
                 }
             });
     }
+
+  changePassword() {
+    this.matDialog.open(ChangePasswordDialogComponent, {data: {}})
+      .afterClosed()
+      .subscribe((result?: boolean) => {
+        console.log('mat dialog result', result);
+      });
+  }
 
     ngOnInit(): void {
     }

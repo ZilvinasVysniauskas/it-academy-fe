@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {User} from "../../interfaces/user";
 import {Observable} from "rxjs";
 import {UserRequest} from "../../interfaces/user-request";
+import {ChangePasswordRequest} from "../../interfaces/changePasswordRequest";
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,6 @@ export class AdminPageService {
   }
 
   updateUser(user: UserRequest): Observable<UserRequest> {
-    console.log(user)
     return this.httpClient.put<UserRequest>(this.apiUser, user)
   }
 
@@ -33,5 +33,9 @@ export class AdminPageService {
 
   checkIfEmailExists(value: boolean): Observable<boolean> {
     return this.httpClient.get<boolean>(this.apiUser + `/email/${value}`)
+  }
+
+  changePassword($event: ChangePasswordRequest) {
+    return this.httpClient.put(`${this.apiUser}password`, $event, {responseType: "text"})
   }
 }
