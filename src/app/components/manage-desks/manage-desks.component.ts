@@ -26,7 +26,6 @@ export class ManageDesksComponent implements OnInit {
   selectedDesk: Desk | null;
   buildings?: Building[];
   floors?: Floor[];
-  floor!: Floor;
   selectedBuilding: Building | null;
   display = Entities.BUILDINGS;
   selectedFloor: Floor | null;
@@ -41,7 +40,7 @@ export class ManageDesksComponent implements OnInit {
   }
 
   getRooms(): void {
-    this.deskService.getRooms(this.floor.id).subscribe(desks => {
+    this.deskService.getRooms(this.selectedFloor!.id).subscribe(desks => {
       this.listOfRooms = desks;
     })
   }
@@ -68,7 +67,7 @@ export class ManageDesksComponent implements OnInit {
   }
 
   addRoom() {
-    let floorId = 1
+    let floorId = this.selectedFloor?.id!;
     this.matDialog.open(AddRoomDialogComponent, {data: {floorId}})
       .afterClosed()
       .subscribe((result) => {

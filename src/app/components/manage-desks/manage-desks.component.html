@@ -24,24 +24,30 @@
 </ng-template>
 
 <ng-template #displayFloors>
+  <h1>Building Name {{selectedBuilding!.buildingName!}}</h1>
+  <button (click)="display = Entities.BUILDINGS">Change Building</button>
   <div *ngFor="let floor of floors!" fxLayout="row"
        [ngSwitch]="( floor === selectedFloor )">
     <app-click-to-edit
       *ngSwitchCase="true"
-      [value]="floor.buildingName!"
+      [value]="floor.floorNumber.toString()!"
       (valueChangeEvents)="changeBuildingName($event)"
       (cancelEvents)="selectedBuilding=null"
     ></app-click-to-edit>
 
     <div *ngSwitchCase="false" (click)="selectedFloor = floor">
-      {{ floor.buildingName! }}
+      {{ floor.floorNumber! }}
     </div>
-    <button (click)="selectFloor(floor)">select building</button>
-    <button >delete building</button>
+    <button (click)="selectFloor(floor)">select floor</button>
+    <button >delete floor</button>
   </div>
 </ng-template>
 
 <ng-template #displayRooms>
+  <h1>Building Name {{selectedBuilding!.buildingName!}}</h1>
+  <button (click)="display = Entities.BUILDINGS">Change Building</button>
+  <h1>Floor Number {{selectedFloor!.floorNumber!}}</h1>
+  <button (click)="display = Entities.FLOORS">Change Floor</button>
   <div *ngFor="let room of listOfRooms"
        [ngSwitch]="( room === selectedRoom )">
     <app-click-to-edit
