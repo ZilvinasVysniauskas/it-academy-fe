@@ -20,4 +20,8 @@ export class BuildingService {
   addBuilding($event: BuildingRequest): Observable<any> {
     return this.httpClient.post(this.buildingApi, $event)
   }
+
+  editBuilding(building: BuildingRequest): Observable<any> {
+    return this.httpClient.put(this.buildingApi, building);
+  }
 }
