@@ -16,6 +16,8 @@ import {Entities} from "../../enums/entities";
 import {AddBuildingDialogComponent} from "../modals/add-building-dialog/add-building-dialog.component";
 import {AddFloorDialogComponent} from "../modals/add-floor-dialog/add-floor-dialog.component";
 import {ChangePlaceDialogComponent} from "../modals/change-place-dialog/change-place-dialog.component";
+import {BuildingRequest} from "../../interfaces/buildingRequest";
+import {FloorRequest} from "../../interfaces/floorRequest";
 
 
 @Component({
@@ -108,7 +110,19 @@ export class ManageDesksComponent implements OnInit {
   }
 
   changeBuildingName($event: string) {
+    const building: BuildingRequest = {
+      id: this.selectedBuilding?.id,
+      name: $event
+    }
+    this.buildingService.editBuilding(building).subscribe(a => this.getBuilding())
+  }
 
+  changeFloorName($event: string) {
+    const floor: FloorRequest = {
+      id: this.selectedFloor?.id,
+      floorName: $event
+    }
+    this.floorService.editFloor(floor).subscribe(a => this.getFloors())
   }
 
   selectBuilding(building: Building) {

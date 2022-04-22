@@ -32,4 +32,8 @@ export class FloorService {
   deleteFloor(idToDelete: number, idToReplace: number) {
     return this.httpClient.delete(`${this.floorApi}${idToDelete}/${idToReplace}`)
   }
+
+  editFloor(floor: FloorRequest): Observable<any> {
+    return this.httpClient.put(this.floorApi, floor);
+  }
 }
