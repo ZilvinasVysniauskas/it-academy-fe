@@ -34,7 +34,7 @@ import {AdminAddUserComponent} from "./components/adim-add-user/adim-add-user.co
 import { UserDialogComponentComponent } from './components/modals/user-dialog-component/user-dialog-component.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatSelectModule} from "@angular/material/select";
-import { HistoryLogComponent } from './components/history-log/history-log.component';
+import { ReservationHistoryComponent } from './components/reservation-history/reservation-history.component';
 import {Routes} from "@angular/router";
 import { ReservationsDialogComponent } from './components/modals/reservations-dialog/reservations-dialog.component';
 import {TokenInterceptor} from "./service/interpretor";
@@ -46,7 +46,7 @@ import { AddNewRoomComponent } from './components/forms/add-new-room/add-new-roo
 import { ClickToEditComponent } from './components/click-to-edit/click-to-edit.component';
 import { ChangePasswordDialogComponent } from './components/modals/change-password-dialog/change-password-dialog.component';
 import { ChangePasswordComponent } from './components/forms/change-password/change-password.component';
-
+import {MatTableModule} from "@angular/material/table";
 
 
 
@@ -79,7 +79,6 @@ export const MY_DATE_FORMATS = {
     EditUserFormComponent,
     AdminAddUserComponent,
     UserDialogComponentComponent,
-    HistoryLogComponent,
     ReservationsDialogComponent,
     ManageDesksComponent,
     AddDesksFormComponent,
@@ -89,6 +88,7 @@ export const MY_DATE_FORMATS = {
     ClickToEditComponent,
     ChangePasswordDialogComponent,
     ChangePasswordComponent,
+    ReservationHistoryComponent
   ],
   imports: [
     BrowserModule,
@@ -107,6 +107,7 @@ export const MY_DATE_FORMATS = {
     MatDialogModule,
     MatOptionModule,
     MatSelectModule,
+    MatTableModule,
   ],
   providers: [
     {

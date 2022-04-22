@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HistoryLogComponent } from './history-log.component';
+import { ReservationHistoryComponent } from './reservation-history.component';
 
-describe('HistoryLogComponent', () => {
-  let component: HistoryLogComponent;
-  let fixture: ComponentFixture<HistoryLogComponent>;
+describe('ReservationHistoryComponent', () => {
+  let component: ReservationHistoryComponent;
+  let fixture: ComponentFixture<ReservationHistoryComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ HistoryLogComponent ]
+      declarations: [ ReservationHistoryComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(HistoryLogComponent);
+    fixture = TestBed.createComponent(ReservationHistoryComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
