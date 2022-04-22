@@ -101,6 +101,7 @@ export const MY_DATE_FORMATS = {
     AddNewBuildingComponent,
     AddNewFloorComponent,
     AddFloorDialogComponent,
+
   ],
   imports: [
     BrowserModule,

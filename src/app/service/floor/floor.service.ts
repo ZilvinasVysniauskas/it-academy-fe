@@ -28,4 +28,8 @@ export class FloorService {
   addFloor($event: FloorRequest): Observable<any> {
     return this.httpClient.post(this.floorApi, $event)
   }
+
+  deleteFloor(idToDelete: number, idToReplace: number) {
+    return this.httpClient.delete(`${this.floorApi}${idToDelete}/${idToReplace}`)
+  }
 }

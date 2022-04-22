@@ -15,6 +15,8 @@ import {BuildingService} from "../../service/building/building.service";
 import {Entities} from "../../enums/entities";
 import {AddBuildingDialogComponent} from "../modals/add-building-dialog/add-building-dialog.component";
 import {AddFloorDialogComponent} from "../modals/add-floor-dialog/add-floor-dialog.component";
+import {ChangePlaceDialogComponent} from "../modals/change-place-dialog/change-place-dialog.component";
+
 
 @Component({
   selector: 'app-manage-desks',
@@ -128,12 +130,24 @@ export class ManageDesksComponent implements OnInit {
         this.getBuilding();
       });
   }
+
   addNewFloor() {
     let buildingId = this.selectedBuilding?.id!;
-    this.matDialog.open(AddFloorDialogComponent,{data: {buildingId}})
+    this.matDialog.open(AddFloorDialogComponent, {data: {buildingId}})
       .afterClosed()
       .subscribe((result) => {
         this.getFloors();
+      });
+  }
+
+  deleteFloor(floorInject: Floor) {
+    this.matDialog.open(ChangePlaceDialogComponent, {data: {floorInject}})
+      .afterClosed()
+      .subscribe((floor) => {
+        this.floorService.deleteFloor(floorInject.id, floor.floor.id).subscribe(a => {
+            this.getFloors();
+          }
+        )
       });
   }
 

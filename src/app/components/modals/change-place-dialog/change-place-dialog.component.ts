@@ -4,6 +4,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {ChangePasswordRequest} from "../../../interfaces/changePasswordRequest";
 import {Floor} from "../../../interfaces/floor";
 import {Building} from "../../../interfaces/building";
+import {User} from "../../../interfaces/user";
 
 @Component({
   selector: 'app-change-place-dialog',
@@ -14,7 +15,9 @@ export class ChangePlaceDialogComponent implements OnInit {
 
   floor?: Floor;
 
-  constructor(private adminService: AdminPageService, private dialogRef: MatDialogRef<ChangePlaceDialogComponent>) {
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: { floorInject?: Floor },
+    private adminService: AdminPageService, private dialogRef: MatDialogRef<ChangePlaceDialogComponent>) {
   }
 
   ngOnInit(): void {

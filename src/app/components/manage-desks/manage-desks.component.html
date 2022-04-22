@@ -40,7 +40,7 @@
       {{ floor.floorName! }}
     </div>
     <button (click)="selectFloor(floor)">select floor</button>
-    <button >delete floor</button>
+    <button (click)="deleteFloor(floor)" >delete floor</button>
   </div>
   <button mat-button (click)="addNewFloor()">add floor</button>
 </ng-template>

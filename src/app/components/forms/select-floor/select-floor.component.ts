@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {BuildingService} from "../../../service/building/building.service";
 import {FloorService} from "../../../service/floor/floor.service";
 import {Building} from "../../../interfaces/building";
@@ -18,6 +18,7 @@ export class SelectFloorComponent implements OnInit {
   currentFloor?: Floor;
   selectFloorForm: FormGroup;
 
+  @Input() floor?: Floor;
   @Output() changeFloor: EventEmitter<Floor> = new EventEmitter<Floor>();
   @Output() cancelClicked: EventEmitter<any> = new EventEmitter<any>();
 
@@ -41,7 +42,8 @@ export class SelectFloorComponent implements OnInit {
 
   changeCurrentBuilding() {
     this.currentBuilding = this.getBuilding?.value!;
-    this.floorService.getFloorsByBuildingId(this.currentBuilding!.id).subscribe(floors => this.currentFloors = floors);
+    this.floorService.getFloorsByBuildingId(this.currentBuilding!.id)
+      .subscribe(floors => this.currentFloors = floors.filter(f => f.floorName !== this.floor?.floorName));
     console.log('here')
     console.log(this.currentFloors)
   }

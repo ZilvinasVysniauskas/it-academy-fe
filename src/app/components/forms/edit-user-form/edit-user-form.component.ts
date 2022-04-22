@@ -33,6 +33,7 @@ export class EditUserFormComponent implements OnInit {
   userRequest?: UserRequest;
   selected!: string;
   currentFloor!: Floor;
+  floor: Floor | null = null;
 
   states = [
     'STANDARD_USER', 'ADMINISTRATOR'
@@ -166,7 +167,8 @@ export class EditUserFormComponent implements OnInit {
 
 
   changeFloorDialog() {
-    this.matDialog.open(ChangePlaceDialogComponent, {})
+    let floorInjected = null;
+    this.matDialog.open(ChangePlaceDialogComponent, {data: {floorInjected}})
       .afterClosed()
       .subscribe((floor) => {
         this.currentFloor = floor.floor;
