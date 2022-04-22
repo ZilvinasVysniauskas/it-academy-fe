@@ -2,8 +2,7 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {RoomRequest} from "../../../interfaces/RoomRequest";
 import {ChangePasswordRequest} from "../../../interfaces/changePasswordRequest";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {validateEmail} from "../../../validators/emailValidator";
-import {generatePassword} from "../../../shared/generatePassword";
+
 
 @Component({
   selector: 'app-change-password',
