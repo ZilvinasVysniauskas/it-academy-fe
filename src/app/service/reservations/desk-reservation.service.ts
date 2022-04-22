@@ -18,8 +18,9 @@ export class DeskReservationService {
   desksApi = '/api/v1/desks/';
   reservationsApi = '/api/v1/reservations/';
 
-  getDesksByDate(reservationDate: string ): Observable<Room[]> {
-    return this.httpClient.get<Room[]>(this.desksApi + reservationDate!);
+  getDesksByDate(reservationDate: string, id: number ): Observable<Room[]> {
+    console.log('this is id: ' + id)
+    return this.httpClient.get<Room[]>(`${this.desksApi}${id}/${reservationDate!}`);
   }
 
   reserveTable(reservationRequest: ReservationRequest): Observable<ReservationRequest> {
@@ -27,7 +28,7 @@ export class DeskReservationService {
   }
 
   getUserCurrentDayReservation(reservationDate: string): Observable<HttpResponse<Reservation>> {
-    return this.httpClient.get<Reservation>(this.reservationsApi + reservationDate, {observe: 'response'})
+    return this.httpClient.get<Reservation>(this.reservationsApi +  reservationDate, {observe: 'response'})
   }
 
   cancelReservationById(id: number): Observable<any> {

@@ -1,0 +1,8 @@
+<div mat-dialog-content fxLayout="column">
+  <app-select-floor
+    [floor]="data.floorInject"
+    (changeFloor)="changeSelectedFloor($event)"
+    (cancelClicked)="closeForm()">]
+  </app-select-floor>
+</div>
+

@@ -27,8 +27,8 @@ export class SearchUserComponent implements OnInit {
       userId: new FormControl(''),
       firstName: new FormControl(''),
       lastName: new FormControl('')
-    }
-  );}
+    });
+  }
 
   ngOnInit(): void {
 
