@@ -1,11 +1,13 @@
-<div *ngIf="displaySuccessMessage; then message else form"></div>
+<div class="container">
+  <div *ngIf="displaySuccessMessage; then message else form"></div>
 
 <ng-template #message>
   <div class="container">
-    <p>User added successfully</p>
+    <p>User added successfully.</p>
     <p>User ID: {{userRequest!.userId}}</p>
-    <p>Password: {{userRequest!.password}}</p>
-    <button (click)="cancel.emit()">Close</button>
+    <p class="password" >Password: {{userRequest!.password}}</p>
+    <p><i>Please save the password before closing.</i></p>
+    <button class="close-button" (click)="cancel.emit()">Close</button>
   </div>
 </ng-template>
 
@@ -15,10 +17,10 @@
     <mat-label>User ID</mat-label>
     <input id="userid" [readOnly]="isEditForm" matInput formControlName="userId">
     <mat-error *ngIf="getUserId?.errors?.['required']">
-      id field is required
+      user id field is required
     </mat-error>
     <mat-error *ngIf="getUserId?.errors?.['minlength']|| getUserId?.errors?.['maxlength']">
-      id must be 8 digits
+      id must consist of 8 digits
     </mat-error>
     <mat-error *ngIf="getUserId?.errors?.['idAlreadyExists']">
       id already exists
@@ -32,7 +34,7 @@
       first name is required
     </mat-error>
     <mat-error *ngIf="getFirstName?.errors?.['maxlength']">
-      cannot be longer then 40 characters
+      max length is 40 characters
     </mat-error>
   </mat-form-field>
 
@@ -40,7 +42,7 @@
     <mat-label>Middle Name</mat-label>
     <input [readOnly]="isEditForm" matInput formControlName="middleName">
     <mat-error *ngIf="getLastName?.errors?.['maxlength']">
-      cannot be longer then 40 characters
+      max length is 40 characters
     </mat-error>
   </mat-form-field>
 
@@ -51,10 +53,10 @@
       last name is required
     </mat-error>
     <mat-error *ngIf="getLastName?.errors?.['maxlength']">
-      cannot be longer then 40 characters
+      max length is 40 characters
     </mat-error>
   </mat-form-field>
-  
+
   <mat-form-field>
     <mat-label>Email</mat-label>
     <input [readOnly]="isEditForm" matInput formControlName="email">
@@ -76,20 +78,28 @@
     </mat-select>
   </mat-form-field>
 
-  <section class="example-section">
-    <mat-checkbox class="example-margin" formControlName="active" [checked]="getActive?.value" >active</mat-checkbox>
-  </section>
+  <div fxLayout="row">
 
-    <div [hidden]="!passwordChanged">
-      new password: {{password}}
-    </div>
-
-
-  <div [hidden]="!isEditForm">
-    <button (click)="resetPassword()"  mat-button >generate new password</button>
+    <p>Default location: Floor {{currentFloor.floorName}} on building {{currentFloor.buildingName}}</p>
+    <button mat-button (click)="changeFloorDialog()">change floor</button>
   </div>
 
-  <button (click)="AddOrUpdateUser()" mat-button [disabled]="">save</button>
-  <button (click)="cancel.emit()" mat-button>cancel</button>
+
+  <section class="example-section">
+    <mat-checkbox class="example-margin" formControlName="active" [checked]="getActive?.value" >Active</mat-checkbox>
+  </section>
+
+  <div [hidden]="!isEditForm">
+    <button class="generate-password-button" (click)="resetPassword()"  mat-button >Generate new password</button>
+  </div>
+
+    <div [hidden]="!passwordChanged">
+      <p class="generated-password">New password: {{password}}</p>
+    </div>
+
+      <button class="cancel-button" (click)="cancel.emit()" mat-button>Cancel</button>
+  <button class="save-button" (click)="AddOrUpdateUser()" mat-button [disabled]="">Save</button>
+
 </form>
 </ng-template>
+</div>

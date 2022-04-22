@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {DeskRequest} from "../../interfaces/deskRequest";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
@@ -11,7 +11,9 @@ export class DeskService {
 
   desksApi = '/api/v1/desks/';
 
-  constructor(private httpClient: HttpClient) { }
+
+  constructor(private httpClient: HttpClient) {
+  }
 
   addNewDesk($event: DeskRequest): Observable<any> {
     return this.httpClient.post(this.desksApi, $event)
@@ -21,8 +23,8 @@ export class DeskService {
     return this.httpClient.delete(this.desksApi + id);
   }
 
-  getDesks(): Observable<Room[]> {
-    return this.httpClient.get<Room[]>(this.desksApi);
+  getRooms(floorId: number): Observable<Room[]> {
+    return this.httpClient.get<Room[]>(this.desksApi +  floorId);
   }
 
   editDest(desk: DeskRequest): Observable<any> {
