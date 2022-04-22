@@ -54,7 +54,7 @@
       cannot be longer then 40 characters
     </mat-error>
   </mat-form-field>
-  
+
   <mat-form-field>
     <mat-label>Email</mat-label>
     <input [readOnly]="isEditForm" matInput formControlName="email">
@@ -75,6 +75,13 @@
       <mat-option *ngFor="let state of states" [value]="state">{{state}}</mat-option>
     </mat-select>
   </mat-form-field>
+
+  <div fxLayout="row">
+
+    <p>Default location: Floor {{currentFloor.floorName}} on building {{currentFloor.buildingName}}</p>
+    <button mat-button (click)="changeFloorDialog()">change floor</button>
+  </div>
+
 
   <section class="example-section">
     <mat-checkbox class="example-margin" formControlName="active" [checked]="getActive?.value" >active</mat-checkbox>

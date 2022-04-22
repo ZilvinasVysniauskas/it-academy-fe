@@ -20,7 +20,7 @@ export class AuthService {
         if (response.status == 200) {
           this.setRole(response.body?.user.role!);
           this.setToken(response.body?.jwtToken!);
-          this.setDefaultFloor("1");
+          this.setDefaultFloor(response.body!.user.defaultFloorId!.toString());
           this.router.navigate(['home']);
         }
       },

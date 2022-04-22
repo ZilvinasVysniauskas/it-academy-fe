@@ -6,7 +6,7 @@
 
   <mat-label>Floor</mat-label>
   <mat-select formControlName="floor" [(value)]="currentFloor" (selectionChange)="changeCurrentFloor()">
-    <mat-option *ngFor="let floor of currentFloors!" [value]="floor">{{floor.floorNumber}}</mat-option>
+    <mat-option *ngFor="let floor of currentFloors!" [value]="floor">{{floor.floorName}}</mat-option>
   </mat-select>
 
   <button (click)="changeFloor.emit(getFloor!.value!)" mat-button>select</button>

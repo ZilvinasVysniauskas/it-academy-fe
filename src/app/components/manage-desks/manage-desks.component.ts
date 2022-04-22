@@ -13,6 +13,8 @@ import {FloorService} from "../../service/floor/floor.service";
 import {Building} from "../../interfaces/building";
 import {BuildingService} from "../../service/building/building.service";
 import {Entities} from "../../enums/entities";
+import {AddBuildingDialogComponent} from "../modals/add-building-dialog/add-building-dialog.component";
+import {AddFloorDialogComponent} from "../modals/add-floor-dialog/add-floor-dialog.component";
 
 @Component({
   selector: 'app-manage-desks',
@@ -31,12 +33,20 @@ export class ManageDesksComponent implements OnInit {
   selectedFloor: Floor | null;
 
   constructor(private deskService: DeskService, private roomService: RoomService, private matDialog: MatDialog,
-              private floorService: FloorService, buildingService: BuildingService) {
+              private floorService: FloorService, private buildingService: BuildingService) {
     this.selectedRoom = null;
     this.selectedDesk = null
     this.selectedBuilding = null;
     this.selectedFloor = null;
-    buildingService.getAllBuilding().subscribe(buildings => this.buildings = buildings);
+    this.getBuilding();
+  }
+
+  getBuilding(): void {
+    this.buildingService.getAllBuilding().subscribe(buildings => this.buildings = buildings);
+  }
+
+  private getFloors() {
+    this.floorService.getFloorsByBuildingId(this.selectedBuilding?.id!).subscribe(floors => this.floors = floors);
   }
 
   getRooms(): void {
@@ -102,7 +112,7 @@ export class ManageDesksComponent implements OnInit {
   selectBuilding(building: Building) {
     this.selectedBuilding = building;
     this.display = Entities.FLOORS;
-    this.floorService.getFloorsByBuildingId(building.id).subscribe(floors => this.floors = floors);
+    this.getFloors()
   }
 
   selectFloor(floor: Floor) {
@@ -110,4 +120,22 @@ export class ManageDesksComponent implements OnInit {
     this.display = Entities.ROOMS;
     this.deskService.getRooms(floor.id).subscribe(rooms => this.listOfRooms = rooms);
   }
+
+  addNewBuilding() {
+    this.matDialog.open(AddBuildingDialogComponent)
+      .afterClosed()
+      .subscribe((result) => {
+        this.getBuilding();
+      });
+  }
+  addNewFloor() {
+    let buildingId = this.selectedBuilding?.id!;
+    this.matDialog.open(AddFloorDialogComponent,{data: {buildingId}})
+      .afterClosed()
+      .subscribe((result) => {
+        this.getFloors();
+      });
+  }
+
+
 }

@@ -7,6 +7,11 @@ import {validateEmail} from "../../../validators/emailValidator";
 import {AdminPageService} from "../../../service/admin/admin-page.service";
 import {validateEmailUnique} from "../../../validators/emailUniqueValidator";
 import {userIdValidator} from "../../../validators/userIdValidator";
+import {FloorService} from "../../../service/floor/floor.service";
+import {Floor} from "../../../interfaces/floor";
+import {AddRoomDialogComponent} from "../../modals/add-room-dialog/add-room-dialog.component";
+import {ChangePlaceDialogComponent} from "../../modals/change-place-dialog/change-place-dialog.component";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-edit-user-form',
@@ -27,6 +32,7 @@ export class EditUserFormComponent implements OnInit {
   passwordChanged: boolean = false;
   userRequest?: UserRequest;
   selected!: string;
+  currentFloor!: Floor;
 
   states = [
     'STANDARD_USER', 'ADMINISTRATOR'
@@ -35,6 +41,7 @@ export class EditUserFormComponent implements OnInit {
   get getFirstName() {
     return this.editUserForm.get('firstName')
   }
+
   get getLastName() {
     return this.editUserForm.get('lastName')
   }
@@ -42,49 +49,63 @@ export class EditUserFormComponent implements OnInit {
   get getMiddleName() {
     return this.editUserForm.get('middleName')
   }
+
   get getEmail() {
     return this.editUserForm.get('email')
   }
+
   get getPassword() {
     return this.editUserForm.get('password')
   }
+
   get getRole() {
     return this.editUserForm.get('role')
   }
+
   get getActive() {
     return this.editUserForm.get('active')
   }
 
-  get getUserId () {
+  get getUserId() {
     return this.editUserForm.get('userId')
   }
+  get getDefaultFloor() {
+    return this.editUserForm.get('defaultFloor')
+  }
 
-  constructor(private adminService: AdminPageService) {
+  constructor(private adminService: AdminPageService, private floorService: FloorService, private matDialog: MatDialog) {
     this.editUserForm = new FormGroup({
-        userId: new FormControl('', {validators:
+        userId: new FormControl('', {
+          validators:
             [Validators.required, Validators.maxLength(8),
               Validators.minLength(8)],
-          }),
-        firstName: new FormControl('', {validators:
+        }),
+        firstName: new FormControl('', {
+          validators:
             [Validators.required, Validators.maxLength(40)]
         }),
-        lastName: new FormControl('', {validators:
+        lastName: new FormControl('', {
+          validators:
             [Validators.required, Validators.maxLength(40)]
         }),
-        middleName: new FormControl('', {validators:
+        middleName: new FormControl('', {
+          validators:
             [Validators.maxLength(40)]
         }),
-        email: new FormControl('', {validators:
+        email: new FormControl('', {
+          validators:
             [Validators.required, validateEmail]
         }),
         role: new FormControl(''),
+        defaultFloor: new FormControl(''),
         active: new FormControl('')
       }
     );
   }
 
   ngOnInit(): void {
-    if (this.user){
+    this.floorService.getFloorsById(this.user!.defaultFloorId.toString()).subscribe(floor => this.currentFloor = floor);
+    if (this.user) {
       this.password = this.user.password;
       this.getUserId?.setValue(this.user.userId);
       this.getFirstName?.setValue(this.user.firstName);
@@ -95,19 +116,16 @@ export class EditUserFormComponent implements OnInit {
       this.getActive?.setValue(this.user.active);
       this.editUserForm.get('email')?.setAsyncValidators(validateEmailUnique(this.adminService))
       this.selected = this.getRole?.value;
-    }
-    else {
+    } else {
       this.getActive?.setValue(true)
       this.editUserForm.get('userId')?.setAsyncValidators(userIdValidator(this.adminService))
       this.editUserForm.get('email')?.setAsyncValidators(validateEmailUnique(this.adminService))
     }
-
   }
-
 
   AddOrUpdateUser() {
     const isActive = () => {
-      if (this.getActive?.value){
+      if (this.getActive?.value) {
         return 1;
       }
       return 0;
@@ -132,10 +150,11 @@ export class EditUserFormComponent implements OnInit {
       isActive: isActive(),
       password: password(),
       email: this.getEmail?.value,
-      role: this.getRole?.value
+      role: this.getRole?.value,
+      defaultFloorId: this.currentFloor.id
     }
     this.userRequest = user;
-    if (this.editUserForm.valid){
+    if (this.editUserForm.valid) {
       this.savedUser.emit(user)
     }
   }
@@ -146,4 +165,11 @@ export class EditUserFormComponent implements OnInit {
   }
 
 
+  changeFloorDialog() {
+    this.matDialog.open(ChangePlaceDialogComponent, {})
+      .afterClosed()
+      .subscribe((floor) => {
+        this.currentFloor = floor.floor;
+      });
+  }
 }
