@@ -18,9 +18,10 @@ export class AuthService {
     this.httpClient.post<LoginResponse>(loginUrl, loginRequest, {observe: 'response'})
       .subscribe(response => {
         if (response.status == 200) {
-          this.setRole(response.body?.user.role!)
-          this.setToken(response.body?.jwtToken!)
-          this.router.navigate(['home'])
+          this.setRole(response.body?.user.role!);
+          this.setToken(response.body?.jwtToken!);
+          this.setDefaultFloor(response.body!.user.defaultFloorId!.toString());
+          this.router.navigate(['home']);
         }
       },
         error => alert('login failed'));
@@ -51,6 +52,9 @@ export class AuthService {
   return this.getToken() !== null;
   }
 
+  private setDefaultFloor(id: string) {
+    localStorage.setItem('floor-id', id);
+  }
 }
 
 

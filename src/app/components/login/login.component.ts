@@ -44,7 +44,6 @@ export class LoginComponent implements OnInit {
     const loginRequest: UserLoginRequest =  {
       userId: this.getUserId!.value,
       password: this.getPassword!.value
-
     }
     this.authService.login(loginRequest);
   }

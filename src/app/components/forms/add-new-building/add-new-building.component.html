@@ -1,0 +1,38 @@
+<form [formGroup]="buildingRequestForm">
+  <mat-form-field>
+    <mat-label>Enter Building Name</mat-label>
+    <input id="name" matInput formControlName="name">
+    <mat-error *ngIf="getName?.errors?.['required']">
+      Building name is required
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Enter City</mat-label>
+    <input id="city" matInput formControlName="city">
+    <mat-error *ngIf="getCity?.errors?.['required']">
+      City is required
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Enter Street name</mat-label>
+    <input id="streetName" matInput formControlName="streetName">
+    <mat-error *ngIf="getStreetName?.errors?.['required']">
+      Street name is required
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Enter Street name</mat-label>
+    <input id="buildingNumber" matInput formControlName="buildingNumber">
+    <mat-error *ngIf="getBuildingNumber?.errors?.['required']">
+      Building number is required
+    </mat-error>
+  </mat-form-field>
+
+  <button (click)="addNewBuilding()" mat-button>Add Building</button>
+  <button (click)="cancel.emit()" mat-button>cancel</button>
+
+</form>
+

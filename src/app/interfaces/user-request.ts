@@ -6,5 +6,6 @@ export interface UserRequest {
   "password"?: string,
   "isActive": number,
   "email": string,
-  "role": number
+  "role": number,
+  defaultFloorId: number
 }

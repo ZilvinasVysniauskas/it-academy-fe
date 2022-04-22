@@ -1,5 +1,9 @@
 
+<h3>Current Building: {{floor.buildingName}}</h3>
+<h3>Current Floor: {{floor.floorName}}</h3>
+<button mat-button (click)="changeFloor()">Change floor</button>
 <div fxLayout="row" >
+
   <app-calendar [date]="reservationDate"
                 (onDateChange)="handleReservationChange($event!)"></app-calendar>
 
@@ -22,9 +26,9 @@
             </div>
           </div>
         </div>
-        <button class="book-button" [disabled]="selected == undefined" (click)="placeReservation()">Book desk</button>  
+        <button class="book-button" [disabled]="selected == undefined" (click)="placeReservation()">Book desk</button>
         <button class="cancel-button" onclick="window.history.back()">Cancel</button>
-    </div>  
+    </div>
 
   </div>
 <img src="assets/img/office-map.png" >

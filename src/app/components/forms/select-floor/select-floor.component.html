@@ -1,0 +1,15 @@
+<form [formGroup]="selectFloorForm">
+  <mat-label>Building</mat-label>
+  <mat-select formControlName="building" [(value)]="currentBuilding" (selectionChange)="changeCurrentBuilding()">>
+    <mat-option *ngFor="let building of buildings!" [value]="building">{{building.buildingName}}</mat-option>
+  </mat-select>
+
+  <mat-label>Floor</mat-label>
+  <mat-select formControlName="floor" [(value)]="currentFloor" (selectionChange)="changeCurrentFloor()">
+    <mat-option *ngFor="let floor of currentFloors!" [value]="floor">{{floor.floorName}}</mat-option>
+  </mat-select>
+
+  <button (click)="changeFloor.emit(getFloor!.value!)" mat-button>select</button>
+  <button (click)="cancelClicked.emit()" mat-button>cancel</button>
+
+</form>
