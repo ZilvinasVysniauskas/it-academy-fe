@@ -4,8 +4,8 @@ import {AdminPageService} from "../../service/admin/admin-page.service";
 import {FormControl, FormGroup} from "@angular/forms";
 import {map, startWith} from "rxjs/operators";
 import {combineLatest, Observable, of} from "rxjs";
-import { UserDialogComponentComponent } from '../modals/user-dialog-component/user-dialog-component.component';
 import { MatDialog } from '@angular/material/dialog';
+import {EditUserFormComponent} from "../forms/edit-user-form/edit-user-form.component";
 
 @Component({
   selector: 'app-admin',
@@ -53,8 +53,8 @@ export class AdminComponent implements OnInit {
       this.adminService.fetchAllUsers(),
     ]).pipe(
       map(([userId, firstName, lastName, allUsers]: [string, string, string, User[]]): User[] => allUsers.filter(
-        (user: User): boolean => user.firstName.toLocaleLowerCase().startsWith(firstName)
-          && user.lastName.toLocaleLowerCase().startsWith(lastName)
+        (user: User): boolean => user.firstName.toLowerCase().startsWith(firstName.toLowerCase())
+          && user.lastName.toLowerCase().startsWith(lastName.toLowerCase())
           && user.userId.toString().toLocaleLowerCase().startsWith(userId),
       )),
     );
@@ -64,7 +64,7 @@ export class AdminComponent implements OnInit {
   }
 
   editUser(user: User) {
-    this.matDialog.open(UserDialogComponentComponent, { data: { user } })
+    this.matDialog.open(EditUserFormComponent, { data: { user } })
       .afterClosed()
       .subscribe((result?: boolean) => {
         console.log('mat dialog result on edit', result);

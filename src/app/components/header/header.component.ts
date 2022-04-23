@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {UserDialogComponentComponent} from "../modals/user-dialog-component/user-dialog-component.component";
 import {MatDialog} from "@angular/material/dialog";
 import {AuthService} from "../../service/authentification/auth.service";
 import {ChangePasswordComponent} from "../forms/change-password/change-password.component";
 import {SendMessageFormComponent} from "../forms/send-message-form/send-message-form.component";
+import {EditUserFormComponent} from "../forms/edit-user-form/edit-user-form.component";
 
 @Component({
     selector: 'app-header',
@@ -22,7 +22,7 @@ export class HeaderComponent implements OnInit {
     }
 
     addUser() {
-        this.matDialog.open(UserDialogComponentComponent, {data: {}})
+        this.matDialog.open(EditUserFormComponent, {data: {}})
             .afterClosed()
             .subscribe((result?: boolean) => {
                 console.log('mat dialog result', result);

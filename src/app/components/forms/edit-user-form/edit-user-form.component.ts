@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Inject, Input, OnInit, Output} from '@angular/core';
 import {User} from "../../../interfaces/user";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserRequest} from "../../../interfaces/user-request";
@@ -9,7 +9,7 @@ import {validateEmailUnique} from "../../../validators/emailUniqueValidator";
 import {userIdValidator} from "../../../validators/userIdValidator";
 import {FloorService} from "../../../service/floor/floor.service";
 import {Floor} from "../../../interfaces/floor";
-import {MatDialog} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {SelectFloorComponent} from "../select-floor/select-floor.component";
 
 @Component({
@@ -19,13 +19,9 @@ import {SelectFloorComponent} from "../select-floor/select-floor.component";
 })
 export class EditUserFormComponent implements OnInit {
 
-  @Input() user: User | undefined;
-  @Input() isEditForm!: boolean;
-  @Input() displaySuccessMessage = false;
-  @Output() savedUser: EventEmitter<UserRequest> = new EventEmitter<UserRequest>();
-  @Output() cancel: EventEmitter<any> = new EventEmitter<any>();
-  @Output() addNewUser: EventEmitter<any> = new EventEmitter<any>();
-
+  user: User | undefined;
+  isEdit!: boolean;
+  displaySuccessMessage: boolean = false;
   editUserForm: FormGroup;
   password: string | undefined;
   passwordChanged: boolean = false;
@@ -42,6 +38,7 @@ export class EditUserFormComponent implements OnInit {
   departments = [
     'SALES', 'MARKETING', 'DEVELOPERS', 'MANAGEMENT'
   ]
+  floorIsPresent: boolean = false;
 
 
   get getFirstName() {
@@ -84,9 +81,14 @@ export class EditUserFormComponent implements OnInit {
   }
 
 
-  constructor(private adminService: AdminPageService, private floorService: FloorService, private matDialog: MatDialog) {
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: { user?: User },
+    public dialogRef: MatDialogRef<EditUserFormComponent>,
+    private adminService: AdminPageService, private floorService: FloorService, private matDialog: MatDialog) {
+    this.user = data.user;
+    this.isEdit = data.user !== undefined;
     this.editUserForm = new FormGroup({
-        userId: new FormControl('', {
+        userId: new FormControl({value: '', disabled: this.isEdit}, {
           validators:
             [Validators.required, Validators.maxLength(8),
               Validators.minLength(8)],
@@ -116,8 +118,9 @@ export class EditUserFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.floorService.getFloorsById(this.user!.defaultFloorId.toString()).subscribe(floor => this.currentFloor = floor);
     if (this.user) {
+      this.floorIsPresent = true;
+      this.floorService.getFloorsById(this.user!.defaultFloorId.toString()).subscribe(floor => this.currentFloor = floor);
       this.password = this.user.password;
       this.getUserId?.setValue(this.user.userId);
       this.getFirstName?.setValue(this.user.firstName);
@@ -145,13 +148,13 @@ export class EditUserFormComponent implements OnInit {
       return 0;
     }
     const id = () => {
-      if (this.isEditForm) {
+      if (this.isEdit) {
         return this.user!.userId;
       }
       return this.getUserId?.value;
     }
     const password = () => {
-      if (this.isEditForm) {
+      if (this.isEdit) {
         return this.password;
       }
       return generatePassword();
@@ -170,8 +173,26 @@ export class EditUserFormComponent implements OnInit {
     }
     this.userRequest = user;
     if (this.editUserForm.valid) {
-      this.savedUser.emit(user)
+      this.handleSavedUser(user)
     }
+  }
+
+  handleSavedUser(userRequest: UserRequest) {
+    if (this.user) {
+      this.adminService.updateUser(userRequest).subscribe(() => {
+        this.displaySuccessMessage = true;
+        this.dialogRef.close(true);
+      })
+    }
+    else {
+      this.adminService.addNewUser(userRequest).subscribe(() => {
+        this.displaySuccessMessage = true;
+      })
+    }
+  }
+
+  handleCancel() {
+    this.dialogRef.close();
   }
 
   resetPassword() {
@@ -186,6 +207,11 @@ export class EditUserFormComponent implements OnInit {
       .afterClosed()
       .subscribe((floor) => {
         this.currentFloor = floor.floor;
+        this.floorIsPresent = true;
       });
+  }
+
+  idReadOnly() {
+    return this.isEdit;
   }
 }

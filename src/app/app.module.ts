@@ -31,7 +31,6 @@ import {AdminComponent} from "./components/admin/admin.component";
 import { SearchUserComponent } from './components/forms/search-user/search-user.component';
 import { EditUserFormComponent } from './components/forms/edit-user-form/edit-user-form.component';
 import {AdminAddUserComponent} from "./components/adim-add-user/adim-add-user.component";
-import { UserDialogComponentComponent } from './components/modals/user-dialog-component/user-dialog-component.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatSelectModule} from "@angular/material/select";
 import { ReservationHistoryComponent } from './components/reservation-history/reservation-history.component';
@@ -80,7 +79,6 @@ export const MY_DATE_FORMATS = {
     SearchUserComponent,
     EditUserFormComponent,
     AdminAddUserComponent,
-    UserDialogComponentComponent,
     ManageDesksComponent,
     AddDesksFormComponent,
     AddNewRoomComponent,
