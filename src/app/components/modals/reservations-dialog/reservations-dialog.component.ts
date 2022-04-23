@@ -11,6 +11,7 @@ import {DeskReservationService} from "../../../service/reservations/desk-reserva
 export class ReservationsDialogComponent {
 
 
+
   constructor(@Inject(MAT_DIALOG_DATA) public data: { message: string, currentReservation: Reservation },
               public dialogRef: MatDialogRef<ReservationsDialogComponent>,private reservationService: DeskReservationService) {
   }

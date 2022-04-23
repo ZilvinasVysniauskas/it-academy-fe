@@ -1,5 +1,6 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Inject, Input, OnInit, Output} from '@angular/core';
 import {Notification} from "../../../interfaces/notification";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-notification-message',
@@ -8,9 +9,15 @@ import {Notification} from "../../../interfaces/notification";
 })
 export class NotificationMessageComponent {
 
-  @Input() notification!: Notification;
-  @Output() close: EventEmitter<any> = new EventEmitter<any>();
+  notification!: Notification;
 
-  constructor() {
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: { notification: Notification },
+    public dialogRef: MatDialogRef<NotificationMessageComponent>) {
   }
+
+  closeForm() {
+    this.dialogRef.close();
+  }
+
 }

@@ -1,9 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {NotificationService} from "../../service/notification/notification.service";
 import {Notification} from "../../interfaces/notification";
-
 import {MatDialog} from "@angular/material/dialog";
-import {NotificationDialogComponent} from "../modals/notification-dialog/notification-dialog.component";
+import {NotificationMessageComponent} from "../forms/notification-message/notification-message.component";
 
 @Component({
   selector: 'app-home',
@@ -35,7 +34,7 @@ export class HomeComponent implements OnInit {
   private displayNotification(notifications: Notification[], index: number) {
     console.log(index)
     let notification = notifications[index];
-    this.matDialog.open(NotificationDialogComponent, {data: {notification}})
+    this.matDialog.open(NotificationMessageComponent, {data: {notification}})
       .afterClosed()
       .subscribe((result) => {
         setTimeout(() => {

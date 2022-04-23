@@ -1,31 +1,35 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Inject, Input, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";1
 import {DeskRequest} from "../../../interfaces/deskRequest";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {DeskService} from "../../../service/desks/desk.service";
 
 @Component({
   selector: 'app-add-desks-form',
   templateUrl: './add-desks-form.component.html',
   styleUrls: ['./add-desks-form.component.scss']
 })
-export class AddDesksFormComponent implements OnInit {
+export class AddDesksFormComponent {
 
 
-  @Input() roomId!: number;
-  @Output() addDesk: EventEmitter<DeskRequest> = new EventEmitter<DeskRequest>();
-  @Output() cancel: EventEmitter<any> = new EventEmitter<any>();
+  roomId!: number;
 
   deskName = new FormControl();
 
-  constructor() {}
+  constructor(@Inject(MAT_DIALOG_DATA) public data: { roomId: number },
+              public dialogRef: MatDialogRef<AddDesksFormComponent>, private deskService: DeskService) {
+    this.roomId = data.roomId;
+  }
 
   addNewDesk(): void {
     const desk: DeskRequest = {
       deskName: this.deskName.value,
       roomId: this.roomId
     }
-    this.addDesk.emit(desk)
+    this.deskService.addNewDesk(desk).subscribe(a=> this.dialogRef.close())
   }
 
-  ngOnInit(): void {
+  closeForm() {
+    this.dialogRef.close();
   }
 }

@@ -3,9 +3,11 @@ import {UserRequest} from "../../../interfaces/user-request";
 import {NotificationRequest} from "../../../interfaces/notificationRequest";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ReservationsDialogComponent} from "../../modals/reservations-dialog/reservations-dialog.component";
-import {MatDialog} from "@angular/material/dialog";
+import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {SearchUserComponent} from "../search-user/search-user.component";
 import {ChangePasswordComponent} from "../change-password/change-password.component";
+import {NotificationService} from "../../../service/notification/notification.service";
+
 
 @Component({
   selector: 'app-send-message-form',
@@ -38,7 +40,8 @@ export class SendMessageFormComponent implements OnInit {
     return this.notificationRequestForm.get('department')
   }
 
-  constructor(private matDialog: MatDialog) {
+  constructor(public dialogRef: MatDialogRef<SendMessageFormComponent>,private notificationService: NotificationService,
+  private matDialog: MatDialog) {
     this.notificationRequestForm = new FormGroup({
       message: new FormControl('', {
         validators:
@@ -55,17 +58,19 @@ export class SendMessageFormComponent implements OnInit {
         message: this.getMessage?.value,
         userId: this.getUserId?.value
       }
-      this.sendNotification.emit(notificationRequest);
+      this.notificationService.sendNotificationToUser(notificationRequest).subscribe(this.dialogRef.close);
     } else {
       const notificationRequest: NotificationRequest = {
         message: this.getMessage?.value,
         department: this.getDepartment?.value,
       }
-      this.sendNotification.emit(notificationRequest)
+      this.notificationService.sendNotificationToDepartment(notificationRequest).subscribe(this.dialogRef.close)
     }
   }
 
-
+  closeDialog() {
+    this.dialogRef.close();
+  }
   ngOnInit(): void {
   }
 

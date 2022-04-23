@@ -2,8 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {UserDialogComponentComponent} from "../modals/user-dialog-component/user-dialog-component.component";
 import {MatDialog} from "@angular/material/dialog";
 import {AuthService} from "../../service/authentification/auth.service";
-import {ChangePasswordDialogComponent} from "../modals/change-password-dialog/change-password-dialog.component";
-import {SendMessageComponent} from "../modals/send-message/send-message.component";
+import {ChangePasswordComponent} from "../forms/change-password/change-password.component";
+import {SendMessageFormComponent} from "../forms/send-message-form/send-message-form.component";
 
 @Component({
     selector: 'app-header',
@@ -33,14 +33,14 @@ export class HeaderComponent implements OnInit {
     }
 
   sendNotification() {
-    this.matDialog.open(SendMessageComponent)
+    this.matDialog.open(SendMessageFormComponent)
       .afterClosed()
       .subscribe((result?: boolean) => {
       });
   }
 
   changePassword() {
-    this.matDialog.open(ChangePasswordDialogComponent)
+    this.matDialog.open(ChangePasswordComponent)
       .afterClosed()
       .subscribe((result?: boolean) => {
         console.log('mat dialog result', result);

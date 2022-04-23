@@ -9,9 +9,8 @@ import {validateEmailUnique} from "../../../validators/emailUniqueValidator";
 import {userIdValidator} from "../../../validators/userIdValidator";
 import {FloorService} from "../../../service/floor/floor.service";
 import {Floor} from "../../../interfaces/floor";
-import {AddRoomDialogComponent} from "../../modals/add-room-dialog/add-room-dialog.component";
-import {ChangePlaceDialogComponent} from "../../modals/change-place-dialog/change-place-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
+import {SelectFloorComponent} from "../select-floor/select-floor.component";
 
 @Component({
   selector: 'app-edit-user-form',
@@ -183,7 +182,7 @@ export class EditUserFormComponent implements OnInit {
 
   changeFloorDialog() {
     let floorInjected = null;
-    this.matDialog.open(ChangePlaceDialogComponent, {data: {floorInjected}})
+    this.matDialog.open(SelectFloorComponent, {data: {floorInjected}})
       .afterClosed()
       .subscribe((floor) => {
         this.currentFloor = floor.floor;
