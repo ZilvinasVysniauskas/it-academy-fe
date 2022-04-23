@@ -2,6 +2,8 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {RoomRequest} from "../../../interfaces/RoomRequest";
 import {ChangePasswordRequest} from "../../../interfaces/changePasswordRequest";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {MatDialogRef} from "@angular/material/dialog";
+import {AdminPageService} from "../../../service/admin/admin-page.service";
 
 
 @Component({
@@ -27,7 +29,8 @@ export class ChangePasswordComponent implements OnInit {
     return this.changePasswordForm.get('newPasswordRepeat')
   }
 
-  constructor() {
+  constructor(private adminService: AdminPageService,
+              private dialogRef: MatDialogRef<ChangePasswordComponent>) {
     this.changePasswordForm = new FormGroup({
         currentPassword: new FormControl('', {
           validators:
@@ -51,10 +54,24 @@ export class ChangePasswordComponent implements OnInit {
       newPassword: this.getNewPassword?.value,
       newPasswordRepeat: this.getNewPasswordRepeat?.value
     }
-    this.changePassword.emit(passwordChangeRequest);
+    this.adminService.changePassword(passwordChangeRequest).subscribe(
+      message => {
+        alert(message)
+        this.dialogRef.close()
+      },
+      error => {
+        console.log(error.error)
+      });
+
   }
+
+  closeDialog() {
+    this.dialogRef.close()
+  }
+
 
   ngOnInit(): void {
   }
+
 
 }

@@ -1,9 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Room} from "../../interfaces/room";
 import {MatDialog} from "@angular/material/dialog";
-import {AddingDeskDialogComponent} from "../modals/adding-desk-dialog/adding-desk-dialog.component";
 import {DeskService} from "../../service/desks/desk.service";
-import {AddRoomDialogComponent} from "../modals/add-room-dialog/add-room-dialog.component";
 import {RoomService} from "../../service/rooms/room.service";
 import {RoomRequest} from "../../interfaces/RoomRequest";
 import {Desk} from "../../interfaces/desk";
@@ -13,11 +11,13 @@ import {FloorService} from "../../service/floor/floor.service";
 import {Building} from "../../interfaces/building";
 import {BuildingService} from "../../service/building/building.service";
 import {Entities} from "../../enums/entities";
-import {AddBuildingDialogComponent} from "../modals/add-building-dialog/add-building-dialog.component";
-import {AddFloorDialogComponent} from "../modals/add-floor-dialog/add-floor-dialog.component";
-import {ChangePlaceDialogComponent} from "../modals/change-place-dialog/change-place-dialog.component";
 import {BuildingRequest} from "../../interfaces/buildingRequest";
 import {FloorRequest} from "../../interfaces/floorRequest";
+import {AddNewBuildingComponent} from "../forms/add-new-building/add-new-building.component";
+import {AddNewFloorComponent} from "../forms/add-new-floor/add-new-floor.component";
+import {AddNewRoomComponent} from "../forms/add-new-room/add-new-room.component";
+import {AddDesksFormComponent} from "../forms/add-desks-form/add-desks-form.component";
+import {SelectFloorComponent} from "../forms/select-floor/select-floor.component";
 
 
 @Component({
@@ -69,7 +69,7 @@ export class ManageDesksComponent implements OnInit {
 
 
   addTable(roomId: number) {
-    this.matDialog.open(AddingDeskDialogComponent, {data: {roomId}})
+    this.matDialog.open(AddDesksFormComponent, {data: {roomId}})
       .afterClosed()
       .subscribe((result) => {
         this.getRooms();
@@ -82,7 +82,7 @@ export class ManageDesksComponent implements OnInit {
 
   addRoom() {
     let floorId = this.selectedFloor?.id!;
-    this.matDialog.open(AddRoomDialogComponent, {data: {floorId}})
+    this.matDialog.open(AddNewRoomComponent, {data: {floorId}})
       .afterClosed()
       .subscribe((result) => {
         this.getRooms();
@@ -138,7 +138,7 @@ export class ManageDesksComponent implements OnInit {
   }
 
   addNewBuilding() {
-    this.matDialog.open(AddBuildingDialogComponent)
+    this.matDialog.open(AddNewBuildingComponent)
       .afterClosed()
       .subscribe((result) => {
         this.getBuilding();
@@ -147,7 +147,7 @@ export class ManageDesksComponent implements OnInit {
 
   addNewFloor() {
     let buildingId = this.selectedBuilding?.id!;
-    this.matDialog.open(AddFloorDialogComponent, {data: {buildingId}})
+    this.matDialog.open(AddNewFloorComponent, {data: {buildingId}})
       .afterClosed()
       .subscribe((result) => {
         this.getFloors();
@@ -155,7 +155,7 @@ export class ManageDesksComponent implements OnInit {
   }
 
   deleteFloor(floorInject: Floor) {
-    this.matDialog.open(ChangePlaceDialogComponent, {data: {floorInject}})
+    this.matDialog.open(SelectFloorComponent, {data: {floorInject}})
       .afterClosed()
       .subscribe((floor) => {
         this.floorService.deleteFloor(floorInject.id, floor.floor.id).subscribe(a => {

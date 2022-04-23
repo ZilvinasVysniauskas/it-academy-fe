@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddingDeskDialogComponent } from './adding-desk-dialog.component';
+import { SendMessageFormComponent } from './send-message-form.component';
 
-describe('AddingDeskDialogComponent', () => {
-  let component: AddingDeskDialogComponent;
-  let fixture: ComponentFixture<AddingDeskDialogComponent>;
+describe('SendMessageFormComponent', () => {
+  let component: SendMessageFormComponent;
+  let fixture: ComponentFixture<SendMessageFormComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddingDeskDialogComponent ]
+      declarations: [ SendMessageFormComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AddingDeskDialogComponent);
+    fixture = TestBed.createComponent(SendMessageFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

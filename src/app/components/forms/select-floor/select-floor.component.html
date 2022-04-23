@@ -9,7 +9,7 @@
     <mat-option *ngFor="let floor of currentFloors!" [value]="floor">{{floor.floorName}}</mat-option>
   </mat-select>
 
-  <button (click)="changeFloor.emit(getFloor!.value!)" mat-button>select</button>
-  <button (click)="cancelClicked.emit()" mat-button>cancel</button>
+  <button (click)="changeFloor()" mat-button>select</button>
+  <button (click)="closeForm()" mat-button>cancel</button>
 
 </form>

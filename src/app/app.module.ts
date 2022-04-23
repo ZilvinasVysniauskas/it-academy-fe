@@ -31,35 +31,26 @@ import {AdminComponent} from "./components/admin/admin.component";
 import { SearchUserComponent } from './components/forms/search-user/search-user.component';
 import { EditUserFormComponent } from './components/forms/edit-user-form/edit-user-form.component';
 import {AdminAddUserComponent} from "./components/adim-add-user/adim-add-user.component";
-import { UserDialogComponentComponent } from './components/modals/user-dialog-component/user-dialog-component.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatSelectModule} from "@angular/material/select";
 import { ReservationHistoryComponent } from './components/reservation-history/reservation-history.component';
 import {Routes} from "@angular/router";
-import { ReservationsDialogComponent } from './components/modals/reservations-dialog/reservations-dialog.component';
 import {TokenInterceptor} from "./service/interpretor";
 import { ManageDesksComponent } from './components/manage-desks/manage-desks.component';
 import { AddDesksFormComponent } from './components/forms/add-desks-form/add-desks-form.component';
-import { AddingDeskDialogComponent } from './components/modals/adding-desk-dialog/adding-desk-dialog.component';
-import { AddRoomDialogComponent } from './components/modals/add-room-dialog/add-room-dialog.component';
 import { AddNewRoomComponent } from './components/forms/add-new-room/add-new-room.component';
 import { ClickToEditComponent } from './components/click-to-edit/click-to-edit.component';
-import { ChangePasswordDialogComponent } from './components/modals/change-password-dialog/change-password-dialog.component';
 import { ChangePasswordComponent } from './components/forms/change-password/change-password.component';
 
 import {MatTableModule} from "@angular/material/table";
 
-import { ChangePlaceDialogComponent } from './components/modals/change-place-dialog/change-place-dialog.component';
 import { SelectFloorComponent } from './components/forms/select-floor/select-floor.component';
-import { AddBuildingDialogComponent } from './components/modals/add-building-dialog/add-building-dialog.component';
 import { AddNewBuildingComponent } from './components/forms/add-new-building/add-new-building.component';
 import { AddNewFloorComponent } from './components/forms/add-new-floor/add-new-floor.component';
-import { AddFloorDialogComponent } from './components/modals/add-floor-dialog/add-floor-dialog.component';
-
-
-
-
-
+import { NotificationMessageComponent } from './components/forms/notification-message/notification-message.component';
+import {MatFormField, MatFormFieldControl, MatFormFieldModule} from "@angular/material/form-field";
+import {ScrollingModule} from "@angular/cdk/scrolling";
+import { SendMessageFormComponent } from './components/forms/send-message-form/send-message-form.component';
 
 export const MY_DATE_FORMATS = {
   parse: {
@@ -88,23 +79,17 @@ export const MY_DATE_FORMATS = {
     SearchUserComponent,
     EditUserFormComponent,
     AdminAddUserComponent,
-    UserDialogComponentComponent,
-    ReservationsDialogComponent,
     ManageDesksComponent,
     AddDesksFormComponent,
-    AddingDeskDialogComponent,
-    AddRoomDialogComponent,
     AddNewRoomComponent,
     ClickToEditComponent,
-    ChangePasswordDialogComponent,
     ChangePasswordComponent,
-    ReservationHistoryComponent
-    ChangePlaceDialogComponent,
+    ReservationHistoryComponent,
     SelectFloorComponent,
-    AddBuildingDialogComponent,
     AddNewBuildingComponent,
     AddNewFloorComponent,
-    AddFloorDialogComponent,
+    NotificationMessageComponent,
+    SendMessageFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -124,6 +109,8 @@ export const MY_DATE_FORMATS = {
     MatOptionModule,
     MatSelectModule,
     MatTableModule,
+    MatFormFieldModule,
+    ScrollingModule,
   ],
   providers: [
     {

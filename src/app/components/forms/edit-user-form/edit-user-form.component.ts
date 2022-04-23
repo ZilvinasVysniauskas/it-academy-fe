@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Inject, Input, OnInit, Output} from '@angular/core';
 import {User} from "../../../interfaces/user";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserRequest} from "../../../interfaces/user-request";
@@ -9,9 +9,8 @@ import {validateEmailUnique} from "../../../validators/emailUniqueValidator";
 import {userIdValidator} from "../../../validators/userIdValidator";
 import {FloorService} from "../../../service/floor/floor.service";
 import {Floor} from "../../../interfaces/floor";
-import {AddRoomDialogComponent} from "../../modals/add-room-dialog/add-room-dialog.component";
-import {ChangePlaceDialogComponent} from "../../modals/change-place-dialog/change-place-dialog.component";
-import {MatDialog} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {SelectFloorComponent} from "../select-floor/select-floor.component";
 
 @Component({
   selector: 'app-edit-user-form',
@@ -20,24 +19,27 @@ import {MatDialog} from "@angular/material/dialog";
 })
 export class EditUserFormComponent implements OnInit {
 
-  @Input() user: User | undefined;
-  @Input() isEditForm!: boolean;
-  @Input() displaySuccessMessage = false;
-  @Output() savedUser: EventEmitter<UserRequest> = new EventEmitter<UserRequest>();
-  @Output() cancel: EventEmitter<any> = new EventEmitter<any>();
-  @Output() addNewUser: EventEmitter<any> = new EventEmitter<any>();
-
+  user: User | undefined;
+  isEdit!: boolean;
+  displaySuccessMessage: boolean = false;
   editUserForm: FormGroup;
   password: string | undefined;
   passwordChanged: boolean = false;
   userRequest?: UserRequest;
   selected!: string;
+  selectedDepartment!: string;
   currentFloor!: Floor;
   floor: Floor | null = null;
 
   states = [
     'STANDARD_USER', 'ADMINISTRATOR'
   ]
+
+  departments = [
+    'SALES', 'MARKETING', 'DEVELOPERS', 'MANAGEMENT'
+  ]
+  floorIsPresent: boolean = false;
+
 
   get getFirstName() {
     return this.editUserForm.get('firstName')
@@ -74,9 +76,19 @@ export class EditUserFormComponent implements OnInit {
     return this.editUserForm.get('defaultFloor')
   }
 
-  constructor(private adminService: AdminPageService, private floorService: FloorService, private matDialog: MatDialog) {
+  get getDepartment() {
+    return this.editUserForm.get('department')
+  }
+
+
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: { user?: User },
+    public dialogRef: MatDialogRef<EditUserFormComponent>,
+    private adminService: AdminPageService, private floorService: FloorService, private matDialog: MatDialog) {
+    this.user = data.user;
+    this.isEdit = data.user !== undefined;
     this.editUserForm = new FormGroup({
-        userId: new FormControl('', {
+        userId: new FormControl({value: '', disabled: this.isEdit}, {
           validators:
             [Validators.required, Validators.maxLength(8),
               Validators.minLength(8)],
@@ -98,6 +110,7 @@ export class EditUserFormComponent implements OnInit {
             [Validators.required, validateEmail]
         }),
         role: new FormControl(''),
+        department: new FormControl(''),
         defaultFloor: new FormControl(''),
         active: new FormControl('')
       }
@@ -105,8 +118,9 @@ export class EditUserFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.floorService.getFloorsById(this.user!.defaultFloorId.toString()).subscribe(floor => this.currentFloor = floor);
     if (this.user) {
+      this.floorIsPresent = true;
+      this.floorService.getFloorsById(this.user!.defaultFloorId.toString()).subscribe(floor => this.currentFloor = floor);
       this.password = this.user.password;
       this.getUserId?.setValue(this.user.userId);
       this.getFirstName?.setValue(this.user.firstName);
@@ -114,9 +128,11 @@ export class EditUserFormComponent implements OnInit {
       this.getMiddleName?.setValue(this.user.middleName);
       this.getEmail?.setValue(this.user.email);
       this.getRole?.setValue(this.user.role);
+      this.getDepartment?.setValue(this.user.department);
       this.getActive?.setValue(this.user.active);
       this.editUserForm.get('email')?.setAsyncValidators(validateEmailUnique(this.adminService))
       this.selected = this.getRole?.value;
+      this.selectedDepartment = this.getDepartment?.value;
     } else {
       this.getActive?.setValue(true)
       this.editUserForm.get('userId')?.setAsyncValidators(userIdValidator(this.adminService))
@@ -132,13 +148,13 @@ export class EditUserFormComponent implements OnInit {
       return 0;
     }
     const id = () => {
-      if (this.isEditForm) {
+      if (this.isEdit) {
         return this.user!.userId;
       }
       return this.getUserId?.value;
     }
     const password = () => {
-      if (this.isEditForm) {
+      if (this.isEdit) {
         return this.password;
       }
       return generatePassword();
@@ -152,12 +168,31 @@ export class EditUserFormComponent implements OnInit {
       password: password(),
       email: this.getEmail?.value,
       role: this.getRole?.value,
-      defaultFloorId: this.currentFloor.id
+      defaultFloorId: this.currentFloor.id,
+      department: this.getDepartment?.value
     }
     this.userRequest = user;
     if (this.editUserForm.valid) {
-      this.savedUser.emit(user)
+      this.handleSavedUser(user)
     }
+  }
+
+  handleSavedUser(userRequest: UserRequest) {
+    if (this.user) {
+      this.adminService.updateUser(userRequest).subscribe(() => {
+        this.displaySuccessMessage = true;
+        this.dialogRef.close(true);
+      })
+    }
+    else {
+      this.adminService.addNewUser(userRequest).subscribe(() => {
+        this.displaySuccessMessage = true;
+      })
+    }
+  }
+
+  handleCancel() {
+    this.dialogRef.close();
   }
 
   resetPassword() {
@@ -168,10 +203,15 @@ export class EditUserFormComponent implements OnInit {
 
   changeFloorDialog() {
     let floorInjected = null;
-    this.matDialog.open(ChangePlaceDialogComponent, {data: {floorInjected}})
+    this.matDialog.open(SelectFloorComponent, {data: {floorInjected}})
       .afterClosed()
       .subscribe((floor) => {
         this.currentFloor = floor.floor;
+        this.floorIsPresent = true;
       });
+  }
+
+  idReadOnly() {
+    return this.isEdit;
   }
 }

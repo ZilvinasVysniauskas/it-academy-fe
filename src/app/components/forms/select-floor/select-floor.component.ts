@@ -1,9 +1,11 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Inject, Input, OnInit, Output} from '@angular/core';
 import {BuildingService} from "../../../service/building/building.service";
 import {FloorService} from "../../../service/floor/floor.service";
 import {Building} from "../../../interfaces/building";
 import {Floor} from "../../../interfaces/floor";
 import {FormControl, FormGroup} from "@angular/forms";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {AdminPageService} from "../../../service/admin/admin-page.service";
 
 @Component({
   selector: 'app-select-floor',
@@ -18,10 +20,7 @@ export class SelectFloorComponent implements OnInit {
   currentFloor?: Floor;
   selectFloorForm: FormGroup;
 
-  @Input() floor?: Floor;
-  @Output() changeFloor: EventEmitter<Floor> = new EventEmitter<Floor>();
-  @Output() cancelClicked: EventEmitter<any> = new EventEmitter<any>();
-
+  floor?: Floor;
 
   get getBuilding() {
     return this.selectFloorForm.get('building')
@@ -31,7 +30,10 @@ export class SelectFloorComponent implements OnInit {
     return this.selectFloorForm.get('floor')
   }
 
-  constructor(private buildingService: BuildingService,
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: { floorInject?: Floor },
+    private adminService: AdminPageService, private dialogRef: MatDialogRef<SelectFloorComponent>,
+    private buildingService: BuildingService,
               private floorService: FloorService) {
     buildingService.getAllBuilding().subscribe(a => this.buildings = a);
     this.selectFloorForm = new FormGroup({
@@ -50,6 +52,14 @@ export class SelectFloorComponent implements OnInit {
 
   changeCurrentFloor() {
     this.currentFloor = this.getFloor?.value!;
+  }
+
+  changeFloor() {
+    this.dialogRef.close( {floor: this.currentFloor})
+  }
+
+  closeForm() {
+    this.dialogRef.close();
   }
 
   ngOnInit(): void {
