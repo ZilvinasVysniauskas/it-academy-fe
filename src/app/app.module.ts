@@ -55,11 +55,12 @@ import { AddBuildingDialogComponent } from './components/modals/add-building-dia
 import { AddNewBuildingComponent } from './components/forms/add-new-building/add-new-building.component';
 import { AddNewFloorComponent } from './components/forms/add-new-floor/add-new-floor.component';
 import { AddFloorDialogComponent } from './components/modals/add-floor-dialog/add-floor-dialog.component';
-
-
-
-
-
+import { NotificationMessageComponent } from './components/forms/notification-message/notification-message.component';
+import { NotificationDialogComponent } from './components/modals/notification-dialog/notification-dialog.component';
+import {MatFormField, MatFormFieldControl, MatFormFieldModule} from "@angular/material/form-field";
+import {ScrollingModule} from "@angular/cdk/scrolling";
+import { SendMessageComponent } from './components/modals/send-message/send-message.component';
+import { SendMessageFormComponent } from './components/forms/send-message-form/send-message-form.component';
 
 export const MY_DATE_FORMATS = {
   parse: {
@@ -105,6 +106,10 @@ export const MY_DATE_FORMATS = {
     AddNewBuildingComponent,
     AddNewFloorComponent,
     AddFloorDialogComponent,
+    NotificationMessageComponent,
+    NotificationDialogComponent,
+    SendMessageComponent,
+    SendMessageFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -124,6 +129,8 @@ export const MY_DATE_FORMATS = {
     MatOptionModule,
     MatSelectModule,
     MatTableModule,
+    MatFormFieldModule,
+    ScrollingModule,
   ],
   providers: [
     {

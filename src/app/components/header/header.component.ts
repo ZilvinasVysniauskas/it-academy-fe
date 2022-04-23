@@ -3,6 +3,7 @@ import {UserDialogComponentComponent} from "../modals/user-dialog-component/user
 import {MatDialog} from "@angular/material/dialog";
 import {AuthService} from "../../service/authentification/auth.service";
 import {ChangePasswordDialogComponent} from "../modals/change-password-dialog/change-password-dialog.component";
+import {SendMessageComponent} from "../modals/send-message/send-message.component";
 
 @Component({
     selector: 'app-header',
@@ -31,8 +32,15 @@ export class HeaderComponent implements OnInit {
             });
     }
 
+  sendNotification() {
+    this.matDialog.open(SendMessageComponent)
+      .afterClosed()
+      .subscribe((result?: boolean) => {
+      });
+  }
+
   changePassword() {
-    this.matDialog.open(ChangePasswordDialogComponent, {data: {}})
+    this.matDialog.open(ChangePasswordDialogComponent)
       .afterClosed()
       .subscribe((result?: boolean) => {
         console.log('mat dialog result', result);

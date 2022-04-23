@@ -78,6 +78,13 @@
     </mat-select>
   </mat-form-field>
 
+  <mat-form-field>
+    <mat-label>Department</mat-label>
+    <mat-select formControlName="department" [(value)]="selectedDepartment">
+      <mat-option *ngFor="let department of departments" [value]="department">{{department}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
   <div fxLayout="row">
 
     <p>Default location: Floor {{currentFloor.floorName}} on building {{currentFloor.buildingName}}</p>

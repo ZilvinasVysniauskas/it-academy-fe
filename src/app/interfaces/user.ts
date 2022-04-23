@@ -8,4 +8,5 @@ export interface User {
   "role": string,
   "active": boolean
   "defaultFloorId": number
+  department: string;
 }

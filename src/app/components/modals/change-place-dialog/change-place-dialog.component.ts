@@ -1,10 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {AdminPageService} from "../../../service/admin/admin-page.service";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {ChangePasswordRequest} from "../../../interfaces/changePasswordRequest";
 import {Floor} from "../../../interfaces/floor";
-import {Building} from "../../../interfaces/building";
-import {User} from "../../../interfaces/user";
 
 @Component({
   selector: 'app-change-place-dialog',

@@ -32,12 +32,18 @@ export class EditUserFormComponent implements OnInit {
   passwordChanged: boolean = false;
   userRequest?: UserRequest;
   selected!: string;
+  selectedDepartment!: string;
   currentFloor!: Floor;
   floor: Floor | null = null;
 
   states = [
     'STANDARD_USER', 'ADMINISTRATOR'
   ]
+
+  departments = [
+    'SALES', 'MARKETING', 'DEVELOPERS', 'MANAGEMENT'
+  ]
+
 
   get getFirstName() {
     return this.editUserForm.get('firstName')
@@ -74,6 +80,11 @@ export class EditUserFormComponent implements OnInit {
     return this.editUserForm.get('defaultFloor')
   }
 
+  get getDepartment() {
+    return this.editUserForm.get('department')
+  }
+
+
   constructor(private adminService: AdminPageService, private floorService: FloorService, private matDialog: MatDialog) {
     this.editUserForm = new FormGroup({
         userId: new FormControl('', {
@@ -98,6 +109,7 @@ export class EditUserFormComponent implements OnInit {
             [Validators.required, validateEmail]
         }),
         role: new FormControl(''),
+        department: new FormControl(''),
         defaultFloor: new FormControl(''),
         active: new FormControl('')
       }
@@ -114,9 +126,11 @@ export class EditUserFormComponent implements OnInit {
       this.getMiddleName?.setValue(this.user.middleName);
       this.getEmail?.setValue(this.user.email);
       this.getRole?.setValue(this.user.role);
+      this.getDepartment?.setValue(this.user.department);
       this.getActive?.setValue(this.user.active);
       this.editUserForm.get('email')?.setAsyncValidators(validateEmailUnique(this.adminService))
       this.selected = this.getRole?.value;
+      this.selectedDepartment = this.getDepartment?.value;
     } else {
       this.getActive?.setValue(true)
       this.editUserForm.get('userId')?.setAsyncValidators(userIdValidator(this.adminService))
@@ -152,7 +166,8 @@ export class EditUserFormComponent implements OnInit {
       password: password(),
       email: this.getEmail?.value,
       role: this.getRole?.value,
-      defaultFloorId: this.currentFloor.id
+      defaultFloorId: this.currentFloor.id,
+      department: this.getDepartment?.value
     }
     this.userRequest = user;
     if (this.editUserForm.valid) {
