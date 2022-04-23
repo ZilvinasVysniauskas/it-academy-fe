@@ -14,6 +14,7 @@ export class NotificationMessageComponent {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { notification: Notification },
     public dialogRef: MatDialogRef<NotificationMessageComponent>) {
+    this.notification = data.notification;
   }
 
   closeForm() {

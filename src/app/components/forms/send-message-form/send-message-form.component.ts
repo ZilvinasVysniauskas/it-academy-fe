@@ -1,10 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {UserRequest} from "../../../interfaces/user-request";
 import {NotificationRequest} from "../../../interfaces/notificationRequest";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {ReservationsDialogComponent} from "../../modals/reservations-dialog/reservations-dialog.component";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {SearchUserComponent} from "../search-user/search-user.component";
 import {ChangePasswordComponent} from "../change-password/change-password.component";
 import {NotificationService} from "../../../service/notification/notification.service";
 

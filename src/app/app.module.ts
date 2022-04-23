@@ -36,7 +36,6 @@ import { MatDialogModule } from '@angular/material/dialog';
 import {MatSelectModule} from "@angular/material/select";
 import { ReservationHistoryComponent } from './components/reservation-history/reservation-history.component';
 import {Routes} from "@angular/router";
-import { ReservationsDialogComponent } from './components/modals/reservations-dialog/reservations-dialog.component';
 import {TokenInterceptor} from "./service/interpretor";
 import { ManageDesksComponent } from './components/manage-desks/manage-desks.component';
 import { AddDesksFormComponent } from './components/forms/add-desks-form/add-desks-form.component';
@@ -82,7 +81,6 @@ export const MY_DATE_FORMATS = {
     EditUserFormComponent,
     AdminAddUserComponent,
     UserDialogComponentComponent,
-    ReservationsDialogComponent,
     ManageDesksComponent,
     AddDesksFormComponent,
     AddNewRoomComponent,

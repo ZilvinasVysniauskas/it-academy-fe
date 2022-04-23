@@ -6,10 +6,10 @@ import {Reservation} from "../../interfaces/reservation";
 import * as moment from "moment";
 import {dateToString} from "../../shared/utils";
 import {MatDialog} from "@angular/material/dialog";
-import {ReservationsDialogComponent} from "../modals/reservations-dialog/reservations-dialog.component";
 import {Floor} from "../../interfaces/floor";
 import {FloorService} from "../../service/floor/floor.service";
 import {SelectFloorComponent} from "../forms/select-floor/select-floor.component";
+import {BookingMessagesComponent} from "../booking-messages/booking-messages.component";
 
 
 @Component({
@@ -95,7 +95,7 @@ export class ReservationsComponent implements OnInit {
   }
 
   displayErrorMessage(message: string, currentReservation: Reservation) {
-    this.matDialog.open(ReservationsDialogComponent, {data: {message, currentReservation}})
+    this.matDialog.open(BookingMessagesComponent, {data: {message, currentReservation}})
       .afterClosed()
       .subscribe((result) => {
         if (result?.event == 'canceled') {
