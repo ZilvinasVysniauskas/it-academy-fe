@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SelectFloorComponent } from './select-floor.component';
+import {MatDialog} from "@angular/material/dialog";
 
 describe('SelectFloorComponent', () => {
   let component: SelectFloorComponent;
@@ -8,7 +9,7 @@ describe('SelectFloorComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SelectFloorComponent ]
+      declarations: [ SelectFloorComponent, MatDialog ]
     })
     .compileComponents();
   });

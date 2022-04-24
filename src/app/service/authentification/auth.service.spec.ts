@@ -1,12 +1,18 @@
 import { TestBed } from '@angular/core/testing';
 
 import { AuthService } from './auth.service';
+import {HttpClientTestingModule} from "@angular/common/http/testing";
+import {ReservationHistoryService} from "../reservation-history/reservation-history.service";
 
 describe('AuthService', () => {
   let service: AuthService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+        imports: [HttpClientTestingModule],
+        providers: [AuthService, HttpClientTestingModule]
+      }
+    );
     service = TestBed.inject(AuthService);
   });
 

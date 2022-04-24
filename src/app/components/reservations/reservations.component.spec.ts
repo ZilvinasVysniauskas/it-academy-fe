@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ReservationsComponent } from './reservations.component';
+import {MatDialog} from "@angular/material/dialog";
 
 describe('ReservationsComponent', () => {
   let component: ReservationsComponent;
@@ -8,7 +9,8 @@ describe('ReservationsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ReservationsComponent ]
+      declarations: [ ReservationsComponent ],
+      providers: [MatDialog]
     })
     .compileComponents();
   });
