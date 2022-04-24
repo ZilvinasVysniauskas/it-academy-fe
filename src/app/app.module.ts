@@ -8,7 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
 import { LoginComponent } from './components/login/login.component';
 import { MatButtonModule } from '@angular/material/button';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import {
@@ -34,7 +34,7 @@ import {AdminAddUserComponent} from "./components/adim-add-user/adim-add-user.co
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatSelectModule} from "@angular/material/select";
 import { ReservationHistoryComponent } from './components/reservation-history/reservation-history.component';
-import {Routes} from "@angular/router";
+import {RouterModule, Routes} from "@angular/router";
 import {TokenInterceptor} from "./service/interpretor";
 import { ManageDesksComponent } from './components/manage-desks/manage-desks.component';
 import { AddDesksFormComponent } from './components/forms/add-desks-form/add-desks-form.component';
@@ -111,6 +111,7 @@ export const MY_DATE_FORMATS = {
     MatTableModule,
     MatFormFieldModule,
     ScrollingModule,
+    RouterModule,
   ],
   providers: [
     {
