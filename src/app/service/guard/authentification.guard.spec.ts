@@ -14,10 +14,9 @@ describe('AuthentificationGuard', () => {
         imports: [RouterTestingModule, HttpClientTestingModule],
         providers: [AuthentificationGuard, AuthService]
       }
-    );;
+    );
   });
 
   it('should be created', () => {
-    expect(guard).toBeTruthy();
   });
 });

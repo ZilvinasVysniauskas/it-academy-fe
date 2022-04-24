@@ -3,6 +3,10 @@ import { TestBed } from '@angular/core/testing';
 import { AuthService } from './auth.service';
 import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {ReservationHistoryService} from "../reservation-history/reservation-history.service";
+import {RouterTestingModule} from "@angular/router/testing";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {HttpClient} from "@angular/common/http";
+import {Router} from "@angular/router";
 
 describe('AuthService', () => {
   let service: AuthService;
@@ -10,7 +14,9 @@ describe('AuthService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
         imports: [HttpClientTestingModule],
-        providers: [AuthService, HttpClientTestingModule]
+      providers: [
+        { provide: Router, useValue: {} },
+      ]
       }
     );
     service = TestBed.inject(AuthService);

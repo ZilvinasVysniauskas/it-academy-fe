@@ -4,6 +4,7 @@ import { AdminPageService } from './admin-page.service';
 import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {ReservationHistoryService} from "../reservation-history/reservation-history.service";
 import {AuthService} from "../authentification/auth.service";
+import {HttpClient} from "@angular/common/http";
 
 describe('AdminPageService', () => {
   let service: AdminPageService;
@@ -11,7 +12,7 @@ describe('AdminPageService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
         imports: [HttpClientTestingModule],
-        providers: [AdminPageService, HttpClientTestingModule]
+        providers: [AdminPageService, HttpClientTestingModule, HttpClient]
       }
     );
     service = TestBed.inject(AdminPageService);
