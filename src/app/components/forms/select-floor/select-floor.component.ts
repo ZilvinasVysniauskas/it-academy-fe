@@ -19,8 +19,10 @@ export class SelectFloorComponent implements OnInit {
   currentFloors?: Floor[];
   currentFloor?: Floor;
   selectFloorForm: FormGroup;
-
+  chooseReplacementOnDelete: boolean;
   floor?: Floor;
+  isAddNewUserForm: boolean;
+  department?: string;
 
   get getBuilding() {
     return this.selectFloorForm.get('building')
@@ -31,10 +33,14 @@ export class SelectFloorComponent implements OnInit {
   }
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: { floorInject?: Floor },
+    @Inject(MAT_DIALOG_DATA) public data: { floorInject: Floor, chooseReplacementOnDelete: boolean, department: string },
     private adminService: AdminPageService, private dialogRef: MatDialogRef<SelectFloorComponent>,
     private buildingService: BuildingService,
-              private floorService: FloorService) {
+    private floorService: FloorService) {
+    this.isAddNewUserForm = data.floorInject == null;
+    this.floor = data.floorInject;
+    this.department = data.department;
+    this.chooseReplacementOnDelete = data.chooseReplacementOnDelete;
     buildingService.getAllBuilding().subscribe(a => this.buildings = a);
     this.selectFloorForm = new FormGroup({
       building: new FormControl(''),
@@ -45,9 +51,13 @@ export class SelectFloorComponent implements OnInit {
   changeCurrentBuilding() {
     this.currentBuilding = this.getBuilding?.value!;
     this.floorService.getFloorsByBuildingId(this.currentBuilding!.id)
-      .subscribe(floors => this.currentFloors = floors.filter(f => f.floorName !== this.floor?.floorName));
-    console.log('here')
-    console.log(this.currentFloors)
+      .subscribe(floors => {
+        if (this.chooseReplacementOnDelete) {
+          this.currentFloors = floors.filter(floor => floor.floorName !== this.floor?.floorName);
+        } else {
+          this.currentFloors = floors
+        }
+      });
   }
 
   changeCurrentFloor() {
@@ -55,7 +65,7 @@ export class SelectFloorComponent implements OnInit {
   }
 
   changeFloor() {
-    this.dialogRef.close( {floor: this.currentFloor})
+    this.dialogRef.close({floor: this.currentFloor})
   }
 
   closeForm() {

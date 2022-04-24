@@ -55,6 +55,7 @@ export class AuthService {
   private setDefaultFloor(id: string) {
     localStorage.setItem('floor-id', id);
   }
+
 }
 
 

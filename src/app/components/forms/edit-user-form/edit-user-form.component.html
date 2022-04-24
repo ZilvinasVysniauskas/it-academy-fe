@@ -80,7 +80,7 @@
 
       <mat-form-field>
         <mat-label>Department</mat-label>
-        <mat-select formControlName="department" [(value)]="selectedDepartment">
+        <mat-select formControlName="department" [(value)]="selectedDepartment" (selectionChange)="departmentChanged()">
           <mat-option *ngFor="let department of departments" [value]="department">{{department}}</mat-option>
         </mat-select>
       </mat-form-field>
@@ -91,7 +91,6 @@
         <button mat-button (click)="changeFloorDialog()">
           <p [hidden]="floorIsPresent">select floor</p>
           <p [hidden]="!floorIsPresent">change floor</p>
-
         </button>
       </div>
 

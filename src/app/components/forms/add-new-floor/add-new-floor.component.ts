@@ -15,12 +15,19 @@ export class AddNewFloorComponent {
   buildingId!: number;
 
   floorRequestForm: FormGroup;
-
+  departments = [
+    'SALES', 'MARKETING', 'DEVELOPERS', 'MANAGEMENT'
+  ]
   get getFloorNumber() {
     return this.floorRequestForm.get('number')
   }
+
   get getFloorName() {
     return this.floorRequestForm.get('name')
+  }
+
+  get getFloorDepartment() {
+    return this.floorRequestForm.get('department')
   }
 
   constructor(
@@ -33,6 +40,10 @@ export class AddNewFloorComponent {
             [Validators.required]
         }),
         number: new FormControl('', {
+          validators:
+            [Validators.required]
+        }),
+        department: new FormControl('', {
           validators:
             [Validators.required]
         })
@@ -48,7 +59,8 @@ export class AddNewFloorComponent {
     const floor: FloorRequest = {
       floorName: this.getFloorName?.value!,
       floorNumber: this.getFloorNumber?.value!,
-      buildingId: this.buildingId
+      buildingId: this.buildingId,
+      department: this.getFloorDepartment?.value!
     }
     this.floorService.addFloor(floor).subscribe(a => this.dialogRef.close())
   }

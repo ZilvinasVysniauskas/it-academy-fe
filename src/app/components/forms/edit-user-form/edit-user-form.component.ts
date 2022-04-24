@@ -28,8 +28,10 @@ export class EditUserFormComponent implements OnInit {
   userRequest?: UserRequest;
   selected!: string;
   selectedDepartment!: string;
-  currentFloor!: Floor;
+  currentFloor?: Floor;
   floor: Floor | null = null;
+  department!: string;
+
 
   states = [
     'STANDARD_USER', 'ADMINISTRATOR'
@@ -72,6 +74,7 @@ export class EditUserFormComponent implements OnInit {
   get getUserId() {
     return this.editUserForm.get('userId')
   }
+
   get getDefaultFloor() {
     return this.editUserForm.get('defaultFloor')
   }
@@ -120,7 +123,10 @@ export class EditUserFormComponent implements OnInit {
   ngOnInit(): void {
     if (this.user) {
       this.floorIsPresent = true;
-      this.floorService.getFloorsById(this.user!.defaultFloorId.toString()).subscribe(floor => this.currentFloor = floor);
+      this.floorService.getFloorsById(this.user!.defaultFloorId.toString()).subscribe(floor => {
+        this.currentFloor = floor;
+        this.department = floor.department;
+      });
       this.password = this.user.password;
       this.getUserId?.setValue(this.user.userId);
       this.getFirstName?.setValue(this.user.firstName);
@@ -168,7 +174,7 @@ export class EditUserFormComponent implements OnInit {
       password: password(),
       email: this.getEmail?.value,
       role: this.getRole?.value,
-      defaultFloorId: this.currentFloor.id,
+      defaultFloorId: this.currentFloor!.id,
       department: this.getDepartment?.value
     }
     this.userRequest = user;
@@ -183,8 +189,7 @@ export class EditUserFormComponent implements OnInit {
         this.displaySuccessMessage = true;
         this.dialogRef.close(true);
       })
-    }
-    else {
+    } else {
       this.adminService.addNewUser(userRequest).subscribe(() => {
         this.displaySuccessMessage = true;
       })
@@ -202,8 +207,10 @@ export class EditUserFormComponent implements OnInit {
 
 
   changeFloorDialog() {
-    let floorInjected = null;
-    this.matDialog.open(SelectFloorComponent, {data: {floorInjected}})
+    let floorInject = this.currentFloor;
+    let chooseReplacementOnDelete = false;
+    let department = this.department;
+    this.matDialog.open(SelectFloorComponent, {data: {floorInject, chooseReplacementOnDelete, department}})
       .afterClosed()
       .subscribe((floor) => {
         this.currentFloor = floor.floor;
@@ -213,5 +220,11 @@ export class EditUserFormComponent implements OnInit {
 
   idReadOnly() {
     return this.isEdit;
+  }
+
+  departmentChanged() {
+    this.currentFloor = undefined;
+    this.floorIsPresent = false;
+    this.department = this.getDepartment?.value
   }
 }

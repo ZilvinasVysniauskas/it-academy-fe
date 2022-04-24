@@ -67,7 +67,6 @@ export class ManageDesksComponent implements OnInit {
     this.getRooms();
   }
 
-
   addTable(roomId: number) {
     this.matDialog.open(AddDesksFormComponent, {data: {roomId}})
       .afterClosed()
@@ -120,7 +119,8 @@ export class ManageDesksComponent implements OnInit {
   changeFloorName($event: string) {
     const floor: FloorRequest = {
       id: this.selectedFloor?.id,
-      floorName: $event
+      floorName: $event,
+      department: this.selectedFloor?.department!
     }
     this.floorService.editFloor(floor).subscribe(a => this.getFloors())
   }
@@ -155,7 +155,9 @@ export class ManageDesksComponent implements OnInit {
   }
 
   deleteFloor(floorInject: Floor) {
-    this.matDialog.open(SelectFloorComponent, {data: {floorInject}})
+    let chooseReplacementOnDelete = true;
+    let department = floorInject.department;
+    this.matDialog.open(SelectFloorComponent, {data: {floorInject, chooseReplacementOnDelete, department}})
       .afterClosed()
       .subscribe((floor) => {
         this.floorService.deleteFloor(floorInject.id, floor.floor.id).subscribe(a => {
@@ -165,5 +167,11 @@ export class ManageDesksComponent implements OnInit {
       });
   }
 
+  setDeskUnavailable(id: number) {
+    this.deskService.setDeskUnavailableById(id).subscribe(a => this.getRooms())
+  }
 
+  setDeskAvailable(id: number) {
+    this.deskService.setDeskAvailableById(id).subscribe(a => this.getRooms())
+  }
 }

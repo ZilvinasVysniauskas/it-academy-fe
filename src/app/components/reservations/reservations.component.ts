@@ -148,7 +148,9 @@ export class ReservationsComponent implements OnInit {
 
   changeFloor() {
     let floorInject = this.floor;
-    this.matDialog.open(SelectFloorComponent, {data: {floorInject}})
+    let department = this.floor.department;
+    let chooseReplacementOnDelete = false;
+    this.matDialog.open(SelectFloorComponent, {data: {floorInject, chooseReplacementOnDelete, department}})
       .afterClosed()
       .subscribe((floor) => {
         this.floor = floor.floor;

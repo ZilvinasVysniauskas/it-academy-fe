@@ -30,4 +30,12 @@ export class DeskService {
   editDest(desk: DeskRequest): Observable<any> {
     return this.httpClient.put(this.desksApi, desk);
   }
+
+  setDeskUnavailableById(id: number) {
+    return this.httpClient.get(`${this.desksApi}/disable/${id}`)
+  }
+
+  setDeskAvailableById(id: number) {
+    return this.httpClient.get(`${this.desksApi}/enable/${id}`)
+  }
 }
