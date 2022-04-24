@@ -113,6 +113,11 @@ export const MY_DATE_FORMATS = {
     ScrollingModule,
     RouterModule,
   ],
+  exports: [
+    AppRoutingModule,
+    RouterModule,
+    FormsModule,
+  ],
   providers: [
     {
       provide: DateAdapter,
