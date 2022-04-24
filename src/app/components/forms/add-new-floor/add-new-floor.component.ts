@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {BuildingRequest} from "../../../interfaces/buildingRequest";
 import {FloorRequest} from "../../../interfaces/floorRequest";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-add-new-floor',
@@ -16,6 +17,7 @@ export class AddNewFloorComponent {
 
 
   floorRequestForm: FormGroup;
+  selectedFile?: File;
 
   get getFloorNumber() {
     return this.floorRequestForm.get('number')
@@ -23,8 +25,11 @@ export class AddNewFloorComponent {
   get getFloorName() {
     return this.floorRequestForm.get('name')
   }
+  get getFloorPlan() {
+    return this.floorRequestForm.get('plan')
+  }
 
-  constructor() {
+  constructor(private httpClient: HttpClient) {
     this.floorRequestForm = new FormGroup({
         name: new FormControl('', {
           validators:
@@ -33,7 +38,8 @@ export class AddNewFloorComponent {
         number: new FormControl('', {
           validators:
             [Validators.required]
-        })
+        }),
+        plan: new FormControl('',{validators: [Validators.required]})
       }
     );
   }
@@ -42,9 +48,17 @@ export class AddNewFloorComponent {
     const floor: FloorRequest = {
       floorName: this.getFloorName?.value!,
       floorNumber: this.getFloorNumber?.value!,
-      buildingId: this.buildingId
+      buildingId: this.buildingId,
+      floorPlan: this.getFloorPlan?.value!
     }
     this.addFloor.emit(floor)
+  }
+
+  onFileUpload(event: any){
+    this.selectedFile = event.target.files[0];
+  }
+  OnUploadFile() {
+    this.httpClient.post('api/v1/images', this.selectedFile);
   }
 
 

@@ -9,12 +9,22 @@
 
   <mat-form-field>
     <mat-label>Enter floor number</mat-label>
-    <input id="newPassword" matInput formControlName="newPassword">
+    <input id="newPassword" matInput formControlName="number">
     <mat-error *ngIf="getFloorNumber?.errors?.['required']">
       Floor number is required
     </mat-error>
   </mat-form-field>
 
+<!--  <mat-form-field>-->
+<!--    <mat-label>Enter floor number</mat-label>-->
+<!--    <input type="file" matInput formControlName="plan" (change)="onFileUpload($event)" #selectFile>-->
+<!--    <mat-error *ngIf="getFloorNumber?.errors?.['required']">-->
+<!--      Floor number is required-->
+<!--    </mat-error>-->
+<!--  </mat-form-field>-->
+  <input style="display: none" type="file" (change)="onFileUpload($event)" #selectFile>
+  <button (click)="selectFile.click()">Select floor plan image</button>
+  <button (click)="OnUploadFile()">Upload</button>
 
   <button (click)="addNewFloor()" mat-button>Add floor</button>
   <button (click)="cancel.emit()" mat-button>cancel</button>
