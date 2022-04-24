@@ -1,16 +1,15 @@
-//Install express server
 const express = require('express');
+const http = require('http');
 const path = require('path');
 
 const app = express();
 
-// Serve only the static files form the dist directory
-app.use(express.static('/dist/heroku-angular-fe'));
+const port = process.env.PORT || 8080;
 
-app.get('/*', function(req,res) {
+app.use(express.static(__dirname + '/dist/heroku-angular-fe'));
 
-  res.sendFile(path.join('/dist/heroku-angular-fe/index.html'));
-});
+app.get('/*', (req, res) => res.sendFile(path.join(__dirname)));
 
-// Start the app by listening on the default Heroku port
-app.listen(process.env.PORT || 8080);
+const server = http.createServer(app);
+
+server.listen(port, () => console.log(`App running on: http://localhost:${port}`));
