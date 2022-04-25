@@ -1,23 +1,21 @@
 // import { ComponentFixture, TestBed } from '@angular/core/testing';
 //
-// import { HeaderComponent } from './header.component';
+// import { NotificationMessageComponent } from './notification-message.component';
 // import {MatDialog} from "@angular/material/dialog";
 //
-// describe('HeaderComponent', () => {
-//   let component: HeaderComponent;
-//   let fixture: ComponentFixture<HeaderComponent>;
+// describe('NotificationMessageComponent', () => {
+//   let component: NotificationMessageComponent;
+//   let fixture: ComponentFixture<NotificationMessageComponent>;
 //
 //   beforeEach(async () => {
 //     await TestBed.configureTestingModule({
-//       declarations: [ HeaderComponent, MatDialog ]
+//       declarations: [ NotificationMessageComponent, MatDialog ]
 //     })
 //     .compileComponents();
 //   });
 //
-//
-//
 //   beforeEach(() => {
-//     fixture = TestBed.createComponent(HeaderComponent);
+//     fixture = TestBed.createComponent(NotificationMessageComponent);
 //     component = fixture.componentInstance;
 //     fixture.detectChanges();
 //   });

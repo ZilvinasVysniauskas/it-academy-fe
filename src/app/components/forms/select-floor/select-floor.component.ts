@@ -1,9 +1,11 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Inject, Input, OnInit, Output} from '@angular/core';
 import {BuildingService} from "../../../service/building/building.service";
 import {FloorService} from "../../../service/floor/floor.service";
 import {Building} from "../../../interfaces/building";
 import {Floor} from "../../../interfaces/floor";
 import {FormControl, FormGroup} from "@angular/forms";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {AdminPageService} from "../../../service/admin/admin-page.service";
 
 @Component({
   selector: 'app-select-floor',
@@ -17,11 +19,10 @@ export class SelectFloorComponent implements OnInit {
   currentFloors?: Floor[];
   currentFloor?: Floor;
   selectFloorForm: FormGroup;
-
-  @Input() floor?: Floor;
-  @Output() changeFloor: EventEmitter<Floor> = new EventEmitter<Floor>();
-  @Output() cancelClicked: EventEmitter<any> = new EventEmitter<any>();
-
+  chooseReplacementOnDelete: boolean;
+  floor?: Floor;
+  isAddNewUserForm: boolean;
+  department?: string;
 
   get getBuilding() {
     return this.selectFloorForm.get('building')
@@ -31,8 +32,15 @@ export class SelectFloorComponent implements OnInit {
     return this.selectFloorForm.get('floor')
   }
 
-  constructor(private buildingService: BuildingService,
-              private floorService: FloorService) {
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: { floorInject: Floor, chooseReplacementOnDelete: boolean, department: string },
+    private adminService: AdminPageService, private dialogRef: MatDialogRef<SelectFloorComponent>,
+    private buildingService: BuildingService,
+    private floorService: FloorService) {
+    this.isAddNewUserForm = data.floorInject == null;
+    this.floor = data.floorInject;
+    this.department = data.department;
+    this.chooseReplacementOnDelete = data.chooseReplacementOnDelete;
     buildingService.getAllBuilding().subscribe(a => this.buildings = a);
     this.selectFloorForm = new FormGroup({
       building: new FormControl(''),
@@ -43,13 +51,25 @@ export class SelectFloorComponent implements OnInit {
   changeCurrentBuilding() {
     this.currentBuilding = this.getBuilding?.value!;
     this.floorService.getFloorsByBuildingId(this.currentBuilding!.id)
-      .subscribe(floors => this.currentFloors = floors.filter(f => f.floorName !== this.floor?.floorName));
-    console.log('here')
-    console.log(this.currentFloors)
+      .subscribe(floors => {
+        if (this.chooseReplacementOnDelete) {
+          this.currentFloors = floors.filter(floor => floor.floorName !== this.floor?.floorName);
+        } else {
+          this.currentFloors = floors
+        }
+      });
   }
 
   changeCurrentFloor() {
     this.currentFloor = this.getFloor?.value!;
+  }
+
+  changeFloor() {
+    this.dialogRef.close({floor: this.currentFloor})
+  }
+
+  closeForm() {
+    this.dialogRef.close();
   }
 
   ngOnInit(): void {

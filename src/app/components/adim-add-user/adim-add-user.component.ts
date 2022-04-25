@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {AdminPageService} from "../../service/admin/admin-page.service";
 import {UserRequest} from "../../interfaces/user-request";
 import { MatDialog } from '@angular/material/dialog';
-import { UserDialogComponentComponent } from '../modals/user-dialog-component/user-dialog-component.component';
+import {EditUserFormComponent} from "../forms/edit-user-form/edit-user-form.component";
 
 @Component({
   selector: 'app-adim-add-user',
@@ -15,7 +15,7 @@ export class AdminAddUserComponent implements OnInit {
               private matDialog: MatDialog,) { }
 
   ngOnInit(): void {
-    this.matDialog.open(UserDialogComponentComponent, { data: { } })
+    this.matDialog.open(EditUserFormComponent, { data: { } })
       .afterClosed()
       .subscribe((result?: boolean) => {
         console.log('mat dialog result', result);

@@ -3,4 +3,5 @@ export interface FloorRequest {
   floorNumber?: number,
   buildingId?: number
   floorName: string
+  department: string
 }

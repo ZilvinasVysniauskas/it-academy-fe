@@ -1,7 +1,8 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {DeskRequest} from "../../../interfaces/deskRequest";
 import {BuildingRequest} from "../../../interfaces/buildingRequest";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {MatDialogRef} from "@angular/material/dialog";
+import {BuildingService} from "../../../service/building/building.service";
 
 @Component({
   selector: 'app-add-new-building',
@@ -9,10 +10,6 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
   styleUrls: ['./add-new-building.component.scss']
 })
 export class AddNewBuildingComponent {
-
-  @Output() addBuilding: EventEmitter<BuildingRequest> = new EventEmitter<BuildingRequest>();
-  @Output() cancel: EventEmitter<any> = new EventEmitter<any>();
-
 
   buildingRequestForm: FormGroup;
 
@@ -32,7 +29,8 @@ export class AddNewBuildingComponent {
     return this.buildingRequestForm.get('buildingNumber')
   }
 
-  constructor() {
+  constructor(public dialogRef: MatDialogRef<AddNewBuildingComponent>,
+              private buildingService: BuildingService) {
     this.buildingRequestForm = new FormGroup({
         name: new FormControl('', {
           validators:
@@ -61,7 +59,11 @@ export class AddNewBuildingComponent {
       streetName: this.getStreetName?.value!,
       city: this.getCity?.value!
     }
-    this.addBuilding.emit(building)
+    this.buildingService.addBuilding(building).subscribe(a=> this.dialogRef.close())
+  }
+
+  closeForm() {
+    this.dialogRef.close();
   }
 
   ngOnInit(): void {

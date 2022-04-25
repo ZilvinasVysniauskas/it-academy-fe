@@ -1,6 +1,6 @@
 {
   "/api/*": {
-    "target": "https://heroku-spring-be.herokuapp.com/",
+    "target": "https://heroku-spring-be.herokuapp.com//",
     "secure": false,
     "changeOrigin": true,
     "logLevel": "debug"

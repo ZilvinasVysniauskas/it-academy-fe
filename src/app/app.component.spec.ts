@@ -1,7 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
-import {HerokuTestComponent} from "./heroku-test/heroku-test.component";
 import {HttpClientTestingModule} from "@angular/common/http/testing";
 
 
@@ -15,8 +14,7 @@ describe('AppComponent', () => {
         RouterTestingModule, HttpClientTestingModule
       ],
       declarations: [
-        AppComponent,
-        HerokuTestComponent
+        AppComponent
       ],
     }).compileComponents();
   });
