@@ -98,7 +98,7 @@ export const MY_DATE_FORMATS = {
     ClickToEditComponent,
     ChangePasswordDialogComponent,
     ChangePasswordComponent,
-    ReservationHistoryComponent
+    ReservationHistoryComponent,
     ChangePlaceDialogComponent,
     SelectFloorComponent,
     AddBuildingDialogComponent,
