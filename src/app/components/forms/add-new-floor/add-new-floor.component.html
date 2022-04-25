@@ -24,9 +24,8 @@
 <!--  </mat-form-field>-->
   <input style="display: none" type="file" (change)="onFileUpload($event)" #selectFile>
   <button (click)="selectFile.click()">Select floor plan image</button>
-  <button (click)="OnUploadFile()">Upload</button>
 
-  <button (click)="addNewFloor()" mat-button>Add floor</button>
+  <button (click)="addNewFloor(); OnUploadFile()" mat-button>Add floor</button>
   <button (click)="cancel.emit()" mat-button>cancel</button>
 
 </form>
