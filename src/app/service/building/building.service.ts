@@ -3,16 +3,13 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Building} from "../../interfaces/building";
 import {BuildingRequest} from "../../interfaces/buildingRequest";
-import {environment} from "../../../environments/environment.prod";
 
 @Injectable({
   providedIn: 'root'
 })
 export class BuildingService {
 
-  baseUrl = environment.baseUrl;
-
-  buildingApi = this.baseUrl + "api/v1/buildings/";
+  buildingApi = "api/v1/buildings/";
 
   constructor(private httpClient: HttpClient) { }
 

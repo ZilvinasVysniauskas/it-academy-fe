@@ -6,7 +6,6 @@ import {ReservationRequest} from "../../interfaces/reservationRequest";
 import 'rxjs/add/operator/catch';
 import {Reservation} from "../../interfaces/reservation";
 import {DeskRequest} from "../../interfaces/deskRequest";
-import {environment} from "../../../environments/environment.prod";
 
 @Injectable({
   providedIn: 'root'
@@ -15,10 +14,9 @@ export class DeskReservationService {
 
   constructor(private httpClient: HttpClient) {
   }
-  baseUrl = environment.baseUrl;
 
-  desksApi = this.baseUrl + '/api/v1/desks/';
-  reservationsApi = this.baseUrl + '/api/v1/reservations/';
+  desksApi = '/api/v1/desks/';
+  reservationsApi = '/api/v1/reservations/';
 
   getDesksByDate(reservationDate: string, id: number ): Observable<Room[]> {
     console.log('this is id: ' + id)
