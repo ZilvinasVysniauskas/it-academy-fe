@@ -91,6 +91,9 @@
     <button mat-button (click)="addTable(room.roomId)">Add desk</button>
   </div>
   <button mat-button (click)="addRoom()">Add room</button>
+
+  <img [src]="getFloorPlan(selectedFloor!)">
+  <button (click)="changeFloorPlane()">change image</button>
 </ng-template>
 
 

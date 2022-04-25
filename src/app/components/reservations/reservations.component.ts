@@ -45,7 +45,7 @@ export class ReservationsComponent implements OnInit {
               private floorService: FloorService,
               private matDialog: MatDialog,
               private sanitizer:DomSanitizer) {
-    floorService.getFloorsById(localStorage.getItem("floor-id")).subscribe(floor => {
+    floorService.getFloorById(localStorage.getItem("floor-id")).subscribe(floor => {
         this.floor = floor;
         this.getFloorPlan();
       }
@@ -60,7 +60,6 @@ export class ReservationsComponent implements OnInit {
   getFloorPlan() {
     this.retrievedImage = this.sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,'
       + this.floor.floorPlan);
-
   }
 
 

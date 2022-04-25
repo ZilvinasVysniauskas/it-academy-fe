@@ -11,7 +11,7 @@ import {environment} from "../../../environments/environment";
 export class FloorService {
 
   floorApi = environment.baseUrl + "api/v1/floors/"
-  imageApi = environment.baseUrl + "api/v1/image/"
+  imageApi = environment.baseUrl + "api/v1/images/"
 
   constructor(private httpClient: HttpClient) { }
 
@@ -19,7 +19,7 @@ export class FloorService {
     return this.httpClient.get<Floor[]>(this.floorApi + id);
   }
 
-  getFloorsById(id: string | null): Observable<Floor> {
+  getFloorById(id: string | null): Observable<Floor> {
     return this.httpClient.get<Floor>(`${this.floorApi}floor/${id}`);
   }
 
@@ -27,7 +27,7 @@ export class FloorService {
     return this.httpClient.get<Floor>(this.floorApi + 'first')
   }
 
-  addFloor($event: FloorRequest): Observable<any> {
+  addFloor($event: FormData): Observable<any> {
     return this.httpClient.post(this.floorApi, $event)
   }
 
@@ -42,4 +42,10 @@ export class FloorService {
   addFloorImage(uploadData: FormData) {
     return this.httpClient.post(this.imageApi, uploadData)
   }
+
+  changeFloorPlan(uploadData: FormData) {
+    return  this.httpClient.put(this.floorApi + 'plan', uploadData )
+  }
+
+
 }

@@ -124,7 +124,7 @@ export class EditUserFormComponent implements OnInit {
   ngOnInit(): void {
     if (this.user) {
       this.floorIsPresent = true;
-      this.floorService.getFloorsById(this.user!.defaultFloorId.toString()).subscribe(floor => {
+      this.floorService.getFloorById(this.user!.defaultFloorId.toString()).subscribe(floor => {
         this.currentFloor = floor;
         this.department = floor.department;
       });

@@ -77,12 +77,18 @@ export class AddNewFloorComponent {
       floorNumber: this.getFloorNumber?.value!,
       buildingId: this.buildingId,
       department: this.getFloorDepartment?.value!,
-      floorPlan: this.selectedFile.name!
     }
-    this.floorService.addFloor(floor).subscribe(a => this.dialogRef.close())
+
     const uploadData = new FormData();
     uploadData.append("myFile", this.selectedFile, this.selectedFile.name)
-    this.floorService.addFloorImage(uploadData);
+    uploadData.set("floorName", this.getFloorName?.value!)
+    uploadData.set("floorNumber", this.getFloorNumber?.value!)
+    uploadData.set("buildingId", this.buildingId.toString())
+    uploadData.set("department", this.getFloorDepartment?.value)
+    this.floorService.addFloor(uploadData).subscribe(a => {
+
+    });
+
   }
 
   onFileUpload(event: any){

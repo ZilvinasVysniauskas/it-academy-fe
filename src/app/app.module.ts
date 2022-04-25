@@ -53,6 +53,7 @@ import {ScrollingModule} from "@angular/cdk/scrolling";
 import { SendMessageFormComponent } from './components/forms/send-message-form/send-message-form.component';
 import {HashLocationStrategy, LocationStrategy} from "@angular/common";
 import { NotificationDisplayComponent } from './components/forms/notification-display/notification-display.component';
+import { UploadImageComponent } from './components/forms/upload-image/upload-image.component';
 
 export const MY_DATE_FORMATS = {
   parse: {
@@ -93,6 +94,7 @@ export const MY_DATE_FORMATS = {
     NotificationMessageComponent,
     SendMessageFormComponent,
     NotificationDisplayComponent,
+    UploadImageComponent,
   ],
   imports: [
     BrowserModule,
