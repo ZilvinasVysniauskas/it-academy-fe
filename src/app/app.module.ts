@@ -51,6 +51,7 @@ import { NotificationMessageComponent } from './components/forms/notification-me
 import {MatFormField, MatFormFieldControl, MatFormFieldModule} from "@angular/material/form-field";
 import {ScrollingModule} from "@angular/cdk/scrolling";
 import { SendMessageFormComponent } from './components/forms/send-message-form/send-message-form.component';
+import {HashLocationStrategy, LocationStrategy} from "@angular/common";
 
 export const MY_DATE_FORMATS = {
   parse: {
@@ -128,6 +129,9 @@ export const MY_DATE_FORMATS = {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
       multi: true
+    },
+    {
+      provide:LocationStrategy, useClass:HashLocationStrategy
     }
   ],
   bootstrap: [AppComponent],
