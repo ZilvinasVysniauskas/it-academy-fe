@@ -12,4 +12,19 @@ app.get('/*', (req, res) => res.sendFile(path.join(__dirname)));
 
 const server = http.createServer(app);
 
+const forceSSL = function() {
+  return function (req, res, next) {
+    if (req.headers['x-forwarded-proto'] !== 'https') {
+      return res.redirect(
+        ['https://', req.get('Host'), req.url].join('')
+      );
+    }
+    next();
+  }
+}
+// Instruct the app
+// to use the forceSSL
+// middleware
+app.use(forceSSL());
+
 server.listen(port, () => console.log(`App running on: http://localhost:${port}`));
