@@ -5,7 +5,7 @@
     "heroku-postbuild": "ng build --prod",
     "ng": "ng",
     "start": "node server.js",
-    "local-start": "ng serve --proxy-config proxy.conf.json",
+    "local-start": "ng serve",
     "build": "ng build --proxy-config proxy.conf.json",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"

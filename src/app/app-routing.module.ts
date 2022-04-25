@@ -13,6 +13,7 @@ sessionStorage.setItem('userId', '12345678')
 
 const routes: Routes = [
   { path: 'home',canActivate: [AuthentificationGuard], component: HomeComponent },
+  { path: '',canActivate: [AuthentificationGuard], component: HomeComponent },
   { path: 'reservations', canActivate: [AuthentificationGuard], component: ReservationsComponent },
   { path: 'history', canActivate: [AuthentificationGuard], component:  ReservationHistoryComponent},
   { path: 'edit', canActivate: [AuthentificationGuard], component:  AdminComponent},
