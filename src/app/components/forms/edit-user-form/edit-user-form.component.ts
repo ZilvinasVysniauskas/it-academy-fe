@@ -38,8 +38,9 @@ export class EditUserFormComponent implements OnInit {
   ]
 
   departments = [
-    'SALES', 'MARKETING', 'DEVELOPERS', 'MANAGEMENT'
+    'SALES', 'MARKETING', 'DEVELOPERS', 'MANAGEMENT', 'JOINED'
   ]
+
   floorIsPresent: boolean = false;
 
 

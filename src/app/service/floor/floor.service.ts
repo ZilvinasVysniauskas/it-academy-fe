@@ -11,6 +11,7 @@ import {environment} from "../../../environments/environment";
 export class FloorService {
 
   floorApi = environment.baseUrl + "api/v1/floors/"
+  imageApi = environment.baseUrl + "api/v1/image/"
 
   constructor(private httpClient: HttpClient) { }
 
@@ -36,5 +37,9 @@ export class FloorService {
 
   editFloor(floor: FloorRequest): Observable<any> {
     return this.httpClient.put(this.floorApi, floor);
+  }
+
+  addFloorImage(uploadData: FormData) {
+    return this.httpClient.post(this.imageApi, uploadData)
   }
 }

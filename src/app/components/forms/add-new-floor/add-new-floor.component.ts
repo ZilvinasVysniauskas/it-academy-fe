@@ -20,10 +20,11 @@ export class AddNewFloorComponent {
   floorRequestForm: FormGroup;
 
   departments = [
-    'SALES', 'MARKETING', 'DEVELOPERS', 'MANAGEMENT'
+    'SALES', 'MARKETING', 'DEVELOPERS', 'MANAGEMENT', 'JOINED'
   ]
 
-  selectedFile?: File;
+  selectedFile?: any;
+  imgURL!:  any;
 
 
   get getFloorNumber() {
@@ -76,16 +77,21 @@ export class AddNewFloorComponent {
       floorNumber: this.getFloorNumber?.value!,
       buildingId: this.buildingId,
       department: this.getFloorDepartment?.value!,
-      floorPlan: this.getFloorPlan?.value!
+      floorPlan: this.selectedFile.name!
     }
     this.floorService.addFloor(floor).subscribe(a => this.dialogRef.close())
+    const uploadData = new FormData();
+    uploadData.append("myFile", this.selectedFile, this.selectedFile.name)
+    this.floorService.addFloorImage(uploadData);
   }
 
   onFileUpload(event: any){
     this.selectedFile = event.target.files[0];
-    console.log(this.selectedFile)
+    let reader = new FileReader();
+    reader.readAsDataURL(event.target.files[0]);
+    reader.onload = (event2) => {
+      this.imgURL = reader.result;
+    }
   }
-  OnUploadFile() {
-    this.httpClient.post('api/v1/images', this.selectedFile);
-  }
+
 }

@@ -64,7 +64,6 @@ export class ManageDesksComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getRooms();
   }
 
   addTable(roomId: number) {
