@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {UserLoginRequest} from "../../interfaces/userLoginRequest";
 import {LoginResponse} from "../../interfaces/loginResponse";
+import {environment} from "../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class AuthService {
 
 
   login(loginRequest: UserLoginRequest) {
-    let loginUrl = 'api/v1/login';
+    let loginUrl = environment.baseUrl + 'api/v1/login';
     this.httpClient.post<LoginResponse>(loginUrl, loginRequest, {observe: 'response'})
       .subscribe(response => {
         if (response.status == 200) {

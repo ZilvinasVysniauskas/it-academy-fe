@@ -4,16 +4,20 @@ import {User} from "../../interfaces/user";
 import {Observable} from "rxjs";
 import {UserRequest} from "../../interfaces/user-request";
 import {ChangePasswordRequest} from "../../interfaces/changePasswordRequest";
+import {Environment} from "@angular/cli/lib/config/workspace-schema";
+import {environment} from "../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdminPageService {
 
+
+
   constructor(private httpClient: HttpClient) { }
 
-  private apiUser = "api/v1/users/";
-  private apiReservations = "api/v1/reservations/"
+  private apiUser = environment.baseUrl + "api/v1/users/";
+  private apiReservations = environment.baseUrl + "api/v1/reservations/"
 
   fetchAllUsers(): Observable<User[]> {
     return this.httpClient.get<User[]>(this.apiUser);

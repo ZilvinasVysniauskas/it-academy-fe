@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import {NavigationStart, Router} from "@angular/router";
+import {environment} from "../environments/environment.prod";
+
 
 @Component({
   selector: 'app-root',
@@ -15,6 +17,7 @@ export class AppComponent {
   }
 
   constructor(private router: Router) {
+    console.log(environment.baseUrl)
     router.events.forEach((event) => {
       if (event instanceof NavigationStart) {
         if (event['url'] == '/login') {

@@ -12,8 +12,7 @@ export class ReservationHistoryService {
     throw new Error('Method not implemented.');
   }
 
-  baseUrl = environment.baseUrl;
-  private apiUserReservationHistory = this.baseUrl + "api/v1/reservations";
+  private apiUserReservationHistory = environment.baseUrl + "api/v1/reservations";
 
   fetchReservation: any;
 
