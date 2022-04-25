@@ -7,13 +7,8 @@ import { Reservation } from 'src/app/interfaces/reservation';
   providedIn: 'root'
 })
 export class ReservationHistoryService {
-  cancelReservationById(id: number) {
-    throw new Error('Method not implemented.');
-  }
-  
+
   private apiUserReservationHistory = "api/v1/reservations";
-  
-  fetchReservation: any;
 
   constructor(private httpClient: HttpClient) { }
 
@@ -21,7 +16,7 @@ export class ReservationHistoryService {
     return this.httpClient.get<Reservation[]>(this.apiUserReservationHistory);
   }
 
-  // cancelReservationById(id: number): Observable<any> {
-  //   return this.httpClient.delete("/api/v1/reservations");
-  // }
+  cancelReservationById(reservationId: number): Observable<any> {
+    return this.httpClient.delete("/api/v1/reservations/"+reservationId);
+  }
 }

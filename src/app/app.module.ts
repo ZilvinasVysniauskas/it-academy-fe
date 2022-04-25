@@ -51,6 +51,7 @@ import { NotificationMessageComponent } from './components/forms/notification-me
 import {MatFormField, MatFormFieldControl, MatFormFieldModule} from "@angular/material/form-field";
 import {ScrollingModule} from "@angular/cdk/scrolling";
 import { SendMessageFormComponent } from './components/forms/send-message-form/send-message-form.component';
+import { CancelReservationComponent } from './components/cancel-reservation/cancel-reservation.component';
 
 export const MY_DATE_FORMATS = {
   parse: {
@@ -90,6 +91,7 @@ export const MY_DATE_FORMATS = {
     AddNewFloorComponent,
     NotificationMessageComponent,
     SendMessageFormComponent,
+    CancelReservationComponent,
   ],
   imports: [
     BrowserModule,
