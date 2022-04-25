@@ -9,7 +9,9 @@ const port = process.env.PORT || 3001;
 
 app.use(express.static(__dirname + '/dist/it-academy-fe/index.html'));
 
+console.log("++++++++++++++++++++++++++++++++++++++++++++++++")
 console.log(path.join(__dirname, '/index.html'));
+console.log("++++++++++++++++++++++++++++++++++++++++++++++++")
 
 app.get('/*', (req, res) =>
   res.sendFile('index.html', {root: '/it-academy-fe/'}),
