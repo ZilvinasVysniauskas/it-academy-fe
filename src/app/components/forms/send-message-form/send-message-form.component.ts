@@ -24,6 +24,7 @@ export class SendMessageFormComponent implements OnInit {
   departments = [
     'SALES', 'MARKETING', 'DEVELOPERS', 'MANAGEMENT'
   ]
+  toAll: boolean = false;
 
   get getMessage() {
     return this.notificationRequestForm.get('message')
@@ -55,13 +56,18 @@ export class SendMessageFormComponent implements OnInit {
         message: this.getMessage?.value,
         userId: this.getUserId?.value
       }
-      this.notificationService.sendNotificationToUser(notificationRequest).subscribe(this.dialogRef.close);
-    } else {
+      this.notificationService.sendNotificationToUser(notificationRequest).subscribe(a => this.closeDialog());
+    } else if (this.toDepartment) {
       const notificationRequest: NotificationRequest = {
         message: this.getMessage?.value,
         department: this.getDepartment?.value,
       }
-      this.notificationService.sendNotificationToDepartment(notificationRequest).subscribe(this.dialogRef.close)
+      this.notificationService.sendNotificationToDepartment(notificationRequest).subscribe(a => this.closeDialog())
+    } else {
+      const notificationRequest: NotificationRequest = {
+        message: this.getMessage?.value,
+      }
+      this.notificationService.sendNotificationToAll(notificationRequest).subscribe(a => this.closeDialog())
     }
   }
 

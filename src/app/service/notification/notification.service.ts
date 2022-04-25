@@ -22,6 +22,10 @@ export class NotificationService {
     return this.httpClient.get<Notification[]>(this.notificationsApi + 'new')
   }
 
+  getNotificationsFromAdmin(): Observable<Notification[]> {
+    return this.httpClient.get<Notification[]>(this.notificationsApi + 'admin')
+  }
+
   sendNotificationToUser($event: NotificationRequest) {
     return this.httpClient.post(this.notificationsApi, $event);
   }
@@ -29,4 +33,14 @@ export class NotificationService {
   sendNotificationToDepartment($event: NotificationRequest) {
     return this.httpClient.post(this.notificationsApi + $event.department, $event);
   }
+
+  sendNotificationToAll($event: NotificationRequest) {
+    return this.httpClient.post(this.notificationsApi + 'all', $event);
+  }
+
+  deleteNotificationById(id: number) {
+    return this.httpClient.delete(this.notificationsApi + id);
+  }
+
+
 }
