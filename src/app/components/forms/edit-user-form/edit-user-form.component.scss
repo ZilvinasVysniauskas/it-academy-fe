@@ -66,5 +66,11 @@ mat-form-field {
 }
 
 .save-button, .cancel-button {
-      float:right;
+  float:right;
 }
+
+.default-floor-text {
+flex-wrap: wrap;
+width: 240px;
+}
+

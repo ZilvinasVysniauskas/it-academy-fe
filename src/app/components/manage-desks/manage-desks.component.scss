@@ -1,0 +1,102 @@
+.buildings {
+  padding: 10px;
+  width: 800px;
+  margin-top: 20px;
+}
+
+button {
+  border-radius: 5px;
+  box-shadow: 0 4px 10px -6px #222;
+}
+
+.add-new-button {
+  color: rgb(58, 57, 57);
+  background-color: rgb(244, 244, 244);
+  border: 1px solid #b6b2b24b;
+  font-size: small;
+  margin: 20px;
+}
+
+.add-new-button:hover {
+  background-color: #008cba;
+  color: white;
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
+    0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+
+.add-new-button:active {
+  transform: translateY(2px);
+}
+
+.set-unavailable-button {
+  margin-left: 20px;
+  background-color: white;
+  color: #008cba;
+}
+
+.set-available-button {
+  margin-left: 20px;
+  border: 2px solid #9999994b;
+  color: white;
+  background-color: #008cba;
+  margin-right: 12px;
+}
+
+.delete-button,
+.select-button {
+  margin-left: 20px;
+  padding: 3px 6px;
+  border: 2px solid #9999994b;
+  font-size: smaller;
+}
+
+.delete-button, .delete-desk-button, .delete-room-button {
+  color: rgb(170, 0, 0);
+}
+
+.delete-button:hover, .delete-desk-button:hover, .delete-room-button:hover {
+  background-color: rgb(170, 0, 0);
+  color: white;
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
+    0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+
+.select-button:hover {
+  background-color: #008cba;
+  color: white;
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
+    0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+
+button:active {
+  transform: translateY(2px);
+}
+
+.building-name {
+  font-size: medium;
+  padding: 8px;
+  width: 250px;
+  flex-wrap: wrap;
+}
+
+.room-name-with-desks {
+margin-top: 20px;
+display: inline-block;
+width: 90%;
+}
+
+.container-with-desks {
+  border: 1px solid #008cba;
+  padding-left: 20px;
+  margin-top: 3px;
+}
+
+.delete-desk-button, .delete-room-button {
+    height: fit-content;
+    margin-left: 5px;
+}
+
+.mat-button, .mat-raised-button, .mat-icon-button, .mat-stroked-button, .mat-flat-button, .mat-fab, .mat-mini-fab {
+    font-size: 12px;
+}
+

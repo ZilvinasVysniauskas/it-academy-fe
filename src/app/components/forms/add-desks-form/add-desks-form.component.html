@@ -1,7 +1,7 @@
 <mat-form-field>
   <mat-label>Desk number</mat-label>
   <input id="userid" [formControl]="deskName" matInput formControlName="userId">
-  <button mat-button (click)="addNewDesk()">add desk</button>
-  <button mat-button (click)="closeForm()">cancel</button>
+  <button class="save-button" mat-button (click)="addNewDesk()">add desk</button>
+  <button class="cancel-button" mat-button (click)="closeForm()">cancel</button>
 </mat-form-field>
 

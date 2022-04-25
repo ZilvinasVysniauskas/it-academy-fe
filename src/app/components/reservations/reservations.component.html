@@ -1,41 +1,58 @@
+<div class="current-floor">
+  <div class="floor-text">
+    <p>Current Building: {{ floor.buildingName }}</p>
+    <p>Current Floor: {{ floor.floorName }}</p>
+  </div>
+  <div class="floor-button">
+    <button class="change-button" mat-button (click)="changeFloor()">
+      Change floor
+    </button>
+  </div>
+</div>
 
-<h3>Current Building: {{floor.buildingName}}</h3>
-<h3>Current Floor: {{floor.floorName}}</h3>
-<button mat-button (click)="changeFloor()">Change floor</button>
-<div fxLayout="row" >
-
-  <app-calendar [date]="reservationDate"
-                (onDateChange)="handleReservationChange($event!)"></app-calendar>
+<div fxLayout="row">
+  <app-calendar
+    [date]="reservationDate"
+    (onDateChange)="handleReservationChange($event!)"
+  ></app-calendar>
 
   <div class="middle-container" fxLayout="column" fxLayoutAlign="center center">
-
-    <div fxFlex  fxLayoutAlign="center center">
-      <button class="one-day-selector" (click)="minusOneDay()"><</button><p>Available workplaces for {{ reservationDate.format('LL') }}</p><button class="one-day-selector" (click)="plusOneDay()">></button>
+    <div fxFlex fxLayoutAlign="center center">
+      <button class="one-day-selector" (click)="minusOneDay()"><</button>
+      <p>Available workplaces for {{ reservationDate.format("LL") }}</p>
+      <button class="one-day-selector" (click)="plusOneDay()">></button>
     </div>
 
     <div class="reservations" fxLayout="row">
-        <div class="room" *ngFor="let room of desksReservationsByDate;">
-          <h4>{{room.roomName}}</h4>
-          <div *ngFor="let desk of room.desks">
-            <mat-checkbox [disabled]="!desk.available" (mouseover)="displayReservationInfo=false; hoverId = desk.id" (mouseout)="displayReservationInfo=true;"
-                          [checked]="desk.id == currentReservation?.deskId || desk.id == selected"
-                          (change)="validateClick(desk.id)"
-            >{{desk!.deskName}}</mat-checkbox>
-            <div *ngIf="displayReservationInfo && desk.id == hoverId">
-              {{desk?.info?.userFirstName}}
-            </div>
+      <div class="room" *ngFor="let room of desksReservationsByDate">
+        <h4>{{ room.roomName }}</h4>
+        <div *ngFor="let desk of room.desks">
+          <mat-checkbox
+            [disabled]="!desk.available"
+            (mouseover)="displayReservationInfo = false; hoverId = desk.id"
+            (mouseout)="displayReservationInfo = true"
+            [checked]="
+              desk.id == currentReservation?.deskId || desk.id == selected
+            "
+            (change)="validateClick(desk.id)"
+            >{{ desk!.deskName }}</mat-checkbox
+          >
+          <div *ngIf="displayReservationInfo && desk.id == hoverId">
+            {{ desk?.info?.userFirstName }}
           </div>
         </div>
-        <button class="book-button" [disabled]="selected == undefined" (click)="placeReservation()">Book desk</button>
-        <button class="cancel-button" onclick="window.history.back()">Cancel</button>
+      </div>
+      <button
+        class="book-button"
+        [disabled]="selected == undefined"
+        (click)="placeReservation()"
+      >
+        Book desk
+      </button>
+      <button class="cancel-button" onclick="window.history.back()">
+        Cancel
+      </button>
     </div>
-
   </div>
-<img src="assets/img/office-map.png" >
+  <img src="assets/img/office-map.png" />
 </div>
-
-
-
-
-
-

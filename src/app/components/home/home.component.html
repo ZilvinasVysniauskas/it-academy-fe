@@ -1,8 +1,8 @@
 <div fxLayout="row">
   <app-calendar></app-calendar>
-  <cdk-virtual-scroll-viewport [itemSize]="2" class="example-viewport">
-    <div *cdkVirtualFor="let notification of allNotifications;" class="example-item">
-      Date: {{notification.date}} Message: {{notification.message}}
+  <cdk-virtual-scroll-viewport [itemSize]="2" class="message-viewport">
+    <div *cdkVirtualFor="let notification of allNotifications;" class="message-item">
+      Date: {{notification.date}}. Message: {{notification.message}}
     </div>
   </cdk-virtual-scroll-viewport>
 </div>
