@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {UserLoginRequest} from "../../interfaces/userLoginRequest";
 import {LoginResponse} from "../../interfaces/loginResponse";
+import {environment} from "../../../environments/environment.prod";
 
 @Injectable({
   providedIn: 'root'
@@ -12,9 +13,9 @@ export class AuthService {
   constructor(private httpClient: HttpClient, private router: Router) {
   }
 
-
+  baseUrl = environment.baseUrl;
   login(loginRequest: UserLoginRequest) {
-    let loginUrl = 'api/v1/login';
+    let loginUrl = this.baseUrl + 'api/v1/login';
     this.httpClient.post<LoginResponse>(loginUrl, loginRequest, {observe: 'response'})
       .subscribe(response => {
         if (response.status == 200) {

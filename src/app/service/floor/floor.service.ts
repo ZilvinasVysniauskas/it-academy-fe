@@ -3,13 +3,16 @@ import {HttpClient} from "@angular/common/http";
 import {Floor} from "../../interfaces/floor";
 import {Observable} from "rxjs";
 import {FloorRequest} from "../../interfaces/floorRequest";
+import {environment} from "../../../environments/environment.prod";
 
 @Injectable({
   providedIn: 'root'
 })
 export class FloorService {
 
-  floorApi = "api/v1/floors/"
+  baseUrl = environment.baseUrl;
+
+  floorApi = this.baseUrl + "api/v1/floors/"
 
   constructor(private httpClient: HttpClient) { }
 

@@ -3,13 +3,16 @@ import {DeskRequest} from "../../interfaces/deskRequest";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Room} from "../../interfaces/room";
+import {environment} from "../../../environments/environment.prod";
 
 @Injectable({
   providedIn: 'root'
 })
 export class DeskService {
 
-  desksApi = '/api/v1/desks/';
+  baseUrl = environment.baseUrl;
+
+  desksApi = this.baseUrl + '/api/v1/desks/';
 
 
   constructor(private httpClient: HttpClient) {

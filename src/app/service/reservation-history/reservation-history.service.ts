@@ -2,6 +2,7 @@ import { Observable } from 'rxjs/Rx';
 import {HttpClient} from "@angular/common/http";
 import { Injectable } from '@angular/core';
 import { Reservation } from 'src/app/interfaces/reservation';
+import {environment} from "../../../environments/environment.prod";
 
 @Injectable({
   providedIn: 'root'
@@ -10,9 +11,10 @@ export class ReservationHistoryService {
   cancelReservationById(id: number) {
     throw new Error('Method not implemented.');
   }
-  
-  private apiUserReservationHistory = "api/v1/reservations";
-  
+
+  baseUrl = environment.baseUrl;
+  private apiUserReservationHistory = this.baseUrl + "api/v1/reservations";
+
   fetchReservation: any;
 
   constructor(private httpClient: HttpClient) { }
