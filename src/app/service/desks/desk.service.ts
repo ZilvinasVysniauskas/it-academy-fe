@@ -3,13 +3,14 @@ import {DeskRequest} from "../../interfaces/deskRequest";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Room} from "../../interfaces/room";
+import {environment} from "../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class DeskService {
 
-  desksApi = '/api/v1/desks/';
+  desksApi = environment.baseUrl + 'api/v1/desks/';
 
 
   constructor(private httpClient: HttpClient) {
@@ -29,5 +30,13 @@ export class DeskService {
 
   editDest(desk: DeskRequest): Observable<any> {
     return this.httpClient.put(this.desksApi, desk);
+  }
+
+  setDeskUnavailableById(id: number) {
+    return this.httpClient.get(`${this.desksApi}/disable/${id}`)
+  }
+
+  setDeskAvailableById(id: number) {
+    return this.httpClient.get(`${this.desksApi}/enable/${id}`)
   }
 }

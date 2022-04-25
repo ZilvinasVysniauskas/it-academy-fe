@@ -3,4 +3,5 @@ export interface Floor {
   floorNumber: number
   buildingName: string
   floorName: string
+  department: string
 }

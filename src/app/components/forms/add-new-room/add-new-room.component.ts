@@ -1,6 +1,8 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Inject, Input, OnInit, Output} from '@angular/core';
 import {RoomRequest} from "../../../interfaces/RoomRequest";
 import {FormControl} from "@angular/forms";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {RoomService} from "../../../service/rooms/room.service";
 
 @Component({
   selector: 'app-add-new-room',
@@ -9,21 +11,24 @@ import {FormControl} from "@angular/forms";
 })
 export class AddNewRoomComponent{
 
-  @Input() floorId!: number;
-  @Output() addRoom: EventEmitter<RoomRequest> = new EventEmitter<RoomRequest>();
-  @Output() cancel: EventEmitter<any> = new EventEmitter<any>();
+  floorId!: number;
 
   roomName = new FormControl();
 
-  constructor() { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: { floorId: number },
+              public dialogRef: MatDialogRef<AddNewRoomComponent>, private roomService: RoomService) {
+    this.floorId = data.floorId;
+  }
 
   addNewRoom(): void {
     const room: RoomRequest = {
       roomName: this.roomName.value,
       floorId: this.floorId
     }
-    this.addRoom.emit(room)
+    this.roomService.addRoom(room).subscribe(a=> this.dialogRef.close())
   }
 
-
+  closeForm() {
+    this.dialogRef.close();
+  }
 }

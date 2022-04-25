@@ -1,7 +1,14 @@
 <div fxLayout="row">
   <app-calendar></app-calendar>
-  <div fxFlex fxLayout="column" fxLayoutAlign="center center">
-    <p>Welcome to the Desk Booking Application!</p>
-    <p>Here you can reserve your working place easily.</p>
-  </div>
+  <cdk-virtual-scroll-viewport [itemSize]="2" class="example-viewport">
+    <div *cdkVirtualFor="let notification of allNotifications;" class="example-item" (click)="notificationTable(notification)">
+      Date: {{notification.date}} Message: {{notification.message}}
+    </div>
+  </cdk-virtual-scroll-viewport>
+
+  <cdk-virtual-scroll-viewport [itemSize]="2" class="example-viewport" >
+    <div *cdkVirtualFor="let adminNotification of allAdminNotifications;" class="example-item" (click)="notificationTable(adminNotification)">
+      Date: {{adminNotification.date}} Message: {{adminNotification.message}}
+    </div>
+  </cdk-virtual-scroll-viewport>
 </div>

@@ -3,13 +3,14 @@ import {HttpClient} from "@angular/common/http";
 import {Floor} from "../../interfaces/floor";
 import {Observable} from "rxjs";
 import {FloorRequest} from "../../interfaces/floorRequest";
+import {environment} from "../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class FloorService {
 
-  floorApi = "api/v1/floors/"
+  floorApi = environment.baseUrl + "api/v1/floors/"
 
   constructor(private httpClient: HttpClient) { }
 
@@ -18,7 +19,7 @@ export class FloorService {
   }
 
   getFloorsById(id: string | null): Observable<Floor> {
-    return this.httpClient.get<Floor>(`${this.floorApi}/floor/${id}`);
+    return this.httpClient.get<Floor>(`${this.floorApi}floor/${id}`);
   }
 
   getFirstFloor(): Observable<Floor> {

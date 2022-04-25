@@ -78,6 +78,15 @@
       </div>
 
       <button mat-button (click)="deleteDesk(desk.id)">delete desk</button>
+
+      <div *ngIf="desk.available">
+        <button mat-button (click)="setDeskUnavailable(desk.id)">set desk unavailable</button>
+      </div>
+
+      <div *ngIf="!desk.available">
+        <button [hidden]="desk.available" mat-button (click)="setDeskAvailable(desk.id)">set desk available</button>
+      </div>
+
     </div>
     <button mat-button (click)="addTable(room.roomId)">Add desk</button>
   </div>

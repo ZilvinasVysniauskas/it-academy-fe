@@ -1,8 +1,12 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Inject, Input, OnInit, Output} from '@angular/core';
 import {BuildingRequest} from "../../../interfaces/buildingRequest";
 import {FloorRequest} from "../../../interfaces/floorRequest";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {FloorService} from "../../../service/floor/floor.service";
+
 import {HttpClient} from "@angular/common/http";
+
 
 @Component({
   selector: 'app-add-new-floor',
@@ -11,17 +15,21 @@ import {HttpClient} from "@angular/common/http";
 })
 export class AddNewFloorComponent {
 
-  @Input() buildingId!: number;
-  @Output() addFloor: EventEmitter<FloorRequest> = new EventEmitter<FloorRequest>();
-  @Output() cancel: EventEmitter<any> = new EventEmitter<any>();
-
+  buildingId!: number;
 
   floorRequestForm: FormGroup;
+
+  departments = [
+    'SALES', 'MARKETING', 'DEVELOPERS', 'MANAGEMENT'
+  ]
+
   selectedFile?: File;
+
 
   get getFloorNumber() {
     return this.floorRequestForm.get('number')
   }
+
   get getFloorName() {
     return this.floorRequestForm.get('name')
   }
@@ -29,7 +37,16 @@ export class AddNewFloorComponent {
     return this.floorRequestForm.get('plan')
   }
 
-  constructor(private httpClient: HttpClient) {
+
+  get getFloorDepartment() {
+    return this.floorRequestForm.get('department')
+  }
+
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: { buildingId: number },
+    public dialogRef: MatDialogRef<AddNewFloorComponent>, private floorService: FloorService,
+    private httpClient: HttpClient) {
+    this.buildingId = data.buildingId;
     this.floorRequestForm = new FormGroup({
         name: new FormControl('', {
           validators:
@@ -39,9 +56,18 @@ export class AddNewFloorComponent {
           validators:
             [Validators.required]
         }),
+
+        department: new FormControl('', {
+          validators:
+            [Validators.required]
+        }),
         plan: new FormControl('',{validators: [Validators.required]})
       }
     );
+  }
+
+  closeForm() {
+    this.dialogRef.close();
   }
 
   addNewFloor(): void {
@@ -49,17 +75,17 @@ export class AddNewFloorComponent {
       floorName: this.getFloorName?.value!,
       floorNumber: this.getFloorNumber?.value!,
       buildingId: this.buildingId,
+      department: this.getFloorDepartment?.value!,
       floorPlan: this.getFloorPlan?.value!
     }
-    this.addFloor.emit(floor)
+    this.floorService.addFloor(floor).subscribe(a => this.dialogRef.close())
   }
 
   onFileUpload(event: any){
     this.selectedFile = event.target.files[0];
+    console.log(this.selectedFile)
   }
   OnUploadFile() {
     this.httpClient.post('api/v1/images', this.selectedFile);
   }
-
-
 }
