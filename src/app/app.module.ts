@@ -114,7 +114,6 @@ export const MY_DATE_FORMATS = {
     ScrollingModule,
     RouterModule,
   ],
-
   providers: [
     {
       provide: DateAdapter,
