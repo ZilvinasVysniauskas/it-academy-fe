@@ -11,7 +11,7 @@ app.use(express.static('/dist/it-academy-fe/index.html'));
 
 
 app.get('/*', (req, res) =>
-  res.sendFile('index.html'),
+  res.sendFile('index.html', {root: '/it-academy-fe/'}),
 );
 
 app.get('/*', (req, res) => res.sendFile(path.join(__dirname)));
