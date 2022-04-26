@@ -39,6 +39,7 @@ export class ManageDesksComponent implements OnInit {
   display = Entities.BUILDINGS;
   selectedFloorForEdit: Floor | null;
   selectedFloor?: Floor | null;
+  currentFloorPlan: any;
 
 
   constructor(private deskService: DeskService, private roomService: RoomService, private matDialog: MatDialog,
@@ -51,9 +52,9 @@ export class ManageDesksComponent implements OnInit {
     this.getBuilding();
   }
 
-  getFloorPlan(floor: Floor) {
+  getFloorPlan(selectedFloor: Floor) {
     return this.sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,'
-      + floor.floorPlan);
+      + selectedFloor.floorPlan);
   }
 
   getBuilding(): void {
@@ -118,6 +119,11 @@ export class ManageDesksComponent implements OnInit {
     this.deskService.editDest(desk).subscribe(a => this.getRooms())
   }
 
+  reselectFloor() {
+    this.display = Entities.FLOORS;
+    this.getFloors();
+  }
+
   changeBuildingName($event: string) {
     const building: BuildingRequest = {
       id: this.selectedBuildingForEdit?.id,
@@ -143,6 +149,7 @@ export class ManageDesksComponent implements OnInit {
 
   selectFloor(floor: Floor) {
     this.selectedFloor = floor;
+    this.currentFloorPlan = this.getFloorPlan(floor);
     this.display = Entities.ROOMS;
     this.deskService.getRooms(floor.id).subscribe(rooms => this.listOfRooms = rooms);
   }
@@ -185,13 +192,15 @@ export class ManageDesksComponent implements OnInit {
     this.deskService.setDeskAvailableById(id).subscribe(a => this.getRooms())
   }
 
-  changeFloorPlane() {
+  changeFloorPlan() {
     let floor = this.selectedFloor;
     this.matDialog.open(UploadImageComponent, {data: {floor}})
       .afterClosed()
       .subscribe((floor) => {
         this.getRooms();
-        this.floorService.getFloorById(this.selectedFloor!.id.toString()).subscribe(floor => this.selectedFloor = floor)
+        this.floorService.getFloorById(this.selectedFloor!.id.toString()).subscribe(floor => {
+          this.currentFloorPlan = this.getFloorPlan(floor);
+        })
       });
   }
 }

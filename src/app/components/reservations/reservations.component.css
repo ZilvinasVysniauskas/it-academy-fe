@@ -118,4 +118,8 @@ img {
   border-radius: 5px;
 }
 
+.floor-plan {
+  max-width: 30vw;
+}
+
 /*# sourceMappingURL=reservations.component.css.map */

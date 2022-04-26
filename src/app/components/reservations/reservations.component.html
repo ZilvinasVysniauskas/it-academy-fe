@@ -45,8 +45,7 @@
       <button
         class="book-button"
         [disabled]="selected == undefined"
-        (click)="placeReservation()"
-      >
+        (click)="placeReservation()">
         Book desk
       </button>
       <button class="cancel-button" onclick="window.history.back()">
@@ -55,6 +54,6 @@
     </div>
   </div>
 
-  <img [src]="retrievedImage">
+  <img class="floor-plan" [src]="retrievedImage">
 
 </div>
