@@ -4,4 +4,5 @@ export interface Floor {
   buildingName: string
   floorName: string
   department: string
+  floorPlan?: any
 }

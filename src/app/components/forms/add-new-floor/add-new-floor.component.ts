@@ -5,6 +5,9 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {FloorService} from "../../../service/floor/floor.service";
 
+import {HttpClient} from "@angular/common/http";
+
+
 @Component({
   selector: 'app-add-new-floor',
   templateUrl: './add-new-floor.component.html',
@@ -15,9 +18,15 @@ export class AddNewFloorComponent {
   buildingId!: number;
 
   floorRequestForm: FormGroup;
+
   departments = [
-    'SALES', 'MARKETING', 'DEVELOPERS', 'MANAGEMENT'
+    'SALES', 'MARKETING', 'DEVELOPERS', 'MANAGEMENT', 'JOINED'
   ]
+
+  selectedFile?: any;
+  imgURL!:  any;
+
+
   get getFloorNumber() {
     return this.floorRequestForm.get('number')
   }
@@ -25,6 +34,10 @@ export class AddNewFloorComponent {
   get getFloorName() {
     return this.floorRequestForm.get('name')
   }
+  get getFloorPlan() {
+    return this.floorRequestForm.get('plan')
+  }
+
 
   get getFloorDepartment() {
     return this.floorRequestForm.get('department')
@@ -32,7 +45,8 @@ export class AddNewFloorComponent {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { buildingId: number },
-    public dialogRef: MatDialogRef<AddNewFloorComponent>, private floorService: FloorService) {
+    public dialogRef: MatDialogRef<AddNewFloorComponent>, private floorService: FloorService,
+    private httpClient: HttpClient) {
     this.buildingId = data.buildingId;
     this.floorRequestForm = new FormGroup({
         name: new FormControl('', {
@@ -43,10 +57,12 @@ export class AddNewFloorComponent {
           validators:
             [Validators.required]
         }),
+
         department: new FormControl('', {
           validators:
             [Validators.required]
-        })
+        }),
+        plan: new FormControl('',{validators: [Validators.required]})
       }
     );
   }
@@ -60,10 +76,28 @@ export class AddNewFloorComponent {
       floorName: this.getFloorName?.value!,
       floorNumber: this.getFloorNumber?.value!,
       buildingId: this.buildingId,
-      department: this.getFloorDepartment?.value!
+      department: this.getFloorDepartment?.value!,
     }
-    this.floorService.addFloor(floor).subscribe(a => this.dialogRef.close())
+
+    const uploadData = new FormData();
+    uploadData.append("myFile", this.selectedFile, this.selectedFile.name)
+    uploadData.set("floorName", this.getFloorName?.value!)
+    uploadData.set("floorNumber", this.getFloorNumber?.value!)
+    uploadData.set("buildingId", this.buildingId.toString())
+    uploadData.set("department", this.getFloorDepartment?.value)
+    this.floorService.addFloor(uploadData).subscribe(a => {
+
+    });
+
   }
 
+  onFileUpload(event: any){
+    this.selectedFile = event.target.files[0];
+    let reader = new FileReader();
+    reader.readAsDataURL(event.target.files[0]);
+    reader.onload = (event2) => {
+      this.imgURL = reader.result;
+    }
+  }
 
 }

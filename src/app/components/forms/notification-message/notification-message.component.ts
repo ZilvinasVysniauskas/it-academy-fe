@@ -9,12 +9,12 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 })
 export class NotificationMessageComponent {
 
-  notification!: Notification;
+  notifications!: Notification[];
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: { notification: Notification },
+    @Inject(MAT_DIALOG_DATA) public data: { notifications: Notification[] },
     public dialogRef: MatDialogRef<NotificationMessageComponent>) {
-    this.notification = data.notification;
+    this.notifications = data.notifications;
   }
 
   closeForm() {

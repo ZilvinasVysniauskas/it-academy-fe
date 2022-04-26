@@ -18,6 +18,8 @@ import {AddNewFloorComponent} from "../forms/add-new-floor/add-new-floor.compone
 import {AddNewRoomComponent} from "../forms/add-new-room/add-new-room.component";
 import {AddDesksFormComponent} from "../forms/add-desks-form/add-desks-form.component";
 import {SelectFloorComponent} from "../forms/select-floor/select-floor.component";
+import {DomSanitizer} from "@angular/platform-browser";
+import {UploadImageComponent} from "../forms/upload-image/upload-image.component";
 
 
 @Component({
@@ -36,13 +38,20 @@ export class ManageDesksComponent implements OnInit {
   display = Entities.BUILDINGS;
   selectedFloor: Floor | null;
 
+
   constructor(private deskService: DeskService, private roomService: RoomService, private matDialog: MatDialog,
-              private floorService: FloorService, private buildingService: BuildingService) {
+              private floorService: FloorService, private buildingService: BuildingService,
+              private sanitizer: DomSanitizer) {
     this.selectedRoom = null;
     this.selectedDesk = null
     this.selectedBuilding = null;
     this.selectedFloor = null;
     this.getBuilding();
+  }
+
+  getFloorPlan(floor: Floor) {
+    return this.sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,'
+      + floor.floorPlan);
   }
 
   getBuilding(): void {
@@ -64,7 +73,6 @@ export class ManageDesksComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getRooms();
   }
 
   addTable(roomId: number) {
@@ -173,5 +181,15 @@ export class ManageDesksComponent implements OnInit {
 
   setDeskAvailable(id: number) {
     this.deskService.setDeskAvailableById(id).subscribe(a => this.getRooms())
+  }
+
+  changeFloorPlane() {
+    let floor = this.selectedFloor;
+    this.matDialog.open(UploadImageComponent, {data: {floor}})
+      .afterClosed()
+      .subscribe((floor) => {
+        this.getRooms();
+        this.floorService.getFloorById(this.selectedFloor!.id.toString()).subscribe(floor => this.selectedFloor = floor)
+      });
   }
 }

@@ -143,7 +143,13 @@
       Add new desk
     </button>
   </div>
+
   <button class="add-new-button" mat-button (click)="addRoom()">
     Add new room
   </button>
+
+
+  <img [src]="getFloorPlan(selectedFloor!)">
+  <button (click)="changeFloorPlane()">change image</button>
+
 </ng-template>

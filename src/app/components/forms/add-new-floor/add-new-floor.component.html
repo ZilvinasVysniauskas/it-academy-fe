@@ -11,7 +11,7 @@
 
   <mat-form-field>
     <mat-label>Enter floor number</mat-label>
-    <input id="newPassword" matInput formControlName="newPassword">
+    <input id="newPassword" matInput formControlName="number">
     <mat-error *ngIf="getFloorNumber?.errors?.['required']">
       Floor number is required
     </mat-error>
@@ -23,9 +23,14 @@
       <mat-option *ngFor="let department of departments" [value]="department">{{department}}</mat-option>
     </mat-select>
   </mat-form-field>
+<!--  <img src="{{imgURL}}" alt="">-->
+>
+  <input style="display: none" type="file" (change)="onFileUpload($event)" #selectFile>
+  <button (click)="selectFile.click()">Select floor plan image</button>
 
 
-  <button (click)="addNewFloor()" mat-button>Add floor</button>
+  <button (click)="addNewFloor();" mat-button>Add floor</button>
   <button (click)="closeForm()" mat-button>cancel</button>
+
 
 </form>

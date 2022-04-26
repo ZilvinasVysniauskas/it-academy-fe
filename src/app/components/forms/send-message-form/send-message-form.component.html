@@ -12,13 +12,18 @@
       </mat-form-field>
 
       <section class="example-section">
-        <mat-checkbox class="example-margin" formControlName="active" (click)="toUser = true; toDepartment = false"
+        <mat-checkbox class="example-margin" (click)="toUser = true; toDepartment = false"
                       [checked]="toUser" >send to user</mat-checkbox>
       </section>
 
       <section class="example-section">
-        <mat-checkbox class="example-margin" formControlName="department" (click)="toUser = false; toDepartment = true"
+        <mat-checkbox class="example-margin"  (click)="toUser = false; toDepartment = true"
                       [checked]="toDepartment" >send to department</mat-checkbox>
+      </section>
+
+      <section class="example-section">
+        <mat-checkbox class="example-margin"  (click)="toUser = false; toDepartment = false; toAll = true;"
+                      [checked]="toAll" >send to all employees</mat-checkbox>
       </section>
 
       <mat-form-field *ngIf="toDepartment">
@@ -37,10 +42,8 @@
         </mat-form-field>
       </mat-form-field>
 
-      <button class="cancel-button" (click)="cancel.emit()" mat-button>Send</button>
-      <button class="save-button" (click)="createAndSendNotification()" mat-button [disabled]="">Cancel</button>
-
-      <button [hidden]="toDepartment" (click)="searchForUser()">search for user</button>
+      <button class="cancel-button" (click)="createAndSendNotification()" mat-button>Send</button>
+      <button class="save-button" (click)="closeDialog()" mat-button [disabled]="">Cancel</button>
 
     </form>
 </div>

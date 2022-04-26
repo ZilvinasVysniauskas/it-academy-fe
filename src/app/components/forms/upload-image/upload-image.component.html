@@ -1,0 +1,4 @@
+<input style="display: none" type="file" (change)="onFileUpload($event)" #selectFile>
+<button (click)="selectFile.click()">Select floor plan image</button>
+<button (click)="updateFloorPlan()">change</button>
+<button (click)="closeDialog()">Cancel</button>

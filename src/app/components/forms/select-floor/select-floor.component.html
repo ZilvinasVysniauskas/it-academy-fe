@@ -7,7 +7,8 @@
   <mat-label>Floor</mat-label>
   <mat-select formControlName="floor" [(value)]="currentFloor" (selectionChange)="changeCurrentFloor()">
     <div *ngIf="!isAddNewUserForm">
-      <mat-option *ngFor="let floorOption of currentFloors!" [value]="floorOption" [disabled]="department! !== floorOption.department">{{floorOption.floorName}}</mat-option>
+      <mat-option *ngFor="let floorOption of currentFloors!" [value]="floorOption"
+                  [disabled]="department! !== floorOption.department">{{floorOption.floorName}}</mat-option>
     </div>
 
     <div *ngIf="isAddNewUserForm">

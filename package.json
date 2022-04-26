@@ -5,8 +5,8 @@
     "heroku-postbuild": "ng build --prod",
     "ng": "ng",
     "start": "node server.js",
-    "local-start": "ng serve --proxy-config proxy.conf.json",
-    "build": "ng build",
+    "local-start": "ng serve",
+    "build": "ng build --proxy-config proxy.conf.json",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
@@ -33,6 +33,7 @@
     "rxjs-compat": "^6.6.7",
     "tslib": "^2.3.0",
     "typescript": "~4.6.2",
+    "uuid": "^8.3.2",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {

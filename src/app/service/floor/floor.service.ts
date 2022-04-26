@@ -3,13 +3,15 @@ import {HttpClient} from "@angular/common/http";
 import {Floor} from "../../interfaces/floor";
 import {Observable} from "rxjs";
 import {FloorRequest} from "../../interfaces/floorRequest";
+import {environment} from "../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class FloorService {
 
-  floorApi = "api/v1/floors/"
+  floorApi = environment.baseUrl + "api/v1/floors/"
+  imageApi = environment.baseUrl + "api/v1/images/"
 
   constructor(private httpClient: HttpClient) { }
 
@@ -17,15 +19,15 @@ export class FloorService {
     return this.httpClient.get<Floor[]>(this.floorApi + id);
   }
 
-  getFloorsById(id: string | null): Observable<Floor> {
-    return this.httpClient.get<Floor>(`${this.floorApi}/floor/${id}`);
+  getFloorById(id: string | null): Observable<Floor> {
+    return this.httpClient.get<Floor>(`${this.floorApi}floor/${id}`);
   }
 
   getFirstFloor(): Observable<Floor> {
     return this.httpClient.get<Floor>(this.floorApi + 'first')
   }
 
-  addFloor($event: FloorRequest): Observable<any> {
+  addFloor($event: FormData): Observable<any> {
     return this.httpClient.post(this.floorApi, $event)
   }
 
@@ -36,4 +38,14 @@ export class FloorService {
   editFloor(floor: FloorRequest): Observable<any> {
     return this.httpClient.put(this.floorApi, floor);
   }
+
+  addFloorImage(uploadData: FormData) {
+    return this.httpClient.post(this.imageApi, uploadData)
+  }
+
+  changeFloorPlan(uploadData: FormData) {
+    return  this.httpClient.put(this.floorApi + 'plan', uploadData )
+  }
+
+
 }
