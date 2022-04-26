@@ -1,35 +1,28 @@
 <div fxLayout="row">
   <app-calendar></app-calendar>
 </div>
-<div class="reservation-history-table" fxFlex fxLayout="column" fxLayoutAlign="space-between stretch">
+<div class="reservation-history-table" fxFlex fxLayout="column">
   <h2>My desk booking history</h2>
-
-   <div fxLayout="row">
+  <div>
     <table>
-      <th>Date</th>
-      <th>Building</th>
-      <th>Floor</th>
-      <th>Room</th>
-      <th>Desk</th>
-      <th>Status</th>
-    </table>
-  </div>
-
-  <div *ngFor="let reservation of reservations">
-    <div>
-      <table>
-        <td>{{reservation.date}}</td>
-
-        <td>{{reservation.buildingName}}</td>
-
-        <td>{{reservation.floorNumber}}</td>
-
-        <td>{{reservation.roomName}}</td>
-
-        <td>{{reservation.deskName}}</td>
-
-        <td (click)="cancelReservationById(reservation)">{{reservation.reservationStatus}}</td>
+        <thead>
+          <th>Date</th>
+          <th>Building</th>
+          <th>Floor</th>
+          <th>Room</th>
+          <th>Desk</th>
+          <th>Status</th>
+        </thead>
+        <tbody>
+        <tr *ngFor="let reservation of reservations">
+          <td>{{reservation.date}}</td>
+          <td>{{reservation.buildingName}}</td>
+          <td>{{reservation.floorNumber}}</td>
+          <td>{{reservation.roomName}}</td>
+          <td>{{reservation.deskName}}</td>
+          <td (click)="cancelReservationById(reservation)">{{reservation.reservationStatus}}</td>
+        </tr>
+        </tbody>
       </table>
     </div>
-  </div>
 </div>

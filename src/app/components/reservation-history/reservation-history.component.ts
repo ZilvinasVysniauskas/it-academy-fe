@@ -16,7 +16,6 @@ export class ReservationHistoryComponent {
 
   reservations!:Reservation[];
 
-
   constructor(private reservationHistoryService:ReservationHistoryService, private matDialog:MatDialog) {
     this.fetchReservations();
   }
