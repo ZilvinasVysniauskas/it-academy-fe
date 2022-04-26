@@ -78,6 +78,9 @@ export class SelectFloorComponent implements OnInit {
 
   validateFloor(floor: Floor): boolean {
     if (floor.department !== this.department) {
+      if (this.chooseReplacementOnDelete) {
+        return true;
+      }
       return floor.department != 'JOINED';
     }
     return false;

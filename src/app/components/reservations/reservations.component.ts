@@ -11,6 +11,7 @@ import {FloorService} from "../../service/floor/floor.service";
 import {SelectFloorComponent} from "../forms/select-floor/select-floor.component";
 import {BookingMessagesComponent} from "../booking-messages/booking-messages.component";
 import {DomSanitizer, SafeHtml} from "@angular/platform-browser";
+import {Observable} from "rxjs";
 
 
 
@@ -36,6 +37,8 @@ export class ReservationsComponent implements OnInit {
 
   hoverId?: number;
 
+  floor$: Observable<Floor>;
+
   floor!: Floor;
 
   retrievedImage: any;
@@ -45,15 +48,16 @@ export class ReservationsComponent implements OnInit {
               private floorService: FloorService,
               private matDialog: MatDialog,
               private sanitizer:DomSanitizer) {
-    floorService.getFloorById(localStorage.getItem("floor-id")).subscribe(floor => {
-        this.floor = floor;
-        this.getFloorPlan();
-      }
-    )
+    this.floor$ = floorService.getFloorById(localStorage.getItem("floor-id"));
 
   }
 
   ngOnInit(): void {
+    this.floor$.subscribe(f => {
+      this.floor = f;
+      this.getFloorPlan();
+    });
+
     this.checkUserCurrentDateReservations();
   }
 

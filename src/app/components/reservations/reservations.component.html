@@ -1,7 +1,7 @@
 <div class="current-floor">
-  <div class="floor-text">
-    <p>Current Building: {{ floor.buildingName }}</p>
-    <p>Current Floor: {{ floor.floorName }}</p>
+  <div class="floor-text" *ngIf="floor$ | async as floorObs">
+    <p>Current Building: {{ floorObs.buildingName }}</p>
+    <p>Current Floor: {{ floorObs.floorName }}</p>
   </div>
   <div class="floor-button">
     <button class="change-button" mat-button (click)="changeFloor()">

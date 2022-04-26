@@ -1,12 +1,9 @@
 <div *ngIf="user$ | async as user">
   <p>First Name: {{user.firstName}}</p>
-
-  <p>Last Name: </p>
-  <p>Department:</p>
-  <p>Role: </p>
-  <p>Email: </p>
-
+  <p>Last Name: {{user.lastName}} </p>
+  <p>Department: {{user.firstName}}</p>
+  <p>Role: {{user.role}}</p>
+  <p>Email: {{user.email}}</p>
 </div>
-
 
 <button mat-button (click)="changePassword()">Change password</button>
