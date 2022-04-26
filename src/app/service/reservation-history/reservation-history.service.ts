@@ -21,8 +21,4 @@ export class ReservationHistoryService {
   fetchReservationHistory(): Observable<Reservation[]> {
     return this.httpClient.get<Reservation[]>(this.apiUserReservationHistory);
   }
-
-  // cancelReservationById(id: number): Observable<any> {
-  //   return this.httpClient.delete("/api/v1/reservations");
-  // }
 }
