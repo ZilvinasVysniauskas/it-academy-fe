@@ -4,6 +4,7 @@ import {AuthService} from "../../service/authentification/auth.service";
 import {ChangePasswordComponent} from "../forms/change-password/change-password.component";
 import {SendMessageFormComponent} from "../forms/send-message-form/send-message-form.component";
 import {EditUserFormComponent} from "../forms/edit-user-form/edit-user-form.component";
+import {UserService} from "../../service/user/user.service";
 
 @Component({
     selector: 'app-header',
@@ -36,14 +37,6 @@ export class HeaderComponent implements OnInit {
     this.matDialog.open(SendMessageFormComponent)
       .afterClosed()
       .subscribe((result?: boolean) => {
-      });
-  }
-
-  changePassword() {
-    this.matDialog.open(ChangePasswordComponent)
-      .afterClosed()
-      .subscribe((result?: boolean) => {
-        console.log('mat dialog result', result);
       });
   }
 

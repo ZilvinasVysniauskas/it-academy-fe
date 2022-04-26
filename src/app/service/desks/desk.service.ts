@@ -33,10 +33,10 @@ export class DeskService {
   }
 
   setDeskUnavailableById(id: number) {
-    return this.httpClient.get(`${this.desksApi}/disable/${id}`)
+    return this.httpClient.get(`${this.desksApi}disable/${id}`)
   }
 
   setDeskAvailableById(id: number) {
-    return this.httpClient.get(`${this.desksApi}/enable/${id}`)
+    return this.httpClient.get(`${this.desksApi}enable/${id}`)
   }
 }

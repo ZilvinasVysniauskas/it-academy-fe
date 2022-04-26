@@ -61,6 +61,7 @@ import { SendMessageFormComponent } from './components/forms/send-message-form/s
 import {HashLocationStrategy, LocationStrategy} from "@angular/common";
 import { NotificationDisplayComponent } from './components/forms/notification-display/notification-display.component';
 import { UploadImageComponent } from './components/forms/upload-image/upload-image.component';
+import { UserInfoComponent } from './components/user-info/user-info.component';
 
 export const MY_DATE_FORMATS = {
   parse: {
@@ -101,6 +102,7 @@ export const MY_DATE_FORMATS = {
     SendMessageFormComponent,
     NotificationDisplayComponent,
     UploadImageComponent,
+    UserInfoComponent,
   ],
   imports: [
     BrowserModule,
