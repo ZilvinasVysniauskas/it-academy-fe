@@ -28,11 +28,12 @@
         <h4>{{ room.roomName }}</h4>
         <div *ngFor="let desk of room.desks">
           <mat-checkbox
-            [disabled]="!desk.available"
+            [disabled]="true"
+            [ngClass]="{'testing' : desk.available}"
             (mouseover)="displayReservationInfo = false; hoverId = desk.id"
             (mouseout)="displayReservationInfo = true"
             [checked]="desk.id == currentReservation?.deskId || desk.id == selected"
-            (change)="validateClick(desk.id)"
+            (click)="validateClick(desk);"
             >{{ desk!.deskName }}</mat-checkbox>
           <div *ngIf="displayReservationInfo && desk.id == hoverId">
             {{ desk?.info?.userFirstName }}

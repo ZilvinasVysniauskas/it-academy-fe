@@ -13,6 +13,7 @@ import {BookingMessagesComponent} from "../booking-messages/booking-messages.com
 import {DomSanitizer, SafeHtml} from "@angular/platform-browser";
 import {Observable} from "rxjs";
 import {FormControl} from "@angular/forms";
+import {Desk} from "../../interfaces/desk";
 
 
 
@@ -44,6 +45,7 @@ export class ReservationsComponent implements OnInit {
 
   retrievedImage: any;
 
+  X = false;
 
   constructor(private reservationService: DeskReservationService,
               private floorService: FloorService,
@@ -145,18 +147,19 @@ export class ReservationsComponent implements OnInit {
     this.checkUserCurrentDateReservations();
   }
 
-  validateClick(id: number): boolean {
+  validateClick(desk: Desk) {
     if (this.currentReservation) {
-      this.displayErrorMessage(this.getMessage(), this.currentReservation!);
-
-      return false;
-    } else if (this.selected == id) {
       this.selected = undefined;
-      return true;
+      this.displayErrorMessage(this.getMessage(), this.currentReservation!);
+    } else if (this.selected == desk.id) {
+      this.selected = undefined;
     } else {
-      this.selected = id;
-      return true;
+      if (desk.available){
+        this.selected = desk.id;
+      }
     }
+
+
   }
 
   minusOneDay() {
