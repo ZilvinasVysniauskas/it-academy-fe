@@ -1,13 +1,16 @@
 <div fxLayout="row">
   <app-calendar></app-calendar>
-  <cdk-virtual-scroll-viewport [itemSize]="2" class="example-viewport">
-    <div *cdkVirtualFor="let notification of allNotifications;" class="example-item" (click)="notificationTable(notification)">
-      Date: {{notification.date}} Message: {{notification.message}}
+
+  <cdk-virtual-scroll-viewport [itemSize]="2" class="message-viewport">
+    <h3>Notifications</h3>
+    <div  *cdkVirtualFor="let notification of allNotifications;" class="message-item" (click)="notificationTable(notification)">
+      Date: {{notification.date}}. Message: {{notification.message}}
     </div>
   </cdk-virtual-scroll-viewport>
 
-  <cdk-virtual-scroll-viewport [itemSize]="2" class="example-viewport" >
-    <div *cdkVirtualFor="let adminNotification of allAdminNotifications;" class="example-item" (click)="notificationTable(adminNotification)">
+  <cdk-virtual-scroll-viewport [itemSize]="2" class="message-viewport" >
+    <h3>Admin messages</h3>
+    <div *cdkVirtualFor="let adminNotification of allAdminNotifications;" class="message-item" (click)="notificationTable(adminNotification)">
       Date: {{adminNotification.date}} Message: {{adminNotification.message}}
     </div>
   </cdk-virtual-scroll-viewport>

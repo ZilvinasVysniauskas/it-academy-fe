@@ -1,101 +1,155 @@
-
-
 <div *ngIf="display === Entities.BUILDINGS; then displayBuildings"></div>
 <div *ngIf="display === Entities.FLOORS; then displayFloors"></div>
 <div *ngIf="display === Entities.ROOMS; then displayRooms"></div>
 
-
 <ng-template #displayBuildings>
-  <div *ngFor="let building of buildings!" fxLayout="row"
-       [ngSwitch]="( building === selectedBuilding )">
+  <div
+    class="buildings"
+    *ngFor="let building of buildings!"
+    fxLayout="row"
+    [ngSwitch]="building === selectedBuilding"
+  >
     <app-click-to-edit
       *ngSwitchCase="true"
       [value]="building.buildingName!"
       (valueChangeEvents)="changeBuildingName($event)"
-      (cancelEvents)="selectedBuilding=null"
+      (cancelEvents)="selectedBuilding = null"
     ></app-click-to-edit>
 
-    <div *ngSwitchCase="false" (click)="selectedBuilding = building">
+    <div
+      class="building-name"
+      *ngSwitchCase="false"
+      (click)="selectedBuilding = building"
+    >
       {{ building.buildingName! }}
     </div>
-    <button (click)="selectBuilding(building)">select building</button>
-    <button >delete building</button>
+    <button class="select-button" (click)="selectBuilding(building)">
+      Select building
+    </button>
+    <button class="delete-button">Delete building</button>
   </div>
-  <button mat-button (click)="addNewBuilding()">add building</button>
+  <button class="add-new-button" mat-button (click)="addNewBuilding()">
+    Add new building
+  </button>
 </ng-template>
 
 <ng-template #displayFloors>
-  <h1>Building Name {{selectedBuilding!.buildingName!}}</h1>
-  <button (click)="display = Entities.BUILDINGS">Change Building</button>
-  <div *ngFor="let floor of floors!" fxLayout="row"
-       [ngSwitch]="( floor === selectedFloor )">
+  <p>Building: {{ selectedBuilding!.buildingName! }}</p>
+  <button class="add-new-button" (click)="display = Entities.BUILDINGS">
+    Change building
+  </button>
+  <div
+    class="buildings"
+    *ngFor="let floor of floors!"
+    fxLayout="row"
+    [ngSwitch]="floor === selectedFloor"
+  >
     <app-click-to-edit
       *ngSwitchCase="true"
       [value]="floor.floorName!"
       (valueChangeEvents)="changeFloorName($event)"
-      (cancelEvents)="selectedBuilding=null"
+      (cancelEvents)="selectedBuilding = null"
     ></app-click-to-edit>
 
-    <div *ngSwitchCase="false" (click)="selectedFloor = floor">
+    <div
+      class="building-name"
+      *ngSwitchCase="false"
+      (click)="selectedFloor = floor"
+    >
       {{ floor.floorName! }}
     </div>
-    <button (click)="selectFloor(floor)">select floor</button>
-    <button (click)="deleteFloor(floor)" >delete floor</button>
+    <button class="select-button" (click)="selectFloor(floor)">
+      Select floor
+    </button>
+    <button class="delete-button" (click)="deleteFloor(floor)">
+      Delete floor
+    </button>
   </div>
-  <button mat-button (click)="addNewFloor()">add floor</button>
+  <button class="add-new-button" mat-button (click)="addNewFloor()">
+    Add new floor
+  </button>
 </ng-template>
 
 <ng-template #displayRooms>
-  <h1>Building Name {{selectedBuilding!.buildingName!}}</h1>
-  <button (click)="display = Entities.BUILDINGS">Change Building</button>
-  <h1>Floor Number {{selectedFloor!.floorName!}}</h1>
-  <button (click)="display = Entities.FLOORS">Change Floor</button>
-  <div *ngFor="let room of listOfRooms"
-       [ngSwitch]="( room === selectedRoom )">
+  <p>Building: {{ selectedBuilding!.buildingName! }}</p>
+  <p>Floor: {{ selectedFloor!.floorName! }}</p>
+  <button class="add-new-button" (click)="display = Entities.BUILDINGS">
+    Change building
+  </button>
+  <button class="add-new-button" (click)="display = Entities.FLOORS">
+    Change floor
+  </button>
+  <div class="container-with-desks" *ngFor="let room of listOfRooms" [ngSwitch]="room === selectedRoom">
     <app-click-to-edit
       *ngSwitchCase="true"
       [value]="room.roomName"
       (valueChangeEvents)="changeRoomName($event)"
-      (cancelEvents)="selectedRoom=null"
+      (cancelEvents)="selectedRoom = null"
     ></app-click-to-edit>
 
-    <div *ngSwitchCase="false" (click)="selectedRoom = room">
-      {{ room.roomName }}
+    <div>
+    <div class="room-name-with-desks" *ngSwitchCase="false" (click)="selectedRoom = room">
+      {{ room.roomName }}</div>
+      <button
+        class="delete-room-button"
+        mat-button
+        (click)="deleteRoom(room.roomId)">
+        Delete room
+      </button>
     </div>
 
-    <button mat-button (click)="deleteRoom(room.roomId)">delete room</button>
-    <div *ngFor="let desk of room.desks" fxLayout="row"
-         [ngSwitch]="( desk === selectedDesk )">
+    <div
+      *ngFor="let desk of room.desks"
+      fxLayout="row"
+      [ngSwitch]="desk === selectedDesk"
+    >
       <app-click-to-edit
         *ngSwitchCase="true"
         [value]="desk.deskName"
         (valueChangeEvents)="changeDeskName($event)"
-        (cancelEvents)="selectedDesk=null"
+        (cancelEvents)="selectedDesk = null"
       ></app-click-to-edit>
 
-      <div *ngSwitchCase="false" (click)="selectedDesk = desk">
+      <div class="building-name" *ngSwitchCase="false" (click)="selectedDesk = desk">
         {{ desk.deskName }}
       </div>
 
-      <button mat-button (click)="deleteDesk(desk.id)">delete desk</button>
 
       <div *ngIf="desk.available">
-        <button mat-button (click)="setDeskUnavailable(desk.id)">set desk unavailable</button>
+        <button
+          class="set-unavailable-button"
+          mat-button
+          (click)="setDeskUnavailable(desk.id)"
+        >
+          Set desk unavailable
+        </button>
       </div>
 
       <div *ngIf="!desk.available">
-        <button [hidden]="desk.available" mat-button (click)="setDeskAvailable(desk.id)">set desk available</button>
+        <button
+          class="set-available-button"
+          [hidden]="desk.available"
+          mat-button
+          (click)="setDeskAvailable(desk.id)"
+        >
+          Set desk available
+        </button>
       </div>
-
+      <button class="delete-desk-button" mat-button (click)="deleteDesk(desk.id)">
+        Delete desk
+      </button>
     </div>
-    <button mat-button (click)="addTable(room.roomId)">Add desk</button>
+    <button class="add-new-button" mat-button (click)="addTable(room.roomId)">
+      Add new desk
+    </button>
   </div>
-  <button mat-button (click)="addRoom()">Add room</button>
+
+  <button class="add-new-button" mat-button (click)="addRoom()">
+    Add new room
+  </button>
+
 
   <img [src]="getFloorPlan(selectedFloor!)">
   <button (click)="changeFloorPlane()">change image</button>
+
 </ng-template>
-
-
-
-
