@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {environment} from "../../../environments/environment.prod";
+import {environment} from "../../../environments/environment";
+import {Observable} from "rxjs";
+import {User} from "../../interfaces/user";
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +10,11 @@ import {environment} from "../../../environments/environment.prod";
 export class UserService {
 
   baseUrl = environment.baseUrl;
-  roomApi = this.baseUrl + '/api/v1/rooms/';
+  userApi = this.baseUrl + 'api/v1/users/';
 
   constructor(private httpClient: HttpClient) { }
+
+  public getUser(): Observable<User> {
+    return this.httpClient.get<User>(this.userApi + 'user');
+  }
 }

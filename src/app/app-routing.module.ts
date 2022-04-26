@@ -7,6 +7,7 @@ import {AdminComponent} from "./components/admin/admin.component";
 import {HomeComponent} from "./components/home/home.component";
 import {AuthentificationGuard} from "./service/guard/authentification.guard";
 import {ManageDesksComponent} from "./components/manage-desks/manage-desks.component";
+import {UserInfoComponent} from "./components/user-info/user-info.component";
 
 sessionStorage.setItem('role', 'user')
 sessionStorage.setItem('userId', '12345678')
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'edit', canActivate: [AuthentificationGuard], component:  AdminComponent},
   { path: 'login', component:  LoginComponent},
   { path: 'desk-manage', component:  ManageDesksComponent},
+  { path: 'account', component:  UserInfoComponent},
 ];
 
 @NgModule({

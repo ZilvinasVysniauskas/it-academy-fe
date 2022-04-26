@@ -1,49 +1,29 @@
 <div fxLayout="row">
-<app-calendar></app-calendar>
-</div>
-<div class="reservation-history-table" fxFlex fxLayout="column" fxLayoutAlign="space-between stretch">
-    <h2>My desk booking history</h2>
-
-    <table mat-table [dataSource]="history">
-
-        <ng-container matColumnDef="date">
-            <th mat-header-cell *matHeaderCellDef >Date</th>
-            <td mat-cell *matCellDef="let reservation"> {{reservation.date}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="buildingName">
-            <th mat-header-cell *matHeaderCellDef>Building</th>
-            <td mat-cell *matCellDef="let reservation"> {{reservation.buildingName}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="floorNumber">
-            <th mat-header-cell *matHeaderCellDef>Floor</th>
-            <td mat-cell *matCellDef="let reservation"> {{reservation.floorNumber}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="roomName">
-            <th mat-header-cell *matHeaderCellDef>Room</th>
-            <td mat-cell *matCellDef="let reservation"> {{reservation.roomName}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="deskName">
-            <th mat-header-cell *matHeaderCellDef>Desk</th>
-            <td mat-cell *matCellDef="let reservation"> {{reservation.deskName}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="reservationStatus">
-            <th mat-header-cell *matHeaderCellDef>Status</th>
-            <td mat-cell *matCellDef="let reservation"> {{reservation.reservationStatus}} </td>
-        </ng-container>
-
-        <!-- <ng-container matColumnDef="cancel">
-            <th mat-header-cell *matHeaderCellDef>Cancel</th>
-            <td mat-cell *matCellDef="let reservation"><button (click)="cancelReservation(reservation._id)"mat-raised-button color="warn">Cancel</button></td>
-        </ng-container> -->
-        
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
+  <app-calendar></app-calendar>
 </div>
 
-
+<div class="reservation-history-table" fxFlex fxLayout="column">
+  <h2>My desk booking history</h2>
+  <div>
+    <table>
+        <thead>
+          <th>Date</th>
+          <th>Building</th>
+          <th>Floor</th>
+          <th>Room</th>
+          <th>Desk</th>
+          <th>Status</th>
+        </thead>
+        <tbody>
+        <tr *ngFor="let reservation of reservations">
+          <td>{{reservation.date}}</td>
+          <td>{{reservation.buildingName}}</td>
+          <td>{{reservation.floorNumber}}</td>
+          <td>{{reservation.roomName}}</td>
+          <td>{{reservation.deskName}}</td>
+          <td (click)="cancelReservationById(reservation)">{{reservation.reservationStatus}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+</div>

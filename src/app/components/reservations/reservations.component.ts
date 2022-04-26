@@ -11,6 +11,9 @@ import {FloorService} from "../../service/floor/floor.service";
 import {SelectFloorComponent} from "../forms/select-floor/select-floor.component";
 import {BookingMessagesComponent} from "../booking-messages/booking-messages.component";
 import {DomSanitizer, SafeHtml} from "@angular/platform-browser";
+import {Observable} from "rxjs";
+import {FormControl} from "@angular/forms";
+import {Desk} from "../../interfaces/desk";
 
 
 
@@ -36,24 +39,28 @@ export class ReservationsComponent implements OnInit {
 
   hoverId?: number;
 
+  floor$: Observable<Floor>;
+
   floor!: Floor;
 
   retrievedImage: any;
 
+  X = false;
 
   constructor(private reservationService: DeskReservationService,
               private floorService: FloorService,
               private matDialog: MatDialog,
               private sanitizer:DomSanitizer) {
-    floorService.getFloorById(localStorage.getItem("floor-id")).subscribe(floor => {
-        this.floor = floor;
-        this.getFloorPlan();
-      }
-    )
+    this.floor$ = floorService.getFloorById(localStorage.getItem("floor-id"));
 
   }
 
   ngOnInit(): void {
+    this.floor$.subscribe(f => {
+      this.floor = f;
+      this.getFloorPlan();
+    });
+
     this.checkUserCurrentDateReservations();
   }
 
@@ -140,14 +147,19 @@ export class ReservationsComponent implements OnInit {
     this.checkUserCurrentDateReservations();
   }
 
-  validateClick(id: number) {
+  validateClick(desk: Desk) {
     if (this.currentReservation) {
+      this.selected = undefined;
       this.displayErrorMessage(this.getMessage(), this.currentReservation!);
-    } else if (this.selected == id) {
+    } else if (this.selected == desk.id) {
       this.selected = undefined;
     } else {
-      this.selected = id;
+      if (desk.available){
+        this.selected = desk.id;
+      }
     }
+
+
   }
 
   minusOneDay() {

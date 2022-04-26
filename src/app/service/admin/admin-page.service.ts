@@ -32,11 +32,11 @@ export class AdminPageService {
   }
 
   checkIfUserIdExists(value: string): Observable<boolean> {
-    return this.httpClient.get<boolean>(this.apiUser + `/id/${value}`);
+    return this.httpClient.get<boolean>(this.apiUser + `id/${value}`);
   }
 
   checkIfEmailExists(value: boolean): Observable<boolean> {
-    return this.httpClient.get<boolean>(this.apiUser + `/email/${value}`)
+    return this.httpClient.get<boolean>(this.apiUser + `email/${value}`)
   }
 
   changePassword($event: ChangePasswordRequest) {

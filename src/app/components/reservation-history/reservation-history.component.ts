@@ -1,6 +1,8 @@
 import { ReservationHistoryService } from './../../service/reservation-history/reservation-history.service';
-import { Component, OnInit } from '@angular/core';
-import { mergeMap } from 'rxjs-compat/operator/mergeMap';
+import { Component } from '@angular/core';
+import { Reservation } from 'src/app/interfaces/reservation';
+import {MatDialog} from "@angular/material/dialog";
+import {CancelReservationComponent} from "../cancel-reservation/cancel-reservation.component";
 
 @Component({
   selector: 'app-reservation-history',
@@ -8,26 +10,27 @@ import { mergeMap } from 'rxjs-compat/operator/mergeMap';
   styleUrls: ['./reservation-history.component.scss']
 })
 
-export class ReservationHistoryComponent implements OnInit {
+export class ReservationHistoryComponent {
 
   displayedColumns: string[] = ['date', 'buildingName', 'floorNumber', 'roomName', 'deskName', 'reservationStatus'];
 
-  history:any;
-  
-  constructor(private reservationHistoryData:ReservationHistoryService) {}
+  reservations!:Reservation[];
 
-  ngOnInit(): void {
-    this.reservationHistoryData.fetchReservationHistory().subscribe((result)=>{
-      console.log("result",result)
-      this.history=result;
-    });  
+  constructor(private reservationHistoryService:ReservationHistoryService, private matDialog:MatDialog) {
+    this.fetchReservations();
   }
-  
-  //  cancelReservation(id: number) {
-  //   return this.reservationHistoryData.cancelReservationById(id).subscribe(_a => this.checkReservations());
-  //  }
-  // checkReservations() {
-  //   throw new Error('Method not implemented.');
-  // }
 
+  fetchReservations(){
+    this.reservationHistoryService.fetchReservationHistory().subscribe(reservation => this.reservations = reservation);
+  }
+
+   cancelReservationById(reservation:Reservation) {
+    if (reservation.reservationStatus == "ACTIVE") {
+      this.matDialog.open(CancelReservationComponent, {data: {reservation}})
+        .afterClosed()
+        .subscribe(() => {
+          this.fetchReservations()
+        });
+    }
+  }
 }
