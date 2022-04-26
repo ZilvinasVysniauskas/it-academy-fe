@@ -7,31 +7,39 @@ import {EditUserFormComponent} from "../forms/edit-user-form/edit-user-form.comp
 import {UserService} from "../../service/user/user.service";
 
 @Component({
-    selector: 'app-header',
-    templateUrl: './header.component.html',
-    styleUrls: ['./header.component.scss']
+  selector: 'app-header',
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
 
-    isLogged: boolean;
+  isLogged: boolean;
 
-    isAdmin: boolean;
+  isAdmin: boolean;
 
-    constructor(private matDialog: MatDialog, private authService: AuthService) {
-        this.isLogged = authService.isLoggedIn();
-        this.isAdmin = authService.getRole()! == 'ADMINISTRATOR';
-    }
+  constructor(private matDialog: MatDialog, private authService: AuthService) {
+    this.isLogged = authService.isLoggedIn();
+    this.isAdmin = authService.getRole()! == 'ADMINISTRATOR';
+  }
 
-    addUser() {
-        this.matDialog.open(EditUserFormComponent, {data: {}})
-            .afterClosed()
-            .subscribe((result?: boolean) => {
-                console.log('mat dialog result', result);
-                if (result === true) {
-                    console.log('Create success');
-                }
-            });
-    }
+  addUser() {
+    this.matDialog.open(EditUserFormComponent, {data: {}})
+      .afterClosed()
+      .subscribe((result?: boolean) => {
+        console.log('mat dialog result', result);
+        if (result === true) {
+          console.log('Create success');
+        }
+      });
+  }
+
+  changePassword() {
+    this.matDialog.open(ChangePasswordComponent)
+      .afterClosed()
+      .subscribe((result?: boolean) => {
+        console.log('mat dialog result', result);
+      });
+  }
 
   sendNotification() {
     this.matDialog.open(SendMessageFormComponent)
@@ -40,10 +48,10 @@ export class HeaderComponent implements OnInit {
       });
   }
 
-    ngOnInit(): void {
-    }
+  ngOnInit(): void {
+  }
 
-    logout() {
-        this.authService.logout();
-    }
+  logout() {
+    this.authService.logout();
+  }
 }
