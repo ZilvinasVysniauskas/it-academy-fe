@@ -12,6 +12,7 @@ import {SelectFloorComponent} from "../forms/select-floor/select-floor.component
 import {BookingMessagesComponent} from "../booking-messages/booking-messages.component";
 import {DomSanitizer, SafeHtml} from "@angular/platform-browser";
 import {Observable} from "rxjs";
+import {FormControl} from "@angular/forms";
 
 
 
@@ -144,13 +145,17 @@ export class ReservationsComponent implements OnInit {
     this.checkUserCurrentDateReservations();
   }
 
-  validateClick(id: number) {
+  validateClick(id: number): boolean {
     if (this.currentReservation) {
       this.displayErrorMessage(this.getMessage(), this.currentReservation!);
+
+      return false;
     } else if (this.selected == id) {
       this.selected = undefined;
+      return true;
     } else {
       this.selected = id;
+      return true;
     }
   }
 

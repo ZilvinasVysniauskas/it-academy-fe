@@ -31,12 +31,9 @@
             [disabled]="!desk.available"
             (mouseover)="displayReservationInfo = false; hoverId = desk.id"
             (mouseout)="displayReservationInfo = true"
-            [checked]="
-              desk.id == currentReservation?.deskId || desk.id == selected
-            "
+            [checked]="desk.id == currentReservation?.deskId || desk.id == selected"
             (change)="validateClick(desk.id)"
-            >{{ desk!.deskName }}</mat-checkbox
-          >
+            >{{ desk!.deskName }}</mat-checkbox>
           <div *ngIf="displayReservationInfo && desk.id == hoverId">
             {{ desk?.info?.userFirstName }}
           </div>
