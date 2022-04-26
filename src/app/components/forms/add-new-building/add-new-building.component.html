@@ -24,14 +24,14 @@
   </mat-form-field>
 
   <mat-form-field>
-    <mat-label>Enter Street name</mat-label>
-    <input id="buildingNumber" matInput formControlName="buildingNumber">
+    <mat-label>Enter Building number</mat-label>
+    <input id="buildingNumber" matInput formControlName="buildingNumber" type="number">
     <mat-error *ngIf="getBuildingNumber?.errors?.['required']">
       Building number is required
     </mat-error>
   </mat-form-field>
 
-  <button (click)="addNewBuilding()" mat-button>Add Building</button>
+  <button (click)="addNewBuilding()" mat-button [disabled]="!buildingRequestForm.valid">Add Building</button>
   <button (click)="closeForm()" mat-button>cancel</button>
 
 </form>

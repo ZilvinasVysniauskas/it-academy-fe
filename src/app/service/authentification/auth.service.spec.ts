@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { AuthService } from './auth.service';
 import {HttpClientTestingModule} from "@angular/common/http/testing";
-import {ReservationHistoryService} from "../reservation-history/reservation-history.service";
+import {ReservationService} from "../reservation-history/reservation.service";
 import {RouterTestingModule} from "@angular/router/testing";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {HttpClient} from "@angular/common/http";

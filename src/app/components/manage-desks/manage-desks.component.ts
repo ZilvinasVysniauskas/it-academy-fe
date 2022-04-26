@@ -34,9 +34,11 @@ export class ManageDesksComponent implements OnInit {
   selectedDesk: Desk | null;
   buildings?: Building[];
   floors?: Floor[];
-  selectedBuilding: Building | null;
+  selectedBuildingForEdit: Building | null;
+  selectedBuilding?: Building | null;
   display = Entities.BUILDINGS;
-  selectedFloor: Floor | null;
+  selectedFloorForEdit: Floor | null;
+  selectedFloor?: Floor | null;
 
 
   constructor(private deskService: DeskService, private roomService: RoomService, private matDialog: MatDialog,
@@ -44,8 +46,8 @@ export class ManageDesksComponent implements OnInit {
               private sanitizer: DomSanitizer) {
     this.selectedRoom = null;
     this.selectedDesk = null
-    this.selectedBuilding = null;
-    this.selectedFloor = null;
+    this.selectedBuildingForEdit = null;
+    this.selectedFloorForEdit = null;
     this.getBuilding();
   }
 
@@ -118,7 +120,7 @@ export class ManageDesksComponent implements OnInit {
 
   changeBuildingName($event: string) {
     const building: BuildingRequest = {
-      id: this.selectedBuilding?.id,
+      id: this.selectedBuildingForEdit?.id,
       name: $event
     }
     this.buildingService.editBuilding(building).subscribe(a => this.getBuilding())
@@ -126,7 +128,7 @@ export class ManageDesksComponent implements OnInit {
 
   changeFloorName($event: string) {
     const floor: FloorRequest = {
-      id: this.selectedFloor?.id,
+      id: this.selectedFloorForEdit?.id,
       floorName: $event,
       department: this.selectedFloor?.department!
     }

@@ -1,4 +1,4 @@
-<input style="display: none" type="file" (change)="onFileUpload($event)" #selectFile>
-<button (click)="selectFile.click()">Select floor plan image</button>
-<button (click)="updateFloorPlan()">change</button>
+<input mat-dialog-content style="display: none" type="file" (change)="onFileUpload($event)" #selectFile>
+<button (click)="selectFile.click()" mat-button>Select floor plan image</button>
+<button (click)="updateFloorPlan()" [disabled]="!selectedFile" mat-button>change</button>
 <button (click)="closeDialog()">Cancel</button>

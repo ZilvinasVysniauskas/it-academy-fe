@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { DeskService } from './desk.service';
 import {HttpClientTestingModule} from "@angular/common/http/testing";
-import {ReservationHistoryService} from "../reservation-history/reservation-history.service";
+import {ReservationService} from "../reservation-history/reservation.service";
 
 describe('DeskService', () => {
   let service: DeskService;

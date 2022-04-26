@@ -7,19 +7,19 @@
     class="buildings"
     *ngFor="let building of buildings!"
     fxLayout="row"
-    [ngSwitch]="building === selectedBuilding"
+    [ngSwitch]="building === selectedBuildingForEdit"
   >
     <app-click-to-edit
       *ngSwitchCase="true"
       [value]="building.buildingName!"
       (valueChangeEvents)="changeBuildingName($event)"
-      (cancelEvents)="selectedBuilding = null"
+      (cancelEvents)="selectedBuildingForEdit = null"
     ></app-click-to-edit>
 
     <div
       class="building-name"
       *ngSwitchCase="false"
-      (click)="selectedBuilding = building"
+      (click)="selectedBuildingForEdit = building"
     >
       {{ building.buildingName! }}
     </div>
@@ -42,7 +42,7 @@
     class="buildings"
     *ngFor="let floor of floors!"
     fxLayout="row"
-    [ngSwitch]="floor === selectedFloor"
+    [ngSwitch]="floor === selectedFloorForEdit"
   >
     <app-click-to-edit
       *ngSwitchCase="true"
@@ -54,7 +54,7 @@
     <div
       class="building-name"
       *ngSwitchCase="false"
-      (click)="selectedFloor = floor"
+      (click)="selectedFloorForEdit = floor"
     >
       {{ floor.floorName! }}
     </div>
@@ -150,6 +150,6 @@
 
 
   <img [src]="getFloorPlan(selectedFloor!)">
-  <button (click)="changeFloorPlane()">change image</button>
+  <button (click)="changeFloorPlane()" mat-button>change image</button>
 
 </ng-template>

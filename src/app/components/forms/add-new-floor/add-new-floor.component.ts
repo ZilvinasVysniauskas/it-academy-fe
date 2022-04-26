@@ -38,7 +38,6 @@ export class AddNewFloorComponent {
     return this.floorRequestForm.get('plan')
   }
 
-
   get getFloorDepartment() {
     return this.floorRequestForm.get('department')
   }
@@ -62,7 +61,7 @@ export class AddNewFloorComponent {
           validators:
             [Validators.required]
         }),
-        plan: new FormControl('',{validators: [Validators.required]})
+        plan: new FormControl('')
       }
     );
   }
@@ -86,7 +85,7 @@ export class AddNewFloorComponent {
     uploadData.set("buildingId", this.buildingId.toString())
     uploadData.set("department", this.getFloorDepartment?.value)
     this.floorService.addFloor(uploadData).subscribe(a => {
-
+      this.closeForm();
     });
 
   }

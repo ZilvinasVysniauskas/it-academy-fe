@@ -22,7 +22,7 @@
     <p>Date: {{currentReservation.date}}</p>
     <p>Room: {{currentReservation.roomName}}</p>
     <p>Desk: {{currentReservation.deskName}}</p>
-    <button mat-button (click)="okClicked.emit()">OKAY</button>
+    <button mat-button (click)="dialogRef.close()">OKAY</button>
   </div>
 </ng-template>
 

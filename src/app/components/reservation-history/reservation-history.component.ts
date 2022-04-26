@@ -1,8 +1,9 @@
-import { ReservationHistoryService } from './../../service/reservation-history/reservation-history.service';
+
 import { Component } from '@angular/core';
 import { Reservation } from 'src/app/interfaces/reservation';
 import {MatDialog} from "@angular/material/dialog";
 import {CancelReservationComponent} from "../cancel-reservation/cancel-reservation.component";
+import {DeskReservationService} from "../../service/reservations/desk-reservation.service";
 
 @Component({
   selector: 'app-reservation-history',
@@ -16,12 +17,12 @@ export class ReservationHistoryComponent {
 
   reservations!:Reservation[];
 
-  constructor(private reservationHistoryService:ReservationHistoryService, private matDialog:MatDialog) {
+  constructor(private reservationService:DeskReservationService, private matDialog:MatDialog) {
     this.fetchReservations();
   }
 
   fetchReservations(){
-    this.reservationHistoryService.fetchReservationHistory().subscribe(reservation => this.reservations = reservation);
+    this.reservationService.fetchReservationHistory().subscribe(reservation => this.reservations = reservation);
   }
 
    cancelReservationById(reservation:Reservation) {

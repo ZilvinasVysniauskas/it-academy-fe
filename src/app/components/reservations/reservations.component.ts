@@ -154,8 +154,6 @@ export class ReservationsComponent implements OnInit {
         this.selected = desk.id;
       }
     }
-
-
   }
 
   minusOneDay() {

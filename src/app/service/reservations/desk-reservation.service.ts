@@ -20,7 +20,6 @@ export class DeskReservationService {
   reservationsApi = environment.baseUrl +'api/v1/reservations/';
 
   getDesksByDate(reservationDate: string, id: number ): Observable<Room[]> {
-    console.log('this is id: ' + id)
     return this.httpClient.get<Room[]>(`${this.desksApi}${id}/${reservationDate!}`);
   }
 
@@ -32,11 +31,11 @@ export class DeskReservationService {
     return this.httpClient.get<Reservation>(this.reservationsApi +  reservationDate, {observe: 'response'})
   }
 
-  cancelReservationById(id: number): Observable<any> {
-    return this.httpClient.delete(this.reservationsApi + id);
+  fetchReservationHistory(): Observable<Reservation[]> {
+    return this.httpClient.get<Reservation[]>(this.reservationsApi);
   }
 
-
-
-
+  cancelReservationById(reservationId: number): Observable<any> {
+    return this.httpClient.delete(this.reservationsApi + reservationId);
+  }
 }
