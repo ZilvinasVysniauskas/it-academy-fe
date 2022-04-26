@@ -6,24 +6,45 @@
   <h2>My desk booking history</h2>
   <div>
     <table>
-        <thead>
-          <th>Date</th>
-          <th>Building</th>
-          <th>Floor</th>
-          <th>Room</th>
-          <th>Desk</th>
-          <th>Status</th>
-        </thead>
-        <tbody>
-        <tr *ngFor="let reservation of reservations">
-          <td>{{reservation.date}}</td>
-          <td>{{reservation.buildingName}}</td>
-          <td>{{reservation.floorNumber}}</td>
-          <td>{{reservation.roomName}}</td>
-          <td>{{reservation.deskName}}</td>
-          <td (click)="cancelReservationById(reservation)">{{reservation.reservationStatus}}</td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
+      <thead>
+      <th (click)="sortReservationsByDate()">Date</th>
+
+        <th>Building
+          <mat-form-field [style.width.px]="100">
+            <mat-label>Building</mat-label>
+            <mat-select [formControl]="buildingSelect"  (selectionChange)="filterList()">
+              <mat-option [value]="">all</mat-option>
+              <mat-option *ngFor="let building of buildings" [value]="building">{{building.buildingName}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </th>
+      <th>Floor</th>
+      <th>Room</th>
+      <th>Desk</th>
+      <th>Status
+        <mat-form-field [style.width.px]="100">
+          <mat-label>Status</mat-label>
+          <mat-select [formControl]="statusSelected"  (selectionChange)="filterList()">
+            <mat-option [value]="">ALL</mat-option>
+            <mat-option [value]="'ACTIVE'">ACTIVE</mat-option>
+            <mat-option [value]="'EXPIRED'">EXPIRED</mat-option>
+            <mat-option [value]="'CANCELED'">CANCELED</mat-option>
+
+          </mat-select>
+        </mat-form-field>
+      </th>
+      </thead>
+      <tbody>
+      <tr *ngFor="let reservation of reservationsForDisplay">
+        <td>{{reservation.date}}</td>
+        <td>{{reservation.buildingName}}</td>
+
+        <td>{{reservation.floorNumber}}</td>
+        <td>{{reservation.roomName}}</td>
+        <td>{{reservation.deskName}}</td>
+        <td (click)="cancelReservationById(reservation)">{{reservation.reservationStatus}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

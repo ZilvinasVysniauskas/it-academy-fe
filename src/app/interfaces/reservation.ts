@@ -7,5 +7,6 @@ export interface Reservation {
   reservationStatus?: string
   "buildingName": string
   "floorNumber": number
+  "floorName": string
 
 }
