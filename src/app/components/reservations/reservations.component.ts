@@ -180,4 +180,11 @@ export class ReservationsComponent implements OnInit {
         this.checkUserCurrentDateReservations();
       });
   }
+
+  getBookedDeskMessage(desk: Desk): string {
+    if (desk.info) {
+      return "Desk is booked by employee " + desk.info?.userFirstName;
+    }
+    return "Desk is currently unavailable";
+  }
 }

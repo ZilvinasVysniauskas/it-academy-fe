@@ -64,6 +64,7 @@ import { NotificationDisplayComponent } from './components/forms/notification-di
 import { UploadImageComponent } from './components/forms/upload-image/upload-image.component';
 import { UserInfoComponent } from './components/user-info/user-info.component';
 import { CancelReservationComponent } from './components/cancel-reservation/cancel-reservation.component';
+import {MatTooltipModule} from "@angular/material/tooltip";
 
 
 export const MY_DATE_FORMATS = {
@@ -109,28 +110,29 @@ export const MY_DATE_FORMATS = {
     CancelReservationComponent
 
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    MatInputModule,
-    MatButtonModule,
-    ReactiveFormsModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatCardModule,
-    FlexLayoutModule,
-    FormsModule,
-    MatCheckboxModule,
-    MatDialogModule,
-    MatOptionModule,
-    MatSelectModule,
-    MatTableModule,
-    MatFormFieldModule,
-    ScrollingModule,
-    RouterModule,
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        MatInputModule,
+        MatButtonModule,
+        ReactiveFormsModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatCardModule,
+        FlexLayoutModule,
+        FormsModule,
+        MatCheckboxModule,
+        MatDialogModule,
+        MatOptionModule,
+        MatSelectModule,
+        MatTableModule,
+        MatFormFieldModule,
+        ScrollingModule,
+        RouterModule,
+        MatTooltipModule,
+    ],
   providers: [
     {
       provide: DateAdapter,

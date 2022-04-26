@@ -1,5 +1,4 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {RoomRequest} from "../../../interfaces/RoomRequest";
 import {ChangePasswordRequest} from "../../../interfaces/changePasswordRequest";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {MatDialogRef} from "@angular/material/dialog";
@@ -40,7 +39,8 @@ export class ChangePasswordComponent implements OnInit {
         }),
         newPassword: new FormControl('', {
           validators:
-            [Validators.required]
+            [Validators.required,
+              Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')]
         }),
         newPasswordRepeat: new FormControl('', {
           validators:

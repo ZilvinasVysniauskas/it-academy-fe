@@ -28,6 +28,8 @@
         <h4>{{ room.roomName }}</h4>
         <div *ngFor="let desk of room.desks">
           <mat-checkbox
+            matTooltip="{{getBookedDeskMessage(desk)}}"
+            [matTooltipDisabled]="desk.available"
             [disabled]="true"
             [ngClass]="{'testing' : desk.available}"
             (mouseover)="displayReservationInfo = false; hoverId = desk.id"
@@ -35,9 +37,9 @@
             [checked]="desk.id == currentReservation?.deskId || desk.id == selected"
             (click)="validateClick(desk);"
             >{{ desk!.deskName }}</mat-checkbox>
-          <div *ngIf="displayReservationInfo && desk.id == hoverId">
-            {{ desk?.info?.userFirstName }}
-          </div>
+<!--          <div *ngIf="displayReservationInfo && desk.id == hoverId">-->
+<!--            {{ desk?.info?.userFirstName }}-->
+<!--          </div>-->
         </div>
       </div>
       <button
