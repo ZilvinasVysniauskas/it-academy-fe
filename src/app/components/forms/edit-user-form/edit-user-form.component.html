@@ -86,7 +86,7 @@
       </mat-form-field>
 
       <div fxLayout="row">
-        <p class="default-floor-text" *ngIf="floorIsPresent">Default location: Floor {{currentFloor?.floorName}} on
+        <p class="default-floor-text" *ngIf="floorIsPresent">Default location: Floor: {{currentFloor?.floorName}} on
           building {{currentFloor?.buildingName}}</p>
         <button class="select-floor-button" mat-button (click)="changeFloorDialog()">
           <p [hidden]="floorIsPresent">Select floor</p>
