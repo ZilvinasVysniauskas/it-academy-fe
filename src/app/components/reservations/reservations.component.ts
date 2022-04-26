@@ -12,7 +12,6 @@ import {SelectFloorComponent} from "../forms/select-floor/select-floor.component
 import {BookingMessagesComponent} from "../booking-messages/booking-messages.component";
 import {DomSanitizer, SafeHtml} from "@angular/platform-browser";
 import {Observable} from "rxjs";
-import {FormControl} from "@angular/forms";
 import {Desk} from "../../interfaces/desk";
 
 
@@ -45,8 +44,6 @@ export class ReservationsComponent implements OnInit {
 
   retrievedImage: any;
 
-  X = false;
-
   constructor(private reservationService: DeskReservationService,
               private floorService: FloorService,
               private matDialog: MatDialog,
@@ -59,9 +56,8 @@ export class ReservationsComponent implements OnInit {
     this.floor$.subscribe(f => {
       this.floor = f;
       this.getFloorPlan();
+      this.checkUserCurrentDateReservations();
     });
-
-    this.checkUserCurrentDateReservations();
   }
 
   getFloorPlan() {
