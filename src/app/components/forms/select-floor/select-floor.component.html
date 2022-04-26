@@ -16,7 +16,7 @@
     </div>
   </mat-select>
 
-  <button (click)="changeFloor()" mat-button>select</button>
+  <button (click)="changeFloor()" [disabled]="!selectFloorForm.valid" mat-button>select</button>
   <button (click)="closeForm()" mat-button>cancel</button>
 
 </form>

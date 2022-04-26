@@ -94,8 +94,8 @@ export class EditUserFormComponent implements OnInit {
     this.editUserForm = new FormGroup({
         userId: new FormControl({value: '', disabled: this.isEdit}, {
           validators:
-            [Validators.required, Validators.maxLength(8),
-              Validators.minLength(8)],
+            [Validators.required, Validators.max(99999999),
+              Validators.min(10000000)],
         }),
         firstName: new FormControl('', {
           validators:
@@ -113,7 +113,10 @@ export class EditUserFormComponent implements OnInit {
           validators:
             [Validators.required, validateEmail]
         }),
-        role: new FormControl(''),
+        role: new FormControl('', {
+          validators:
+            [Validators.required]
+        }),
         department: new FormControl(''),
         defaultFloor: new FormControl(''),
         active: new FormControl('')

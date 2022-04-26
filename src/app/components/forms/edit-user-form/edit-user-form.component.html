@@ -15,11 +15,11 @@
     <form [formGroup]="editUserForm">
       <mat-form-field>
         <mat-label>User ID</mat-label>
-        <input id="userid" matInput formControlName="userId">
+        <input id="userid" type="number" matInput formControlName="userId">
         <mat-error *ngIf="getUserId?.errors?.['required']">
           user id field is required
         </mat-error>
-        <mat-error *ngIf="getUserId?.errors?.['minlength']|| getUserId?.errors?.['maxlength']">
+        <mat-error *ngIf="getUserId?.errors?.['min']|| getUserId?.errors?.['max']">
           id must consist of 8 digits
         </mat-error>
         <mat-error *ngIf="getUserId?.errors?.['idAlreadyExists']">
@@ -108,9 +108,10 @@
       </div>
 
       <button class="cancel-button" (click)="handleCancel()" mat-button>Cancel</button>
-      <button class="save-button" (click)="AddOrUpdateUser()" mat-button [disabled]="">Save</button>
+      <button class="save-button" (click)="AddOrUpdateUser()" mat-button
+              [disabled]="!editUserForm.valid || !currentFloor">Save</button>
 
     </form>
   </ng-template>
-  
+
 </div>

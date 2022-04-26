@@ -3,7 +3,7 @@ import {BuildingService} from "../../../service/building/building.service";
 import {FloorService} from "../../../service/floor/floor.service";
 import {Building} from "../../../interfaces/building";
 import {Floor} from "../../../interfaces/floor";
-import {FormControl, FormGroup} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {AdminPageService} from "../../../service/admin/admin-page.service";
 
@@ -43,8 +43,12 @@ export class SelectFloorComponent implements OnInit {
     this.chooseReplacementOnDelete = data.chooseReplacementOnDelete;
     buildingService.getAllBuilding().subscribe(a => this.buildings = a);
     this.selectFloorForm = new FormGroup({
-      building: new FormControl(''),
-      floor: new FormControl('')
+      building: new FormControl('', {validators:
+          [Validators.required]
+      }),
+      floor: new FormControl('', {validators:
+          [Validators.required]
+      })
     });
   }
 
