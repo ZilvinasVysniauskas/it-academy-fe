@@ -7,6 +7,8 @@
     "start": "node server.js",
     "local-start": "ng serve",
     "build": "ng build --proxy-config proxy.conf.json",
+
+
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },

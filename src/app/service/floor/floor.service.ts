@@ -15,7 +15,7 @@ export class FloorService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getFloorsByBuildingId(id: number) {
+  getFloorsByBuildingId(id: number): Observable<Floor[]> {
     return this.httpClient.get<Floor[]>(this.floorApi + id);
   }
 
