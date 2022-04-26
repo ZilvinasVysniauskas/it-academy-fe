@@ -1,7 +1,5 @@
 button {
   margin: 20px 10px 10px 10px;
-  background-color: #008cba;
-  color: white;
   font-size: medium;
   border-radius: 5px;
   border: 1px solid #9999994b;
@@ -67,10 +65,24 @@ mat-form-field {
 
 .save-button, .cancel-button {
   float:right;
+  margin-top: -40px;
+  background-color: #008cba;
+  color: white;
 }
 
 .default-floor-text {
 flex-wrap: wrap;
 width: 240px;
+}
+
+.select-floor-button {
+  width: auto;
+  margin-left: 280px;
+  margin-top: -80px;
+  height: 40px;
+}
+
+.change-floor {
+  padding-right: 170px;
 }
 
