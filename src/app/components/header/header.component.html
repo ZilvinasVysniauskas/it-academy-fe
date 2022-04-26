@@ -1,25 +1,41 @@
 <div>
-    <header>
-        <nav>
-            <ul>
-                <button mat-raised-button [routerLink]="'/home'">Home</button>
-                <button mat-raised-button [routerLink]="'/reservations'">Reservations</button>
-                <button mat-raised-button [routerLink]="'/history'">My bookings</button>
-                <div *ngIf="isAdmin">
-                    <div class="dropdown">
-                        <button mat-raised-button class="drop-btn">Administrate</button>
-                        <div class="dropdown-content">
-                            <button mat-button (click)="addUser()">Add new user</button>
-                            <button mat-button [routerLink]="'/edit'">Edit user info</button>
-                            <button mat-button [routerLink]="'/desk-manage'">Manage Desks</button>
-                            <button mat-button (click)="sendNotification()">Send notification</button>
-                        </div>
-                    </div>
-                </div>
-                <button mat-button (click)="changePassword()">Change password</button>
-                <button class="logout-button" mat-raised-button (click)="logout()">LOGOUT</button>
-            </ul>
-        </nav>
-    </header>
-</div>
+  <header>
+    <nav>
+      <ul>
+        <button mat-raised-button [routerLink]="'/home'">Home</button>
+        <button mat-raised-button [routerLink]="'/reservations'">
+          Reservations
+        </button>
 
+        <div *ngIf="isAdmin">
+          <div class="dropdown">
+            <button mat-raised-button class="drop-btn">Administrate</button>
+            <div class="dropdown-content">
+              <button mat-button (click)="addUser()">Add new user</button>
+              <button mat-button [routerLink]="'/edit'">Edit user info</button>
+              <button mat-button [routerLink]="'/desk-manage'">
+                Manage Desks
+              </button>
+              <button mat-button (click)="sendNotification()">
+                Send notification
+              </button>
+            </div>
+          </div>
+          <div class="dropdown">
+            <button mat-raised-button class="drop-btn">My account</button>
+            <div class="dropdown-content">
+              <button mat-button [routerLink]="'/history'">
+                My bookings
+              </button>
+              <button mat-button (click)="changePassword()">Change password</button>
+              <button mat-button
+                (click)="logout()">
+                LOG OUT
+              </button>
+            </div>
+          </div>
+        </div>
+      </ul>
+    </nav>
+  </header>
+</div>
