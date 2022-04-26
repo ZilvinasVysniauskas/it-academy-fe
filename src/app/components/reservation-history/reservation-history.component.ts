@@ -66,7 +66,7 @@ export class ReservationHistoryComponent {
       this.reservationsForDisplay = this.reservations.filter(reservation => reservation.buildingName == this.buildingSelect.value.buildingName)
     }
     else if (this.statusSelected.value) {
-      this.reservationsForDisplay = this.reservations.filter(reservation => reservation.reservationStatus == this.buildingSelect.value)
+      this.reservationsForDisplay = this.reservations.filter(reservation => reservation.reservationStatus == this.statusSelected.value)
     }
     else {
       this.reservationsForDisplay = this.reservations;

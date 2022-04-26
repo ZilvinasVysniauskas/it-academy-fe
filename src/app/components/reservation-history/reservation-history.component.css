@@ -1,0 +1,11 @@
+table, h2 {
+  width: 100%;
+  margin: 10px;
+}
+
+.ACTIVE {
+  color: blue;
+  text-decoration: underline;
+}
+
+/*# sourceMappingURL=reservation-history.component.css.map */
