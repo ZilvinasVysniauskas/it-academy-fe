@@ -1,11 +1,12 @@
-<form [formGroup]="selectFloorForm">
-  <mat-label>Building</mat-label>
-  <mat-select formControlName="building" [(value)]="currentBuilding" (selectionChange)="changeCurrentBuilding()">>
+<div class="container">
+  <form [formGroup]="selectFloorForm">
+  <mat-label class="selection-title">Building</mat-label>
+  <mat-select class="select-drop-down" formControlName="building" [(value)]="currentBuilding" (selectionChange)="changeCurrentBuilding()">>
     <mat-option *ngFor="let building of buildings!" [value]="building">{{building.buildingName}}</mat-option>
   </mat-select>
 
-  <mat-label>Floor</mat-label>
-  <mat-select formControlName="floor" [(value)]="currentFloor" (selectionChange)="changeCurrentFloor()">
+  <mat-label class="selection-title">Floor</mat-label>
+  <mat-select class="select-drop-down" formControlName="floor" [(value)]="currentFloor" (selectionChange)="changeCurrentFloor()">
     <div *ngIf="!isAddNewUserForm">
       <mat-option *ngFor="let floorOption of currentFloors!" [value]="floorOption"
                   [disabled]="validateFloor(floorOption)">{{floorOption.floorName}}</mat-option>
@@ -16,7 +17,9 @@
     </div>
   </mat-select>
 
-  <button (click)="changeFloor()" mat-button>select</button>
-  <button (click)="closeForm()" mat-button>cancel</button>
+   <button (click)="closeForm()" mat-button>Cancel</button> 
+   <button (click)="changeFloor()" mat-button>Select</button>
 
 </form>
+
+</div>
