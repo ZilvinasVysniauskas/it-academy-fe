@@ -17,6 +17,8 @@ export class ChangePasswordComponent implements OnInit {
   @Output() cancel: EventEmitter<any> = new EventEmitter<any>();
 
   changePasswordForm: FormGroup;
+  errorMessage?: String;
+
 
   get getCurrentPassword() {
     return this.changePasswordForm.get('currentPassword')
@@ -60,7 +62,7 @@ export class ChangePasswordComponent implements OnInit {
         this.dialogRef.close()
       },
       error => {
-        console.log(error.error)
+        this.errorMessage = error.error;
       });
 
   }
