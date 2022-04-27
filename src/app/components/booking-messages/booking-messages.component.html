@@ -7,8 +7,13 @@
 <ng-template #reservationExists>
   <div class="container" mat-dialog-content >
 
-    <p>You already have a reservation on {{currentReservation?.date}}.</p>
-    <p>Would you like to cancel this reservation for desk {{currentReservation?.deskName}} in room {{currentReservation?.deskName}}?</p>
+    <p>You already have a reservation on this date.</p>
+    <p>Would you like to cancel this reservation:</p>
+    <p><b>Date: </b> {{currentReservation?.date}}</p>
+    <p><b>Building: </b> {{currentReservation?.buildingName}}</p>
+    <p><b>Floor: </b> {{currentReservation?.floorName}}</p>
+    <p><b>Room: </b> {{currentReservation?.roomName}}</p>
+    <p><b>Desk:</b> {{currentReservation?.deskName}}</p>
     <button mat-button (click)="keepReservationButtonClickEvent()">Keep reservation</button>
     <button mat-button (click)="inputIdToCancelButton(currentReservation!.reservationId)">Cancel reservation</button>
 
@@ -18,10 +23,12 @@
 
 <ng-template #successful>
   <div mat-dialog-content class="container" >
-    <p>Reservation is successful.</p>
-    <p>Date: {{currentReservation.date}}</p>
-    <p>Room: {{currentReservation.roomName}}</p>
-    <p>Desk: {{currentReservation.deskName}}</p>
+    <p><b>Reservation is successful!</b></p>
+    <p><b>Date:</b> {{currentReservation?.date}}</p>
+    <p><b>Building:</b> {{currentReservation?.buildingName}}</p>
+    <p><b>Floor: </b> {{currentReservation?.floorName}}</p>
+    <p><b>Room: </b> {{currentReservation?.roomName}}</p>
+    <p><b>Desk:</b> {{currentReservation?.deskName}}</p>
     <button mat-button (click)="dialogRef.close()">OKAY</button>
   </div>
 </ng-template>

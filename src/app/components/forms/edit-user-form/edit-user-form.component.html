@@ -86,12 +86,17 @@
       </mat-form-field>
 
       <div fxLayout="row">
-        <p class="default-floor-text" *ngIf="floorIsPresent">Default location: Floor: {{currentFloor?.floorName}} on
-          building {{currentFloor?.buildingName}}</p>
-        <button class="select-floor-button" mat-button (click)="changeFloorDialog()">
-          <p [hidden]="floorIsPresent">Select floor</p>
-          <p class="change-floor" [hidden]="!floorIsPresent">Change floor</p>
-        </button>
+
+        <div *ngIf="department">
+          <button class="select-floor-button" mat-button (click)="changeFloorDialog()">
+            {{buttonText()}}
+          </button>
+        </div>
+
+      </div>
+      <div *ngIf="floorIsPresent">
+        <p> <b>Current Building:</b> {{currentFloor?.buildingName}}</p>
+        <p> <b>Current Floor:</b> {{currentFloor?.floorName}}</p>
       </div>
 
 
@@ -109,7 +114,8 @@
 
       <button class="cancel-button" (click)="handleCancel()" mat-button>Cancel</button>
       <button class="save-button" (click)="AddOrUpdateUser()" mat-button
-              [disabled]="!editUserForm.valid || !currentFloor">Save</button>
+              [disabled]="!editUserForm.valid || !currentFloor">Save
+      </button>
 
     </form>
   </ng-template>
