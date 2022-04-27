@@ -11,22 +11,18 @@
         </mat-error>
       </mat-form-field>
 
-      <section class="example-section">
-        <mat-checkbox class="example-margin" (click)="toUser = true; toDepartment = false"
-                      [checked]="toUser" >send to user</mat-checkbox>
-      </section>
+      <mat-form-field Role="fill">
+        <mat-label>Send To</mat-label>
+        <mat-select formControlName="sendTo" (selectionChange)="changeValidators()">
+          <mat-option *ngFor="let sendTo of sendToList" [value]="sendTo">{{sendTo}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="getSendTo?.errors?.['required']">
+          send to is required
+        </mat-error>
+      </mat-form-field>
 
-      <section class="example-section">
-        <mat-checkbox class="example-margin"  (click)="toUser = false; toDepartment = true"
-                      [checked]="toDepartment" >send to department</mat-checkbox>
-      </section>
 
-      <section class="example-section">
-        <mat-checkbox class="example-margin"  (click)="toUser = false; toDepartment = false; toAll = true;"
-                      [checked]="toAll" >send to all employees</mat-checkbox>
-      </section>
-
-      <mat-form-field *ngIf="toDepartment">
+      <mat-form-field *ngIf="getSendTo?.value == 'DEPARTMENT'">
         <mat-form-field>
           <mat-label>Department</mat-label>
           <mat-select formControlName="department">
@@ -35,14 +31,16 @@
         </mat-form-field>
       </mat-form-field>
 
-      <mat-form-field *ngIf="toUser">
+      <mat-form-field  *ngIf="getSendTo?.value == 'USER'">
         <mat-form-field>
           <mat-label>User id</mat-label>
-          <input id="userId" matInput formControlName="userId">
+          <input id="userId" matInput formControlName="userId" type="number">
+          <mat-error *ngIf="getUserId?.errors?.['required']">
+          </mat-error>
         </mat-form-field>
       </mat-form-field>
 
-      <button class="cancel-button" (click)="createAndSendNotification()" mat-button>Send</button>
+      <button class="cancel-button" (click)="createAndSendNotification()" [disabled]="!notificationRequestForm.valid" mat-button>Send</button>
       <button class="save-button" (click)="closeDialog()" mat-button [disabled]="">Cancel</button>
 
     </form>
