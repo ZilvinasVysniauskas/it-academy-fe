@@ -37,7 +37,7 @@ export class SelectFloorComponent implements OnInit {
     private adminService: AdminPageService, private dialogRef: MatDialogRef<SelectFloorComponent>,
     private buildingService: BuildingService,
     private floorService: FloorService) {
-    this.isAddNewUserForm = data.floorInject == null;
+    this.isAddNewUserForm = data.floorInject == undefined;
     this.floor = data.floorInject;
     this.department = data.department;
     this.chooseReplacementOnDelete = data.chooseReplacementOnDelete;

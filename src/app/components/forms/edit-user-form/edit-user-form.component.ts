@@ -125,6 +125,7 @@ export class EditUserFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(this.department)
     if (this.user) {
       this.floorIsPresent = true;
       this.floorService.getFloorById(this.user!.defaultFloorId.toString()).subscribe(floor => {
@@ -230,5 +231,9 @@ export class EditUserFormComponent implements OnInit {
     this.currentFloor = undefined;
     this.floorIsPresent = false;
     this.department = this.getDepartment?.value
+  }
+
+  buttonText() {
+    return this.floorIsPresent? "Change Floor" : "Select Floor";
   }
 }

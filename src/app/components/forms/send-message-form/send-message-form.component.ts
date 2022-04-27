@@ -18,13 +18,14 @@ export class SendMessageFormComponent implements OnInit {
   @Output() cancel: EventEmitter<any> = new EventEmitter<any>();
 
   notificationRequestForm: FormGroup;
-  toUser: boolean = false;
-  toDepartment: boolean = true;
 
   departments = [
     'SALES', 'MARKETING', 'DEVELOPERS', 'MANAGEMENT'
   ]
-  toAll: boolean = false;
+
+  sendToList = [
+    'ALL USERS', 'DEPARTMENT', 'USER'
+  ]
 
   get getMessage() {
     return this.notificationRequestForm.get('message')
@@ -38,26 +39,59 @@ export class SendMessageFormComponent implements OnInit {
     return this.notificationRequestForm.get('department')
   }
 
-  constructor(public dialogRef: MatDialogRef<SendMessageFormComponent>,private notificationService: NotificationService,
-  private matDialog: MatDialog) {
+  get getSendTo() {
+    return this.notificationRequestForm.get('sendTo')
+  }
+
+  constructor(public dialogRef: MatDialogRef<SendMessageFormComponent>, private notificationService: NotificationService,
+              private matDialog: MatDialog) {
     this.notificationRequestForm = new FormGroup({
       message: new FormControl('', {
         validators:
           [Validators.required, Validators.maxLength(100)]
       }),
       userId: new FormControl(''),
-      department: new FormControl('')
+      department: new FormControl(''),
+      sendTo: new FormControl('', {
+        validators:
+          [Validators.required]
+      }),
     })
   }
 
+  changeValidators() {
+    if (this.getSendTo?.value == 'USER') {
+      this.getUserId?.setValidators(Validators.required)
+      this.getDepartment?.clearValidators()
+      this.updateValidity()
+    }
+    else if (this.getSendTo?.value == 'DEPARTMENT') {
+      this.getDepartment?.setValidators(Validators.required)
+      this.getUserId?.clearValidators()
+      this.updateValidity()
+    }
+    else {
+      console.log("HERE")
+      this.getDepartment?.removeValidators(Validators.required)
+      this.getUserId?.clearValidators()
+      this.updateValidity()
+    }
+  }
+
+  private updateValidity() {
+    this.getUserId?.updateValueAndValidity()
+    this.getDepartment?.updateValueAndValidity()
+  }
+
   createAndSendNotification() {
-    if (this.toUser) {
+    if (this.getSendTo?.value == 'USER') {
+      this.getUserId?.setValidators(Validators.required)
       const notificationRequest: NotificationRequest = {
         message: this.getMessage?.value,
         userId: this.getUserId?.value
       }
       this.notificationService.sendNotificationToUser(notificationRequest).subscribe(a => this.closeDialog());
-    } else if (this.toDepartment) {
+    } else if (this.getSendTo?.value == 'DEPARTMENT') {
       const notificationRequest: NotificationRequest = {
         message: this.getMessage?.value,
         department: this.getDepartment?.value,
@@ -74,6 +108,7 @@ export class SendMessageFormComponent implements OnInit {
   closeDialog() {
     this.dialogRef.close();
   }
+
   ngOnInit(): void {
   }
 
@@ -84,4 +119,6 @@ export class SendMessageFormComponent implements OnInit {
         this.getUserId?.setValue(userId.userId)
       });
   }
+
+
 }

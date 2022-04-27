@@ -16,8 +16,8 @@ export class ChangePasswordComponent implements OnInit {
   @Output() cancel: EventEmitter<any> = new EventEmitter<any>();
 
   changePasswordForm: FormGroup;
-  errorMessage?: String;
-
+  errorMessage?: string;
+  successMessage?: string;
 
   get getCurrentPassword() {
     return this.changePasswordForm.get('currentPassword')
@@ -40,7 +40,7 @@ export class ChangePasswordComponent implements OnInit {
         newPassword: new FormControl('', {
           validators:
             [Validators.required,
-              Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')]
+              Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[A-Za-z].{8,}')]
         }),
         newPasswordRepeat: new FormControl('', {
           validators:
@@ -58,8 +58,9 @@ export class ChangePasswordComponent implements OnInit {
     }
     this.adminService.changePassword(passwordChangeRequest).subscribe(
       message => {
-        alert(message)
-        this.dialogRef.close()
+        this.errorMessage = undefined;
+        this.successMessage = message;
+        setTimeout(()=>{ this.closeDialog()}, 1000)
       },
       error => {
         this.errorMessage = error.error;
