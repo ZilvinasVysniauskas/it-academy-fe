@@ -136,8 +136,8 @@ button:active {
 }
 
 .just-buttons {
-display: flex;
-justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .map-and-buttons {
@@ -146,4 +146,12 @@ justify-content: space-between;
 
 .second-floor-plan {
   width: 600px;
+}
+
+.top-buttons {
+  display: inline-block;
+}
+
+.map-and-buttons {
+  margin-top: -100px !important;
 }

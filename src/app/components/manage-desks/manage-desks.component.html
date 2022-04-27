@@ -73,8 +73,10 @@
   </button>
 </ng-template>
 
+
 <ng-template #displayRooms>
-  <div class="button-and-building">
+ <div class="top-buttons"> 
+   <div class="button-and-building">
    
     <button
       class="change-building-button"
@@ -92,7 +94,7 @@
     </button>
      <p>Floor: {{ selectedFloor!.floorName! }}</p>
   </div>
-
+</div>
 
   <div class="map-and-buttons">  
     <img class="second-floor-plan" [src]="currentFloorPlan" />
