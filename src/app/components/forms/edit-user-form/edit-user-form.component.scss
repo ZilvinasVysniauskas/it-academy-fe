@@ -65,30 +65,30 @@ mat-form-field {
   box-shadow: 0 4px 10px -6px #222;
 }
 
-.save-button, .cancel-button {
-  float:right;
+.save-button,
+.cancel-button {
+  float: right;
   margin-top: -30px;
   background-color: #008cba;
-  color: white;
+  color: white !important;
 }
 
 .default-floor-text {
   flex-wrap: wrap;
-  width: 250px;
-  text-align: center;
-  border: 1px solid #008cba;
-  border-radius: 10px;
-  padding: 5px;
+  text-align: justify;
+  padding: 20px 40px 20px 20px;
 }
 
 .select-floor-button {
-  width: auto;
-  margin-left: 280px;
-  margin-top: -80px;
   height: 40px;
+  font-size: small;
+  text-align: center !important;
+  width: 145px;
+  margin-bottom: 20px;
 }
 
-.change-floor {
-  padding-right: 170px;
+.floor-info {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 20px;
 }
-

@@ -1,13 +1,13 @@
 .selection-title {
-    margin-top: 20px;
-    padding: 10px;
+  margin-top: 20px;
+  padding: 10px;
 }
 
 button {
-      float:right;
+  float: right;
   margin-top: 30px;
   background-color: #008cba;
-  color: white;
+  color: white !important;
   margin-right: 5px;
 }
 
@@ -22,14 +22,13 @@ button:active {
 }
 
 .select-drop-down {
-margin: 20px;
-width: 200px;
+  margin: 20px;
+  width: 200px;
 }
 
 .container {
-    border: 1px solid #008cba;
-    padding: 3px;
-    width: 250px;
-    height: 230px;
+  border: 1px solid #008cba;
+  padding: 3px;
+  width: 250px;
+  height: 230px;
 }
-
