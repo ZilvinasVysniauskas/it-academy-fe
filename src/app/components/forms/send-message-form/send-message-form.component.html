@@ -48,8 +48,8 @@
       </div>
 
       <div>
-      <button class="cancel-button" (click)="createAndSendNotification()" [disabled]="!notificationRequestForm.valid" mat-button>Send</button>
-      <button class="save-button" (click)="closeDialog()" mat-button [disabled]="">Cancel</button>
+        <button class="save-button" (click)="closeDialog()" mat-button [disabled]="">Cancel</button>
+        <button class="cancel-button" (click)="createAndSendNotification()" [disabled]="!notificationRequestForm.valid" mat-button>Send</button>
       </div>
 
     </form>
