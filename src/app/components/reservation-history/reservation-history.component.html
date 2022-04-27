@@ -38,7 +38,7 @@
       <tr *ngFor="let reservation of reservationsForDisplay">
         <td>{{reservation.date}}</td>
         <td>{{reservation.buildingName}}</td>
-        <td>{{reservation.floorNumber}}</td>
+        <td>{{reservation.floorName}}</td>
         <td>{{reservation.roomName}}</td>
         <td>{{reservation.deskName}}</td>
         <td (click)="cancelReservationById(reservation)"
