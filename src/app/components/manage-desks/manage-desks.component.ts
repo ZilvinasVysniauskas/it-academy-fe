@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, Renderer2, ViewChild} from '@angular/core';
 import {Room} from "../../interfaces/room";
 import {MatDialog} from "@angular/material/dialog";
 import {DeskService} from "../../service/desks/desk.service";
@@ -42,15 +42,23 @@ export class ManageDesksComponent implements OnInit {
   currentFloorPlan: any;
 
 
+
   constructor(private deskService: DeskService, private roomService: RoomService, private matDialog: MatDialog,
               private floorService: FloorService, private buildingService: BuildingService,
-              private sanitizer: DomSanitizer) {
+              private sanitizer: DomSanitizer, private renderer: Renderer2) {
     this.selectedRoom = null;
     this.selectedDesk = null
     this.selectedBuildingForEdit = null;
     this.selectedFloorForEdit = null;
     this.getBuilding();
+
   }
+
+
+
+
+
+
 
   getFloorPlan(selectedFloor: Floor) {
     return this.sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,'

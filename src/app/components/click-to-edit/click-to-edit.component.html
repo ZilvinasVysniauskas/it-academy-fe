@@ -1,19 +1,22 @@
-<input
-  type="text"
-  name="value"
-  autofocus
-  [(ngModel)]="pendingValue"
-  (keydown.enter)="processChanges()"
-  (keydown.meta.enter)="processChanges()"
-  (keydown.escape)="cancel()"
-  (keydown.meta.escape)="cancel()"
-/>
-<button (click)="processChanges()">
-  Save
-</button>
-<a
-  (click)="cancel()"
-  (keydown.enter)="cancel()"
-  tabindex="0">
-  Cancel
-</a>
+
+  <input
+    #EditTextElement
+    type="text"
+    name="value"
+    autofocus
+    [(ngModel)]="pendingValue"
+    (keydown.enter)="processChanges()"
+    (keydown.meta.enter)="processChanges()"
+    (keydown.escape)="cancel()"
+    (keydown.meta.escape)="cancel()"
+  />
+  <button (click)="processChanges()">
+    Save
+  </button>
+  <a
+    (click)="cancel()"
+    (keydown.enter)="cancel()"
+    tabindex="0">
+    Cancel
+  </a>
+

@@ -2,19 +2,21 @@
 <div *ngIf="display === Entities.FLOORS; then displayFloors"></div>
 <div *ngIf="display === Entities.ROOMS; then displayRooms"></div>
 
+
 <ng-template #displayBuildings>
   <div
     class="buildings"
     *ngFor="let building of buildings!"
     fxLayout="row"
-    [ngSwitch]="building === selectedBuildingForEdit"
-  >
+    [ngSwitch]="building === selectedBuildingForEdit">
+
     <app-click-to-edit
       *ngSwitchCase="true"
       [value]="building.buildingName!"
       (valueChangeEvents)="changeBuildingName($event)"
       (cancelEvents)="selectedBuildingForEdit = null"
     ></app-click-to-edit>
+
 
     <div
       class="building-name"
@@ -89,8 +91,8 @@
     ></app-click-to-edit>
 
     <div>
-    <div class="room-name-with-desks" *ngSwitchCase="false" (click)="selectedRoom = room">
-      {{ room.roomName }}</div>
+      <div class="room-name-with-desks" *ngSwitchCase="false" (click)="selectedRoom = room">
+        {{ room.roomName }}</div>
       <button
         class="delete-room-button"
         mat-button
