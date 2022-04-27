@@ -1,33 +1,41 @@
-<h3>Search for users</h3>
-<form [formGroup]="searchUserForm">
-  <label for="userId">User ID</label>
-  <input id="userId" type="text" formControlName="userId">
-  <label for="firstname">First Name</label>
-  <input id="firstname" type="text" formControlName="firstName">
-  <label for="lastname">Last Name</label>
-  <input id="lastname" type="text" formControlName="lastName">
+<h2>Search for users</h2>
+<form class="search-user" [formGroup]="searchUserForm">
+    <mat-form-field appearance="fill">
+        <mat-label>User ID</mat-label>
+        <input matInput id="userId" type="text" formControlName="userId">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+        <mat-label>First Name</mat-label>
+        <input matInput id="firstname" type="text" formControlName="firstName">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+        <mat-label>Last Name</mat-label>
+        <input matInput id="lastname" type="text" formControlName="lastName">
+    </mat-form-field>
 </form>
 
-
-
 <div>
-  <table>
-    <th>User ID</th>
-    <th>First name</th>
-    <th>Last name</th>
-    <th>Active</th>
-    <th>Edit user</th>
-<tr *ngFor="let user of this.users$ | async">
-    <td>{{user.userId}}</td>
-    <td>{{user.firstName}}</td>
-    <td>{{user.lastName}}</td>
-    <td *ngIf="user.active">
-      Active</td>
-    <td *ngIf="!user.active">
-      Suspended</td>
-    <td><button class="edit-button" (click)="editUser(user)">Edit details</button></td>
-  </tr>
-  </table>
+    <table>
+        <th>User ID</th>
+        <th>First name</th>
+        <th>Last name</th>
+        <th>Active</th>
+        <th>Edit user</th>
+        <tr *ngFor="let user of this.users$ | async">
+            <td>{{user.userId}}</td>
+            <td>{{user.firstName}}</td>
+            <td>{{user.lastName}}</td>
+            <td *ngIf="user.active">
+                Active
+            </td>
+            <td *ngIf="!user.active">
+                Suspended
+            </td>
+            <td>
+                <button class="edit-button" (click)="editUser(user)">Edit details</button>
+            </td>
+        </tr>
+    </table>
 </div>
 
 

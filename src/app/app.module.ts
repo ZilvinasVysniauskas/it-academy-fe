@@ -65,6 +65,7 @@ import { UploadImageComponent } from './components/forms/upload-image/upload-ima
 import { UserInfoComponent } from './components/user-info/user-info.component';
 import { CancelReservationComponent } from './components/cancel-reservation/cancel-reservation.component';
 import {MatTooltipModule} from "@angular/material/tooltip";
+import {MatIconModule} from "@angular/material/icon";
 
 
 export const MY_DATE_FORMATS = {
@@ -132,6 +133,7 @@ export const MY_DATE_FORMATS = {
         ScrollingModule,
         RouterModule,
         MatTooltipModule,
+        MatIconModule,
     ],
   providers: [
     {
