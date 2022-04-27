@@ -9,7 +9,8 @@ button {
   box-shadow: 0 4px 10px -6px #222;
 }
 
-.add-new-button {
+.add-new-button,
+.change-building-button {
   color: rgb(58, 57, 57);
   background-color: rgb(244, 244, 244);
   border: 1px solid #b6b2b24b;
@@ -17,14 +18,22 @@ button {
   margin: 20px;
 }
 
-.add-new-button:hover {
+.change-building-button {
+  padding: 10px;
+  font: small;
+  margin: 0 15px 0 0 !important;
+}
+
+.add-new-button:hover,
+.change-building-button:hover {
   background-color: #008cba;
   color: white;
   box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
     0 17px 50px 0 rgba(0, 0, 0, 0.19);
 }
 
-.add-new-button:active {
+.add-new-button:active,
+.change-building-button:active {
   transform: translateY(2px);
 }
 
@@ -50,11 +59,15 @@ button {
   font-size: smaller;
 }
 
-.delete-button, .delete-desk-button, .delete-room-button {
+.delete-button,
+.delete-desk-button,
+.delete-room-button {
   color: rgb(170, 0, 0);
 }
 
-.delete-button:hover, .delete-desk-button:hover, .delete-room-button:hover {
+.delete-button:hover,
+.delete-desk-button:hover,
+.delete-room-button:hover {
   background-color: rgb(170, 0, 0);
   color: white;
   box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
@@ -80,9 +93,9 @@ button:active {
 }
 
 .room-name-with-desks {
-margin-top: 20px;
-display: inline-block;
-width: 90%;
+  margin-top: 20px;
+  display: inline-block;
+  width: 90%;
 }
 
 .container-with-desks {
@@ -91,16 +104,33 @@ width: 90%;
   margin-top: 3px;
 }
 
-.delete-desk-button, .delete-room-button {
-    height: fit-content;
-    margin-left: 5px;
+.delete-desk-button,
+.delete-room-button {
+  height: fit-content;
+  margin-left: 5px;
 }
 
-.mat-button, .mat-raised-button, .mat-icon-button, .mat-stroked-button, .mat-flat-button, .mat-fab, .mat-mini-fab {
-    font-size: 12px;
+.mat-button,
+.mat-raised-button,
+.mat-icon-button,
+.mat-stroked-button,
+.mat-flat-button,
+.mat-fab,
+.mat-mini-fab {
+  font-size: 12px;
 }
 
 .floor-plan {
   max-width: 20vw;
   margin: 10px;
+}
+
+.button-and-building {
+  display: flex;
+  margin: 10px;
+}
+
+.button-and-building p {
+  vertical-align: middle;
+  padding-top: 10px;
 }
