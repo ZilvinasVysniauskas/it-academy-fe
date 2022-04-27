@@ -19,9 +19,9 @@ button {
 }
 
 .change-building-button {
-  padding: 10px;
   font: small;
   margin: 0 15px 0 0 !important;
+  width: 110px;
 }
 
 .add-new-button:hover,
@@ -133,4 +133,17 @@ button:active {
 .button-and-building p {
   vertical-align: middle;
   padding-top: 10px;
+}
+
+.just-buttons {
+display: flex;
+justify-content: space-between;
+}
+
+.map-and-buttons {
+  text-align: right;
+}
+
+.second-floor-plan {
+  width: 600px;
 }

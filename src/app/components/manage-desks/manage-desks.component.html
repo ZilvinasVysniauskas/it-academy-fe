@@ -93,6 +93,22 @@
      <p>Floor: {{ selectedFloor!.floorName! }}</p>
   </div>
 
+
+  <div class="map-and-buttons">  
+    <img class="second-floor-plan" [src]="currentFloorPlan" />
+  
+    <div class="just-buttons">
+      <button class="add-new-button" mat-button (click)="addRoom()">
+    Add new room
+  </button>
+    <button class="add-new-button" (click)="changeFloorPlan()" mat-button>
+    Change image
+  </button>
+</div>
+
+</div>
+
+  
   <div
     class="container-with-desks"
     *ngFor="let room of listOfRooms"
@@ -175,12 +191,6 @@
     </button>
   </div>
 
-  <button class="add-new-button" mat-button (click)="addRoom()">
-    Add new room
-  </button>
 
-  <img class="floor-plan" [src]="currentFloorPlan" />
-  <button class="add-new-button" (click)="changeFloorPlan()" mat-button>
-    Change image
-  </button>
+
 </ng-template>
