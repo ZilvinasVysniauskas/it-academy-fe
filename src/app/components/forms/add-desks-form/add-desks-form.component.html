@@ -1,8 +1,11 @@
-<mat-form-field>
+<div class="container-border"><div class="container"><mat-form-field>
   <mat-label>Desk name</mat-label>
   <input id="userid" [formControl]="deskName" matInput >
-
 </mat-form-field>
 
-<button class="save-button" mat-button (click)="addNewDesk()">add desk</button>
-<button class="cancel-button" mat-button (click)="closeForm()">cancel</button>
+<div class="button-container">
+<button class="save-button" mat-button (click)="addNewDesk()">Add desk</button>
+<button class="cancel-button" mat-button (click)="closeForm()">Cancel</button>
+</div>
+</div>
+</div>

@@ -1,38 +1,57 @@
-<form [formGroup]="floorRequestForm">
-  <mat-form-field>
-    <mat-label>Enter floor name</mat-label>
-    <input id="name" matInput formControlName="name">
-    <mat-error *ngIf="getFloorName?.errors?.['required']">
-      Floor name is required
-    </mat-error>
-  </mat-form-field>
+<div class="container">
+  <form [formGroup]="floorRequestForm">
+    <mat-form-field>
+      <mat-label>Floor name</mat-label>
+      <input id="name" matInput formControlName="name" />
+      <mat-error *ngIf="getFloorName?.errors?.['required']">
+        Floor name is required
+      </mat-error>
+    </mat-form-field>
 
+    <mat-form-field>
+      <mat-label>Floor number</mat-label>
+      <input id="newPassword" matInput formControlName="number" type="number" />
+      <mat-error *ngIf="getFloorNumber?.errors?.['required']">
+        Floor number is required
+      </mat-error>
+    </mat-form-field>
 
+    <mat-form-field>
+      <mat-label>Department</mat-label>
+      <mat-select formControlName="department">
+        <mat-option
+          *ngFor="let department of departments"
+          [value]="department"
+          >{{ department }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
 
-  <mat-form-field>
-    <mat-label>Enter floor number</mat-label>
-    <input id="newPassword" matInput formControlName="number" type="number">
-    <mat-error *ngIf="getFloorNumber?.errors?.['required']">
-      Floor number is required
-    </mat-error>
-  </mat-form-field>
-
-  <mat-form-field>
-    <mat-label>Department</mat-label>
-    <mat-select formControlName="department">
-      <mat-option *ngFor="let department of departments" [value]="department">{{department}}</mat-option>
-    </mat-select>
-  </mat-form-field>
-
-  <div *ngIf="selectedFile">
-    <p>{{selectedFile.name}}</p>
-  </div>
-  <input mat-dialog-content style="display: none" type="file" (change)="onFileUpload($event)" #selectFile>
-  <button (click)="selectFile.click()" mat-button>Select floor plan image</button>
-
-
-  <button (click)="addNewFloor()" [disabled]="!floorRequestForm.valid || !selectedFile" mat-button>Add floor</button>
-  <button (click)="closeForm()" mat-button>cancel</button>
-
-
-</form>
+    <div *ngIf="selectedFile">
+      <p>{{ selectedFile.name }}</p>
+    </div>
+    <input
+      mat-dialog-content
+      style="display: none"
+      type="file"
+      (change)="onFileUpload($event)"
+      #selectFile
+    />
+    <button class="choice-button" (click)="selectFile.click()" mat-button>
+      Upload floor plan
+    </button>
+<div class="buttons-container">
+    <button
+      class="select-button"
+      (click)="addNewFloor()"
+      [disabled]="!floorRequestForm.valid || !selectedFile"
+      mat-button
+    >
+      Add floor
+    </button>
+    <button class="cancel-button" (click)="closeForm()" mat-button>
+      Cancel
+    </button>
+    </div>
+  </form>
+</div>
