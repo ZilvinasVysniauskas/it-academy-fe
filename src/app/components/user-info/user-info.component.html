@@ -1,9 +1,10 @@
 <div *ngIf="user$ | async as user">
-  <p>First Name: {{user.firstName}}</p>
-  <p>Middle Name: {{user.middleName}}</p>
-  <p>Last Name: {{user.lastName}} </p>
-  <p>Department: {{user.firstName}}</p>
-  <p>Role: {{user.role}}</p>
-  <p>Email: {{user.email}}</p>
+  <p><strong>First Name:</strong> {{user.firstName}}</p>
+  <p><strong>Middle Name:</strong> {{user.middleName}}</p>
+  <p><strong>Last Name:</strong> {{user.lastName}} </p>
+  <p><strong>Department:</strong> {{user.firstName}}</p>
+  <p><strong>Role:</strong> {{user.role}}</p>
+  <p><strong>Email:</strong> {{user.email}}</p>
+  <p><strong>Default floor:</strong> {{user.defaultFloorId}}</p>
 </div>
 <button (click)="closeDialog()" mat-button>close</button>

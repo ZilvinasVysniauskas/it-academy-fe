@@ -1,14 +1,29 @@
 .message-viewport {
   height: 300px;
-
   width: 500px;
   border: 1px solid #008CBA;
   border-radius: 5px;
   margin: 80px;
-
 }
 
 .message-item {
-  height: 50px;
+  height: auto;
   flex-wrap: wrap;
+  padding: 5px;
+  border-bottom: 1px solid #008CBA;
+}
+
+h3 {
+  padding: 5px;
+  border-bottom: 1px solid #008CBA;
+}
+
+mat-icon {
+  float: right;
+  position: relative;
+  bottom: 25px;
+}
+
+mat-icon:hover {
+  cursor: pointer;
 }

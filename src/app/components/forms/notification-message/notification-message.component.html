@@ -1,6 +1,6 @@
 
 <div *ngFor="let notification of notifications">
-  DATE: {{notification.date}}
+  <strong>DATE:</strong> {{notification.date}}
   {{notification.message}}
 </div>
-<button mat-button (click)="closeForm()">close</button>
+<button mat-raised-button (click)="closeForm()">close</button>
