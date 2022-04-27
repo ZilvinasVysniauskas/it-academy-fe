@@ -1,9 +1,9 @@
 <div *ngIf="user$ | async as user">
   <p>First Name: {{user.firstName}}</p>
+  <p>Middle Name: {{user.middleName}}</p>
   <p>Last Name: {{user.lastName}} </p>
   <p>Department: {{user.firstName}}</p>
   <p>Role: {{user.role}}</p>
   <p>Email: {{user.email}}</p>
 </div>
-
-<button mat-button (click)="changePassword()">Change password</button>
+<button (click)="closeDialog()" mat-button>close</button>

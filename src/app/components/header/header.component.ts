@@ -5,6 +5,7 @@ import {ChangePasswordComponent} from "../forms/change-password/change-password.
 import {SendMessageFormComponent} from "../forms/send-message-form/send-message-form.component";
 import {EditUserFormComponent} from "../forms/edit-user-form/edit-user-form.component";
 import {UserService} from "../../service/user/user.service";
+import {UserInfoComponent} from "../user-info/user-info.component";
 
 @Component({
   selector: 'app-header',
@@ -53,5 +54,13 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     this.authService.logout();
+  }
+
+  displayAccountInfo() {
+    this.matDialog.open(UserInfoComponent)
+      .afterClosed()
+      .subscribe((result?: boolean) => {
+        console.log('mat dialog result', result);
+      });
   }
 }
