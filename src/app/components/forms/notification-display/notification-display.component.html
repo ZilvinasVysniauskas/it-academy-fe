@@ -1,5 +1,5 @@
 <p>Message: {{notification.message}}</p>
 <p>Date: {{notification.date}}</p>
 
-<button mat-button (click)="deleteNotificationById(notification.id)">delete</button>
-<button mat-button (click)="closeDialog()">close</button>
+<button class="cancel-button" mat-button (click)="deleteNotificationById(notification.id)">Delete</button>
+<button mat-button (click)="closeDialog()">Close</button>

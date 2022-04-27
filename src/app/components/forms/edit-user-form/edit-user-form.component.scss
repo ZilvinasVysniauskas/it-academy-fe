@@ -103,3 +103,14 @@ mat-form-field {
   float:right;
   margin-top: -19px;
 }
+
+.cancel-button {
+  color: rgb(166, 16, 16) !important;
+  background-color: white !important;
+}
+
+.cancel-button:hover {
+  background-color: rgb(166, 16, 16) !important;
+  color: white !important;
+  border: none !important;
+}
