@@ -15,8 +15,6 @@ import {BuildingService} from "../../service/building/building.service";
 
 export class ReservationHistoryComponent {
 
-  displayedColumns: string[] = ['date', 'buildingName', 'floorNumber', 'roomName', 'deskName', 'reservationStatus'];
-
   reservations!: Reservation[];
 
   reservationsForDisplay!: Reservation[]
@@ -72,4 +70,5 @@ export class ReservationHistoryComponent {
       this.reservationsForDisplay = this.reservations;
     }
   }
+
 }
