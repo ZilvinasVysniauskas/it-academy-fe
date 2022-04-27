@@ -6,7 +6,8 @@ export interface User {
   "password": string,
   "email": string,
   "role": string,
-  "active": boolean
-  "defaultFloorId": number
+  "active": boolean,
+  "defaultFloorId": number,
+  "defaultFloorName": string,
   department: string;
 }
