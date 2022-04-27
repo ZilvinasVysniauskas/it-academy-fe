@@ -2,12 +2,12 @@
   <div *ngIf="displaySuccessMessage; then message; else form"></div>
 
   <ng-template #message>
-    <div class="container">
+    <div class="container-added-user">
       <p>User added successfully.</p>
-      <p>User ID: {{ userRequest!.userId }}</p>
-      <p class="password">Password: {{ userRequest!.password }}</p>
+      <p><b>User ID:</b> {{ userRequest!.userId }}</p>
+      <p class="password"><b>Password:</b> {{ userRequest!.password }}</p>
       <p><i>Please save the password before closing.</i></p>
-      <button class="close-button" (click)="handleCancel()">Close</button>
+      <button class="close-user-button" (click)="handleCancel()">Close</button>
     </div>
   </ng-template>
 
