@@ -6,6 +6,8 @@ import {DeskReservationService} from "../../service/reservations/desk-reservatio
 import {FormControl} from "@angular/forms";
 import {Building} from "../../interfaces/building";
 import {BuildingService} from "../../service/building/building.service";
+import {Floor} from "../../interfaces/floor";
+import {FloorService} from "../../service/floor/floor.service";
 
 @Component({
   selector: 'app-reservation-history',
@@ -22,15 +24,20 @@ export class ReservationHistoryComponent {
   reservationsForDisplay!: Reservation[]
   buildings!: Building[];
   desc = true;
+  floors?: Floor[];
+  selectedBuildingName!: string
 
-  constructor(private reservationService: DeskReservationService, private matDialog: MatDialog, private buildingService:BuildingService) {
+  constructor(private reservationService: DeskReservationService, private matDialog: MatDialog, private buildingService:BuildingService, private floorService: FloorService) {
     this.fetchReservations();
     this.buildingService.getAllBuilding().subscribe(b => this.buildings = b)
+    this.buildingSelect.setValue('');
+    this.floorSelected.setValue('');
+    this.statusSelected.setValue('');
   }
 
   buildingSelect = new FormControl();
   statusSelected = new FormControl();
-  roomName = new FormControl();
+  floorSelected = new FormControl();
 
   sortReservationsByDate() {
     if (this.desc) {
@@ -59,18 +66,17 @@ export class ReservationHistoryComponent {
   }
 
   filterList() {
-    if (this.buildingSelect.value && this.statusSelected.value && this.roomName.value) {
-      this.reservationsForDisplay = this.reservations.filter(reservation =>
-        reservation.reservationStatus == this.statusSelected.value && reservation.buildingName == this.buildingSelect.value.buildingName)
-    }
-    else if (this.buildingSelect.value) {
-      this.reservationsForDisplay = this.reservations.filter(reservation => reservation.buildingName == this.buildingSelect.value.buildingName)
-    }
-    else if (this.statusSelected.value) {
-      this.reservationsForDisplay = this.reservations.filter(reservation => reservation.reservationStatus == this.statusSelected.value)
-    }
-    else {
-      this.reservationsForDisplay = this.reservations;
+    this.reservationsForDisplay = this.reservations.filter(
+      reservation => reservation.reservationStatus?.startsWith(this.statusSelected.value) &&
+        reservation.buildingName.startsWith(this.selectedBuildingName) &&
+        reservation.floorName.startsWith(this.floorSelected.value)
+    )
+  }
+
+  getFloors() {
+    if (this.buildingSelect.value) {
+      this.floorService.getFloorsByBuildingId(this.buildingSelect.value.id).subscribe(f  => this.floors = f)
+      this.selectedBuildingName = this.buildingSelect.value.buildingName;
     }
   }
 }
