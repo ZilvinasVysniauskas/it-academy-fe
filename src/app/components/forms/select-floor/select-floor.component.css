@@ -1,0 +1,35 @@
+.selection-title {
+  margin-top: 20px;
+  padding: 10px;
+}
+
+button {
+  float: right;
+  margin-top: 30px;
+  background-color: #008cba;
+  color: white;
+  margin-right: 5px;
+}
+
+button:hover {
+  border: 1px solid #1080a5b8;
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+
+button:active {
+  transform: translateY(3px);
+}
+
+.select-drop-down {
+  margin: 20px;
+  width: 200px;
+}
+
+.container {
+  border: 1px solid #008cba;
+  padding: 3px;
+  width: 250px;
+  height: 230px;
+}
+
+/*# sourceMappingURL=select-floor.component.css.map */

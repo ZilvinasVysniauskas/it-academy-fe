@@ -114,9 +114,12 @@ img {
 .floor-text {
   width: 90%;
 }
-.testing::ng-deep {
-  border: 2px solid green;
+
+.testing {
+  border: 2px solid #008cba;
   border-radius: 5px;
+  padding: 3px 5px;
+  margin: 1px;
 }
 .floor-plan {
   max-width: 30vw;
