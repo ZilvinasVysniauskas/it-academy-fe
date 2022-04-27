@@ -30,6 +30,7 @@ export class ReservationHistoryComponent {
 
   buildingSelect = new FormControl();
   statusSelected = new FormControl();
+  roomName = new FormControl();
 
   sortReservationsByDate() {
     if (this.desc) {
@@ -58,7 +59,7 @@ export class ReservationHistoryComponent {
   }
 
   filterList() {
-    if (this.buildingSelect.value && this.statusSelected.value) {
+    if (this.buildingSelect.value && this.statusSelected.value && this.roomName.value) {
       this.reservationsForDisplay = this.reservations.filter(reservation =>
         reservation.reservationStatus == this.statusSelected.value && reservation.buildingName == this.buildingSelect.value.buildingName)
     }
