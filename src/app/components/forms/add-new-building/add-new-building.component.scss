@@ -1,0 +1,40 @@
+.container {
+    border: 1px solid #008cba;
+    width: 400px;
+    padding: 8px;
+    text-align: right;
+}
+
+mat-form-field {
+    padding: 20px 10px;
+    text-align: left;
+}
+
+button  {
+  background-color: #008cba;
+  color: white !important;
+   margin: 20px 10px;
+}
+
+button:hover {
+  border: 1px solid #1080a5b8;
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
+    0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+
+button:active {
+  transform: translateY(3px);
+}
+
+.cancel-button {
+  color: rgb(166, 16, 16) !important;
+  background-color: white !important;
+}
+
+.cancel-button:hover {
+  background-color: rgb(166, 16, 16) !important;
+  color: white !important;
+  border: none !important;
+}
+
+

@@ -124,3 +124,14 @@ img {
 .floor-plan {
   max-width: 30vw;
 }
+
+.cancel-button {
+  color: rgb(166, 16, 16) !important;
+  background-color: white !important;
+}
+
+.cancel-button:hover {
+  background-color: rgb(166, 16, 16) !important;
+  color: white !important;
+  border: none !important;
+}

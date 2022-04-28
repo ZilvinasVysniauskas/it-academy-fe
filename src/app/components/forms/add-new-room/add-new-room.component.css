@@ -1,14 +1,22 @@
-.selection-title {
-  margin-top: 20px;
+.container {
+  border: 1px solid #008cba;
+  padding: 10px;
+  width: 300px;
+}
+
+mat-form-field {
   padding: 10px;
 }
 
+.button-container {
+  text-align: right;
+}
+
 button {
-  float: right;
-  margin-top: 30px;
   background-color: #008cba;
+  border-radius: 5px;
   color: white !important;
-  margin-right: 5px;
+  margin: 20px 10px;
 }
 
 button:hover {
@@ -18,18 +26,6 @@ button:hover {
 
 button:active {
   transform: translateY(3px);
-}
-
-.select-drop-down {
-  margin: 20px;
-  width: 200px;
-}
-
-.container {
-  border: 1px solid #008cba;
-  padding: 3px;
-  width: 250px;
-  height: 230px;
 }
 
 .cancel-button {
@@ -43,4 +39,4 @@ button:active {
   border: none !important;
 }
 
-/*# sourceMappingURL=select-floor.component.css.map */
+/*# sourceMappingURL=add-new-room.component.css.map */

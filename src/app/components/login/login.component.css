@@ -31,15 +31,14 @@ p {
   text-align: right;
 }
 
-button  {
+button {
   background-color: #008cba;
   color: white;
 }
 
 button:hover {
   border: 3px solid #1080a5b8;
-  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
-    0 17px 50px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
 }
 
 button:active {
@@ -47,12 +46,14 @@ button:active {
 }
 
 #cancel-button {
-  color: rgb(166, 16, 16) !important;
+  color: #a61010 !important;
   background-color: white !important;
 }
 
 .cancel-button:hover {
-  background-color: rgb(166, 16, 16) !important;
+  background-color: #a61010 !important;
   color: white !important;
   border: none !important;
 }
+
+/*# sourceMappingURL=login.component.css.map */

@@ -7,6 +7,7 @@ button {
   box-shadow: 0 4px 10px -6px #222;
   text-align: right;
   float:right;
+  margin: 10px;
 }
 
 button:hover {
@@ -17,4 +18,28 @@ button:hover {
 
 button:active {
   transform: translateY(3px);
+}
+
+.button-container {
+  text-align: right;
+  vertical-align: baseline;
+}
+
+  .container {
+  border: 1px solid #008cba;
+  padding: 15px;
+  border-radius: 5px;
+  width: 250px;
+  height: 110px;
+}
+
+.cancel-button {
+  color: rgb(166, 16, 16) !important;
+  background-color: white !important;
+}
+
+.cancel-button:hover {
+  background-color: rgb(166, 16, 16) !important;
+  color: white !important;
+  border: none !important;
 }

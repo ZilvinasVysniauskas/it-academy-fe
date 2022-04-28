@@ -1,7 +1,12 @@
+
 <div *ngIf="selectedFile">
   <p>{{selectedFile.name}}</p>
 </div>
+
+<div class="container">
 <input mat-dialog-content style="display: none" type="file" (change)="onFileUpload($event)" #selectFile>
-<button (click)="selectFile.click()" mat-button>Select floor plan image</button>
-<button (click)="updateFloorPlan()" [disabled]="!selectedFile" mat-button>change</button>
-<button (click)="closeDialog()" mat-button>Cancel</button>
+<button class="input-button" (click)="selectFile.click()" mat-button>Select floor plan image</button>
+<button class="cancel-button" (click)="closeDialog()" mat-button>Cancel</button>
+<button class="save-button" (click)="updateFloorPlan()" [disabled]="!selectedFile" mat-button>Confirm</button>
+</div>
+

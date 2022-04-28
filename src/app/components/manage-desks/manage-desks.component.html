@@ -28,7 +28,6 @@
     <button class="select-button" (click)="selectBuilding(building)">
       Select building
     </button>
-
   </div>
   <button class="add-new-button" mat-button (click)="addNewBuilding()">
     Add new building
@@ -36,10 +35,13 @@
 </ng-template>
 
 <ng-template #displayFloors>
-  <p>Building: {{ selectedBuilding!.buildingName! }}</p>
-  <button class="add-new-button" (click)="display = Entities.BUILDINGS">
+  <div class="button-and-building">
+
+  <button class="change-building-button" (click)="display = Entities.BUILDINGS">
     Change building
   </button>
+      <p>Building: {{ selectedBuilding!.buildingName! }}</p>
+  </div>
   <div
     class="buildings"
     *ngFor="let floor of floors!"
@@ -66,23 +68,56 @@
     <button class="delete-button" (click)="deleteFloor(floor)">
       Delete floor
     </button>
-    <img class="floor-plan" [src]="getFloorPlan(floor)">
+    <img class="floor-plan" [src]="getFloorPlan(floor)" />
   </div>
   <button class="add-new-button" mat-button (click)="addNewFloor()">
     Add new floor
   </button>
 </ng-template>
 
+
 <ng-template #displayRooms>
-  <p>Building: {{ selectedBuilding!.buildingName! }}</p>
-  <p>Floor: {{ selectedFloor!.floorName! }}</p>
-  <button class="add-new-button" (click)="display = Entities.BUILDINGS">
-    Change building
+ <div class="top-buttons"> 
+   <div class="button-and-building">
+   
+    <button
+      class="change-building-button"
+      (click)="display = Entities.BUILDINGS"
+    >
+      Change building
+    </button>
+     <p>Building: {{ selectedBuilding!.buildingName! }}</p>
+  </div>
+
+  <div class="button-and-building">
+   
+    <button class="change-building-button" (click)="reselectFloor()">
+      Change floor
+    </button>
+     <p>Floor: {{ selectedFloor!.floorName! }}</p>
+  </div>
+</div>
+
+  <div class="map-and-buttons">  
+    <img class="second-floor-plan" [src]="currentFloorPlan" />
+  
+    <div class="just-buttons">
+      <button class="add-new-button" mat-button (click)="addRoom()">
+    Add new room
   </button>
-  <button class="add-new-button" (click)="reselectFloor()">
-    Change floor
+    <button class="add-new-button" (click)="changeFloorPlan()" mat-button>
+    Change image
   </button>
-  <div class="container-with-desks" *ngFor="let room of listOfRooms" [ngSwitch]="room === selectedRoom">
+</div>
+
+</div>
+
+  
+  <div
+    class="container-with-desks"
+    *ngFor="let room of listOfRooms"
+    [ngSwitch]="room === selectedRoom"
+  >
     <app-click-to-edit
       *ngSwitchCase="true"
       [value]="room.roomName"
@@ -91,12 +126,23 @@
     ></app-click-to-edit>
 
     <div>
+<<<<<<< HEAD
       <div class="room-name-with-desks" *ngSwitchCase="false" (click)="selectedRoom = room">
         {{ room.roomName }}</div>
+=======
+      <div
+        class="room-name-with-desks"
+        *ngSwitchCase="false"
+        (click)="selectedRoom = room"
+      >
+        {{ room.roomName }}
+      </div>
+>>>>>>> origin/sandra-really-final
       <button
         class="delete-room-button"
         mat-button
-        (click)="deleteRoom(room.roomId)">
+        (click)="deleteRoom(room.roomId)"
+      >
         Delete room
       </button>
     </div>
@@ -113,10 +159,13 @@
         (cancelEvents)="selectedDesk = null"
       ></app-click-to-edit>
 
-      <div class="building-name" *ngSwitchCase="false" (click)="selectedDesk = desk">
+      <div
+        class="building-name"
+        *ngSwitchCase="false"
+        (click)="selectedDesk = desk"
+      >
         {{ desk.deskName }}
       </div>
-
 
       <div *ngIf="desk.available">
         <button
@@ -138,7 +187,11 @@
           Set desk available
         </button>
       </div>
-      <button class="delete-desk-button" mat-button (click)="deleteDesk(desk.id)">
+      <button
+        class="delete-desk-button"
+        mat-button
+        (click)="deleteDesk(desk.id)"
+      >
         Delete desk
       </button>
     </div>
@@ -147,12 +200,6 @@
     </button>
   </div>
 
-  <button class="add-new-button" mat-button (click)="addRoom()">
-    Add new room
-  </button>
 
-
-  <img class="floor-plan" [src]="currentFloorPlan">
-  <button (click)="changeFloorPlan()" mat-button>change image</button>
 
 </ng-template>

@@ -1,13 +1,13 @@
 .selection-title {
-    margin-top: 20px;
-    padding: 10px;
+  margin-top: 20px;
+  padding: 10px;
 }
 
 button {
-      float:right;
+  float: right;
   margin-top: 30px;
   background-color: #008cba;
-  color: white;
+  color: white !important;
   margin-right: 5px;
 }
 
@@ -22,14 +22,24 @@ button:active {
 }
 
 .select-drop-down {
-margin: 20px;
-width: 200px;
+  margin: 20px;
+  width: 200px;
 }
 
 .container {
-    border: 1px solid #008cba;
-    padding: 3px;
-    width: 250px;
-    height: 230px;
+  border: 1px solid #008cba;
+  padding: 3px;
+  width: 250px;
+  height: 230px;
 }
 
+.cancel-button {
+  color: rgb(166, 16, 16) !important;
+  background-color: white !important;
+}
+
+.cancel-button:hover {
+  background-color: rgb(166, 16, 16) !important;
+  color: white !important;
+  border: none !important;
+}

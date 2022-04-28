@@ -1,13 +1,13 @@
 <div class="container">
-  <div *ngIf="displaySuccessMessage; then message else form"></div>
+  <div *ngIf="displaySuccessMessage; then message; else form"></div>
 
   <ng-template #message>
-    <div class="container">
+    <div class="container-added-user">
       <p>User added successfully.</p>
-      <p>User ID: {{userRequest!.userId}}</p>
-      <p class="password">Password: {{userRequest!.password}}</p>
+      <p><b>User ID:</b> {{ userRequest!.userId }}</p>
+      <p class="password"><b>Password:</b> {{ userRequest!.password }}</p>
       <p><i>Please save the password before closing.</i></p>
-      <button class="close-button" (click)="handleCancel()">Close</button>
+      <button class="close-user-button" (click)="handleCancel()">Close</button>
     </div>
   </ng-template>
 
@@ -15,11 +15,13 @@
     <form [formGroup]="editUserForm">
       <mat-form-field>
         <mat-label>User ID</mat-label>
-        <input id="userid" type="number" matInput formControlName="userId">
+        <input id="userid" type="number" matInput formControlName="userId" />
         <mat-error *ngIf="getUserId?.errors?.['required']">
           user id field is required
         </mat-error>
-        <mat-error *ngIf="getUserId?.errors?.['min']|| getUserId?.errors?.['max']">
+        <mat-error
+          *ngIf="getUserId?.errors?.['min']|| getUserId?.errors?.['max']"
+        >
           id must consist of 8 digits
         </mat-error>
         <mat-error *ngIf="getUserId?.errors?.['idAlreadyExists']">
@@ -29,7 +31,7 @@
 
       <mat-form-field>
         <mat-label>First Name</mat-label>
-        <input [readOnly]="isEdit" matInput formControlName="firstName">
+        <input [readOnly]="isEdit" matInput formControlName="firstName" />
         <mat-error *ngIf="getFirstName?.errors?.['required']">
           first name is required
         </mat-error>
@@ -40,7 +42,7 @@
 
       <mat-form-field>
         <mat-label>Middle Name</mat-label>
-        <input [readOnly]="isEdit" matInput formControlName="middleName">
+        <input [readOnly]="isEdit" matInput formControlName="middleName" />
         <mat-error *ngIf="getLastName?.errors?.['maxlength']">
           max length is 40 characters
         </mat-error>
@@ -48,7 +50,7 @@
 
       <mat-form-field>
         <mat-label>Last Name</mat-label>
-        <input [readOnly]="isEdit" matInput formControlName="lastName">
+        <input [readOnly]="isEdit" matInput formControlName="lastName" />
         <mat-error *ngIf="getLastName?.errors?.['required']">
           last name is required
         </mat-error>
@@ -59,7 +61,7 @@
 
       <mat-form-field>
         <mat-label>Email</mat-label>
-        <input [readOnly]="isEdit" matInput formControlName="email">
+        <input [readOnly]="isEdit" matInput formControlName="email" />
         <mat-error *ngIf="getEmail?.errors?.['required']">
           email is required
         </mat-error>
@@ -74,50 +76,82 @@
       <mat-form-field Role="fill">
         <mat-label>Role</mat-label>
         <mat-select formControlName="role" [(value)]="selected">
-          <mat-option *ngFor="let state of states" [value]="state">{{state}}</mat-option>
+          <mat-option *ngFor="let state of states" [value]="state">{{
+            state
+          }}</mat-option>
         </mat-select>
       </mat-form-field>
 
       <mat-form-field>
         <mat-label>Department</mat-label>
-        <mat-select formControlName="department" [(value)]="selectedDepartment" (selectionChange)="departmentChanged()">
-          <mat-option *ngFor="let department of departments" [value]="department">{{department}}</mat-option>
+        <mat-select
+          formControlName="department"
+          [(value)]="selectedDepartment"
+          (selectionChange)="departmentChanged()"
+        >
+          <mat-option
+            *ngFor="let department of departments"
+            [value]="department"
+            >{{ department }}</mat-option
+          >
         </mat-select>
       </mat-form-field>
 
-      <div fxLayout="row">
-
-        <div *ngIf="department">
-          <button class="select-floor-button" mat-button (click)="changeFloorDialog()">
-            {{buttonText()}}
-          </button>
+      <div class="floor-info" fxLayout="row">
+        <div *ngIf="floorIsPresent">
+          <div>
+            <p>Current floor: {{ currentFloor?.floorName }}</p>
+            <p>Current building {{ currentFloor?.buildingName }}</p>
+          </div>
         </div>
+        <button
+          class="select-floor-button"
+          mat-button
+          (click)="changeFloorDialog()"
+        >
+          <p [hidden]="floorIsPresent">Select floor</p>
+          <p class="change-floor" [hidden]="!floorIsPresent">Change floor</p>
+        </button>
 
       </div>
-      <div *ngIf="floorIsPresent">
-        <p> <b>Current Building:</b> {{currentFloor?.buildingName}}</p>
-        <p> <b>Current Floor:</b> {{currentFloor?.floorName}}</p>
-      </div>
-
 
       <section class="example-section">
-        <mat-checkbox class="example-margin" formControlName="active" [checked]="getActive?.value">Active</mat-checkbox>
+        <mat-checkbox
+          class="example-margin"
+          formControlName="active"
+          [checked]="getActive?.value"
+          >Active</mat-checkbox
+        >
       </section>
 
       <div [hidden]="!isEdit">
-        <button class="generate-password-button" (click)="resetPassword()" mat-button>Generate new password</button>
+        <button
+          class="generate-password-button"
+          (click)="resetPassword()"
+          mat-button
+        >
+          Generate new password
+        </button>
       </div>
 
       <div [hidden]="!passwordChanged">
-        <p class="generated-password">New password: {{password}}</p>
+        <p class="generated-password">New password: {{ password }}</p>
       </div>
 
-      <button class="cancel-button" (click)="handleCancel()" mat-button>Cancel</button>
-      <button class="save-button" (click)="AddOrUpdateUser()" mat-button
-              [disabled]="!editUserForm.valid || !currentFloor">Save
+
+
+
+      <button class="cancel-button" (click)="handleCancel()" mat-button>
+        Cancel
+      </button>
+      <button
+        class="save-button"
+        (click)="AddOrUpdateUser()"
+        mat-button
+        [disabled]="!editUserForm.valid || !currentFloor">
+        Save
       </button>
 
     </form>
   </ng-template>
-
 </div>

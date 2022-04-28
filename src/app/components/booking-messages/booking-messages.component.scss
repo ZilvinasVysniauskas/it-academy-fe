@@ -30,6 +30,18 @@ p {
 border: 1px solid #008CBA;
 }
 
+
 .green {
   color: green;
+
+  .cancel-button {
+    color: rgb(166, 16, 16) !important;
+    background-color: white !important;
+  }
+
+  .cancel-button:hover {
+    background-color: rgb(166, 16, 16) !important;
+    color: white !important;
+    border: none !important;
+  }
 }

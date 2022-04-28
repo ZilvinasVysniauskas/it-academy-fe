@@ -34,5 +34,14 @@ p {
 .green {
   color: green;
 }
+.green .cancel-button {
+  color: #a61010 !important;
+  background-color: white !important;
+}
+.green .cancel-button:hover {
+  background-color: #a61010 !important;
+  color: white !important;
+  border: none !important;
+}
 
 /*# sourceMappingURL=booking-messages.component.css.map */

@@ -124,4 +124,15 @@ img {
   max-width: 30vw;
 }
 
+.cancel-button {
+  color: #a61010 !important;
+  background-color: white !important;
+}
+
+.cancel-button:hover {
+  background-color: #a61010 !important;
+  color: white !important;
+  border: none !important;
+}
+
 /*# sourceMappingURL=reservations.component.css.map */

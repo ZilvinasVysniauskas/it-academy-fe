@@ -1,6 +1,7 @@
-<form [formGroup]="buildingRequestForm">
+<div class="container">
+  <form [formGroup]="buildingRequestForm">
   <mat-form-field>
-    <mat-label>Enter Building Name</mat-label>
+    <mat-label>Building Name</mat-label>
     <input id="name" matInput formControlName="name">
     <mat-error *ngIf="getName?.errors?.['required']">
       Building name is required
@@ -8,7 +9,7 @@
   </mat-form-field>
 
   <mat-form-field>
-    <mat-label>Enter City</mat-label>
+    <mat-label>City</mat-label>
     <input id="city" matInput formControlName="city">
     <mat-error *ngIf="getCity?.errors?.['required']">
       City is required
@@ -16,7 +17,7 @@
   </mat-form-field>
 
   <mat-form-field>
-    <mat-label>Enter Street name</mat-label>
+    <mat-label>Street name</mat-label>
     <input id="streetName" matInput formControlName="streetName">
     <mat-error *ngIf="getStreetName?.errors?.['required']">
       Street name is required
@@ -24,15 +25,15 @@
   </mat-form-field>
 
   <mat-form-field>
-    <mat-label>Enter Building number</mat-label>
+    <mat-label>Building number</mat-label>
     <input id="buildingNumber" matInput formControlName="buildingNumber" type="number">
     <mat-error *ngIf="getBuildingNumber?.errors?.['required']">
       Building number is required
     </mat-error>
   </mat-form-field>
 
-  <button (click)="addNewBuilding()" mat-button [disabled]="!buildingRequestForm.valid">Add Building</button>
-  <button (click)="closeForm()" mat-button>cancel</button>
+  <button class="select-button" (click)="addNewBuilding()" mat-button [disabled]="!buildingRequestForm.valid">Add building</button>
+  <button class="cancel-button" (click)="closeForm()" mat-button>Cancel</button>
 
 </form>
-
+</div>
