@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Reservation} from 'src/app/interfaces/reservation';
 import {MatDialog} from "@angular/material/dialog";
 import {CancelReservationComponent} from "../cancel-reservation/cancel-reservation.component";
@@ -15,7 +15,7 @@ import {FloorService} from "../../service/floor/floor.service";
   styleUrls: ['./reservation-history.component.scss']
 })
 
-export class ReservationHistoryComponent {
+export class ReservationHistoryComponent implements OnInit{
 
   reservations!: Reservation[];
 
@@ -23,7 +23,7 @@ export class ReservationHistoryComponent {
   buildings!: Building[];
   desc = true;
   floors?: Floor[];
-  selectedBuildingName!: string
+  selectedBuildingName: string = '';
 
   constructor(private reservationService: DeskReservationService, private matDialog: MatDialog, private buildingService:BuildingService, private floorService: FloorService) {
     this.fetchReservations();
@@ -50,6 +50,7 @@ export class ReservationHistoryComponent {
   fetchReservations() {
     this.reservationService.fetchReservationHistory().subscribe(reservation => {
       this.reservationsForDisplay = this.reservations = reservation;
+      this.filterList()
     })
   }
 
@@ -59,7 +60,6 @@ export class ReservationHistoryComponent {
         .afterClosed()
         .subscribe(() => {
           this.fetchReservations();
-          this.filterList();
         });
     }
   }
@@ -81,9 +81,13 @@ export class ReservationHistoryComponent {
         this.filterList();
       })
     }else {
+      this.floorSelected.setValue("");
       this.selectedBuildingName = '';
       this.filterList()
     }
+  }
+
+  ngOnInit(): void {
   }
 
 }

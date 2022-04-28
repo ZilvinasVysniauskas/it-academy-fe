@@ -8,23 +8,17 @@
   <div>
     <table matSort>
       <thead>
-        <th mat-sort-header (click)="sortReservationsByDate()">Date</th>
-
+        <th (click)="sortReservationsByDate()">Date</th>
         <th>
           <mat-form-field class="mat-form-field-sorting" [style.width.px]="100">
             <mat-label>Building</mat-label>
             <mat-select
               [formControl]="buildingSelect"
-              (selectionChange)="getFloors(); filterList()"
-              [value]="''"
-            >
+              (selectionChange)="getFloors()"
+              [value]="''">
               <mat-option [value]="''">All</mat-option>
 
-              <mat-option
-                *ngFor="let building of buildings"
-                [value]="building"
-                >{{ building.buildingName }}</mat-option
-              >
+              <mat-option *ngFor="let building of buildings" [value]="building">{{ building.buildingName }}</mat-option>
             </mat-select>
           </mat-form-field>
         </th>
