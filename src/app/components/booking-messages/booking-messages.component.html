@@ -1,13 +1,16 @@
 
+
 <div class="dialog">
   <div *ngIf="message=='reservationExists'; then reservationExists"></div>
 <div *ngIf="message=='successful'; then successful"></div>
 <div *ngIf="message=='noDesks'; then noDesks"></div>
 
 <ng-template #reservationExists>
+
+  <h2>You already have a reservation on this date.</h2>
+
   <div class="container" mat-dialog-content >
 
-    <p>You already have a reservation on this date.</p>
     <p>Would you like to cancel this reservation:</p>
     <p><b>Date: </b> {{currentReservation?.date}}</p>
     <p><b>Building: </b> {{currentReservation?.buildingName}}</p>
@@ -25,6 +28,8 @@
   <div mat-dialog-content class="container" >
 
     <p><b>Reservation is successful!</b></p>
+
+
     <p><b>Date:</b> {{currentReservation?.date}}</p>
     <p><b>Building:</b> {{currentReservation?.buildingName}}</p>
     <p><b>Floor: </b> {{currentReservation?.floorName}}</p>
@@ -36,9 +41,9 @@
 </ng-template>
 
 <ng-template #noDesks>
+  <h2>No desks are available.</h2>
   <div mat-dialog-content class="container">
-    <p>No desks are available.</p>
-    <button mat-button (click)="okClicked.emit()">OKAY</button>
+        <button mat-button (click)="okClicked.emit()">OKAY</button>
   </div>
 </ng-template>
 

@@ -1,8 +1,11 @@
-<div class="container">
+<h2>Send notification</h2>
+
+<div class="container" fxLayout="column" fxLayoutAlign="space-around center" >
     <form [formGroup]="notificationRequestForm">
+      <div>
       <mat-form-field>
         <mat-label>Message</mat-label>
-        <input id="message" matInput formControlName="message">
+        <textarea id="message" matInput formControlName="message"></textarea>
         <mat-error *ngIf="getMessage?.errors?.['required']">
           message is required
         </mat-error>
@@ -10,7 +13,9 @@
           message cannot be longer then 100 characters
         </mat-error>
       </mat-form-field>
+      </div>
 
+      <div>
       <mat-form-field Role="fill">
         <mat-label>Send To</mat-label>
         <mat-select formControlName="sendTo" (selectionChange)="changeValidators()">
@@ -20,6 +25,7 @@
           send to is required
         </mat-error>
       </mat-form-field>
+
 
 
       <mat-form-field *ngIf="getSendTo?.value == 'DEPARTMENT'">
@@ -39,10 +45,12 @@
           </mat-error>
         </mat-form-field>
       </mat-form-field>
+      </div>
 
-
-      <button class="save-button" (click)="createAndSendNotification()" mat-button>Send</button>
-      <button class="cancel-button" (click)="closeDialog()" mat-button [disabled]="">Cancel</button>
+      <div>
+        <button class="save-button" (click)="closeDialog()" mat-button [disabled]="">Cancel</button>
+        <button class="cancel-button" (click)="createAndSendNotification()" [disabled]="!notificationRequestForm.valid" mat-button>Send</button>
+      </div>
 
 
     </form>
