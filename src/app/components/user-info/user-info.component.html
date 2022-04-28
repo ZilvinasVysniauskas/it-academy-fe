@@ -1,12 +1,12 @@
 <h2>Account info</h2>
 
-<div *ngIf="user$ | async as user">
+<div *ngIf="user">
   <p><strong>First Name:</strong> {{user.firstName}}</p>
   <p><strong>Middle Name:</strong> {{user.middleName}}</p>
   <p><strong>Last Name:</strong> {{user.lastName}} </p>
-  <p><strong>Department:</strong> {{user.firstName}}</p>
+  <p><strong>Department:</strong> {{user.department}}</p>
   <p><strong>Role:</strong> {{user.role}}</p>
   <p><strong>Email:</strong> {{user.email}}</p>
-  <p><strong>Default floor:</strong> {{user.defaultFloorName}}</p>
+  <p><strong>Default floor:</strong> {{floorName}}</p>
 </div>
 <button (click)="closeDialog()" mat-button>Close</button>

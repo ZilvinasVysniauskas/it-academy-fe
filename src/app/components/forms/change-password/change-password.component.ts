@@ -60,7 +60,7 @@ export class ChangePasswordComponent implements OnInit {
       message => {
         this.errorMessage = undefined;
         this.successMessage = message;
-        setTimeout(()=>{ this.closeDialog()}, 1000)
+        setTimeout(()=>{ this.closeDialog()}, 1500)
       },
       error => {
         this.errorMessage = error.error;

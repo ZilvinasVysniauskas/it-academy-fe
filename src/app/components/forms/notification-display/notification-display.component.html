@@ -1,6 +1,12 @@
-<p><strong>Message:</strong> {{notification.message}}</p>
-<p><strong>Date:</strong> {{notification.date}}</p>
+<div class="dialogWidth">
+  <div class="container" >
+    <p><strong>Message:</strong> {{notification.message}}</p>
+    <p><strong>Date:</strong> {{notification.date}}</p>
+
+    <button class="cancel-button" mat-button (click)="deleteNotificationById(notification.id)">Delete</button>
+    <button mat-button (click)="closeDialog()">Close</button>
+
+  </div>
+</div>
 
 
-<button class="cancel-button" mat-button (click)="deleteNotificationById(notification.id)">Delete</button>
-<button mat-button (click)="closeDialog()">Close</button>

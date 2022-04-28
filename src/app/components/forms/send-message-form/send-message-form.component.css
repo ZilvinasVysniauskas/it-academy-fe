@@ -9,6 +9,10 @@
   border: none !important;
 }
 
+.mat-button-disabled {
+  background-color: #dcdcdc;
+}
+
 button {
   float: right;
   margin-top: 30px;
@@ -30,7 +34,7 @@ button:active {
   border: 1px solid #008cba;
   padding: 3px;
   width: 250px;
-  height: 230px;
+  height: auto;
 }
 
 /*# sourceMappingURL=send-message-form.component.css.map */

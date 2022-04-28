@@ -5,6 +5,7 @@ import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {ChangePasswordComponent} from "../forms/change-password/change-password.component";
 import {Observable} from "rxjs";
 import {FloorService} from "../../service/floor/floor.service";
+import {Floor} from "../../interfaces/floor";
 
 @Component({
   selector: 'app-user-info',
@@ -13,10 +14,14 @@ import {FloorService} from "../../service/floor/floor.service";
 })
 export class UserInfoComponent implements OnInit {
 
-  user$: Observable<User>;
+  user!: User;
+  floorName!: string;
 
   constructor(private userService: UserService, private floorService: FloorService, private matDialogRef: MatDialogRef<UserInfoComponent>) {
-    this.user$ = userService.getUser();
+    userService.getUser().subscribe(user => {
+      this.user = user;
+      this.floorService.getFloorById(user.defaultFloorId.toString()).subscribe(f => this.floorName = f.floorName);
+    });
   }
 
   closeDialog() {

@@ -1,16 +1,22 @@
 .message-viewport {
+  padding: 10px;
   height: 300px;
-  width: 500px;
+  width: 600px;
   border: 1px solid #008CBA;
   border-radius: 5px;
   margin: 80px;
 }
 
+.pad{
+  padding: 10px;
+}
 .message-item {
   height: auto;
   flex-wrap: wrap;
-  padding: 5px;
   border-bottom: 1px solid #008CBA;
+  p {
+    width: 90%;
+  }
 }
 
 h3 {

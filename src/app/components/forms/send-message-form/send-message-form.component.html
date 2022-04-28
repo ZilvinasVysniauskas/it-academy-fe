@@ -15,7 +15,7 @@
       </mat-form-field>
       </div>
 
-      <div>
+
       <mat-form-field Role="fill">
         <mat-label>Send To</mat-label>
         <mat-select formControlName="sendTo" (selectionChange)="changeValidators()">
@@ -25,8 +25,6 @@
           send to is required
         </mat-error>
       </mat-form-field>
-
-
 
       <mat-form-field *ngIf="getSendTo?.value == 'DEPARTMENT'">
         <mat-form-field>
@@ -45,7 +43,7 @@
           </mat-error>
         </mat-form-field>
       </mat-form-field>
-      </div>
+
 
       <div>
         <button class="cancel-button" (click)="closeDialog()" mat-button [disabled]="">Cancel</button>

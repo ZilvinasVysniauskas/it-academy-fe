@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Inject, Input, OnInit, Output} from '@angular/core';
 import {RoomRequest} from "../../../interfaces/RoomRequest";
-import {FormControl} from "@angular/forms";
+import {FormControl, Validators} from "@angular/forms";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {RoomService} from "../../../service/rooms/room.service";
 
@@ -18,6 +18,7 @@ export class AddNewRoomComponent{
   constructor(@Inject(MAT_DIALOG_DATA) public data: { floorId: number },
               public dialogRef: MatDialogRef<AddNewRoomComponent>, private roomService: RoomService) {
     this.floorId = data.floorId;
+    this.roomName.setValidators(Validators.required)
   }
 
   addNewRoom(): void {

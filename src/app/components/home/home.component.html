@@ -2,18 +2,34 @@
   <app-calendar></app-calendar>
 
   <cdk-virtual-scroll-viewport [itemSize]="2" class="message-viewport">
-    <h3>Notifications</h3>
-    <div  *cdkVirtualFor="let notification of allNotifications;" class="message-item">
-      <strong>Date:</strong> {{notification.date}}. <strong>Message:</strong> {{notification.message}}
-      <mat-icon (click)="notificationTable(notification)">delete_outline</mat-icon>
+    <div class="pad">
+      <h3>Notifications</h3>
+      <div *cdkVirtualFor="let notification of allNotifications;">
+        <div class="message-item">
+          <strong>Date:</strong> {{notification.date}}.
+          <br><strong>Message:</strong>
+          <p>
+            {{notification.message}}
+          </p>
+        </div>
+
+        <mat-icon (click)="notificationTable(notification)">delete_outline</mat-icon>
+      </div>
     </div>
+
   </cdk-virtual-scroll-viewport>
 
-  <cdk-virtual-scroll-viewport [itemSize]="2" class="message-viewport" >
-    <h3>Admin messages</h3>
-    <div *cdkVirtualFor="let adminNotification of allAdminNotifications;" class="message-item">
-      <strong>Date:</strong> {{adminNotification.date}} <br><strong>Message:</strong> {{adminNotification.message}}
-      <mat-icon (click)="notificationTable(adminNotification)">delete_outline</mat-icon>
+  <cdk-virtual-scroll-viewport [itemSize]="2" class="message-viewport">
+    <div class="pad">
+      <h3>Admin messages</h3>
+      <div *cdkVirtualFor="let adminNotification of allAdminNotifications;">
+        <div class="message-item">
+          <strong>Date:</strong> {{adminNotification.date}}
+          <br><strong>Message:</strong>
+          <p>{{adminNotification.message}}</p>
+        </div>
+        <mat-icon (click)="notificationTable(adminNotification)">delete_outline</mat-icon>
+      </div>
     </div>
-  </cdk-virtual-scroll-viewport>
+      </cdk-virtual-scroll-viewport>
 </div>

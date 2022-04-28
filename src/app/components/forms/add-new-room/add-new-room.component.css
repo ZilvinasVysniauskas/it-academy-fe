@@ -12,6 +12,10 @@ mat-form-field {
   text-align: right;
 }
 
+.mat-button-disabled {
+  background-color: #dcdcdc;
+}
+
 button {
   background-color: #008cba;
   border-radius: 5px;

@@ -3,6 +3,10 @@
   padding: 10px;
 }
 
+.mat-button-disabled {
+  background-color: #dcdcdc;
+}
+
 button {
   float: right;
   margin-top: 30px;

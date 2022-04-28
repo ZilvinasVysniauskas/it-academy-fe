@@ -19,6 +19,7 @@ export class AddDesksFormComponent {
   constructor(@Inject(MAT_DIALOG_DATA) public data: { roomId: number },
               public dialogRef: MatDialogRef<AddDesksFormComponent>, private deskService: DeskService) {
     this.roomId = data.roomId;
+    this.deskName.setValidators(Validators.required)
   }
 
   addNewDesk(): void {

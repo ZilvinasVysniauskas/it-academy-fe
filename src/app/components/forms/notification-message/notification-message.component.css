@@ -8,4 +8,9 @@ button:hover {
   transform: translateY(2px);
 }
 
+.modal-body {
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
 /*# sourceMappingURL=notification-message.component.css.map */
