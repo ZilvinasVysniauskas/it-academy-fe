@@ -66,6 +66,7 @@ import { UserInfoComponent } from './components/user-info/user-info.component';
 import { CancelReservationComponent } from './components/cancel-reservation/cancel-reservation.component';
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {MatIconModule} from "@angular/material/icon";
+import {MatSortModule} from "@angular/material/sort";
 
 
 export const MY_DATE_FORMATS = {
@@ -134,6 +135,7 @@ export const MY_DATE_FORMATS = {
         RouterModule,
         MatTooltipModule,
         MatIconModule,
+        MatSortModule,
     ],
   providers: [
     {
