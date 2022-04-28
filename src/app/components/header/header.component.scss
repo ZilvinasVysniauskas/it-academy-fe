@@ -39,7 +39,6 @@ mat-select {
 .dropdown-content {
   display: none;
   position: absolute;
-  right: 5px;
   background-color: #f1f1f1;
   width: auto;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
@@ -70,4 +69,8 @@ mat-select {
 .dropdown:hover .drop-btn {
   background-color: #008CBA;
   color: white;
+}
+
+#my-profile {
+  right: 5px;
 }
