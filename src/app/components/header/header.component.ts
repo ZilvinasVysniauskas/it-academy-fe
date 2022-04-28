@@ -6,6 +6,7 @@ import {SendMessageFormComponent} from "../forms/send-message-form/send-message-
 import {EditUserFormComponent} from "../forms/edit-user-form/edit-user-form.component";
 import {UserService} from "../../service/user/user.service";
 import {UserInfoComponent} from "../user-info/user-info.component";
+import {NotificationService} from "../../service/notification/notification.service";
 
 @Component({
   selector: 'app-header',
@@ -18,7 +19,7 @@ export class HeaderComponent implements OnInit {
 
   isAdmin: boolean;
 
-  constructor(private matDialog: MatDialog, private authService: AuthService) {
+  constructor(private matDialog: MatDialog, private authService: AuthService, private notificationService:NotificationService) {
     this.isLogged = authService.isLoggedIn();
     this.isAdmin = authService.getRole()! == 'ADMINISTRATOR';
   }
@@ -32,6 +33,10 @@ export class HeaderComponent implements OnInit {
           console.log('Create success');
         }
       });
+  }
+
+  motivate() {
+    this.notificationService.motivate().subscribe();
   }
 
   changePassword() {

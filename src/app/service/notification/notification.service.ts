@@ -43,4 +43,7 @@ export class NotificationService {
   }
 
 
+  motivate() {
+    return this.httpClient.get(this.notificationsApi + 'motivate')
+  }
 }
