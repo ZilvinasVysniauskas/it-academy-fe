@@ -34,11 +34,13 @@ p {
 .green {
   color: green;
 }
-.green .cancel-button {
+
+.cancel-button {
   color: #a61010 !important;
   background-color: white !important;
 }
-.green .cancel-button:hover {
+
+.cancel-button:hover {
   background-color: #a61010 !important;
   color: white !important;
   border: none !important;
