@@ -14,11 +14,8 @@
           <mat-form-field class="mat-form-field-sorting" [style.width.px]="100">
             <mat-label>Building</mat-label>
 
-            <mat-select [formControl]="buildingSelect" (selectionChange)="getFloors(); filterList()" [value]="''">
+            <mat-select [formControl]="buildingSelect" (selectionChange)="getFloors()" [value]="''">
               <mat-option [value]="''">all</mat-option>
-
-
-
               <mat-option *ngFor="let building of buildings" [value]="building">{{building.buildingName}}</mat-option>
             </mat-select>
           </mat-form-field>
@@ -26,7 +23,7 @@
       <th>
         <mat-form-field [style.width.px]="100">
           <mat-label>Floor name</mat-label>
-          <mat-select [formControl]="floorSelected" (selectionChange)="filterList()">
+          <mat-select [formControl]="floorSelected" (selectionChange)="filterList()" [value]="''">
             <mat-option [value]="''">all</mat-option>
             <mat-option *ngFor="let floor of floors" [value]="floor.floorName">{{floor.floorName}}</mat-option>
           </mat-select>

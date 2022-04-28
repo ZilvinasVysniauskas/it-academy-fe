@@ -58,7 +58,8 @@ export class ReservationHistoryComponent {
       this.matDialog.open(CancelReservationComponent, {data: {reservation}})
         .afterClosed()
         .subscribe(() => {
-          this.fetchReservations()
+          this.fetchReservations();
+          this.filterList();
         });
     }
   }
@@ -72,9 +73,16 @@ export class ReservationHistoryComponent {
   }
 
   getFloors() {
-    if (this.buildingSelect.value) {
-      this.floorService.getFloorsByBuildingId(this.buildingSelect.value.id).subscribe(f  => this.floors = f)
-      this.selectedBuildingName = this.buildingSelect.value.buildingName;
+    if (this.buildingSelect.value.buildingName) {
+      this.floorService.getFloorsByBuildingId(this.buildingSelect.value.id).subscribe(f  => {
+        this.floors = f;
+        this.floorSelected.setValue("");
+        this.selectedBuildingName = this.buildingSelect.value.buildingName;
+        this.filterList();
+      })
+    }else {
+      this.selectedBuildingName = '';
+      this.filterList()
     }
   }
 

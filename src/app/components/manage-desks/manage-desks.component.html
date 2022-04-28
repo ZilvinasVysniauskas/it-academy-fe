@@ -40,7 +40,7 @@
   <button class="change-building-button" (click)="display = Entities.BUILDINGS">
     Change building
   </button>
-      <p>Building: {{ selectedBuilding!.buildingName! }}</p>
+      <p>Building: {{ selectedBuilding?.buildingName! }}</p>
   </div>
   <div
     class="buildings"
@@ -52,7 +52,7 @@
       *ngSwitchCase="true"
       [value]="floor.floorName!"
       (valueChangeEvents)="changeFloorName($event)"
-      (cancelEvents)="selectedBuilding = null"
+      (cancelEvents)="selectedFloorForEdit = null"
     ></app-click-to-edit>
 
     <div
