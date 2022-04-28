@@ -1,11 +1,22 @@
 button {
-  background-color: #008CBA;
+  background-color: #008cba;
   color: white;
   box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+  float: right;
+  margin-top: 20px;
 }
 
 button:hover {
-  transform: translateY(2px);
+  border: 3px solid #1080a5b8;
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+
+button:active {
+  transform: translateY(3px);
+}
+
+div {
+  line-height: 2;
 }
 
 /*# sourceMappingURL=user-info.component.css.map */

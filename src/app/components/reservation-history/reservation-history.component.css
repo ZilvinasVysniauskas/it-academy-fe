@@ -19,4 +19,21 @@ th, td {
   font-weight: bold !important;
 }
 
+th {
+  justify-content: center;
+  vertical-align: top;
+}
+
+td {
+  padding: 5px 10px;
+}
+
+table {
+  margin-top: 40px;
+}
+
+.title {
+  margin-top: 40px;
+}
+
 /*# sourceMappingURL=reservation-history.component.css.map */

@@ -3,58 +3,82 @@
 </div>
 
 <div class="reservation-history-table" fxFlex fxLayout="column">
-  <h2>My desk booking history</h2>
+  <h2 class="title">My desk booking history</h2>
 
   <div>
-    <table >
+    <table matSort>
       <thead>
-      <th (click)="sortReservationsByDate()">Date</th>
+        <th mat-sort-header (click)="sortReservationsByDate()">Date</th>
 
         <th>
           <mat-form-field class="mat-form-field-sorting" [style.width.px]="100">
             <mat-label>Building</mat-label>
+            <mat-select
+              [formControl]="buildingSelect"
+              (selectionChange)="getFloors(); filterList()"
+              [value]="''"
+            >
+              <mat-option [value]="''">All</mat-option>
 
-            <mat-select [formControl]="buildingSelect" (selectionChange)="getFloors()" [value]="''">
-              <mat-option [value]="''">all</mat-option>
-              <mat-option *ngFor="let building of buildings" [value]="building">{{building.buildingName}}</mat-option>
+              <mat-option
+                *ngFor="let building of buildings"
+                [value]="building"
+                >{{ building.buildingName }}</mat-option
+              >
             </mat-select>
           </mat-form-field>
         </th>
-      <th>
-        <mat-form-field [style.width.px]="100">
-          <mat-label>Floor name</mat-label>
-          <mat-select [formControl]="floorSelected" (selectionChange)="filterList()" [value]="''">
-            <mat-option [value]="''">all</mat-option>
-            <mat-option *ngFor="let floor of floors" [value]="floor.floorName">{{floor.floorName}}</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </th>
-      <th>Room</th>
-      <th>Desk</th>
-      <th>
-        <mat-form-field class="mat-form-field-sorting" [style.width.px]="100">
-          <mat-label>Status</mat-label>
-          <mat-select [formControl]="statusSelected" (selectionChange)="filterList()" [value]="''">
-            <mat-option [value]="''">ALL</mat-option>
-            <mat-option [value]="'ACTIVE'">ACTIVE</mat-option>
-            <mat-option [value]="'EXPIRED'">EXPIRED</mat-option>
-            <mat-option [value]="'CANCELED'">CANCELED</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </th>
+        <th>
+          <mat-form-field [style.width.px]="100">
+            <mat-label>Floor name</mat-label>
+            <mat-select
+              [formControl]="floorSelected"
+              (selectionChange)="filterList()"
+            >
+              <mat-option [value]="''">All</mat-option>
+              <mat-option
+                *ngFor="let floor of floors"
+                [value]="floor.floorName"
+                >{{ floor.floorName }}</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
+        </th>
+        <th>Room</th>
+        <th>Desk</th>
+        <th>
+          <mat-form-field class="mat-form-field-sorting" [style.width.px]="100">
+            <mat-label>Status</mat-label>
+            <mat-select
+              [formControl]="statusSelected"
+              (selectionChange)="filterList()"
+              [value]="''"
+            >
+              <mat-option [value]="''">All</mat-option>
+              <mat-option [value]="'ACTIVE'">ACTIVE</mat-option>
+              <mat-option [value]="'EXPIRED'">EXPIRED</mat-option>
+              <mat-option [value]="'CANCELED'">CANCELED</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </th>
+>>>>>>> origin/naujausias
       </thead>
       <tbody>
-      <tr *ngFor="let reservation of reservationsForDisplay">
-        <td>{{reservation.date}}</td>
-        <td>{{reservation.buildingName}}</td>
-        <td>{{reservation.floorName}}</td>
-        <td>{{reservation.roomName}}</td>
-        <td>{{reservation.deskName}}</td>
-        <td (click)="cancelReservationById(reservation)"
+        <tr *ngFor="let reservation of reservationsForDisplay">
+          <td>{{ reservation.date }}</td>
+          <td>{{ reservation.buildingName }}</td>
+          <td>{{ reservation.floorName }}</td>
+          <td>{{ reservation.roomName }}</td>
+          <td>{{ reservation.deskName }}</td>
+          <td
+            (click)="cancelReservationById(reservation)"
             matTooltip="cancel reservation"
             [matTooltipDisabled]="reservation.reservationStatus !== 'ACTIVE'"
-            class="{{reservation.reservationStatus}}">{{reservation.reservationStatus}}</td>
-      </tr>
+            class="{{ reservation.reservationStatus }}"
+          >
+            {{ reservation.reservationStatus }}
+          </td>
+        </tr>
       </tbody>
     </table>
   </div>

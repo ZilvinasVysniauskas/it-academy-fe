@@ -2,7 +2,7 @@
   margin: 5px;
   text-align: center;
   width: auto;
-  background-color: #008CBA;
+  background-color: #008cba;
   color: white;
 }
 
@@ -20,6 +20,7 @@
   font-size: 20px;
   width: 90%;
   margin: auto;
+  line-height: 2;
 }
 
 .cancel-button {
