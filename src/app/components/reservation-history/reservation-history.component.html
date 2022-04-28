@@ -8,7 +8,11 @@
   <div>
     <table matSort>
       <thead>
-        <th (click)="sortReservationsByDate()">Date</th>
+        <th (click)="sortReservationsByDate()">Date
+          <span class="material-icons pointer" (click)="arrowUp=false;arrowDown=true" *ngIf="arrowUp">arrow_upward</span>
+          <span class="material-icons pointer" (click)="arrowUp=true;arrowDown=false" *ngIf="arrowDown">arrow_downward</span>
+          </th>
+
         <th>
           <mat-form-field class="mat-form-field-sorting" [style.width.px]="100">
             <mat-label>Building</mat-label>

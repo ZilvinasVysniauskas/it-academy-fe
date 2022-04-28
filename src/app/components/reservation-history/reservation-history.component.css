@@ -36,4 +36,8 @@ table {
   margin-top: 40px;
 }
 
+.pointer {
+  cursor: pointer;
+}
+
 /*# sourceMappingURL=reservation-history.component.css.map */

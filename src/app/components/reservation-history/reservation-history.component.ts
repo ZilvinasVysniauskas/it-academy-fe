@@ -36,6 +36,8 @@ export class ReservationHistoryComponent implements OnInit{
   buildingSelect = new FormControl();
   statusSelected = new FormControl();
   floorSelected = new FormControl();
+  arrowUp: boolean = true;
+  arrowDown: boolean = false;
 
   sortReservationsByDate() {
     if (this.desc) {
@@ -81,6 +83,7 @@ export class ReservationHistoryComponent implements OnInit{
         this.filterList();
       })
     }else {
+      this.floors = [];
       this.floorSelected.setValue("");
       this.selectedBuildingName = '';
       this.filterList()
