@@ -3,7 +3,7 @@
 
   <p>Do you want to cancel reservation on <b>{{reservation.date}}</b></p>
   <p>{{reservation.buildingName}}, {{reservation.floorNumber}}, {{reservation.roomName}}, {{reservation.deskName}}?</p>
-  <button mat-button (click)="cancelReservationById(reservation.reservationId)">Cancel reservation</button>
+  <button class="cancel-button" mat-button (click)="cancelReservationById(reservation.reservationId)">Cancel reservation</button>
 
   <button mat-button (click)="keepReservationButtonClickEvent()">Keep reservation</button>
 </div>
