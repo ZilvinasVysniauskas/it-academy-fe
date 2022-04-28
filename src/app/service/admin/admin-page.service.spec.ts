@@ -2,8 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { AdminPageService } from './admin-page.service';
 import {HttpClientTestingModule} from "@angular/common/http/testing";
-import {ReservationService} from "../reservation-history/reservation.service";
-import {AuthService} from "../authentification/auth.service";
+
 import {HttpClient} from "@angular/common/http";
 
 describe('AdminPageService', () => {

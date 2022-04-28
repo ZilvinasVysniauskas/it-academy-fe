@@ -77,9 +77,9 @@
 
 
 <ng-template #displayRooms>
- <div class="top-buttons"> 
+ <div class="top-buttons">
    <div class="button-and-building">
-   
+
     <button
       class="change-building-button"
       (click)="display = Entities.BUILDINGS"
@@ -90,7 +90,7 @@
   </div>
 
   <div class="button-and-building">
-   
+
     <button class="change-building-button" (click)="reselectFloor()">
       Change floor
     </button>
@@ -98,9 +98,9 @@
   </div>
 </div>
 
-  <div class="map-and-buttons">  
+  <div class="map-and-buttons">
     <img class="second-floor-plan" [src]="currentFloorPlan" />
-  
+
     <div class="just-buttons">
       <button class="add-new-button" mat-button (click)="addRoom()">
     Add new room
@@ -112,7 +112,7 @@
 
 </div>
 
-  
+
   <div
     class="container-with-desks"
     *ngFor="let room of listOfRooms"
@@ -126,10 +126,7 @@
     ></app-click-to-edit>
 
     <div>
-<<<<<<< HEAD
-      <div class="room-name-with-desks" *ngSwitchCase="false" (click)="selectedRoom = room">
-        {{ room.roomName }}</div>
-=======
+
       <div
         class="room-name-with-desks"
         *ngSwitchCase="false"
@@ -137,7 +134,7 @@
       >
         {{ room.roomName }}
       </div>
->>>>>>> origin/sandra-really-final
+
       <button
         class="delete-room-button"
         mat-button

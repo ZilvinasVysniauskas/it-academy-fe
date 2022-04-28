@@ -19,5 +19,14 @@ button {
 button:hover {
   transform: translateY(2px);
 }
+button:hover .cancel-button {
+  color: #a61010 !important;
+  background-color: white !important;
+}
+button:hover .cancel-button:hover {
+  background-color: #a61010 !important;
+  color: white !important;
+  border: none !important;
+}
 
 /*# sourceMappingURL=notification-display.component.css.map */
