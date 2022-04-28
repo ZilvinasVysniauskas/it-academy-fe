@@ -8,6 +8,10 @@ div {
   margin: 20px;
 }
 
+.noDesks {
+  width: 400px;
+}
+
 ::ng-deep .one-day-selector {
   border-radius: 7px;
   border: 1px solid #008cba;

@@ -15,7 +15,6 @@ import {Observable} from "rxjs";
 import {Desk} from "../../interfaces/desk";
 
 
-
 @Component({
   selector: 'app-reservations',
   templateUrl: './reservations.component.html',
@@ -44,10 +43,12 @@ export class ReservationsComponent implements OnInit {
 
   retrievedImage: any;
 
+  displayImage = false;
+
   constructor(private reservationService: DeskReservationService,
               private floorService: FloorService,
               private matDialog: MatDialog,
-              private sanitizer:DomSanitizer) {
+              private sanitizer: DomSanitizer) {
     this.floor$ = floorService.getFloorById(localStorage.getItem("floor-id"));
 
   }
@@ -84,6 +85,7 @@ export class ReservationsComponent implements OnInit {
     if (this.displayReservationMessage) {
       return "reservationExists"
     }
+    this.displayImage = true;
     return "noDesks"
   }
 
@@ -150,7 +152,7 @@ export class ReservationsComponent implements OnInit {
     } else if (this.selected == desk.id) {
       this.selected = undefined;
     } else {
-      if (desk.available){
+      if (desk.available) {
         this.selected = desk.id;
       }
     }
@@ -169,6 +171,7 @@ export class ReservationsComponent implements OnInit {
   }
 
   changeFloor() {
+    this.displayImage = false;
     let floorInject = this.floor;
     let department = this.floor.department;
     let chooseReplacementOnDelete = false;

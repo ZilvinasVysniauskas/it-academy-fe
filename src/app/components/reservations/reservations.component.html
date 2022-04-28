@@ -11,6 +11,7 @@
 </div>
 
 <div fxLayout="row">
+
   <app-calendar
     [date]="reservationDate"
     (onDateChange)="handleReservationChange($event!)"
@@ -24,6 +25,10 @@
     </div>
 
     <div class="reservations" fxLayout="row">
+      <div *ngIf="displayImage">
+        <img src="assets/maesblostinafield.gif" alt="" class="noDesks">
+      </div>
+
       <div class="room" *ngFor="let room of desksReservationsByDate">
         <h4>{{ room.roomName }}</h4>
         <div *ngFor="let desk of room.desks">

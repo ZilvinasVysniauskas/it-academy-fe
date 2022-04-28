@@ -42,7 +42,7 @@
 <ng-template #noDesks>
   <h2>No desks are available.</h2>
   <div mat-dialog-content class="container">
-        <button mat-button (click)="okClicked.emit()">OKAY</button>
+        <button mat-button (click)="dialogRef.close()">OKAY</button>
   </div>
 </ng-template>
 
