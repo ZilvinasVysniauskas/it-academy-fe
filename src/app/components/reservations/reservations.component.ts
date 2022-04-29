@@ -72,6 +72,7 @@ export class ReservationsComponent implements OnInit {
       .subscribe(rooms => {
         console.log(this.isThereAvailableDesks(rooms) + " HERE")
         this.desksReservationsByDate = rooms;
+        this.displayImage = rooms.length == 0;
         if (this.displayReservationMessage || !this.isThereAvailableDesks(rooms)) {
           this.displayErrorMessage(this.getMessage(), this.currentReservation!);
         }
@@ -85,7 +86,6 @@ export class ReservationsComponent implements OnInit {
     if (this.displayReservationMessage) {
       return "reservationExists"
     }
-    this.displayImage = true;
     return "noDesks"
   }
 
